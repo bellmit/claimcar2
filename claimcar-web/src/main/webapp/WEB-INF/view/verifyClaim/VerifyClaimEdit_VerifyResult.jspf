@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<br/>
+<div class="table_wrap">
+	<div class="table_title f14">险别赔付</div>
+		<div class="formtable">
+			<c:if test="${flag eq '1' }">
+			<div class="row cl">
+				<input type="button" class="btn btn-disabled mb-10" value="理算计算">
+			</div>
+			</c:if>
+			<c:if test="${flag eq '2' }">
+				<div class="row cl">
+					<input type="button" class="btn btn-disabled mt-10" value="获取交强赔付金额">
+					（您可点此按钮获取损失项的交强已赔付金额，也可以手动输入）<br>
+					<input type="button" class="btn btn-disabled mt-10" value="生成计算书（商业险试算）">
+					（理算计算前，请先获取免赔率）
+				</div>
+			</c:if>
+			<div class="row cl">
+				<div class="col-12">
+					<textarea  style="width:100%;font-size: 14px;
+					overflow-y:auto;overpadding: 4px; box-sizing: border-box;" readonly="readonly"
+					rows="10" name="prpLCompensate.lcText" >${compeVo.lcText}</textarea>
+				</div>
+			</div>
+	</div>
+	
+	<%-- <div class="table_cont">
+		<div class="formtable">
+			<div class="row cl">
+				<label class="form_label col-2">责任赔款合计</label>
+				<div class="form_input col-2">${compeVo.sumLoss}</div>
+				<c:if test="${flag eq '2'}">
+					<label class="form_label col-2">不计免赔金额</label>
+					<div class="form_input col-2">${compeVo.deductOffAmt}</div>
+				</c:if>
+				<label class="form_label col-2">费用赔款合计</label>
+				<div class="form_input col-2">${compeVo.sumFee}</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-2">预付/垫付金额</label>
+				<div class="form_input col-2">${compeVo.sumPreAmt}</div>
+				<c:if test="${flag eq '2' }">
+					<label class="form_label col-2">扣交强总金额</label>
+					<div class="form_input col-2">${compeVo.sumBzPaid}</div>
+				</c:if>
+				<label class="form_label col-2">总赔付金额</label>
+				<div class="form_input col-2">${compeVo.sumRealPay}</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-2">本次赔款金额</label>
+				<div class="form_input col-2">${compeVo.sumAmt}</div>
+			</div>
+		</div>
+	</div> --%>
+	<p>
+	<div class="table_cont">
+		<div class="formtable" id="allFee_table">
+			<div class="row cl">
+				<label class="form_label col-2">总赔款金额</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumAmt}</span>        
+				</div>
+				<c:if test="${flag eq '1' }">
+				<label class="form_label col-2">预付/垫付赔款</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumPreAmt} </span>         
+				</div>
+				</c:if>
+				<c:if test="${flag eq '2' }">
+				<label class="form_label col-2">预付赔款</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumPreAmt}</span>         
+				</div>
+				</c:if>
+				<label class="form_label col-2">本次赔款金额</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumPaidAmt}</span>
+				</div>
+				
+				
+			</div>
+			<div class="row cl">
+				<label class="form_label col-2">总费用金额</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumFee }</span> 
+				</div>
+				<label class="form_label col-2">预付费用</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumPreFee }</span> 
+				</div>
+				<label class="form_label col-2">本次赔付费用</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumPaidFee }</span> 
+				</div>
+				
+			</div>
+			<%-- <div class="row cl">
+			<c:if test="${flag eq '2' }">
+				<label class="form_label col-2">不计免赔金额</label>
+				<div class="form_input col-2">
+					<span></span> 
+					<input type="hidden"  name="deductOffALL" />    
+				</div>
+				</c:if>
+				<c:if test="${flag eq '2' }">
+				<label class="form_label col-2">扣交强总金额</label>
+				<div class="form_input col-2">
+					<span>${compeVo.sumBzPaid}</span> 
+				</div>
+				</c:if>
+				<label class="form_label col-2">扣交强总金额</label>
+				<div class="form_input col-2">
+					<span id="bzPaidALL">${prpLCompensate.sumRealPay}</span>   
+					<input type="hidden"  name="prpLCompensate.sumRealPay" id="compSum" value="${prpLCompensate.sumRealPay}"/>   
+				</div>
+			</div> --%>
+		</div>
+	</div>
+</div>
+<p>

@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">定损意见</div>
+	<input type="hidden" name="claimTextVo.id" value="${claimTextVo.id }" />
+	<input type="hidden" name="claimTextVo.registNo"
+		value="${claimTextVo.registNo }" /> <input type="hidden"
+		name="claimTextVo.bussTaskId" value="${claimTextVo.bussTaskId }" /> <input
+		type="hidden" name="claimTextVo.textType"
+		value="${claimTextVo.textType }" /> <input type="hidden"
+		name="claimTextVo.nodeCode" value="${claimTextVo.nodeCode }" /> <input
+		type="hidden" name="claimTextVo.operatorCode"
+		value="${claimTextVo.operatorCode }" /> <input type="hidden"
+		name="claimTextVo.operatorName" value="${claimTextVo.operatorName }" />
+	<textarea datatype="*" class="textarea w100" nullmsg="请输入定损意见！" ignore="ignore"
+		name="claimTextVo.description" maxlength="500" placeholder="请输入定损意见">${claimTextVo.description }</textarea>
+</div>
+

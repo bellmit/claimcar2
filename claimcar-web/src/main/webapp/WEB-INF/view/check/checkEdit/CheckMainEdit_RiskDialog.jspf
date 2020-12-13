@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 风险提示窗口 -->
+<div class="flaotWindow">
+	<div class="floatHead">提示信息 <a class="close"></a></div>
+	<div class="floatBody">
+		<div>
+			<table class="floatTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="right">保单</td>
+					<td align="left">100348799999099991</td>
+				</tr>
+				<tr>
+					<td align="right">出险次数</td>
+					<td align="left"><font class="c-red">1</font></td>
+				</tr>
+				<tr>
+					<td align="right">承保时间与出险时间相差</td>
+					<td align="left"><font class="c-red">127天</font></td>
+				</tr>
+				<tr>
+					<td align="right">产品标识</td>
+					<td align="left"><font class="c-red">无</font></td>
+				</tr>
+				<tr>
+					<td align="right">该保单48小时内已报过案</td>
+					<td align="left"><font class="c-red">疑似重复报案</font></td>
+				</tr>
+			</table>
+			<div class="line-dashed"></div>
+			<table class="floatTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="right">保单</td>
+					<td align="left">100348799999099991</td>
+				</tr>
+				<tr>
+					<td align="right">出险次数</td>
+					<td align="left"><font class="c-red">1</font></td>
+				</tr>
+				<tr>
+					<td align="right">承保时间与出险时间相差</td>
+					<td align="left"><font class="c-red">127天</font></td>
+				</tr>
+				<tr>
+					<td align="right">产品标识</td>
+					<td align="left"><font class="c-red">无</font></td>
+				</tr>
+				<tr>
+					<td align="right">该保单48小时内已报过案</td>
+					<td align="left"><font class="c-red">疑似重复报案</font></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

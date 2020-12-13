@@ -1,0 +1,413 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">车辆损失信息</div>
+		<c:if test="${flag eq '1' }">
+			<div class="table_cont table_list">
+				<table border="1" class="table table-border">
+					<thead class="text-c">
+					<tr>
+						<th>赔付类型</th>
+						<th>险别</th>
+						<th>损失类型</th>
+						<th>车牌号</th>
+						<th>损失金额</th>
+						<th>施救费</th>
+						<th>核定金额</th>
+						<c:if test="${compeVo.deductType eq '1' }">
+							<th>应扣预付金额<font class="must">*</font></th>
+						</c:if>
+						<c:if test="${compeVo.deductType eq '2' }">
+							<th>应扣垫付金额<font class="must">*</font></th>
+						</c:if>
+					</tr>
+				</thead>
+					<tbody class="text-c">
+						<c:forEach var="lossItem" items="${LossItemVos}"
+							varStatus="status">
+							<tr>
+								<td><app:codetrans codeType="PayFlag"
+										codeCode="${lossItem.payFlag}" /></td>
+								<td><app:codetrans codeType="KindCode"
+										codeCode="${lossItem.kindCode}" riskCode="${registVo.riskCode}" />
+								<td>
+									<app:codetrans codeType="LossTypeCar" codeCode="${lossItem.lossType}"/>
+								</td>
+								<td>${lossItem.itemName}</td>
+								<td>${lossItem.sumLoss}</td>
+								<td>${lossItem.rescueFee}</td>
+								<td>${lossItem.sumRealPay}</td>
+								<c:if test="${compeVo.deductType ne '3' }">
+									<td>${empty lossItem.offPreAmt?0.00:lossItem.offPreAmt }</td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<p>
+				<c:if test="${fn:length(LossItemVos_W)>0}">
+					<!-- 无责代赔 -->
+					<div class="table_cont table_list">
+						<table border="1" class="table table-border">
+							<thead class="text-c">
+								<tr>
+									<th>赔付类型</th>
+									<th>险别</th>
+									<th>代赔车牌号</th>
+									<th>本车车辆损失小计</th>
+									<th>本车车辆施救费</th>
+									<th>核定代赔金额</th>
+									<th>代赔保险公司名称</th>
+								</tr>
+							</thead>
+							<tbody class="text-c">
+								<c:forEach var="lossItem" items="${LossItemVos_W}"
+									varStatus="status">
+									<tr>
+										<td>无责代赔-${lossItem.payFlag}</td>
+										<td><app:codetrans codeType="KindCode"
+												codeCode="${lossItem.kindCode}" riskCode="${registVo.riskCode}" /></td>
+										<td>${lossItem.itemName}</td>
+										<td>${lossItem.sumLoss}</td>
+										<td>${lossItem.rescueFee}</td>
+										<%-- <td>${lossItem.otherDeductAmt}</td> --%>
+										<td>${lossItem.sumRealPay}</td>
+										<td>
+											<app:codetrans codeType="CIInsurerCompany" codeCode="${lossItem.insuredComCode}"/>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</c:if>
+		</c:if>
+
+		<c:if test="${flag eq '2' }">
+			<div class="table_cont table_list">
+			<table class="table table-border">
+				<thead class="text-c">
+					<tr>
+						<th>险别</th>
+						<th>赔付类别</th>
+						<th>损失类型</th>
+						<th>车牌号</th>
+						<th>损失金额</th>
+						<th>施救费</th>
+						<th>其它扣除</th>
+						<th>责任比例%</th>
+						<th>定损扣交强</th>
+						<th>施救费扣交强</th>
+						<th>无责代赔金额</th>
+						<th>核定金额</th>
+						<c:if test="${compeVo.deductType eq '1' }">
+							<th>应扣预付金额<font class="must">*</font></th>
+						</c:if>
+						<c:if test="${compeVo.deductType eq '2' }">
+							<th>应扣垫付金额<font class="must">*</font></th>
+						</c:if>
+						<th>免赔率信息</th>
+					</tr>
+				</thead>
+				<tbody class="text-c">
+					<c:forEach var="LossItemVo" items="${LossItemVos}"
+						varStatus="status">
+						<tr>
+							<td><app:codetrans codeType="KindCode"
+									codeCode="${LossItemVo.kindCode}" riskCode="${registVo.riskCode}" /></td>
+							<td><app:codetrans codeType="PayFlag"
+									codeCode="${LossItemVo.payFlag }" /></td>
+							<td>
+								<app:codetrans codeType="LossTypeCar" codeCode="${LossItemVo.lossType}"/>
+							</td>
+							<td>${LossItemVo.itemName}</td>
+							<td>${LossItemVo.sumLoss}</td>
+							<td>${LossItemVo.rescueFee}</td>
+							<td>${LossItemVo.otherDeductAmt}</td>
+							<td>${LossItemVo.dutyRate}</td>
+							<td>${LossItemVo.bzPaidLoss}</td>
+							<td>${LossItemVo.bzPaidRescueFee}</td>
+							<td>${LossItemVo.absolvePayAmt}</td>
+							<td>${LossItemVo.sumRealPay}</td>
+							<c:if test="${compeVo.deductType ne '3' }">
+								<td>${empty LossItemVo.offPreAmt?0.00:LossItemVo.offPreAmt}</td>
+							</c:if>
+							<td><input type="button" class="btn" name="RateInfoBtn"
+								onclick="showRate(this)" value="..." />
+								<div id="rateDiv" class="hide">
+									<div class="row cl">
+										<label class="form_label col-6">事故免赔率</label>
+										<div class="form_input col-6">${LossItemVo.deductDutyRate}</div>
+									</div>
+									<div class="row cl">
+										<label class="form_label col-6">绝对免赔率</label>
+										<div class="form_input col-6">${LossItemVo.deductAbsRate}</div>
+									</div>
+									<div class="row cl">
+										<label class="form_label col-6">加扣免赔率</label>
+										<div class="form_input col-6">${LossItemVo.deductAddRate}</div>
+									</div>
+								</div></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</c:if>
+</div>
+
+<div class="table_wrap">
+	<div class="table_title f14">财产损失信息</div>
+	  <div class="table_cont table_list">
+			<table border="1" class="table table-border">
+				<thead class="text-c">
+					<tr>
+						<th>险别</th>
+						<th>损失类型</th>
+						<th>财物名称</th>
+						<th>车牌号</th>
+						<th>损失金额</th>
+						<th>施救费</th>
+						<c:if test="${flag eq '2' }">
+							<th>其它扣除</th>
+							<th class="c-red">责任比例%</th>
+							<th>定损扣交强</th>
+							<th>施救费扣交强</th>
+						</c:if>
+							<th>核定金额</th>
+						<c:if test="${compeVo.deductType eq '1' }">
+							<th>应扣预付金额<font class="must">*</font></th>
+						</c:if>
+						<c:if test="${compeVo.deductType eq '2' }">
+							<th>应扣垫付金额<font class="must">*</font></th>
+						</c:if>
+						<c:if test="${flag eq '2' }">
+							<th>免赔率信息</th>
+						</c:if>
+					</tr>
+				</thead>
+				<tbody class="text-c">
+					<c:forEach var="lossPropVo" items="${lossPropVos}" varStatus="status">
+						<c:if test="${lossPropVo.propType eq '1' }">
+						<tr>
+							<td>
+								<app:codetrans codeType="KindCode" codeCode="${lossPropVo.kindCode}" riskCode="${registVo.riskCode}"/>
+							</td>
+							<td>
+								<app:codetrans codeType="LossTypeProp" codeCode="${lossPropVo.lossType}"/>
+							</td>
+							<td><span id="VMlossName_${status.index}">${lossPropVo.lossName}</span></td>
+							<td>${lossPropVo.itemName}</td>
+							<td>${lossPropVo.sumLoss}</td>
+							<td>${lossPropVo.rescueFee}</td>
+							<%-- <td>${lossPropVo.otherDeductAmt}</td>--%>
+							<c:if test="${flag eq '2'}">
+								<td>${empty lossPropVo.otherDeductAmt?0.00:lossPropVo.otherDeductAmt}</td>
+								<td>${lossPropVo.dutyRate}</td>
+								<td>${lossPropVo.bzPaidLoss}</td>
+								<td>${lossPropVo.bzPaidRescueFee}</td>
+							</c:if>
+							<td>${lossPropVo.sumRealPay}</td>
+							<c:if test="${compeVo.deductType ne '3'}">
+								<td>${lossPropVo.offPreAmt}</td>
+							</c:if>
+							<c:if test="${flag eq '2'}">
+							<td><input type="button" class="btn" name="RateInfoBtn"
+								onclick="showRate(this)" value="..." />
+								<div id="rateDiv" class="hide">
+									<div class="row cl">
+										<label class="form_label col-6">事故免赔率</label>
+										<div class="form_input col-6">${lossPropVo.deductDutyRate}</div>
+									</div>
+									<div class="row cl">
+										<label class="form_label col-6">绝对免赔率</label>
+										<div class="form_input col-6">${lossPropVo.deductAbsRate}</div>
+									</div>
+									<div class="row cl">
+										<label class="form_label col-6">加扣免赔率</label>
+										<div class="form_input col-6">${lossPropVo.deductAddRate}</div>
+									</div>
+								</div></td>
+								<%-- <td>
+									<div id="rateDiv" class="hide">
+										<div class="row cl">
+											<label class="form_label col-6">事故免赔率</label>
+											<div class="form_input col-6">${lossPropVo.deductDutyRate}</div>
+										</div>
+										<div class="row cl">
+											<label class="form_label col-6">绝对免赔率</label>
+											<div class="form_input col-6">${lossPropVo.deductAbsRate}</div>
+										</div>
+										<div class="row cl">
+											<label class="form_label col-6">加扣免赔率</label>
+											<div class="form_input col-6">${lossPropVo.deductAddRate}</div>
+										</div>
+									</div></td> --%>
+							</c:if>
+						</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+	</div>
+</div>
+
+
+<div class="table_wrap">
+	<c:if test="${!empty lossPersonVos}">
+		<div class="table_title f14">人员损失信息</div>
+	</c:if>
+	<div class="table_cont table_list">
+		<c:forEach var="lossPersonVo" items="${lossPersonVos}" varStatus="statusOut">
+			<div class="formtable" name="personLossDiv_${statusOut.index }">
+				<table border="1" class="table table-border ">
+					<thead class="text-c">
+						<tr>
+							<th>险别</th>
+							<th>损失类型</th>
+							<th>伤情类型</th>
+							<th>姓名</th>
+							<th>年龄</th>
+							<th>车牌号</th>
+							<c:if test="${flag eq '2' }">
+								<th class="c-red">责任比例%</th>
+								<th>事故免赔</th>
+								<th>绝对免赔</th>
+								<th>加扣免赔</th>
+							</c:if>
+						</tr>
+					</thead>
+					<tbody class="text-c">
+						<tr>
+							<td>
+								<app:codetrans codeType="KindCode" codeCode="${lossPersonVo.kindCode}" riskCode="${registVo.riskCode}"/>
+							</td>
+							<td>
+								<app:codetrans codeType="LossType" codeCode="${lossPersonVo.lossType}" />
+							</td>
+							<td>
+								<app:codetrans codeType="WoundCode" codeCode="${lossPersonVo.injuryType}" />
+							</td>
+							<td>${lossPersonVo.personName}</td>
+							<td>${lossPersonVo.personAge}</td>
+							<td>${lossPersonVo.itemName}</td>
+							<c:if test="${flag eq '2' }">
+								<td>${lossPersonVo.dutyRate}</td>
+								<td>${lossPersonVo.deductDutyRate}</td>
+								<td>${lossPersonVo.deductAbsRate}</td>
+								<td>${lossPersonVo.deductAddRate}</td>
+							</c:if>
+						</tr>
+					</tbody>
+				</table>
+				<hr
+					style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				<table border="1" class="table table-border">
+					<thead class="text-c">
+						<tr>
+							<th>费用名称</th>
+							<th>定损金额</th>
+							<c:if test="${flag eq '2' }">
+								<th>核减金额</th>
+								<th>定损扣交强</th>
+							</c:if>
+							<th>核定金额</th>
+							<c:if test="${compeVo.deductType eq '1' }">
+								<th>应扣预付金额<font class="must">*</font></th>
+							</c:if>
+							<c:if test="${compeVo.deductType eq '2' }">
+								<th>应扣垫付金额<font class="must">*</font></th>
+							</c:if>
+						</tr>
+					</thead>
+					<tbody class="text-c">
+						<c:forEach var="LossPersonFee" items="${lossPersonVo.prpLLossPersonFees}" varStatus="status">
+							<tr>
+								<td>
+									<app:codetrans codeType="DAALossItemType" codeCode="${LossPersonFee.lossItemNo }" />
+								</td>
+								<td>${LossPersonFee.feeLoss}</td>
+								<c:if test="${flag eq '2' }">
+									<td>${empty LossPersonFee.feeOffLoss?0.00:LossPersonFee.feeOffLoss }</td>
+									<td>${LossPersonFee.bzPaidLoss}</td>
+								</c:if>
+								<td>${LossPersonFee.feeRealPay }</td>
+								<c:if test="${compeVo.deductType ne '3' }">
+									<td>${empty LossPersonFee.offPreAmt?0.00:LossPersonFee.offPreAmt }</td>
+								</c:if>
+								<%-- <c:if test="${flag eq '2' }">
+									<td>${LossPersonFee.bzPaidLoss}</td>
+								</c:if>
+								<td>${LossPersonFee.feeRealPay}</td>
+								<td>${LossPersonFee.offPreAmt}</td> --%>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr style="height: 1px; border: none; border-top: 1px dashed #0066CC;" /><p>
+				<div class="row cl mt-10">
+					<label class="form_label col-1">总定损金额：</label>
+					<div class="form_input col-2">${lossPersonVo.sumLoss}</div>
+					<c:if test="${flag eq '2' }">
+						<label class="form_label col-1">总核减金额：</label>
+						<div class="form_input col-2">${lossPersonVo.sumOffLoss}</div>
+						<label class="form_label col-1">总交强赔付：</label>
+						<div class="form_input col-2">${lossPersonVo.bzPaidLoss}</div>
+					</c:if>
+					<label class="form_label col-1">实赔金额：</label>
+					<div class="form_input col-2">${lossPersonVo.sumRealPay}</div>
+				</div>
+			</div>
+			<hr style="height: 1px; border: none; border-top: 1px solid #0080FF;" />
+		</c:forEach>
+	</div>
+	
+	<!-- 其它损失信息 -->
+	<div class="table_wrap">
+		<c:if test="${(flag eq '2')&&(fn:length(LossPropOthVos)>0)}">
+			<div class="table_wrap">
+				<div class="table_title f14">其它损失信息</div>
+				<div class="table_cont table_list">
+						<table border="1" class="table table-border table-bg">
+							<thead class="text-c">
+								<tr>
+									<th>附加险险别<font class="must">*</font></th>
+									<th>车/财名称 <font class="must">*</font></th>
+									<th>数量/天数</th>
+									<th>定损金额</th>
+									<th>残值/其他扣除</th>
+									<th>核定金额</th>
+									<th>责任比例%</th>
+									<th>事故免赔</th>
+									<th>绝对免赔</th>
+									<th>加扣免赔</th>
+								</tr>
+							</thead>
+							<tbody class="text-c" id="OtherLossTbody">
+								<!-- 其他财产损失信息也保存在财产损失表中，因此序列号为财产损失记录条数++ -->
+								<c:forEach var="lossPropOthVo" items="${LossPropOthVos}" varStatus="status">
+									<tr class="detail-body">
+										<td>
+											<app:codetrans codeType="KindCode" codeCode="${lossPropOthVo.kindCode}" riskCode="${registVo.riskCode}"/>
+										</td>
+										<td>${lossPropOthVo.itemName}</td>
+										<td>${lossPropOthVo.lossQuantity}</td>
+										<td>${lossPropOthVo.sumLoss}</td>
+										<td>
+											${empty lossPropOthVo.otherDeductAmt?0.00:lossPropOthVo.otherDeductAmt }
+										</td>
+										<td>${lossPropOthVo.sumRealPay}</td>
+										<td>${lossPropOthVo.dutyRate}</td>
+										<td>${lossPropOthVo.deductDutyRate}</td>
+										<td>${lossPropOthVo.deductAbsRate}</td>
+										<td>${lossPropOthVo.deductAddRate}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				</div>
+			</div>
+		</c:if>
+	</div>

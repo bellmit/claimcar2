@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+	version="2.0">
+	<!--name：service 名称 implementation:服务的实现类 -->
+	<endpoint name="claimForceJobService" implementation="ins.interf.ClaimForceJobService" url-pattern="/webservice/claimForceJobService" />
+	<endpoint name="claimAvgFloatService" implementation="ins.interf.ClaimAvgFloatService" url-pattern="/webservice/claimAvgFloatService" />
+	<endpoint name="claimToGXXBService" implementation="ins.interf.ClaimToGXXBService" url-pattern="/webservice/claimToGXXBService" />
+ 	<endpoint name="autoSaveLinkInfoService" implementation="ins.interf.AutoSaveLinkInfoService" url-pattern="/webservice/autoSaveLinkInfoService" />
+  	<endpoint name="claimToSzPoliceInfoService" implementation="ins.interf.ClaimToSzPoliceInfoService" url-pattern="/webservice/claimToSzPoliceInfoService" />
+ 	<endpoint name="gridCarClaimLogService" implementation="ins.interf.GridCarClaimLogService" url-pattern="/webservice/gridCarClaimLogService" />
+	<endpoint name="platformTaskService" implementation="ins.interf.PlatformTaskService" url-pattern="/webservice/platformTaskService" />
+ 	<endpoint name="seniorCourtQueryService" implementation="ins.interf.SeniorCourtQueryService" url-pattern="/webservice/seniorCourtQueryService" />
+ 	<endpoint name="smsMonitorService" implementation="ins.interf.SmsMonitorService" url-pattern="/webservice/smsMonitorService" />
+ 	<endpoint name="billImageUploadService" implementation="ins.interf.BillImageUploadService" url-pattern="/webservice/billImageUploadService" />
+ 	
+ 	<endpoint name="pingAnTaskService" implementation="ins.interf.PingAnTaskService" url-pattern="/webservice/pingAnTaskService" />
+ </endpoints> 

@@ -1,0 +1,119 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">第${HisStatus.index+1 }次提交记录</div>
+	<div class="table_cont ">
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">跟踪人员</label>
+					<div class="form_input col-3">
+						<app:codetrans codeType="UserCode" codeCode="${perTraceHises.operatorCode}"/>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">跟踪时间</label>
+					<div class="form_input col-3">
+						<fmt:formatDate  value="${perTraceHises.operatorTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<%-- <app:date date="${persTrace.createTime}"/> --%>
+					</div>
+					
+				</div>
+				<div>
+					<label class="form_label col-1">跟踪意见</label>
+					<div class="form_input col-3">${perTraceHises.operatorDesc}</div>
+				</div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">审核人员</label>
+					<div class="form_input col-3">
+						<app:codetrans codeType="UserCode" codeCode="${perTraceHises.undwrtCode}"/>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">审核时间</label>
+					<div class="form_input col-3">
+						<fmt:formatDate  value="${perTraceHises.undwrtTime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<%-- <app:date date="${perTraceHises.createTime }"/> --%>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">审核意见</label>
+					<div class="form_input col-3">${perTraceHises.undwrtDesc}</div>
+				</div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>费用名称</th>
+					<th>估损金额</th>
+					<th>索赔金额</th>
+					<th>定损金额</th>
+					<th>减损金额</th>
+					<th>费用说明</th>
+				</tr>
+			</thead>
+			<tbody name="traceRecord_Tbody" class="text-c">
+				<c:forEach var="perTraceFeeHises" items="${perTraceHises.prpLDlossPersTraceFeeHises }" varStatus="HisStatus">
+					<tr>
+						<td>
+							<app:codetrans codeType="FeeType" codeCode="${perTraceFeeHises.feeTypeCode }" />
+						</td>
+						<td>${perTraceFeeHises.reportFee }</td>
+						<td>${perTraceFeeHises.realFee }</td>
+						<td>${perTraceFeeHises.defloss }</td>
+						<td>${perTraceFeeHises.detractionfee }</td>
+						<td>${perTraceFeeHises.remark }</td>
+					</tr>
+					<c:if test="${!empty perTraceFeeHises.veriLevel }">
+					<tr>
+						<td>
+							<app:codetrans codeType="FlowNode" codeCode="${perTraceFeeHises.veriLevel }"/>审核意见
+						</td>
+						<td>${perTraceFeeHises.veriReportFee }</td>
+						<td>${perTraceFeeHises.veriRealFee }</td>
+						<td>${perTraceFeeHises.veriDefloss }</td>
+						<td>${perTraceFeeHises.veriDetractionFee }</td>
+						<td>${perTraceFeeHises.veriRemark }</td>
+					</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>金额统计</th>
+					<th>估损金额总计</th>
+					<th>索赔金额总计</th>
+					<th>定损金额总计</th>
+					<th>减损金额总计</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<tr>
+					<th class="Bth">人伤跟踪金额</th>
+					<td>${perTraceHises.sumReportFee }</td>
+					<td>${perTraceHises.sumRealFee }</td>
+					<td>${perTraceHises.sumdefLoss}</td>
+					<td>${perTraceHises.sumDetractionFee }</td>
+				</tr>
+				<c:if test="${!empty perTraceHises.sumVeriReportFee||!empty perTraceHises.sumVeriRealFee||!empty perTraceHises.sumVeriDefloss||!empty perTraceHises.sumVeriDetractionFee }">
+					<tr>
+						<th class="Bth">审核金额</th>
+						<td>${perTraceHises.sumVeriReportFee }</td>
+						<td>${perTraceHises.sumVeriRealFee }</td>
+						<td>${perTraceHises.sumVeriDefloss }</td>
+						<td>${perTraceHises.sumVeriDetractionFee }</td>
+					</tr>
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+</div>

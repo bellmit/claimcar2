@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="row cl">
+    <label class="form_label col-1">操作说明：</label>
+	    <div class="form_label col-10">
+			<B>包含有{}的内容将被替换为相关的案件信息：在模板中请使用<font color="red"> 
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{承保机构}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{保单号码}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{承保险别}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{承保限额}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险经过}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{查勘意见}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{大案上报意见}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{大案审核意见}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车物大案上报金额为系统立案金额}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{人伤大案上报金额为人伤立案金额}</a>
+			
+			</font> 代替案件信息！单击{}即可将匹配符插入模板内容中。<B>
+		</div>
+</div>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shouju1" language="groovy" pageWidth="700" pageHeight="842" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c3dcd25-1977-426e-a08e-714243ee38f2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="comName" class="java.lang.String">
+		<parameterDescription><![CDATA[comName]]></parameterDescription>
+	</parameter>
+	<parameter name="damageName" class="java.lang.String">
+		<parameterDescription><![CDATA[damageName]]></parameterDescription>
+	</parameter>
+	<parameter name="damageTime" class="java.util.Date">
+		<parameterDescription><![CDATA[damageTime]]></parameterDescription>
+	</parameter>
+	<parameter name="riskName" class="java.lang.String">
+		<parameterDescription><![CDATA[riskName]]></parameterDescription>
+	</parameter>
+	<parameter name="BigMoney" class="java.lang.String">
+		<parameterDescription><![CDATA[BigMoney]]></parameterDescription>
+	</parameter>
+	<parameter name="LiscNo" class="java.lang.String">
+		<parameterDescription><![CDATA[LiscNo]]></parameterDescription>
+	</parameter>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="day" class="java.lang.String">
+		<parameterDescription><![CDATA[day]]></parameterDescription>
+	</parameter>
+	<parameter name="nowyear" class="java.lang.String"/>
+	<parameter name="nowmonth" class="java.lang.String"/>
+	<parameter name="nowday" class="java.lang.String">
+		<parameterDescription><![CDATA[nowday]]></parameterDescription>
+	</parameter>
+	<parameter name="sumRealpay" class="java.lang.String">
+		<parameterDescription><![CDATA[sumRealpay]]></parameterDescription>
+	</parameter>
+	<field name="accountNo" class="java.lang.String">
+		<fieldDescription><![CDATA[accountNo]]></fieldDescription>
+	</field>
+	<field name="bankName" class="java.lang.String">
+		<fieldDescription><![CDATA[bankName]]></fieldDescription>
+	</field>
+	<field name="claimNo" class="java.lang.String">
+		<fieldDescription><![CDATA[claimNo]]></fieldDescription>
+	</field>
+	<field name="compensateNo" class="java.lang.String">
+		<fieldDescription><![CDATA[compensateNo]]></fieldDescription>
+	</field>
+	<field name="payeeName" class="java.lang.String">
+		<fieldDescription><![CDATA[payeeName]]></fieldDescription>
+	</field>
+	<field name="policyNo" class="java.lang.String">
+		<fieldDescription><![CDATA[policyNo]]></fieldDescription>
+	</field>
+	<field name="sumRealPay" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumRealPay]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="800" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="378" y="70" width="237" height="20" uuid="69844b39-bcb9-4650-9a36-6c4a47ccf3e6"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claimNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="93" width="130" height="20" uuid="fac53213-63ba-4875-a558-99c1de3c6662"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{comName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="121" width="130" height="20" uuid="f18f61e4-f19b-46a0-b136-614162094510"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{riskName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="277" y="121" width="189" height="20" uuid="0648af7a-7c54-49de-a55c-a5af786fb3dc"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{policyNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="466" y="121" width="58" height="20" uuid="21996c00-875f-48d3-b4cd-1788d92f1002"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{year}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="49" y="146" width="35" height="20" uuid="b4db3e4f-3f59-49be-92a3-ba522ba772f3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{month}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="146" width="50" height="20" uuid="f1b0bbd5-3e24-4363-b56e-82f5d145307e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{day}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="146" width="143" height="20" uuid="90c89f98-4eca-4be0-b30a-91f785368507"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{LiscNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="146" width="31" height="20" uuid="8c5c750f-76e8-4010-bc48-24a819200943"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[发生]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="308" y="146" width="171" height="20" uuid="ab18f9a8-9550-4da9-9bb3-f6fadd07d3ba"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{damageName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="172" width="290" height="20" uuid="90dabf0b-12e3-4eea-99aa-7d9ec7dfcbe9"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BigMoney}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="406" y="172" width="128" height="20" uuid="1bf64eaa-c590-4783-bdc1-acec94edaf2b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumRealpay}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="435" y="230" width="225" height="32" uuid="24096915-f981-4950-ae8b-31309be109be"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payeeName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="388" y="263" width="272" height="20" uuid="cc07f586-ac9b-4a58-a625-2d8c1af47167"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bankName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="390" y="288" width="270" height="20" uuid="6b23ccbc-ee49-4cd9-a818-7be2eee82668"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="372" y="314" width="44" height="20" uuid="ae99ee5b-0811-4dba-8964-b742ea9ed454"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nowyear}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="314" width="32" height="20" uuid="c492d403-55d1-45ad-9469-4d007469b406"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nowmonth}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="448" y="314" width="44" height="20" uuid="e2fb7904-e692-436e-9702-fb1fa645e1e1"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nowday}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="317" y="90" width="61" height="20" uuid="b3dc7d22-a407-489c-9ff7-5462994cb104"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[计算书号：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="378" y="90" width="237" height="20" uuid="29cf0a04-2ae4-4be4-8acd-ab045a54e17d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="11" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compensateNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

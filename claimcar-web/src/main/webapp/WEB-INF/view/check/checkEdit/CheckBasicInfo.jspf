@@ -1,0 +1,467 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">查勘基本信息</div>
+	<div class="table_cont reportInfo">
+		<div class="formtable">
+			<!--  -->
+			
+			<%-- <input type="hidden" id="id" name="checkTaskVo.id" value="${checkTaskVo.id}"> --%>
+			<input type="hidden" id="oldIndemnityDutyRateValue" value="${checkDutyVo.indemnityDutyRate}">
+			<!--  -->
+			<div class="row cl">
+				<label class="form_label col-1">案件紧急程度</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="MercyFlag" type="select" id="mercyFlag" clazz="must"
+							name="checkVo.mercyFlag" value="${checkVo.mercyFlag}"/>
+					</span>
+				</div>
+				<label class="form_label col-1">赔案类别</label>
+				<div class="form_input col-3">正常赔案</div>
+				<label class="form_label col-1">查勘类别</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="CheckCategory" type="select" id="checkClass"
+							 lableType="code-name" clazz="must"
+							name="checkVo.checkClass" disabled="true"
+							value="${checkVo.checkClass}" />
+					</span><font class="must">*</font>
+				</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">查勘日期</label>
+				<div class="form_input col-3">
+					<input type="text" class="Wdate" datatype="*" id="checkTimeMainBasic" style="width: 96%";
+							name="checkTaskVo.checkDate" nullmsg="请填写查勘日期！"
+							value="<fmt:formatDate  value="${checkTaskVo.checkDate}" pattern="yyyy-MM-dd HH:mm:ss"/>" 
+							onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/>
+					<font class="must">*</font>
+				</div>
+				<label class="form_label col-1">查勘地点</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkAddress"
+							name="checkTaskVo.checkAddress" datatype="*" maxlength="100" nullmsg="查勘地点不能为空！"
+						 	value="${checkTaskVo.checkAddress}"/>
+					<font class="must">*</font>
+				</div>
+				<label class="form_label col-1">查勘类型</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="CheckType" type="select" id="checkType" clazz="must"
+							name="checkVo.checkType" value="${checkVo.checkType}" />
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">查勘人</label>
+				<div class="form_input col-3">
+					<span class="select-box fl" style="width: 65%">
+						<input type="text" class="input-text" id="checker"
+						   name="checkTaskVo.checker" value="${checkTaskVo.checker}"
+						   datatype="*0-100" maxlength="50"/>
+						<font class="must">*</font>
+					</span>
+					<span class="select-box fl" style="width: 25%">
+						<input class="btn btn-secondary  radius size-s" type="button"  id="showIndex" onclick="showCheckIndex('${checkTaskVo.checkerCode}')" value="点击进入">
+					</span>
+				</div>
+<%--				<div class="form_input col-1">--%>
+<%--				</div>--%>
+				<label class="form_label col-1">查勘人身份证</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkeridfno"
+						name="checkTaskVo.checkerIdfNo" onchange="toUpperCase(this)"
+						value="${checkTaskVo.checkerIdfNo}"
+						datatype="idcard" maxlength="30" nullmsg="请填写信息！"/>
+						<font class="must">*</font>
+				</div>
+				<label class="form_label col-1">联系电话</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text"
+						name="checkTaskVo.checkerPhone" value="${checkTaskVo.checkerPhone}"
+						datatype="m|/^0\d{2,3}-\d{7,8}$/" nullmsg="请填写查勘人联系vvv电话！"/>
+						<font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">是否单车事故</label>
+				<div class="form_input col-3">
+					<span class="radio-box">
+						<app:codeSelect codeType="IsValid" type="radio" name="checkVo.singleAccidentFlag"
+							onchange="changeSingle()" value="${checkVo.singleAccidentFlag}"/>
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">事故类型</label>
+				<div class="form_input col-3">
+					<input type="hidden" name="damTypeVal" value="${checkVo.damageTypeCode}"/>
+					<span class="select-box"> <app:codeSelect
+							codeType="AccidentDutyType" type="select" id="damType"
+							lableType="code-name" name="checkVo.damageTypeCode" clazz="must"
+							value="${checkVo.damageTypeCode}"/>
+					<font class="must">*</font>
+					</span> 
+				</div>
+				<label class="form_label col-1">事故处理类型</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="AccidentManageType" type="select" clazz="must"
+							id="damagetype" name="checkVo.manageType"
+							value="${checkVo.manageType}"/>
+					<font class="must">*</font>
+					</span> 
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">出险原因</label>
+				<div class="form_input col-3 clearfix" id="dam_sel">
+				    <span class="select-box fl" style="width: 45%">
+					<app:codeSelect
+							codeType="DamageCode" type="select" lableType="name" onchange="damageSelect(this)"
+							name="checkVo.damageCode" clazz="must" id="damageNames"
+							value="${checkVo.damageCode}" />
+					</span>
+					<span class="select-box fl" style="width: 45%"> <app:codeSelect
+							codeType="DamageCode2" type="select" lableType="name"
+							id="dam_other" name="checkVo.damOtherCode" clazz="must"
+							value="${checkVo.damOtherCode}" />
+					</span>
+				</div>
+				<input type="hidden" id="policyType_tr1" value="${policyType}">
+				<%-- <c:if test="${policyType ne '1'}"> --%>
+				<div id="dutyRateDiv_tr1">
+					<label class="form_label col-1">事故责任比例</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width: 50%"> <app:codeSelect
+								codeType="IndemnityDuty" type="select" id="indemnityDutyRate"
+								onchange="changeDuty()" nullToVal="4"
+								name="checkDutyVo.indemnityDuty" clazz="must"
+								value="${checkDutyVo.indemnityDuty}"/>
+						</span>
+						<input type="text" class="input-text" id="indemnityDutyRateValue"
+							name="checkDutyVo.indemnityDutyRate" style="width: 45%;margin-top: -6px;" error="请输入正确的数字！"
+							onchange="compareDutyRate(this)" datatype="/^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)$/" maxlength="3"
+							value="${checkDutyVo.indemnityDutyRate}"/>
+						<font class="must">*</font>
+					</div>
+				</div>
+				<%-- </c:if> --%>
+				<input type="hidden" id="ci_duty" value="${checkDutyVo.ciDutyFlag}">
+				<div id="dutyRateDiv_tr2">
+				<%-- <c:if test="${policyType ne '2'}"> --%>
+					<label class="form_label col-1">交强险是否有责</label>
+					<div class="form_input col-3">
+						<span class="select-box"> <app:codeSelect
+								codeType="CiIndemDuty" type="select" id="ciIndemDuty"
+								name="checkDutyVo.ciDutyFlag" clazz="must" nullToVal="1"
+								value="${checkDutyVo.ciDutyFlag}"/>
+						</span>
+					</div>
+				<%-- </c:if> --%>
+				</div>
+			</div>
+			<div class="row cl">
+				<div id="dam_val">
+					<label class="form_label col-1">水淹等级</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width: 95%"> <app:codeSelect
+								codeType="WaterLoggingLevel" type="select" lableType="code-name"
+								name="checkVo.waterLoggingLevel" clazz="select2"
+								value="${checkVo.waterLoggingLevel}" />
+						</span>
+					</div>
+				</div>
+				<label class="form_label col-1">是否互碰自赔</label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isClaimSelf}" onchange="kindSelect()"
+							name="checkVo.isClaimSelf"/>
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">是否全损</label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.lossType}" id="lossType"
+							name="checkVo.lossType" />
+					</span><font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">是否包含财损</label>
+				<div class="form_input col-3" id="propLoss">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isPropLoss}" 
+							name="checkVo.isPropLoss" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">是否包含人伤</label>
+				<div class="form_input col-3" id="personLoss">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isPersonLoss}"
+							name="checkVo.isPersonLoss" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1"><h5><B>重大赔案上报</B></h5></label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.majorCaseFlag}"
+							name="checkVo.majorCaseFlag" onchange=""/>
+					</span><font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">是否免责情形</label>
+				<div class="form_input col-3" id="noDutyFlag">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.noDutyFlag}" onchange="changeNoDuty()"
+							name="checkVo.noDutyFlag" />
+					</span><font class="must">*</font>
+				</div>
+				<div id="noDutyReason">
+					<label class="form_label col-1">免责原因</label>
+					<div class="form_input col-3">
+						<span class="select-box"> <app:codeSelect
+								codeType="NoDutyReason" type="select" 
+								name="checkVo.noDutyReason" value="${checkVo.noDutyReason}"/>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<c:if test="${comCode == 22 }">
+				<div class="row cl">
+					<label class="form_label col-1">事故原因</label>
+					<div class="form_input col-3 clearfix">
+						<span class="select-box" style="width: 60%"> <app:codeSelect
+								codeType="AccidentReasonCode" name="checkVo.accidentReason"
+								value="${checkVo.accidentReason}" type="select" clazz="must" />
+						</span>
+					</div>
+			</c:if>
+			<!-- 重大赔案意见 -->
+			<div class="row cl" id="claimTexts">
+				<div>
+					<label class="form_label col-1"><h5><B>重大赔案意见</B></h5></label>
+					<div class="form_input col-10">
+						<%-- <input class="textarea h80 fl10" name="checkTaskVo.claimText"
+							value="${checkTaskVo.claimText}"> --%>
+						<textarea class="textarea" style="height: 80px;margin-left: 10px;margin-top:6px"
+						name="checkTaskVo.claimText" datatype="*0-299" value="${checkTaskVo.claimText}" id="majorText"
+						placeholder="请输入...">${checkTaskVo.claimText}</textarea><font class="must">*</font>
+					</div><br/><br/><br/>
+				</div>
+				<br/><br/>
+			</div>
+				<!-- 重大赔案意见结束 -->
+			
+			
+			
+			<%-- <div class="row cl">
+				<label class="form_label col-1">是否单车事故</label>
+				<div class="form_input col-3">
+					<span class="radio-box" style="width: 94%">
+						<app:codeSelect codeType="IsValid" type="radio" name="checkVo.singleAccidentFlag"
+							onchange="changeSingle()" value="${checkVo.singleAccidentFlag}"/>
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">事故类型</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="AccidentDutyType" type="select" id="damType"
+							lableType="code-name" name="checkVo.damageTypeCode" clazz="must" style="width: 94%"
+							value="${checkVo.damageTypeCode}"/>
+					<font class="must">*</font>
+					</span> 
+				</div>
+				<label class="form_label col-1">事故处理类型</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="AccidentManageType" type="select" clazz="must"
+							id="damagetype" name="checkVo.manageType" style="width: 94%"
+							value="${checkVo.manageType}"/>
+						<font class="must">*</font>
+					</span> 
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">出险原因</label>
+				<div class="form_input col-3" id="dam_sel">
+					<span class="select-box" style="width: 50%"> <app:codeSelect
+							codeType="DamageCode" type="select" lableType="name" onchange="damageSelect(this)"
+							name="checkVo.damageCode" clazz="must" id="damageNames"
+							value="${checkVo.damageCode}" />
+					</span>
+					<span class="select-box" style="width: 45%"> <app:codeSelect
+							codeType="DamageCode2" type="select" lableType="name"
+							id="dam_other" name="checkVo.damOtherCode" 
+							value="${checkVo.damOtherCode}" />
+					</span>
+							<!-- <select class="select-box" style="width: 40%">
+								<option>111111</option>
+							</select> -->
+				</div>
+				<label class="form_label col-1">赔案类别</label>
+				<div class="form_input col-3">正常赔案</div>
+				<label class="form_label col-1">案件紧急程度</label>
+				<div class="form_input col-3">
+					<span class="select-box"> <app:codeSelect
+							codeType="MercyFlag" type="select" id="mercyFlag" clazz="must"
+							name="checkVo.mercyFlag" value="${checkVo.mercyFlag}" style="width: 94%"/>
+					</span>
+				</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">是否全损</label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.lossType}" id="lossType"
+							name="checkVo.lossType" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">查勘地点</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkAddress"
+							name="checkTaskVo.checkAddress" datatype="*" nullmsg="查勘地点不能为空！"
+						 	value="${checkTaskVo.checkAddress}" style="width: 94%"/>
+					<font class="must">*</font>
+				</div>
+				
+				<label class="form_label col-1">查勘日期</label>
+				<div class="form_input col-3">
+					<input type="text" class="Wdate" datatype="*" style="width: 94%";
+							name="checkTaskVo.checkDate" nullmsg="请填写查勘日期！"
+							value="<app:date date='${checkTaskVo.checkDate}'/>" 
+							onfocus="WdatePicker({maxDate:'%y-%M-%d'})"/>
+					<font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">查勘类型</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 94%"> <app:codeSelect
+							codeType="CheckType" type="select" id="checkType" clazz="must"
+							name="checkVo.checkType" value="${checkVo.checkType}" />
+					</span>
+				</div>
+				<label class="form_label col-1">查勘人</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checker"
+						name="checkTaskVo.checker" value="${checkTaskVo.checker}"
+						style="width: 94%" datatype="*0-100" readonly="readonly"/>
+					<font class="must">*</font>
+				</div>
+				<label class="form_label col-1">查勘人身份证</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkeridfno"
+						name="checkTaskVo.checkerIdfNo" style="width: 94%"
+						value="${checkTaskVo.checkerIdfNo}" readonly="readonly"
+						datatype="*0-30" />
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">查勘类别</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 94%"> <app:codeSelect
+							codeType="CheckCategory" type="select" id="checkClass"
+							 lableType="code-name" clazz="must"
+							name="checkVo.checkClass"
+							value="${checkVo.checkClass}" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">第一现场查勘</label>
+				<div class="form_input col-3" id="firstFlag">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkTaskVo.firstAddressFlag}"
+							id="firstaddressflag" name="checkTaskVo.firstAddressFlag" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">是否互碰自赔</label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isClaimSelf}" onchange="kindSelect()"
+							name="checkVo.isClaimSelf"/>
+					</span><font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">是否包含财损</label>
+				<div class="form_input col-3" id="propLoss">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isPropLoss}" 
+							name="checkVo.isPropLoss" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1">是否包含人伤</label>
+				<div class="form_input col-3" id="personLoss">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.isPersonLoss}"
+							name="checkVo.isPersonLoss" />
+					</span><font class="must">*</font>
+				</div>
+				<label class="form_label col-1"><h5><B>重大赔案上报</B></h5></label>
+				<div class="form_input col-3">
+					<span class="radio-box"> <app:codeSelect codeType="IsValid"
+							type="radio" value="${checkVo.majorCaseFlag}"
+							name="checkVo.majorCaseFlag" onchange=""/>
+					</span><font class="must">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+					<c:if test="${registVo.reportType ne '2'}">
+					<label class="form_label col-1">事故责任比例</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width: 45%"> <app:codeSelect
+								codeType="IndemnityDuty" type="select" id="indemnityDutyRate"
+								onchange="changeDuty()" nullToVal="4"
+								name="checkDutyVo.indemnityDuty" clazz="must"
+								value="${checkDutyVo.indemnityDuty}"/>
+						</span>
+						<input type="text" class="input-text" id="indemnityDutyRateValue"
+							name="checkDutyVo.indemnityDutyRate" style="width: 44%" error="请输入正确的数字！"
+							onchange="compareDutyRate(this)" datatype="/^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)$/"
+							value="${checkDutyVo.indemnityDutyRate}">
+						<font class="must">&nbsp;&nbsp;*</font>
+					</div>
+					</c:if>
+					<input type="hidden" id="ci_duty" value="${checkDutyVo.ciDutyFlag}">
+					<c:if test="${registVo.reportType ne '1'}">
+					<label class="form_label col-1">交强险是否有责</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width:94%"> <app:codeSelect
+								codeType="CiIndemDuty" type="select" id="ciIndemDuty"
+								name="checkDutyVo.ciDutyFlag" clazz="must" nullToVal="1"
+								value="${checkDutyVo.ciDutyFlag}"/>
+						</span>
+					</div>
+					</c:if>
+					<c:if test="${checkVo.damageCode eq 'DM12'}">
+					<div id="dam_val">
+						<label class="form_label col-1">水淹等级</label>
+						<div class="form_input col-3">
+							<span class="select-box" style="width:94%"> <app:codeSelect
+								codeType="WaterLoggingLevel" type="select" lableType="code-name"
+								name="checkVo.waterLoggingLevel" clazz="select2"
+								value="${checkVo.waterLoggingLevel}"/>
+						</span>
+						</div>
+					</div>
+					</c:if>
+				</div>
+				
+				<!-- 重大赔案意见 -->
+				<div class="row cl" id="claimTexts">
+					<div>
+						<label class="form_label col-1"><h5><B>重大赔案意见</B></h5></label>
+						<div class="form_input col-10">
+							<input class="textarea h80 fl10" name="checkTaskVo.claimText"
+								value="${checkTaskVo.claimText}">
+							<textarea class="textarea" style="height: 80px;margin-left: 10px;margin-top:6px"
+							name="checkTaskVo.claimText" datatype="*1-299" value="${checkTaskVo.claimText}" id="majorText"
+							placeholder="请输入...">${checkTaskVo.claimText}</textarea><font class="must">*</font>
+						</div><br/><br/><br/><br/><br/>
+					</div>
+				</div>
+				<!-- 重大赔案意见结束 --> --%>
+			</div>
+		</div>
+</div>

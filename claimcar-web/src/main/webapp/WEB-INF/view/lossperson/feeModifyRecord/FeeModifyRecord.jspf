@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<script type="text/javascript">
+	$(function() {
+		$.Huitab("#persInfoTab .tabBar span", "#persInfoTab .tabCon", "current", "click", "0");
+	});
+</script>
+<div id="persInfoTab" class="HuiTab">
+	<div class="tabBar cl">
+		<c:forEach var="persTrace" items="${persTraceVos }" varStatus="status">
+			<c:if test="${persTrace.validFlag =='0' }">
+				<span style="background: gray">
+			</c:if>
+			<c:if test="${persTrace.validFlag =='1'&&persTrace.endFlag=='1' }">
+				<span style="background: #1A6FB8; color: #fff;">
+			</c:if>
+			<c:if test="${(empty persTrace.validFlag||persTrace.validFlag =='1')&&(empty persTrace.endFlag||persTrace.endFlag=='0') }">
+				<span>
+			</c:if>
+                        ${persTrace.prpLDlossPersInjured.personName }</span>
+		</c:forEach>
+	</div>
+	<!--选项卡一 -->
+	<c:forEach var="persTrace" items="${persTraceVos }" varStatus="status">
+		<div class="tabCon">
+			<div class="panel-body">
+				<c:forEach var="perTraceHises" items="${persTrace.persTraceHises }" varStatus="HisStatus">
+					<%@include file="FeeSubmitRecord.jspf"%>
+				</c:forEach>
+			</div>
+		</div>
+	</c:forEach>
+</div>

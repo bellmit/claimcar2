@@ -1,0 +1,4 @@
+﻿@charset "utf-8";/* CSS Document */
+.first-menu .curBg { background:#F00;height:3px;position:absolute;bottom:0;width:10px;left:50px;}
+.first-menu .ul .li a{color:#ffffff;text-decoration:none;outline:none;blr:expression(this.onFocus=this.blur());}
+.first-menu .ul .li a:hover{color:#FF0000;}

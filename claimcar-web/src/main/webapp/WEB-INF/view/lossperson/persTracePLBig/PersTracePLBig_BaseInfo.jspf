@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">人伤跟踪基本信息</div>
+	<div class="table_cont ">
+		<div class="formtable ">
+			<div class="row cl">
+				<input type="hidden" id="traceMainId" name="prpLDlossPersTraceMainVo.id" value="${prpLDlossPersTraceMainVo.id }">
+				<input type="hidden" id="flowNodeCode" name="flowNodeCode" value="${flowNodeCode }">
+				<input type="hidden" id="flowNodeName" name="flowNodeName" value="${flowNodeName }">
+				<input type="hidden" id="handlerStatus" name="handlerStatus" value="${handlerStatus }">
+				<input type="hidden" id="flowTaskId" name="submitNextVo.flowTaskId" value="${flowTaskId }">
+				<label class="form_label col-1">报案号</label>
+				<div class="form_input col-3">${prpLDlossPersTraceMainVo.registNo }</div>
+				<c:if test="${prpLDlossPersTraceMainVo.reportType =='2'||prpLDlossPersTraceMainVo.reportType =='3'}">
+					<label class="form_label col-1">交强险责任类型</label>
+					<div class="form_input col-3">
+						<app:codetrans codeType="CiIndemDuty" codeCode="${prpLCheckDutyVo.ciDutyFlag }" />
+					</div>
+				</c:if>
+				<c:if test="${prpLDlossPersTraceMainVo.reportType =='1'||prpLDlossPersTraceMainVo.reportType =='3'}">
+					<label class="form_label col-1">事故责任比例</label>
+					<div class="col-3">
+						<div class="form_input col-6">
+							<app:codetrans codeType="IndemnityDuty" codeCode="${prpLCheckDutyVo.indemnityDuty }" />
+						</div>
+						<div class="form_input col-6">${prpLCheckDutyVo.indemnityDutyRate }</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">案件处理类型</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="CaseProcessType" codeCode="${prpLDlossPersTraceMainVo.caseProcessType }" />
+				</div>
+				<label class="form_label col-1">定损类别</label>
+				<div class="form_input col-3">
+					<input type='hidden' id="intermediaryFlag" name="intermediaryFlag" value="${prpLDlossPersTraceMainVo.intermediaryFlag }">
+					<app:codetrans codeType="InterMediaryType" codeCode="${prpLDlossPersTraceMainVo.intermediaryFlag }" />
+				</div>
+				<label class="form_label col-1 intermediary">公估公司</label>
+				<div class="form_input col-3 intermediary">
+					<app:codetrans codeType="GongGuPayCode" codeCode="${prpLDlossPersTraceMainVo.intermediaryInfoId }" />
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1 intermediary">公估人员</label> <label
+					class="form_label col-1 persTracePerson">跟踪人员</label>
+				<div class="form_input col-3">${prpLDlossPersTraceMainVo.plfName }</div>
+				<label class="form_label col-1 intermediary">公估员身份证</label> <label
+					class="form_label col-1 persTracePerson">跟踪员身份证</label>
+				<div class="form_input col-3">${prpLDlossPersTraceMainVo.plfCertiCode }</div>
+				<label class="form_label col-1 intermediary">公估人员电话</label>
+				<div class="form_input col-3 intermediary">${prpLDlossPersTraceMainVo.plfPhone }</div>
+			</div>
+		</div>
+		<div class="formtable">
+		   <div class="row cl">
+		      <label class="form_label col-1.5" style="text-align:left;">是否小额人伤案件</label>
+			<div class="form_input col-3">
+			<app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" name="prpLDlossPersTraceMainVo.isMinorInjuryCases" disabled="true" value="${prpLDlossPersTraceMainVo.isMinorInjuryCases}"/>
+			</div>
+		   </div>
+		
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td width="6%">
+		<button class="btn btn-minus Hui-iconfont Hui-iconfont-jianhao delSancheBtn" type="button" onclick="del_NurseInfo(this)" name="nurseInfoDelBtn_${nurseInfoSize }"></button>
+	</td>
+	<td>
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].id" value="${persNurses.id }">
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].registNo" value="${registNo }">
+		<input type="text" class="input-text" datatype="*" maxlength="16" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].payPersonName"
+			value="${persNurses.payPersonName }" />
+	</td>
+	<td>
+		<span class="select-box">
+			<app:codeSelect codeType="SexType" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].sex" value="${persNurses.sex }" />
+		</span>
+	</td>
+	<td>
+		<span class="select-box">
+			<app:codeSelect codeType="TicCode" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].occupationCode"
+				value="${persNurses.occupationCode }" />
+		</span>
+	</td>
+	<td>
+		<span class="select-box">
+			<app:codeSelect codeType="Income" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].income" value="${persNurses.income }" />
+		</span>
+	</td>
+	<td>
+		<input type="text" class="input-text" maxlength="16" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersNurses[${nurseInfoSize }].relationship" value="${persNurses.relationship }" />
+	</td>
+</tr>

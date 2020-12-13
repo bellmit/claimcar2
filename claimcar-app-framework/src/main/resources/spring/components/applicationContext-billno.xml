@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+ 
+ <!-- 单号生成工具配置 -->
+	<bean id="seqGenerator" class="ins.framework.dao.support.sequence.SeqGenerator">
+		<!-- 事务管理器，当newTransaction是false时必须设置 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<!-- 是否使用新事务，如果是false，将继承上下文事务。 此时如果上下文事务失败，则产生的序列将回收，其性能由主事务决定，比新事务性能低下，可用于严格的无跳号交易； 
+			如果没有上下文事务，则创建新事务。默认是true。 -->
+		<property name="newTransaction" value="true" />
+		<!-- 数据源 -->
+		<property name="dataSource" ref="claimDataSource" />
+		<!-- 尝试次数，生成序列时可能产生锁表导致生成失败，此选项是指失败后的尝试次数。默认是10。 -->
+		<property name="tryTime" value="20" />
+		<!-- 数据库类型，目前支持mysql、informix和oracle -->
+		<property name="databaseType" value="oracle" />
+		<!-- 数据表名，该序列发生器将自动生成需要的表 -->
+		<property name="tableName" value="UtiSeqGenerator" />
+		<!-- 序列容量，为了提高性能，对应于每一个键将允许积累一定的序列号之后才清空。默认是25。 -->
+		<property name="capacity" value="25" />
+		<!-- 序列步进，默认是1 -->
+		<property name="step" value="1" />
+		<!-- 是否可以使用已回收的序列号，默认为false -->
+		<property name="recyclable" value="true" />
+	</bean>
+	
+</beans>

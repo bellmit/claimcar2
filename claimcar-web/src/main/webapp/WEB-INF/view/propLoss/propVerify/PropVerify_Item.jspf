@@ -1,0 +1,134 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">受损财产信息</div>
+	<div class="table_cont table_list ">
+		<table class="table table-border" id="tab_propVerify">
+			<thead class="text-c">
+				<tr>
+					<th>财产名称</th>
+					<th>种类</th>
+					<th>费用名称</th>
+					<th>数量&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp单位</th>
+					<th>单价</th>
+					<th>损余回收</th>
+					<th>残值金额</th>
+					<th>小计</th>
+				</tr>
+			</thead>
+			<tbody id="propFeeTbody">
+				<input type="hidden" id="propFeeSize" value="${fn:length(lossPropMainVo.prpLdlossPropFees) }" />
+				<c:forEach var="prpLdlossPropFee" items="${lossPropMainVo.prpLdlossPropFees }" varStatus="status">
+					<tr class="text-c">
+						<input type="hidden" name="lossPropMainVo.prpLdlossPropFees[${status.index }].id" value="${prpLdlossPropFee.id }" />
+						<td style="width: 11.111%;">
+							${prpLdlossPropFee.lossItemName }
+							<input type="hidden" id="propFees_${status.index }_lossItemName" value="${prpLdlossPropFee.lossItemName }" />
+						</td>
+						<td style="width: 13.111%;">
+							<app:codetrans codeType="LossSpeciesCode" codeCode="${prpLdlossPropFee.lossSpeciesCode }" />
+						</td>
+						<td style="width: 13.111%;">
+							<app:codetrans codeType="PropertyFeeType" codeCode="${prpLdlossPropFee.feeTypeCode }" />
+						</td>
+						<td style="width: 11.111%;">
+							${prpLdlossPropFee.lossQuantity }
+							<input type="hidden" id="propFees_${status.index }_lossQuantity" value="${prpLdlossPropFee.lossQuantity }" />
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							${prpLdlossPropFee.unit }
+						</td>
+						<td style="width: 11.111%;">
+							${prpLdlossPropFee.unitPrice }
+							<input type="hidden" id="propFees_${status.index }_unitPrice" value="${prpLdlossPropFee.unitPrice }" />
+						</td>
+
+						<td style="width: 11.111%;">
+							<div class="radio-box">
+								<input type="checkbox" value="${prpLdlossPropFee.recycleFlag}" disabled="disabled" />
+							</div>
+						</td>
+						<td style="width: 11.111%;">
+							${prpLdlossPropFee.recyclePrice }
+							<input type="hidden" id="propFees_${status.index }_recyclePrice" value="${prpLdlossPropFee.recyclePrice }" />
+						</td>
+						<td style="width: 11.111%;">
+							${prpLdlossPropFee.sumDefloss }
+							<input type="hidden" id="propFees_${status.index }_sumDefloss" value="${prpLdlossPropFee.sumDefloss }" />
+						</td>
+					</tr>
+					<tr class="text-c">
+						<td colspan="3" align="center">
+							<strong>核损意见</strong>
+						</td>
+
+						<td style="width: 11.111%;">
+							<input type="text" class="input-text" onblur="calSumLossFee()" datatype="n" style="vertical-align:middle;width:60%;"
+								name="lossPropMainVo.prpLdlossPropFees[${status.index }].veriLossQuantity"
+								value="${!empty prpLdlossPropFee.sumVeriLoss ? prpLdlossPropFee.veriLossQuantity : prpLdlossPropFee.lossQuantity }"/>
+							<input type="text" style="vertical-align:middle;width:30%;" datatype="*0-2" ignore="ignore" class="input-text" 
+ 					            name="lossPropMainVo.prpLdlossPropFees[${status.index }].unit" value="${prpLdlossPropFee.unit }" />
+						</td>
+
+						<td style="width: 11.111%;">
+							<input type="text" class="input-text" onblur="calSumLossFee()" datatype="amount" 
+								name="lossPropMainVo.prpLdlossPropFees[${status.index }].veriUnitPrice"
+								value="${!empty prpLdlossPropFee.sumVeriLoss ? prpLdlossPropFee.veriUnitPrice : prpLdlossPropFee.unitPrice }"/>
+						</td>
+					
+						<td style="width: 11.111%;">
+							<div class="radio-box">
+								<input type="checkbox" value="${prpLdlossPropFee.recycleFlag}" onclick="recycleFlag(this)"
+								    name="lossPropMainVo.prpLdlossPropFees[${status.index }].recycleFlag" />
+							</div>
+						</td>
+						
+						<td style="width: 11.111%;">
+							<input type="text"	class="input-text" onblur="calSumLossFee()" datatype="amount"
+							name="lossPropMainVo.prpLdlossPropFees[${status.index }].veriRecylePrice"
+							value="${!empty prpLdlossPropFee.sumVeriLoss ? prpLdlossPropFee.veriRecylePrice : prpLdlossPropFee.recyclePrice }" />
+						</td>
+
+						<td style="width: 11.111%;">
+							<input type="text" class="input-text" readonly="readonly"
+								name="lossPropMainVo.prpLdlossPropFees[${status.index }].sumVeriLoss"
+								value="${!empty prpLdlossPropFee.sumVeriLoss ? prpLdlossPropFee.sumVeriLoss : prpLdlossPropFee.sumDefloss }" />
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
+		<div class="formtable ">
+			<div class="row cl">
+				<div class="form_input fl  col-1 text-c">
+					<strong>定损金额合计 </strong>
+				</div>
+				<div class="form_input fl" style="width: 20%;">
+					<input type="hidden" id="sumLossFee" name="lossPropMainVo.sumDefloss" value="${lossPropMainVo.sumDefloss} " />
+					${lossPropMainVo.sumDefloss}
+				</div>
+				<div class="form_input col-1 text-c" style="margin-left: 1%; margin-right: 2%;">
+					<strong>核损金额合计</strong>
+				</div>
+				<div class="form_input fl" style="width: 22.5%;">
+					<input type="text" id="sumVeriLoss" class="input-text" readonly="readonly"
+						name="lossPropMainVo.sumVeriLoss"
+						value="${!empty lossPropMainVo.sumVeriLoss ? lossPropMainVo.sumVeriLoss : lossPropMainVo.sumDefloss }"  />
+				</div>
+
+				<c:if test="${configValue=='1' }">
+				<div class="form_input fl col-1 text-c"  style="margin-left: 2%;">
+					<strong>公估费金额 </strong>
+				</div>
+					<div class="form_input fl" style="width: 22.5%;">
+						<input type="text" class="input-text" dataType='amount'name="lossPropMainVo.assessorFee"value="${lossPropMainVo.assessorFee}">
+					</div>
+				</c:if>
+				
+			</div>
+		</div>
+	</div>
+</div>

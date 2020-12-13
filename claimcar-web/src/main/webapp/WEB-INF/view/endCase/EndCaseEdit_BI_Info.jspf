@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">商业险信息</div>
+	<div class="table_cont table_list">
+		<table border="1" class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>计算书类型</th>
+					<th>计算书号</th>
+					<th>收款人</th>
+					<th>例外标志</th>
+					<th>例外原因</th>
+					<th>收款人账号</th>
+					<th>开户银行</th>
+					<th>费用金额</th>
+					<th>赔款金额</th>
+					<th>结案日期</th>
+					<th>支付状态</th>
+					<!-- <th>送收付状态</th> -->
+					<th>支付时间</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<c:forEach var="compeVoList" items="${PAY_BI}" varStatus="status">
+					<c:forEach var="prpLPayments" items="${compeVoList.prpLPayments}" varStatus="status">
+						<tr>
+							<td>理算</td>
+							<td>${compeVoList.compensateNo}</td>
+							<td>${prpLPayments.payeeName}</td>
+							<td><app:codetrans codeType="IsValid" codeCode="${prpLPayments.otherFlag}"/></td>
+							<td><app:codetrans codeType="OtherCase" codeCode="${prpLPayments.otherCause}" /></td>
+							<td>${prpLPayments.accountNo}</td>
+							<td><app:codetrans codeType="BankCode" codeCode="${prpLPayments.bankName}" /></td>
+							<td></td>
+							<td>${prpLPayments.sumRealPay}</td>
+							<td>
+								<fmt:formatDate value="${endCaseVo.endCaseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</td>
+							<td><c:choose>
+									<c:when test="${prpLPayments.payStatus eq '1'}">
+										<a onclick="payHisShow('${prpLPayments.id}','P')">已支付</a>
+									</c:when>
+									<c:when test="${prpLPayments.payStatus eq '3'}">
+										<a onclick="payHisShow('${prpLPayments.id}','P')">已退票</a>
+									</c:when>
+									<c:when test="${prpLPayments.payStatus eq '2'}">
+									<a onclick="payHisShow('${prpLPayments.id}','P')">未支付</a>
+									</c:when>
+								</c:choose>
+							</td>
+							<%-- <td>${prpLPayments.sendPayStatus}</td> --%>
+							<td>
+								<fmt:formatDate value="${prpLPayments.payTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</td>
+						</tr>
+					</c:forEach>
+					<c:forEach var="prpLCharges" items="${compeVoList.prpLCharges}" varStatus="status">
+						<tr>
+							<td>理算</td>
+							<td>${compeVoList.compensateNo}</td>
+							<td>${prpLCharges.payeeName}</td>
+							<td></td>
+							<td></td>
+							<td>${prpLCharges.accountNo}</td>
+							<td><app:codetrans codeType="BankCode" codeCode="${prpLCharges.bankName}" /></td>
+							<td>${prpLCharges.feeAmt}</td>
+							<td></td>
+							<td>
+								<fmt:formatDate value="${endCaseVo.endCaseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${prpLCharges.payStatus eq '1'}">
+										<a onclick="payHisShow('${prpLCharges.id}','F')">已支付</a>
+									</c:when>
+									<c:when test="${prpLCharges.payStatus eq '3'}">
+										<a onclick="payHisShow('${prpLCharges.id}','F')">已退票</a>
+									</c:when>
+									<c:when test="${prpLCharges.payStatus eq '2'}">
+										<a onclick="payHisShow('${prpLCharges.id}','F')">未支付</a>
+									</c:when>
+								</c:choose>
+							</td>
+							<!-- <td></td> -->
+							<td>
+								<fmt:formatDate value="${prpLCharges.payTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:forEach>
+				<!-- 预付 -->
+				<c:forEach var="prePayVo" items="${prePay_bi}" varStatus="status">
+					<tr>
+						<td>预付</td>
+						<td>${prePayVo.compensateNo}</td>
+						<td>${prePayVo.payeeName}</td>
+						<td>
+							<app:codetrans codeType="IsValid" codeCode="${prePayVo.otherFlag}"/>
+						</td>
+						<td>
+							<app:codetrans codeType="OtherCase" codeCode="${prePayVo.otherCause}"/>
+						</td>
+						<td>${prePayVo.accountNo}</td>
+						<td>
+							<app:codetrans codeType="BankCode" codeCode="${prePayVo.bankName}"/>
+						</td>
+						<c:choose>
+							<c:when test="${prePayVo.feeType eq 'F'}">
+								<td>${prePayVo.payAmt}</td>
+								<td></td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+								<td>${prePayVo.payAmt}</td>
+							</c:otherwise>
+						</c:choose>
+						<td>
+							<fmt:formatDate value="${endCaseVo.endCaseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						</td>
+						<td>
+							<c:choose>
+									<c:when test="${prePayVo.payStatus eq '1'}">
+										<a onclick="payHisShow('${prePayVo.id}','Y')">已支付</a>
+									</c:when>
+									<c:when test="${prePayVo.payStatus eq '3'}">
+										<a onclick="payHisShow('${prePayVo.id}','Y')">已退票</a>
+									</c:when>
+									<c:when test="${prePayVo.payStatus eq '2'}">
+										<a onclick="payHisShow('${prePayVo.id}','Y')">未支付</a>
+									</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<fmt:formatDate value="${prePayVo.payTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div class="row cl">
+	<br/><hr>
+		<label class="form_label col-3 text-c">费用金额合计：</label>
+		<div class="form_input col-2 text-c">${realAmt_BI}</div>
+		<label class="form_label col-3 text-c">赔款金额合计：</label>
+		<div class="form_input col-2 text-c">${sumPay_BI}</div>
+	</div>
+</div>

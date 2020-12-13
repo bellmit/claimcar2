@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<c:if test="${flag eq '1' && fn:length(padPayPersonVos) > 0}">
+	<!-- 交强垫付赔款信息界面 -->
+	<br/>
+	<div class="table_title f14">交强垫付赔款明细</div>
+		<div class="formtable">
+			<div class="table_cont table_list">
+				<table border="1" class="table table-border table-bg">
+					<thead class="text-c">
+						<tr>
+							<th>损失险别</th>
+							<th>预付款项类型</th>
+							<th>预付金额</th>
+							<th>收款人</th>
+							<th>例外标志</th>
+							<th>例外原因</th>
+							<th>收款方账号</th>
+							<th>开户银行</th>
+						</tr>
+					</thead>
+					<tbody class="text-c">
+						<c:forEach var="padPayPersonVo" items="${padPayPersonVos}" varStatus="status">
+							<tr>
+								<td><app:codetrans codeType="KindCode" codeCode="BZ" riskCode="${registVo.riskCode}"/></td>
+								<td><app:codetrans codeType="FeeType" codeCode="${padPayPersonVo.injuryType}"/></td>
+								<td>${padPayPersonVo.costSum}</td>
+								<td>${padPayPersonVo.payeeName}</td>
+								<td>
+									<app:codetrans codeType="YN10" codeCode="${padPayPersonVo.otherFlag}" />
+								</td>
+								<td>
+									<app:codetrans codeType="OtherCause" codeCode="${padPayPersonVo.otherCause}" />
+								</td>
+								<td>${padPayPersonVo.accountNo}</td>
+								<td><app:codetrans codeType="BankCode" codeCode="${padPayPersonVo.bankName}" /></td>
+								<input type="hidden" name="payeeIdPFs" value="${padPayPersonVo.payeeId}"/>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</c:if>

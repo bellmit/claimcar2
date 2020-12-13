@@ -1,0 +1,14 @@
+.reportInfo .check-box, .reportInfo .radio-box {
+ min-width: 60px;
+}
+.reportInfo span.check-box, .reportInfo span.radio-box {
+  min-width: 91%;
+}
+.reportInfo label.form_label.col-1,.tableoverlable label.form_label.col-1{width:9.3333%;padding-right:0;}
+.reportInfo .form_input.col-3,.tableoverlable .form_input.col-3{  width: 23%;margin-left: 1%;}
+#contexts{border-color:#2A81CC;}
+#subrogation_cont tbody td,#subrogation_cont tbody th{padding:4px 0;}
+#subrogation_cont .table{border-bottom:1px solid #2A81CC;}
+#subrogation_cont .table .listNUm{border-right:1px solid #ddd;border-bottom:0;}
+#subrogation_cont .table .listName{border-left:0;}
+.addTwoBtn{background-color:#ddd;}

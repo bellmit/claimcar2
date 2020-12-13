@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">报案信息</div>
+	<div class="table_cont ">
+		<input type="hidden" id="tempRegistFlag" value="${registVo.tempRegistFlag}">
+		<input type="hidden" id="registTaskFlag" value="${registVo.registTaskFlag}">
+		<div class="formtable tableoverlable">
+			<div class="row  cl">
+				<label class="form_label col-1">报案号</label>
+				<div class="form_input col-3">${registVo.registNo}</div>
+				<label class="form_label col-1">被保险人</label>
+				<div class="form_input col-3">${policyInfo[0].insuredName}</div>
+				<label class="form_label col-1">车牌号码</label>
+				<div class="form_input col-3">${checkMainCarVo.prpLCheckCarInfo.licenseNo}</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">报案人</label>
+				<div class="form_input col-3">${registVo.reportorName}</div>
+				<label class="form_label col-1">报案人电话</label>
+				<div class="form_input col-3">${registVo.reportorPhone}</div>
+				<label class="form_label col-1">报案人手机</label>
+				<div class="form_input col-3">${registVo.reportorPhone}</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">联系人</label>
+				<div class="form_input col-3">${registVo.linkerName}</div>
+				<label class="form_label col-1">联系人电话</label>
+				<div class="form_input col-3">${registVo.linkerPhone}</div>
+				<label class="form_label col-1">联系人手机</label>
+				<div class="form_input col-3">${registVo.linkerMobile}</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">报案日期</label>
+				<div class="form_input col-3">
+				<fmt:formatDate  value="${registVo.reportTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				<input type="hidden" id="reportTime" value="${registVo.reportTime}" />
+				</div>
+				<label class="form_label col-1">案件紧急程度</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="MercyFlag"
+						codeCode="${registVo.mercyFlag}" />
+				</div>
+				<label class="form_label col-1">被保险人关系</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="InsuredIdentity"
+						codeCode="${registVo.reportorRelation}" />
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">出险日期</label>
+				<div class="form_input col-3">
+					<fmt:formatDate value="${registVo.damageTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</div>
+				<label class="form_label col-1">出险地点</label>
+				<div class="form_input col-3">${registVo.damageAddress}</div>
+				<label class="form_label col-1">出险原因</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="DamageCode"
+						codeCode="${registVo.damageCode}" />
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-1 text-c">出险经过说明</label>
+			<div class="form_input col-10">
+				<textarea class="textarea" style="height: 80px;" id="dangerRemark"
+					value="${registVo.prpLRegistExt.dangerRemark}">${registVo.prpLRegistExt.dangerRemark}</textarea>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 查勘意见 开始 -->
+<div class="table_wrap">
+	<c:choose>
+		<c:when test="${taskParamVo.subNodeCode eq 'Chk' || taskParamVo.subNodeCode eq 'ChkRe'}">
+			<div class="table_title f14">
+				<c:choose>
+					<c:when test="${taskParamVo.subNodeCode eq 'ChkRe'}">
+						复勘意见
+					</c:when>
+					<c:otherwise>
+						查勘意见
+					</c:otherwise>
+				</c:choose>
+				<font class="must">*</font></div>
+				<div class="form_input col-12">
+				<textarea class="textarea h100" id="contexts" maxlength="500"
+					name="checkTaskVo.contexts" datatype="*1-249" nullmsg="请输入查勘意见！"
+					placeholder="请输入...">${checkTaskVo.contexts}</textarea>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="table_title f14">大案审核意见<font class="must">*</font></div>
+				<div class="table_cont ">
+					<div class="formtable">
+					<c:if test="${taskParamVo.subNodeCode eq 'ChkBig_LV2'}">
+						<label class="form_label col-1">是否超时</label>
+						<div class="form_input col-3">
+							<span class="radio-box">
+								<app:codeSelect codeType="IsValid" type="radio" name="checkTaskVo.isTimeout"
+									value="${checkTaskVo.isTimeout}" nullToVal="0" />
+							</span>
+						</div>
+					</c:if>
+				</div>
+					<div class="row cl">
+						<textarea class="textarea h100" id="verifyCheckContext" maxlength="250"
+							name="checkTaskVo.verifyCheckContext" datatype="*1-140" nullmsg="请输入大案审核意见！"
+							placeholder="请输入...">${checkTaskVo.verifyCheckContext}</textarea>
+					</div>
+			</div>	
+		</c:otherwise>
+	</c:choose>
+	
+</div>
+<!-- 查勘意见 结束 -->
+
+<!-- 意见列表 开始 -->
+<div class="table_wrap">
+	<div class="table_title f14">意见列表</div>
+	<div class="table_cont table_list ">
+		<table class="table table-border table-hover">
+			<thead>
+				<tr class="text-c">
+					<th style="width: 15%">角色</th>
+					<th style="width: 15%">操作人员</th>
+					<th style="width: 15%">机构</th>
+					<th style="width: 15%">发表意见时间</th>
+					<th style="width: 18%">意见说明</th>
+					<th style="width: 15%">审核状态</th>
+				</tr>
+			</thead>
+			<tbody class="" id="claimTextItem">
+				<c:forEach var="claimTextVo" items="${claimTextVos}" varStatus="status">
+				<input type="hidden" name="claimTextVo[${status.index}].id" value="${claimTextVo.id}">
+					<tr class="text-c" id="claimTextTr">
+						<td>
+							<c:choose>
+								<c:when test="${claimTextVo.nodeCode eq 'Chk'}">
+									查勘员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkRe'}">
+									复勘员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkBig_LV1'}">
+									大案一级审核人员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkBig_LV2'}">
+									大案二级审核人员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkBig_LV3'}">
+									大案三级审核人员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkBig_LV4'}">
+									大案四级审核人员
+								</c:when>
+								<c:when test="${claimTextVo.nodeCode eq 'ChkBig_LV5'}">
+									大案五级审核人员
+								</c:when>
+								<c:otherwise>
+									大案审核人员
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>${claimTextVo.operatorName}</td>
+						<td><app:codetrans codeType="ComCode" codeCode="${claimTextVo.comCode}"/></td>
+						<td>
+							<fmt:formatDate  value="${claimTextVo.inputTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						</td>
+						<td>${claimTextVo.description}</td>
+						<td><app:codetrans codeType="AuditStatus" codeCode="${claimTextVo.status}"/>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 意见列表 结束 -->

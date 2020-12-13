@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">
+			<div class="table_title f14">零部件辅料费用清单</div>
+				<div class="table_cont ">
+					<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+						<c:set var="kindcol" 	value="1"/> 
+					</c:if>
+					<table border="1" class="table table-border">
+						<c:if test="${! empty lossCarMainVo.sumVeripLoss || ! empty lossCarMainVo.sumVeriLossFee}">
+							<thead class="text-c">
+							<tr>
+								<th colspan="${kindcol +1}"></th>
+								<th style="border-left:2px solid #91c9f9;" colspan="4">定损	</th>
+								<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+									<th style="border-left:2px solid #91c9f9;" colspan="3">核价</th>
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+									<th style="border-left:2px solid #91c9f9;" colspan="3">核损</th>
+								</c:if>
+							</tr>
+						</thead>
+					</c:if>
+					 		<thead class="text-c">
+					 			<tr >
+					 				<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+										<th>险别</th>
+									</c:if>
+					 				<th>辅料名称</th>
+					 				<th style="border-left:2px solid #91c9f9;">单价</th>
+					 				<th>数量</th>
+					 				<th>金额</th>
+					 				<th>备注</th>
+					 				<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+										<th style="border-left:2px solid #91c9f9;">核价单价</th>
+										<th>核价数量</th>
+										<th>核价金额</th>
+									</c:if>
+									<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+										<th style="border-left:2px solid #91c9f9;">核损单价</th>
+										<th>核损数量</th>
+										<th>核损金额</th>
+									</c:if>
+					 			</tr>
+					 		</thead>
+					 		<tbody class="text-c" id="materialBody">
+					 			<c:forEach var="materialVo" items="${lossCarMainVo.prpLDlossCarMaterials }" varStatus="status">
+										<tr>
+												<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+												<td>
+													<app:codetrans codeType="KindCode" codeCode="${commonVo.compKindName}" riskCode="${riskCode }"/>
+													</td>
+												</c:if>
+											<td> ${materialVo.materialName } </td>
+											<td style="border-left:2px solid #91c9f9;"> ${materialVo.unitPrice } </td>
+											<td> ${materialVo.assisCount } </td>
+											<td> ${materialVo.materialFee } </td>
+											<td>
+												<div <c:if test="${fn:length(materialVo.remark ) > 4}">title="${materialVo.remark }"</c:if> >
+													<c:choose> 
+														<c:when test="${fn:length(materialVo.remark ) > 4}"> 
+															${fn:substring(materialVo.remark, 0, 4)}......
+														</c:when>
+														<c:otherwise>  
+															${materialVo.remark }
+														</c:otherwise>  
+													</c:choose> 
+												</div>
+											 </td>
+											<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+												<td style="border-left:2px solid #91c9f9;"> ${materialVo.auditPrice } </td>
+												<td> ${materialVo.auditCount } </td>
+												<td> ${materialVo.auditMaterialFee } </td>
+											</c:if>
+											<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+												<td style="border-left:2px solid #91c9f9;"> ${materialVo.auditLossPrice } </td>
+												<td> ${materialVo.auditLossCount } </td>
+												<td> ${materialVo.auditLossMaterialFee } </td>
+											</c:if>
+										</tr>
+								</c:forEach>
+					 		</tbody>
+					 </table>
+				</div>
+				<div style="margin:4px 0;overflow:hidden;">
+					<input style="display:none;" type='button' title='更多' id="materialBodyButton" onclick="showMore('materialBody')" class='btn btn-zd fl nodisable' value='更多' />
+				</div>
+			</div>

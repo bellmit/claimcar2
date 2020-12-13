@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<c:if test="${!empty prpLPrePayP}">
+<div class="table_wrap">
+	<c:if test="${flag eq '1' }">
+		<div class="table_title f14">交强预付赔款明细</div>
+	</c:if>
+	<c:if test="${flag eq '2' }">
+		<div class="table_title f14">商业预付赔款明细</div>
+	</c:if>
+	<div class="table_cont table_list">
+		<table border="1" class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>损失险别</th>
+					<th>预付款项类型</th>
+					<th>预付金额</th>
+					<th>收款人</th>
+					<th>例外标志</th>
+					<th>例外原因</th>
+					<th>收款方账号</th>
+					<th>开户银行</th>
+					
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<c:forEach var="prePayPVo" items="${prpLPrePayP}" varStatus="status">
+					<tr>
+						<td><app:codetrans codeType="KindCode" codeCode="${prePayPVo.kindCode }" riskCode="${registVo.riskCode}" /></td>
+						<td><app:codetrans codeType="PrePayFeeType" codeCode="${prePayPVo.chargeCode }"/></td>
+						<td><span name="preAmt">${prePayPVo.payAmt }</span></td>
+						<td> ${prePayPVo.payeeName } </td>
+						<td><app:codetrans codeType="YN10" codeCode="${prePayPVo.otherFlag }" /></td>
+						<td><app:codetrans codeType="OtherCause" codeCode="${prePayPVo.otherCause }" /></td>
+						<td>${prePayPVo.accountNo }</td>
+						<td><app:codetrans codeType="BankCode" codeCode="${prePayPVo.bankName }"/></td>
+						<input type="hidden" name="payeeIdPs" value="${prePayPVo.payeeId}"/>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+</c:if>

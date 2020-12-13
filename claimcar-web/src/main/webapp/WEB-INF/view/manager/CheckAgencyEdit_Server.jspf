@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+
+	<div class="table_wrap">
+		<div class="formtable">
+		<div class="FeeStandard mt-15 text-c">
+			<form action="#" id="IntermServerEditform">
+				<div class="table_cont">
+					
+					<table class="table table-bordered table-bg">
+						<thead>
+							<tr>
+								<th>查勘服务类型</th>
+								<th>资费标准</th>
+							</tr>
+						</thead>
+						<tbody class="addrow">
+						<input type="hidden" id="prpdCheckBankId"  name="checkBankId" value="${checkBankId }" />
+						<c:forEach var="prpdCheckServer" items="${prpdcheckServers}" varStatus="status">						
+							<tr>									
+								<td>
+									<input type="hidden" name="prpdcheckServerVos[${status.index }].serviceType" value="${prpdcheckServer.serviceType }"/>
+									<input type="text" class="input-text" readonly="readonly" value="${prpdCheckServer.serviceName}"/>
+								</td>
+								<td>
+									<input type="text" class="input-text" name="prpdcheckServerVos[${status.index }].feeStandard" 
+											value="${prpdCheckServer.feeStandard}" maxlength="10"/>
+									<input type="hidden" name="prpdcheckServerVos[${status.index }].id" value="${prpdCheckServer.id}"/>
+									<input type="hidden" name="prpdcheckServerVos[${status.index }].createTime" value="${prpdCheckServer.createTime }"/>
+									<input type="hidden" name="prpdcheckServerVos[${status.index }].createUser" value="${prpdCheckServer.createUser }"/>
+								</td>
+							</tr>							       
+						</c:forEach>	
+						</tbody>
+						<tr>
+							<td colspan="3"><div class="btn-footer clearfix text-c">
+									<a class="btn btn-zd mr-10" id="submitServer">保存</a> 
+									<a class="btn btn-zd mr-10 ml-5" onclick="layerHidden()">关闭</a>
+
+								</div></td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+			$("#submitServer").click(function(){	//提交表单
+				$("#prpdCheckBankId").val($("#prpdCheckMainID").val());
+				$("#IntermServerEditform").submit();
+				//防止重复提交
+				$("[name^='prpdcheckServerVo']").attr("disabled","disabled");
+				$("[name^='prpdcheckServerVo']").attr("name","submitService");
+			    $("#submitServer").css("display","none");
+			   // $("#submitServer").attr("id","submitService");
+				//layer.close(index);			
+				
+			});
+		
+		$(function (){
+			var ajaxEdit = new AjaxEdit($('#IntermServerEditform'));
+			ajaxEdit.targetUrl = "/claimcar/checkagency/saveCheckServerInfo"; 
+			ajaxEdit.afterSuccess=function(data){
+
+			}; 
+			//绑定表单
+			ajaxEdit.bindForm();
+		});
+		
+		
+	</script>
+
+
+

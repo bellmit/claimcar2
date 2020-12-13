@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/wsdl/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.longrise.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="leap" targetNamespace="http://services.longrise.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.longrise.com/">
+<xs:element name="app_login" type="tns:app_login"/>
+<xs:element name="app_loginResponse" type="tns:app_loginResponse"/>
+<xs:element name="importCaseinfo" type="tns:importCaseinfo"/>
+<xs:element name="importCaseinfoResponse" type="tns:importCaseinfoResponse"/>
+<xs:complexType name="importCaseinfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+<xs:element minOccurs="0" name="arg2" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="importCaseinfoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="app_login">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+<xs:element minOccurs="0" name="arg2" type="xs:string"/>
+<xs:element minOccurs="0" name="arg3" type="xs:int"/>
+<xs:element minOccurs="0" name="arg4" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="app_loginResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="importCaseinfoResponse">
+    <wsdl:part element="tns:importCaseinfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="importCaseinfo">
+    <wsdl:part element="tns:importCaseinfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="app_login">
+    <wsdl:part element="tns:app_login" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="app_loginResponse">
+    <wsdl:part element="tns:app_loginResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Ileap">
+    <wsdl:operation name="importCaseinfo">
+      <wsdl:input message="tns:importCaseinfo" name="importCaseinfo">
+    </wsdl:input>
+      <wsdl:output message="tns:importCaseinfoResponse" name="importCaseinfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="app_login">
+      <wsdl:input message="tns:app_login" name="app_login">
+    </wsdl:input>
+      <wsdl:output message="tns:app_loginResponse" name="app_loginResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="leapSoapBinding" type="tns:Ileap">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="importCaseinfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="importCaseinfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="importCaseinfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="app_login">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="app_login">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="app_loginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="leap">
+    <wsdl:port binding="tns:leapSoapBinding" name="leapPort">
+      <soap:address location="http://localhost:8080/claimcar-claim/services/leapPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

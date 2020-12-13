@@ -1,0 +1,26 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from accRollBackAccount WSDL service -->
+
+  <service name="AccRollBackAccountServicePort" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.interf.claimcar.sino.ins/"/>
+      <parameter name="wsdlServiceElement" value="accRollBackAccount"/>
+      <parameter name="schemaUnqualified" value="http://service.interf.claimcar.sino.ins/"/>
+      <parameter name="wsdlServicePort" value="AccRollBackAccountServicePort"/>
+      <parameter name="className" value="ins.sino.claimcar.interf.service.AccRollBackAccountServicePortBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="AccRollBackAccountService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+  </service>
+</deployment>

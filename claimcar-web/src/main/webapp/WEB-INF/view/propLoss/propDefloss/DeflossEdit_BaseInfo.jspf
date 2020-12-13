@@ -1,0 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 基本信息开始 -->
+<div class="table_wrap">
+		<div class="table_title f14">基本信息</div>
+		<div class="table_cont">
+			<!-- 隐藏表单字段 -->
+			<input type="hidden" id="propId" name="prpLdlossPropMainVo.id" value="${prpLdlossPropMainVo.id }"/>
+			<input type="hidden" id="oldClaim" value="${oldClaim}"/>
+			<input type="hidden" name="prpLdlossPropMainVo.scheduleTaskId" value="${prpLdlossPropMainVo.scheduleTaskId }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.interMediaryinfoId" value="${prpLdlossPropMainVo.interMediaryinfoId }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.comCode" value="${prpLdlossPropMainVo.comCode }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.checkpropId" value="${prpLdlossPropMainVo.checkpropId }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.handlerCode" value="${prpLdlossPropMainVo.handlerCode }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.riskCode" value="${prpLdlossPropMainVo.riskCode }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.reLossPropId" value="${prpLdlossPropMainVo.reLossPropId }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.deflossSourceFlag" id="sourceFlag" value="${prpLdlossPropMainVo.deflossSourceFlag }"/>
+			<!-- 是否通赔任务 -->
+			<input type="hidden" name="prpLdlossPropMainVo.caseTaskFlag" value="${prpLdlossPropMainVo.caseTaskFlag }"/>
+			<input type="hidden" id="amount"  value="${requestScope.amount  }">
+			<input type="hidden" id="lossType" name="prpLdlossPropMainVo.lossType" value="${prpLdlossPropMainVo.lossType  }">
+			<input type="hidden" name="prpLdlossPropMainVo.makeCom" value="${prpLdlossPropMainVo.makeCom }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.lossState" value="${prpLdlossPropMainVo.lossState }"/>
+			<!-- 备用字段 -->	
+			<input type="hidden" id="flowTaskId" name ="prpLdlossPropMainVo.flowTaskId" value="${prpLdlossPropMainVo.flowTaskId}">
+			<input type="hidden" id="currentNode" name="prpLdlossPropMainVo.currentNode" value="${prpLdlossPropMainVo.currentNode}">
+			<input type="hidden" id="saveType" name="prpLdlossPropMainVo.auditStatus" />
+			<input type="hidden" id="handleStatus" value="${commonVo.handleStatus }" />
+			<input type="hidden" id="damageDate" value="<app:date date='${commonVo.damageDate }'/>" />
+			<input type="hidden" id="intermStanders" value="${commonVo.intermStanders }" />
+			<input type="hidden" name="prpLdlossPropMainVo.recycleFlag" value="${prpLdlossPropMainVo.recycleFlag }"/>
+			<input type="hidden" name="prpLdlossPropMainVo.license" value="${prpLdlossPropMainVo.license}">
+			<input type="hidden" name="prpLdlossPropMainVo.serialNo" value="${prpLdlossPropMainVo.serialNo }"/>
+			<input type="hidden" id="acceptFlag" value="${commonVo.acceptFlag}">   
+			<!--用于暂存后从新赋值主表id 防止 js单独文件获取不到EL  -->
+			<input type="hidden" id="propIdTemp" value="${requestScope.id }">
+			<input type="hidden" id="flag" value="${flag}">
+			<input type="hidden" id="haveKindD" name="prpLdlossPropMainVo.haveKindD" value="${prpLdlossPropMainVo.haveKindD}">
+		
+			<div class="formtable tableoverlable">
+				<div class="row  cl">
+					<label class="form_label col-1">报案号</label>
+					<div class="form_input col-3">
+					
+						${prpLdlossPropMainVo.registNo }
+						<input type="hidden" id="registNo" name="prpLdlossPropMainVo.registNo" value="${prpLdlossPropMainVo.registNo}"/>
+					</div>
+					<label class="form_label col-1">赔案类别</label>
+					<div class="form_input col-3">
+						<app:codetrans codeType="CaseCode" codeCode="${prpLdlossPropMainVo.claimType }"/>
+						<input type="hidden" name="prpLdlossPropMainVo.claimType" value="${prpLdlossPropMainVo.claimType }">
+					</div>
+					<label class="form_label col-1">案件紧急程度</label>
+					<div class="form_input col-3">
+						<span class="select-box">
+							<app:codeSelect codeType="MercyFlag" name="prpLdlossPropMainVo.mercyFlag" value="${prpLdlossPropMainVo.mercyFlag }" type="select" clazz="must"/> 
+						</span>
+					</div>
+				</div>
+				<div class="row  cl">
+						<label class="form_label col-1">车牌号码</label>
+						<div class="form_input col-3">				
+							<!--  后台查询出是哪种类型的车辆损失。三者车或者地面不能改为标的车，标的车可以改为地面。-->
+							${prpLdlossPropMainVo.license}
+						</div>
+						<label class="form_label col-1">定损类别</label>
+						<div class="form_input col-3">
+							<app:codetrans codeType="InterMediaryType" codeCode="${prpLdlossPropMainVo.interMediaryFlag }"/> 
+							<input type="hidden" name="prpLdlossPropMainVo.interMediaryFlag" value="${prpLdlossPropMainVo.interMediaryFlag}">
+						</div>
+						<label class="form_label col-1">定损日期</label>
+						<div class="form_input col-3">
+							<input type="text" class="Wdate" datatype="*" style="width: 96%;" name="prpLdlossPropMainVo.defLossDate"  id="deflossDate" 
+								value="<app:date date='${prpLdlossPropMainVo.defLossDate }'/>" onfocus="WdatePicker({maxDate:'%y-%M-%d'})" nullmsg="请填写定损日期！"/>
+							<font class="must">*</font> 	
+						</div>
+				</div>
+				<div class="row  cl">
+						<label class="form_label col-1 ready-only">定损员</label>
+						<div class="form_input col-3">
+							${prpLdlossPropMainVo.handlerName }
+							<input type="hidden" name="prpLdlossPropMainVo.handlerName" value="${prpLdlossPropMainVo.handlerName }"/>
+						</div>
+						<label class="form_label col-1 ready-only">定损员身份证号码</label>
+						<div class="form_input col-3">
+							    <input type="text" class="input-text" name="prpLdlossPropMainVo.handlerIdCard"
+							     value="${prpLdlossPropMainVo.handlerIdCard }"  datatype="idcard" errormsg="请填写正确的身份证号"
+							     oldtitle="请填写正确的身份证号" nullmsg="请填写正确的身份证号" onchange="toUpperCase(this)"/>
+							     <font class="must">*</font>
+						</div>
+						<label class="form_label col-1">是否车物减损</label>
+						<div class="form_input col-3">
+							<span class="radio-box"> <app:codeSelect codeType="IsValid"
+									type="radio" value="${prpLdlossPropMainVo.isWhethertheloss}" 
+									name="prpLdlossPropMainVo.isWhethertheloss" />
+							</span><font class="must">*</font>
+					    </div>
+				</div>
+		</div>
+	</div>
+</div>
+<!-- 基本信息结束 -->

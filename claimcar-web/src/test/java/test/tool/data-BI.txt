@@ -1,0 +1,4 @@
+4	理赔编码	CLAIM_CODE	VARCHAR2(50)	  Y		
+5	拒赔理由	REJECT_REASON	VARCHAR2(900)			
+6	公司注销时间	COM_CANCEL_TIME	DATE	Y		YYYYMMDDHHMMSS
+7	直接理赔费用总金额	DirectClaimAmount	NUMBER(12,2)	Y		金额不可为负，若无直接理赔费用上传0

@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">审批信息</div>
+	<div class="formtable">
+		<div class="table_cont table_list">
+			<table border="1" class="table table-border table-bg">
+				<thead class="text-c">
+					<tr>
+						<th style="width: 12%">角色</th>
+						<th style="width: 12%">操作人员</th>
+						<th style="width: 12%">机构</th>
+						<th style="width: 15%">发表意见时间</th>
+						<th>审核意见</th>
+						<th style="width: 15%">审核状态</th>
+						<th style="width: 12%">操作</th>
+					</tr>
+				</thead>
+				<tbody class="text-c">
+					<c:forEach var="uwNotion" items="${uwNotionMainVo.prpLuwNotions}" varStatus="status">
+						<tr>
+							<td>核赔员</td>
+							<td>
+								<app:codetrans codeType="UserCode" codeCode="${uwNotion.auditor}"/>
+							</td>
+							<td>
+								<app:codetrans codeType="ComCodeFull" codeCode="${uwNotion.comCode}"/>
+							</td>
+							<td>
+								<fmt:formatDate  value="${uwNotion.pubTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</td>
+							<td>${uwNotion.handleText}</td>
+							<td>
+								<app:codetrans codeType="VerifyText" codeCode="${uwNotion.verifyText}"/>
+							<%-- <input type="text" class="input-text"
+								value="${uwNotionVo.remark}" /> --%></td>
+							<td>
+								<app:codetrans codeType="AuditStatus" codeCode="${uwNotion.handle}"/>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<br/>
+
+<%-- <c:if test="${taskType eq '3'|| taskType eq '4' || taskType eq '5'}">
+	<div class="table_wrap">
+	<div class="table_title f14">${reportsTextTitle}<font class="must">*</font></div>
+	<div class="formtable">
+	<textarea class="textarea" style="height: 100px; margin-top: 6px"
+					name="nodeText"  value="" id="nodeText" 
+					readonly="readonly">${reportsText}</textarea>
+				<br />
+	</div>
+</div>
+<br/>
+</c:if> --%>
+<div class="table_wrap">
+	<div class="table_title f14">核赔意见<font class="must">*</font></div>
+	<div class="formtable">
+		<div class="table_cont">
+			<div class="row cl">
+				<label class="form_label col-1">核赔意见</label>
+				<div class="form_input col-9">
+					<span class="radio-box" style="display:inline;"> 
+					<c:if test="${fxqSignShow eq '1' }">
+					<app:codeSelect codeType="VerifyText1" type="radio" name="uwNotionVo.VerifyText"
+							onchange="handle_Text(this)" nullToVal="01"
+							value="${uwNotionVos[0].verifyText}" />
+					</c:if>
+					<c:if test="${fxqSignShow ne '1' }">
+					<app:codeSelect codeType="VerifyText" type="radio" name="uwNotionVo.VerifyText"
+							onchange="handle_Text(this)" nullToVal="01"
+							value="${uwNotionVos[0].verifyText}" />
+					</c:if>
+				
+					</span>
+				</div>
+			</div>
+			<div class="line mt-10 mb-10"></div>
+			<div class="row cl">
+				<label class="form_label col-1">意见内容</label>
+			</div>
+			<div class="row cl" id="contentDiv">
+				<div id="handle_1" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 4%;">
+					<app:codeSelect codeType="HandleText_1" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)"/>
+					</span>
+				</div>
+				<div id="handle_2" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 4%;">
+					<app:codeSelect codeType="HandleText_2" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)"/>
+					</span>
+				</div>
+				<div id="handle_3" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 2%;">
+					<app:codeSelect codeType="HandleText_3" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)" style="margin-left: 2%;"/>
+					</span>
+				</div>
+				<div id="handle_4" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 4%;">
+					<app:codeSelect codeType="HandleText_4" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)"/>
+					</span>
+				</div>
+				<div id="handle_5" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 4%;">
+					<app:codeSelect codeType="HandleText_5" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)"/>
+					</span>
+				</div>
+				 
+                <div id="handle_6" class="form_input col-9" style="display: none">
+					<span class="checkbox" style="margin-left: 4%;">
+					<app:codeSelect codeType="HandleText_6" type="checkbox" value=""
+							name="handleContent" onchange="hadTextClick(this)"/>
+					</span>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-12">
+				<input type="hidden" id="ve_amount" value="${ve_amount}">
+				<textarea class="textarea" style="height: 100px; margin-top: 6px"
+					name="uwNotionVo.handleText" datatype="*1-299" value="" id="handleText" nullmsg="请填写信息！"
+					placeholder="请输入..."></textarea>
+				<br />
+			</div>
+		</div>
+	</div>
+	</div>
+	
+	
+
+<script type="text/javascript">
+	function getReason() {
+		reasons = "";
+		$("input[name='hepeic']").each(function() {
+			if ($(this).prop('checked')) {
+				reasons += $(this).next('span').text() + "  ";
+			}
+		});
+		$("#veriReasons").val(reasons + "（核赔金额xxx元）");
+	}
+</script>

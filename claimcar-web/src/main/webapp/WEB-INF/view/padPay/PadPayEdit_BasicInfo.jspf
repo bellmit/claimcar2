@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">基本信息</div>
+	<div class="table_cont">
+		<div class="formtable tableoverlable">
+		<!-- 隐藏域的值 -->
+		<input type="hidden" name="padPayMainVo.id" value="${padPayMainVo.id}">
+		<input type="hidden" name="padPayMainVo.claimNo" value="${claimVo.claimNo}">
+		<input type="hidden" name="padPayMainVo.registNo" value="${claimVo.registNo}">
+		<input type="hidden" name="padPayMainVo.compensateNo" value="${padPayMainVo.compensateNo}">
+		<input type="hidden" name="padPayMainVo.policyNo" value="${claimVo.policyNo}">
+
+		<div class="row cl">
+			<label class="form_label col-2">立案号：</label>
+			<div class="form_input col-2">${claimVo.claimNo}</div>
+			<label class="form_label col-2">报案号：</label>
+			<div class="form_input col-2">${claimVo.registNo}</div>
+			<label class="form_label col-2">保单号：</label>
+			<div class="form_input col-2">${claimVo.policyNo}</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">被保险人：</label>
+			<div class="form_input col-2">${cMainVo.insuredName}</div>
+			<label class="form_label col-2">归属机构：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="ComCodeFull" codeCode="${cMainVo.comCode}" />
+			</div>
+			<label class="form_label col-2">车牌号码：</label>
+			<div class="form_input col-2">${checkDutyVo.licenseNo}</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">号牌底色：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="LicenseColor"
+					codeCode="${colorCode}" />
+			</div>
+			<label class="form_label col-2">出险地点：</label>
+			<div class="form_input col-2">${registVo.damageAddress}</div>
+			<label class="form_label col-2">出险日期：</label>
+			<div class="form_input col-2">
+				<app:date date='${registVo.damageTime}' />
+				<input type="hidden" id="damageTime" value="<app:date date='${registVo.damageTime}' />">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">交强责任类型：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="CiIndemDuty" codeCode="${checkDutyVo.ciDutyFlag}"/>
+				<%-- <c:if test="${checkDutyVo.ciDutyFlag eq '1'}">有责</c:if>
+				<c:if test="${checkDutyVo.ciDutyFlag eq '2'}">无责</c:if> --%>
+			</div>
+			<label class="form_label col-2">交警联系电话：</label>
+			<div class="form_input col-2">
+				<input type="text" class="input-text" datatype="*0-0|m" nullmsg="请填写交警联系电话！"
+					name="padPayMainVo.policePhone" value="${padPayMainVo.policePhone}"/>
+			</div>
+			<label class="form_label col-2">通知书发出单位：</label>
+			<div class="form_input col-2">
+				<input type="text" class="input-text" name="padPayMainVo.noticeCom"
+					value="${padPayMainVo.noticeCom}" maxlength="25"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">交警通知书号：</label>
+			<div class="form_input col-2">
+				<input type="text" class="input-text"
+					name="padPayMainVo.policeNoticeNo"
+					value="${padPayMainVo.policeNoticeNo}" maxlength="20"/>
+			</div>
+			<label class="form_label col-2">通知日期：</label>
+			<div class="form_input col-2">
+				<input type="text" class="Wdate" datatype="*" style="width: 97%";
+					id="noticeDate" name="padPayMainVo.noticeDate" nullmsg="请填写通知日期！"
+					value="<app:date date='${padPayMainVo.noticeDate}'/>"
+					onfocus="WdatePicker({maxDate:'%y-%M-%d'})" />
+					<font class="must">*</font>
+			</div>
+			<label class="form_label col-2">交警姓名：</label>
+			<div class="form_input col-2">
+				<input class="input-text" name="padPayMainVo.policeName"
+					value="${padPayMainVo.policeName}" maxlength="10"/>
+			</div>
+		</div>
+		<%-- <div class="row cl">
+			<label class="form_label col-2">是否发起追偿：</label>
+			<div class="form_input col-2">
+				是
+				<app:codeSelect codeType="YN10" type="radio" value="1" readonly="readonly"/>
+			</div>
+		</div> --%>
+	</div>
+	</div>
+</div>

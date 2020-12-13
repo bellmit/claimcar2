@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">本次跟踪记录</div>
+	<div class="table_cont  ">
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1"><B>跟踪形式</B></label>
+					<div class="form_input col-3 mustBox">
+						<span class="select-box"> <app:codeSelect clazz="must" codeType="TraceForms" type="select" name="prpLDlossPersTraceVo.traceForms" value="${persTrace.traceForms}"/> <font class="must">*</font>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<table class="table table-border trackingTable" width="100%">
+			<thead class="text-c" width="100%">
+				<tr width="100%">
+					<th width="6%">
+						<button type="button" class="btn btn-plus Hui-iconfont Hui-iconfont-add" onclick="initRecordFeeType(this)"></button>
+					</th>
+					<th width="24%">费用名称</th>
+					<th width="8%">估损金额</th>
+					<th width="8%">索赔金额</th>
+					<th width="30%">费用公式</th>
+					<th width="8%">定损金额</th>
+					<th width="8%">减损金额</th>
+					<th width="8%">费用说明</th>
+				</tr>
+			</thead>
+			<tbody id="traceRecord_Tbody" name="traceRecord_Tbody" class="text-c">
+				<c:choose>
+					<c:when test="${fn:length(persTrace.prpLDlossPersTraceFees)>0 }">
+						<c:forEach var="persTraceFee" items="${persTrace.prpLDlossPersTraceFees }" varStatus="recordStatus">
+							<c:set var="traceRecordSize" value="${recordStatus.index}" />
+							<%@ include file="TabCon_TraceRecord_Tr.jspf"%>
+							<c:if test="${!empty persTraceFee.veriReportFee||!empty persTraceFee.veriRealFee }">
+								<%@ include file="TabCon_ViewVerifyTraceRecord_Tr.jspf"%>
+							</c:if>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="persTraceFee" items="${prpLDlossPersTraceFees }" varStatus="recordStatus">
+							<c:set var="traceRecordSize" value="${recordStatus.index}" />
+							<%@ include file="TabCon_TraceRecord_Tr.jspf"%>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+	</div>
+</div>

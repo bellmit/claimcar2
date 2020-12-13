@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">跟踪内容说明</div>
+	<div class="table_cont ">
+		<div class="row cl">
+			<div class="form_input col-9">
+				<input type="hidden" name="prpLDlossPersTraceVo.registNo" value="${registNo }">
+				<textarea class="textarea" name="prpLDlossPersTraceVo.operatorDesc" readonly="readonly">${persTrace.operatorDesc }</textarea>
+			</div>
+			<div class="form_input col-2 col-offset-1" style="padding-top: 68px">
+				<button type="button" class="btn btn-secondary radius" name="${tabPageNo }_addTraceContent" onclick="addTraceContent(this)">增加</button>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="form_input col-8" style="padding-top: 15px">
+				是否发起索赔
+				<app:codeSelect codeType="IsValid" type="radio" name="prpLDlossPersTraceVo.endFlag" nullToVal="0" value="${persTrace.endFlag }" onchange="changeEndFlag(this)" />
+				<font class="must" style="position: relative;">*</font>
+			</div>
+		</div>
+	</div>
+	<div class="col-2 col-offset-6" style="padding-top: 20px">
+		<button type="button" class="btn btn-secondary radius" onclick="saveCasualtyInfo()">暂存</button>
+	</div>
+</div>

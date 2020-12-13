@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+                            default-autowire="byName" default-lazy-init="false">
+
+	<context:component-scan base-package="com.websystique.spring" />
+
+	<!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+	<bean  name="quertzScheduler"  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="claimForceJobTrigger" />
+				<ref bean="claimAvgFloatFifteenTrigger" />
+				<ref bean="claimAvgFloatThirtyTrigger" />
+				<ref bean="autoSaveLinkInfoJobTrigger" />
+				
+				<ref bean="claimToGXXBTrigger" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- There are 2 ways to configure a Job in Spring using Quartz -->
+	<!-- A : Using MethodInvokingJobDetailFactoryBean  -->
+	<!-- claimForceJobTrigger start -->
+<!-- 	<bean id="claimForceJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="claimForceJobDetail" />
+		start  Delay 10 seconds
+		<property name="startDelay" value="60000" />
+		repeat every 60 seconds
+		<property name="repeatInterval" value="60000" />
+		or run every morning at 1 AM
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+	 
+	</bean> -->
+	<bean id="claimForceJobTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="claimForceJobDetail" />
+       <property name="cronExpression" value="0 0 1 * * ?"/>
+    </bean>
+    <bean id="claimAvgFloatFifteenTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="claimAvgFloatFifteenDetail" />
+       <property name="cronExpression" value="0 30 1 * * ?"/>
+    </bean>
+    <bean id="claimAvgFloatThirtyTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="claimAvgFloatThirtyDetail" />
+       <property name="cronExpression" value="0 0 2 * * ?"/>
+    </bean>  
+    
+    <bean id="autoSaveLinkInfoJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoSaveLinkInfoDetail" />
+		<property name="cronExpression" value="0 0 *  * * ?" />
+	</bean>
+	
+	
+	<bean id="claimToGXXBTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="claimToGXXBDetail" />
+       <property name="cronExpression" value="0 0 22 * * ?"/>
+    </bean>
+
+	<!-- For times when you just need to invoke a method on a specific object -->
+	<bean id="claimForceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="claimForceJobService" />
+		<property name="targetMethod" value="doJob" />
+	</bean>
+	<bean id="claimAvgFloatFifteenDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="claimAvgFloatService" />
+		<property name="targetMethod" value="doFloatCarProp" />
+	</bean>
+	<bean id="claimAvgFloatThirtyDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="claimAvgFloatService" />
+		<property name="targetMethod" value="doFloatPers" />
+	</bean>
+	
+	<bean id="autoSaveLinkInfoDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoSaveLinkInfoService" />
+		<property name="targetMethod" value="test" />
+	</bean>
+	
+	
+	<bean id="claimToGXXBDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="claimToGXXBService" />
+		<property name="targetMethod" value="doJob" />
+	</bean>
+
+<!-- claimForceJobTrigger end -->
+
+	<!--- B : Using JobDetailFactoryBean -->
+</beans>

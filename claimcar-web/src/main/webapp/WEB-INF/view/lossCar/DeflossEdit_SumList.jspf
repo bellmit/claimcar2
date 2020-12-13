@@ -1,0 +1,138 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			
+			<div class="table_wrap">
+        <div class="table_title f14">金额合计</div>
+				<div class="table_cont table_list">
+						<input type="hidden" name="lossCarMainVo.sumRescueFee" value="${lossCarMainVo.sumRescueFee }" />  
+						<input type="hidden" name="lossCarMainVo.sumLossFee" value="${lossCarMainVo.sumLossFee }" />
+					 <div id="jySumList">
+					 <table class="table table-border">
+					 		<thead class="text-c">
+					 			<tr >
+					 				<th>工作环节</th>
+					 				<th>零部件更换金额</th>
+					 				<th>辅料金额</th>
+					 				<th>维修金额(工时费)</th>
+					 				<th>外修金额</th>
+					 				<th>残值金额</th>
+					 				<th>合计</th>
+					 				<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				<th>客户确认金额</th>
+					 				</c:if>
+					 				<th>施救金额</th>
+					 			</tr>
+					 		</thead>
+					 		<tbody class="text-c">
+					 			<tr>
+					 				<td> 定损 </td>
+					 				<td> <input type="text" class="input-text" id="jy_sumComFee" name="lossCarMainVo.sumCompFee" value="${empty lossCarMainVo.sumCompFee ? 0:lossCarMainVo.sumCompFee}" datatype="amount" onchange="calJySum()" readonly="readonly"/> </td>
+					 				<td> <input type="text" class="input-text" id="jy_sumMatFee"  name="lossCarMainVo.sumMatFee" value="${empty lossCarMainVo.sumMatFee ? 0:lossCarMainVo.sumMatFee}" datatype="amount" onchange="calJySum()" readonly="readonly"/> </td>
+					 				<td> <input type="text" class="input-text" id="jy_sumRepairFee" name="lossCarMainVo.sumRepairFee"  value="${empty lossCarMainVo.sumRepairFee ? 0:lossCarMainVo.sumRepairFee}" onchange="calJySum()" datatype="amount" readonly="readonly"/> </td>
+					 				<td> <input type="text" class="input-text" id="jy_sumOutFee" name ="lossCarMainVo.sumOutFee" readonly="readonly" datatype="amount" onchange="calJySum()"
+					 					value="${!empty lossCarMainVo.sumOutFee ? lossCarMainVo.sumOutFee : 0 }"  /> </td>
+					 				<td> <input type="text" class="input-text"  id="jy_sumRemnant" readonly="readonly" datatype="amount" onchange="calJySum()" name="lossCarMainVo.sumRemnant" ignore="ignore"
+					 						value="<c:if test="${lossCarMainVo.cetainLossType !='02' && lossCarMainVo.cetainLossType!='03' }">${empty lossCarMainVo.sumRemnant ? 0:lossCarMainVo.sumRemnant}</c:if><c:if test="${lossCarMainVo.cetainLossType=='02' && lossCarMainVo.cetainLossType=='03' }">0</c:if>" /> </td> 
+					 				<td> <input type="text" class="input-text" id="jy_sumLossFee" readonly="readonly"  
+					 						value="<c:if test="${lossCarMainVo.cetainLossType !='02' && lossCarMainVo.cetainLossType!='03' }">${lossCarMainVo.sumLossFee }</c:if>" /> </td>
+					 				<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				<td> <input type="text" class="input-text"  readonly="readonly" value="${selfDlossAmout}"/></td>
+					 				</c:if>
+					 				<td> <input type="text" class="input-text" id="jy_sumRescueFee" datatype="amount" ignore="ignore" name="lossCarMainVo.sumRescueFee"  value="${empty lossCarMainVo.sumRescueFee ? 0:lossCarMainVo.sumRescueFee}" /></td>
+					 			</tr>
+					 			
+					 			<c:if test="${!empty lossCarMainVo.sumVeripLoss }" >
+									<tr>
+										<td> 核价 </td>
+										<td> ${lossCarMainVo.sumVeripCompFee } </td>
+										<td> ${lossCarMainVo.sumVeripMatFee } </td>
+										<td> 0 </td>
+										<td> 0</td>
+										<td> ${lossCarMainVo.sumVeripRemnant }</td> 
+										<td> ${lossCarMainVo.sumVeripLoss } </td>
+									   <c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				   <td></td>
+					 				   </c:if>
+								        
+										<td>  </td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty lossCarMainVo.sumVeriLossFee }" >
+									<tr>
+										<td> 核损 </td>
+										<td> ${lossCarMainVo.sumVeriCompFee }</td>
+										<td>${lossCarMainVo.sumVeriMatFee } </td>
+										<td> ${lossCarMainVo.sumVeriRepairFee }</td>
+											<td> ${lossCarMainVo.sumVeriOutFee }</td>
+										<td> ${lossCarMainVo.sumVeriRemnant }</td> 
+										<td> ${lossCarMainVo.sumVeriLossFee } </td>
+										<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				    <td></td>
+					 				    </c:if>
+										<td> ${lossCarMainVo.sumVeriRescueFee }</td>
+										
+										
+									</tr>
+								</c:if>	
+					 		</tbody>
+					 </table>
+					 <div class="row cl">
+					 	合计=零配件更换金额+辅料金额+维修金额+外修金额-残值金额
+					 </div>
+					 </div>
+				<div class="table_cont" id="otherSumList" >
+					 <table class="table table-border">
+					 		<thead class="text-c">
+					 			<tr>
+					 				<th>工作环节</th>
+					 				<th>实际价值</th>
+					 				<th>残值金额</th>
+					 				<th>其他费用</th>
+					 				<th>合计</th>
+					 				<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				<th>客户确认金额</th>
+					 				</c:if>
+					 				<th>施救金额</th>
+					 			</tr>
+					 		</thead>
+					 		<tbody class="text-c">
+					 			<tr>
+					 				<td> 定损 </td>
+					 				<td> <input type="text" class="input-text" id="actualValue" onblur="calSumLoss(this)" datatype="amount"
+					 						 	ignore="ignore"  name="lossCarMainVo.actualValue"   value="${lossCarMainVo.actualValue }" /> </td>
+					 				<td> <input type="text" class="input-text" id="other_sumRemnant" datatype="amount" ignore="ignore"  
+					 						 onblur="calSumLoss(this)"
+					 						value="<c:if test="${lossCarMainVo.cetainLossType eq '02' || lossCarMainVo.cetainLossType eq'03' }">${lossCarMainVo.sumRemnant }</c:if>" />
+					 			 </td>
+					 			 
+					 				<td> <input type="text" class="input-text" id="otherFee" datatype="amount" ignore="ignore"  
+					 								name="lossCarMainVo.otherFee" onblur="calSumLoss(this)" value="${lossCarMainVo.otherFee }" /> </td>
+					 								
+					 				<td> <input type="text" class="input-text" id="other_sumLossFee"   readonly="readonly" 
+					 						value="<c:if test="${lossCarMainVo.cetainLossType eq '02' || lossCarMainVo.cetainLossType eq'03' }">${lossCarMainVo.sumLossFee }</c:if>" />
+					 					</td>
+					 				<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				<td> <input type="text" class="input-text"  readonly="readonly" value="${selfDlossAmout}"/></td>
+					 				</c:if>
+					 				<td> <input type="text" class="input-text" id="other_sumRescueFee" datatype="amount" ignore="ignore" value="${lossCarMainVo.sumRescueFee }" /> </td> 
+					 			</tr>
+					 			<c:if test="${lossCarMainVo.sumVeriLossFee !=null}">
+					 				<td> 核损  <input type="hidden" id="veriFeeFlag"  value="1"></td>
+					 				<td align="left"> ${lossCarMainVo.veriActualValue }</td>
+					 				<td align="left"> ${lossCarMainVo.sumVeriRemnant } </td>
+					 				<td align="left"> ${lossCarMainVo.veriOtherFee }</td>
+					 				<td align="left"> ${lossCarMainVo.sumVeriLossFee } </td>
+					 				<c:if test="${selfClaimFlag eq '1' && selfDlossAmout ne '0'}">
+					 				   <td></td>
+					 				 </c:if>
+					 				<td align="left"> ${lossCarMainVo.sumVeriRescueFee } </td> 
+					 			</c:if>		
+					 		</tbody>
+					 </table>
+					 <div class="row cl">
+					 	合计=实际价值+其他费用-残值金额
+					 </div>
+				</div> 
+				</div>
+			</div>
+			

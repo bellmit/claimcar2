@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">
+				<div class="table_title f14">理赔车辆</div>
+					<div class="table_cont basicInforoVer">
+						<div class="formtable">	
+							<div class="row cl">
+							<label class="form_label col-2">车辆序号</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.serialNo }
+							</div>
+							<label class="form_label col-2">损失方</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="DefLossItemType" codeCode="${lossCarMainVo.deflossCarType }"/>
+							</div>
+							<label class="form_label col-2">车辆种类</label>
+							<div class="form_input col-2">
+									<c:choose>
+										 <c:when test="${lossCarMainVo.deflossCarType eq '1'}"> 
+											<app:codetrans codeType="VehicleTypeShow" codeCode="${prpLCItemCarVo.carType }" />
+										 </c:when>
+									     <c:otherwise>
+									     	<app:codetrans codeType="VehicleType" codeCode="${carInfoVo.platformCarKindCode }" />
+									    </c:otherwise>
+							 		</c:choose>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">车牌号码</label>
+							<div class="form_input col-2">
+								${carInfoVo.licenseNo }
+							</div>
+							<label class="form_label col-2">车型名称</label>
+							<div class="form_input col-2 overTextPre">
+									${carInfoVo.modelName }
+							</div>
+							<label class="form_label col-2">初登日期</label>
+							<div class="form_input col-2">
+								<app:date  date='${carInfoVo.enrollDate }'/>
+							</div>
+					 	</div>
+					 	<div class="row cl">
+					 		<label class="form_label col-2">车架号</label>
+							<div class="form_input col-2">
+							<span>
+								${carInfoVo.frameNo }
+								</span>
+							</div>
+							<label class="form_label col-2">VIN码</label>
+							<div class="form_input col-2">
+								${carInfoVo.vinNo }
+							</div>
+							<label class="form_label col-2">推修时间</label>
+							<div class="form_input col-2">
+								<app:date date="${lossCarMainVo.sendDate }"/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">修理厂代码</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.repairFactoryCode }
+							</div>
+							<label class="form_label col-2">修理厂名称</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.repairFactoryName }
+							</div>
+							<label class="form_label col-2">预计修理完毕时间</label>
+							<div class="form_input col-2">
+								<app:date date="${lossCarMainVo.estimatedDate }"/>
+							</div>
+							
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">修理厂类型</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="RepairFactoryType" codeCode="${lossCarMainVo.repairFactoryType }"/>
+							</div>
+							<label class="form_label col-2">推修方式</label>
+							<div class="form_input col-2">
+								<span class="select-box moddisable">
+									<app:codetrans codeType="SendRepairType"  codeCode="${lossCarMainVo.repairType}"  />
+					 			</span>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>	

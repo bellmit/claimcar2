@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<style>
+<!--
+input.number{
+width: 40px
+}
+-->
+</style>
+<!--人伤信息   开始-->
+		<div class="table_title f14">人伤信息</div>
+			<div class="table_cont pd-10">
+				<table class="table table-border table-hover">
+					<thead>
+			 			<tr class="text-c">
+			 				<th>标的车伤亡</th>
+			 				<th>三者伤亡</th>
+			 				<th>合计</th>
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+			 			<tr class="text-c tableInputCss">
+			 				<td>
+				 				
+				 					<strong>伤</strong>
+				 					<input type="text"  id="injCountTag" class="input-text number"  onblur="countSum()" name="prpLRegistPersonLosses[0].injuredcount" value="${prpLRegistPersonLosses[0].injuredcount}" datatype="n" />
+				 					<strong>亡</strong>
+				 					<input type="text" id="deaCountTag"  class="input-text number"   onblur="countSum()" name="prpLRegistPersonLosses[0].deathcount" value="${prpLRegistPersonLosses[0].deathcount}" datatype="n" />
+				 					<input type="checkbox" <c:if test="${prpLRegistPersonLosses[0].driverflag eq '1'}">checked</c:if> name="prpLRegistPersonLosses[0].driverflag" value="1" />是否包含司机
+				 				
+			 				</td>
+			 				<td>
+			 					
+			 					   <strong>伤</strong>
+				 					<input type="text" id="injCountThird"  class="input-text number"   onblur="countSum()" name="prpLRegistPersonLosses[1].injuredcount" value="${prpLRegistPersonLosses[1].injuredcount}" datatype="n" />
+				 					<strong>亡</strong>
+				 					<input type="text" id="deaCountThird"   class="input-text number"   onblur="countSum()" name="prpLRegistPersonLosses[1].deathcount" value="${prpLRegistPersonLosses[1].deathcount}" datatype="n" />
+				 					
+			 					
+			 				</td>
+			 				<td>
+			 					<div class="row cl text-c">
+			 					
+				 					<input type="text" id="injuredSum"   class="input-text number"  readonly="readonly" value="0" datatype="n" />
+				 					<strong>伤</strong>
+				 					<input type="text" id="deathSum"  class="input-text number"   readonly="readonly" value="0" datatype="n" />
+				 					<strong>亡</strong>
+			 					
+			 				</td>
+			 				<input type="hidden" name="prpLRegistPersonLosses[0].lossparty" value="1" />
+			 				<input type="hidden" name="prpLRegistPersonLosses[1].lossparty" value="3" />
+		 					<c:forEach varStatus="status" var="prpLRegistPersonLoss" items="${prpLRegistPersonLosses}">
+				 				<input type="hidden" name="prpLRegistPersonLosses[${status.index}].id" value="${prpLRegistPersonLosses[status.index].id}" />
+				 				<input type="hidden" name="prpLRegistPersonLosses[${status.index}].createUser" value="${prpLRegistPersonLosses[status.index].createUser}" />
+				 				<input type="hidden" name="prpLRegistPersonLosses[${status.index}].createTime" value="<fmt:formatDate value='${prpLRegistPersonLosses[status.index].createTime}' type='both'/>" />
+				 				<input type="hidden" name="prpLRegistPersonLosses[${status.index}].updateUser" value="${prpLRegistPersonLosses[status.index].updateUser}" />
+				 				<input type="hidden" name="prpLRegistPersonLosses[${status.index}].updateTime" value="<fmt:formatDate value='${prpLRegistPersonLosses[status.index].updateTime}' type='both'/>" />
+				 			</c:forEach>
+			 			</tr>
+			 		</tbody>
+		 		</table>
+			</div>
+<!--人伤信息    结束-->

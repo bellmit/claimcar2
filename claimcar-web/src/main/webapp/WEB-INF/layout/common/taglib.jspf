@@ -1,0 +1,24 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="ecx" uri="/WEB-INF/tld/ecx.tld"%>
+<%@ taglib prefix="app" uri="/WEB-INF/tld/app.tld"%>
+<%@ taglib prefix="enhance" uri="/WEB-INF/tld/webappenhance.tld" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
+
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
+<%
+/**
+String newLocale = request.getParameter("locale");
+if(newLocale != null && !"".equals(newLocale)){
+	WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, StringUtils.parseLocaleString(newLocale));
+}
+Locale sessionLocale = (Locale) session
+.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME);
+*/
+%> 

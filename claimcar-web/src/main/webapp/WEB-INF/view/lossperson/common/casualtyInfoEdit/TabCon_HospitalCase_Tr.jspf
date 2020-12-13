@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td>
+		<button type="button" class="btn btn-minus Hui-iconfont Hui-iconfont-jianhao delSancheBtn" onclick="del_HospitalCase(this)" name="hospitalCaseDelBtn_${hospitalCaseSize }"></button>
+	</td>
+	<td>
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].id" value="${persHospital.id }">
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].registNo" value="${registNo }">		
+		<input type="hidden" name="registVo.damageTime" id="damageTIme" value="${damageTime}">
+		<input type="text" class="Wdate" id="rgtDateMin" style="width: 80%"
+			name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].inHospitalDate" value="<app:date date='${persHospital.inHospitalDate }'/>"
+			onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'rgtDateMax\')||\'%y-%M-%d\'}'})" />
+	</td>
+	<td>
+		<input type="text" class="Wdate" id="rgtDateMax" style="width: 80%" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].outHospitalDate"
+			value="<app:date date='${persHospital.outHospitalDate }'/>" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'rgtDateMin\')}',maxDate:'%y-%M-%d'})" />
+	</td>
+	<td>
+		 <app:areaSelect targetElmId="prpDHospitalarea_${hospitalCaseSize }" areaCode="${persHospital.hospitalCity }" hospitalCode="${persHospital.hospitalCode }"  showLevel="3" isHospital="Y" style="width:122px"/>
+		<input type="hidden" id="prpDHospitalarea_${hospitalCaseSize }" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].hospitalCity" value="${persHospital.hospitalCity }" />
+		<input type="hidden" id="prpDHospitalarea_${hospitalCaseSize }_hospitalCode" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].hospitalCode" value="${persHospital.hospitalCode }" />
+		<input type="hidden" id="prpDHospitalarea_${hospitalCaseSize }_hospitalName" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].hospitalName" value="${persHospital.hospitalName }" />
+	</td>
+	<td>
+		<input type="text" class="input-text" maxlength="200" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersHospitals[${hospitalCaseSize }].remark" value="${persHospital.remark }" />
+	</td>
+</tr>

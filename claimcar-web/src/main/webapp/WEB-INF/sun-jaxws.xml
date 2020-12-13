@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+	version="2.0">
+	<!--name：service 名称 implementation:服务的实现类 -->
+	<endpoint name="paymentCallBack" implementation="ins.sino.claimcar.interf.service.PaymentCallBackService" url-pattern="/webservice/paymentCallBack" />
+	<endpoint name="receiptCallBack" implementation="ins.sino.claimcar.invoice.services.ReceiptTaskService" url-pattern="/webservice/receiptCallBack" />
+    <endpoint name="accRollBackAccount" implementation="ins.sino.claimcar.interf.service.AccRollBackAccountService" url-pattern="/webservice/accRollBackAccount" />
+</endpoints>

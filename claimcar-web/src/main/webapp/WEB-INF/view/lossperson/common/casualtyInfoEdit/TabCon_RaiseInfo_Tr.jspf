@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td width="6%">
+		<button class="btn btn-minus Hui-iconfont Hui-iconfont-jianhao delSancheBtn" type="button" onclick="del_RaiseInfo(this)" name="raiseInfoDelBtn_${raiseInfoSize }"></button>
+	</td>
+	<td>
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].id" value="${persRaise.id }">
+		<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].registNo" value="${registNo }">
+		<input type="text" class="input-text" datatype="*" maxlength="16" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].payPersonName"
+			value="${persRaise.payPersonName }" />
+	</td>
+	<td>
+		<span class="select-box">
+			<app:codeSelect codeType="SexType" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].sex" value="${persRaise.sex }" />
+		</span>
+	</td>
+	<td width="20%">
+		<input type="text" class="input-text" style="width: 25%" datatype="age" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].age" value="${persRaise.age }" />
+		岁
+		<input type="text" class="input-text" style="width: 25%" ignore="ignore" datatype="month" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].month" value="${persRaise.month }" />
+		月
+	</td>
+	<td>
+		<span class="select-box">
+			<app:codeSelect codeType="Domicile" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].domicile" value="${persRaise.domicile }" />
+		</span>
+	</td>
+	<td width="20%">
+		<input type="text" class="input-text" maxlength="16" name="prpLDlossPersTraceVo.prpLDlossPersInjured.prpLDlossPersRaises[${raiseInfoSize }].relationship" value="${persRaise.relationship }" />
+	</td>
+</tr>

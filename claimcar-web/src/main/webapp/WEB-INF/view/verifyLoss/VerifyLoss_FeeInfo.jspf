@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+		<div class="table_wrap">
+		<div class="table_title f14">费用赔款信息</div>
+		<div class="table_cont table_list">
+			<table class="table table-border">
+				<thead class="text-c">
+					<tr>
+						<th>险别</th>
+						<th>费用类型</th>
+						<th>费用金额</th>
+						<th>核损费用金额</th>
+						<th>收款人</th>
+					</tr>
+				</thead>
+				<tbody class="text-c" id="chargeTbody">
+				<%-- 	<%@include file="../loss-common/DeflossEdit_CheckCharge.jsp" %>  --%>
+					<c:forEach var="chargeFeeVo" items="${lossChargeVos}" varStatus="status">
+						<tr>
+							<td><app:codetrans codeType="KindCode" codeCode="${chargeFeeVo.kindCode}" riskCode="${registVo.riskCode}"/>
+								<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].id" value="${chargeFeeVo.id }"/>
+								<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].businessId" value="${chargeFeeVo.businessId }"/>
+								<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].registNo" value="${chargeFeeVo.registNo }"/>
+								<input type="hidden" class="input-text " name="lossChargeVos[${status.index }].businessType" value="${chargeFeeVo.businessType }"/>
+							</td>
+							<td>
+								${chargeFeeVo.chargeName }
+								<input type="hidden" class="input-text "  id="lossChargeVos_${status.index }_chargeName"  value="${chargeFeeVo.chargeName }"/>
+							</td>
+							<td>
+								${chargeFeeVo.chargeFee }
+								<input type="hidden" class="input-text "  id="lossChargeVos_${status.index }_chargeFee"  value="${chargeFeeVo.chargeFee }"/>
+							</td>
+							<td width="15%">
+								<input type="text"  class="input-text "  name="lossChargeVos[${status.index }].veriChargeFee" datatype="amount"  onchange ="calSumVeriChargeFee(this)"
+									value="${!empty chargeFeeVo.veriChargeFee ? chargeFeeVo.veriChargeFee : chargeFeeVo.chargeFee}"/>
+							</td>
+							<td>
+								${chargeFeeVo.receiver }
+							</td>
+						</tr>
+						
+					</c:forEach>
+				</tbody>
+			</table>
+			<div style="margin:4px 0;overflow:hidden;">
+					<input style="display:none;" type='button' title='更多' id="chargeTbodyButton" onclick="showMore('chargeTbody')" class='btn btn-zd fl nodisable' value='更多' />
+				</div>
+			<div class="formtable">
+				<div class="row cl">					
+					<label class="form_label col-1">费用合计</label>
+					<div class="form_input col-3">
+						<input type="text"  class="input-text" name="lossCarMainVo.sumChargeFee" value="${lossCarMainVo.sumChargeFee}" readonly="readonly"/>
+					</div>
+					<label class="form_label col-1">核损费用合计</label>
+					<div class="form_input col-3">
+						<input type="text" class="input-text" id="sumVeriChargeFee" name="lossCarMainVo.sumVeriChargeFee" readonly="readonly"
+							value="${!empty lossCarMainVo.sumVeriChargeFee ? lossCarMainVo.sumVeriChargeFee : lossCarMainVo.sumChargeFee }" />
+					</div>	
+				</div>
+			</div>
+		</div>	
+	</div>
+			

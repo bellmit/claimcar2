@@ -1,0 +1,167 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 核赔理算书基本信息 -->
+<div class="table_wrap">
+	<div class="table_title f14">计算书基本信息</div>
+	<div class="table_cont">
+		<div class="formtable">
+			<div class="row cl">
+				<label class="form_label col-2">计算书类型：</label>
+				<div class="form_input col-2">
+					<c:if test="${flag eq '1' }">
+							交强险计算书
+					</c:if>
+					<c:if test="${flag eq '2' }">
+							商业险计算书
+					</c:if>
+				</div>
+				<label class="form_label col-2 ">被保险人电话：</label>
+				<div class="form_input col-2">
+					${compeVo.insuredPhone}
+				</div>
+				<c:if test="${flag eq '2' }">
+					<label class="form_label col-1">车损险保额：</label>
+					<div class="form_input col-2">
+						<span>￥${compeVo.carLossAmt}</span>
+					</div>
+				</c:if>
+			</div>
+			<div class="row cl" id="recDiv">
+				<label class="form_label col-2">是否发起追偿：</label>
+				<div class="form_input col-3">
+					<app:codeSelect codeType="YN10" type="radio" name="uwNotionMainVo.recoveries"
+					 value="${recoveryRadio}" nullToVal="0"/>
+				</div>
+				<label class="form_label col-1">是否欺诈：</label>
+				<div class="form_input col-2 ">
+				<app:codetrans codeType="YN01" codeCode="${isFraud}" nullVal="否"/>
+				</div>
+				<label class="form_label col-1">是否拒赔：</label>
+				<div class="form_input col-1">
+				<app:codetrans codeType="YN01" codeCode="${isRefuse}" nullVal="否"/>
+				</div>
+			</div>
+						
+			<div class="row cl">
+				<label class="form_label col-2">是否互碰自赔：</label>
+				<div class="form_input col-2">
+					<!-- 案件类型1-正常案件，2-互碰自赔，3-代位求偿 -->
+					<c:if test="${compeVo.caseType eq '2' }">是</c:if>
+					<c:if test="${compeVo.caseType ne '2' }">否</c:if>
+					<%-- <app:codetrans codeType="YN01" codeCode="${claimVo.caseFlag}" /> --%>
+				</div>
+				<label class="form_label col-2">是否代位求偿：</label>
+				<div class="form_input col-2">
+					<c:if test="${compeVo.caseType eq '3' }">是</c:if>
+					<c:if test="${compeVo.caseType ne '3' }">否</c:if>
+					<%-- <app:codetrans codeType="YN01" codeCode="${claimVo.isSubRogation}" /> --%>
+				</div>
+				<label class="form_label col-1">是否通融：</label>
+				<div class="form_input col-2">
+					<app:codetrans codeType="YN01" codeCode="${compeVo.allowFlag}" />
+				</div>
+			</div>
+			
+			<div class="row cl">
+				<label class="form_label col-2">是否诉讼：</label>
+				<div class="form_input col-2">
+					<app:codetrans codeType="YN01" codeCode="${compeVo.lawsuitFlag}" />
+				</div>
+				<!-- 是否诉讼 为 是  ，显示协议金额和协议备注 -->
+				<c:if test="${empty compeVo.lawsuitFlag}">
+				<label class="form_label col-2">协议金额：</label>
+				<div class="form_input col-1">
+					${compeVo.agreeAmt}
+					<input type="hidden" class="input-text" value="${compeVo.agreeAmt}" />
+				</div>
+				<label class="form_label col-2">协议情况备注：</label>
+				<div class="form_input col-2">
+					${compeVo.agreeDesc}
+					<input type="hidden" class="input-text" value="${compeVo.agreeDesc}" />
+				</div>
+				</c:if>
+			</div>
+			
+			<div class="row cl">
+				<label class="form_label col-2">是否自然灾害：</label>
+				<div class="form_input col-2">
+					<app:codetrans codeType="YN01" codeCode="${compeVo.prpLCompensateExt.disastersFlag}" nullVal="否"/>
+				</div>
+				<label class="form_label col-2 " >是否小额人伤案件：</label>
+			    <div class="form_input col-2 ">
+			    	<app:codetrans codeType="YN01" codeCode="${isMinorInjuryCases}" nullVal="否"/>
+			        <%-- <app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0"  value="${isMinorInjuryCases}" disabled="true"/> --%>
+			        <input type="hidden" id="isMinorInjuryCases" value="${isMinorInjuryCases}"/>
+			    </div>
+			</div>
+			<c:if test="${reOpenFlag=='0' && compenFlag=='1'}">
+				<div class="row cl">
+				    
+					<label class="form_label col-2">人伤减损金额（审核）：</label>
+					<div class="form_input col-2">
+					<input type="text" class="input-text" id="personPisderoVerifyAmout" datatype="isDeroVerifyAmout"  errormsg="请输入大于等于0的数值" value="${personPisderoVerifyAmout}" oldValue="${personPisderoVerifyAmout}" name="uwNotionMainVo.pisderoAmout">
+					</div>
+					<label class="form_label col-2">人伤内部减损：</label>
+					<div class="form_input col-3">
+						<app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" disabled="true"  value="${inSideDeroPersonFlag}"/>
+					</div>
+					
+				  <c:if
+						test="${fn:substring(prpLCompensate.CompensateNo,0,1) ne 'Y' && fn:substring(prpLCompensate.CompensateNo,0,1) ne 'D'}">
+				 	
+					 <label class="form_label col-1">减损类型:</label>
+					<div class="form_input col-2">
+					<input id="impairmentType" value="${impairmentType}" type="hidden">
+						<select id="impairmenttypesid" style="width: 152px;height: 25px" value="${impairmentType}">
+							<c:if test="${personPisderoVerifyAmout>0||carCisderoVerifyAmout>0}">
+							    <option value=''></option>
+								<option value='2'>协谈减损</option>
+								<option value='1'>拒赔减损</option>
+							</c:if>
+							<c:if test="${personPisderoVerifyAmout==0&&carCisderoVerifyAmout==0}">
+						         <option  value=""></option> 
+							</c:if>
+						</select>
+				   	 
+				     </div>
+				  </c:if>
+				   
+				</div>
+				<div class="row cl">
+				<label class="form_label col-2">车物减损金额（审核）：</label>
+					<div class="form_input col-2">
+					<input type="text" class="input-text"  id="carCisderoVerifyAmout" datatype="isDeroVerifyAmout"  errormsg="请输入大于等于0的数值" value="${carCisderoVerifyAmout}" oldValue="${carCisderoVerifyAmout}" name ="uwNotionMainVo.cisderoAmout">
+					</div>
+					<label class="form_label col-2">车物内部减损：</label>
+					<div class="form_input col-3">
+						<app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" disabled="true"  value="${inSideDeroFlag}"/>
+			        </div>
+			        
+			        <c:if test="${fn:substring(prpLCompensate.CompensateNo,0,1) ne 'Y' && fn:substring(prpLCompensate.CompensateNo,0,1) ne 'D'}">
+			        
+			        <label class="form_label col-1">欺诈类型:</label>
+			        <div class="form_input col-2">
+			        <input id="fraudType" value="${fraudType}" type="hidden">
+			        <select id="fraudtypeid"  style="width: 152px;height: 25px" value="${frudType}" >
+			        <c:choose>
+			        <c:when test="${(personPisderoVerifyAmout!=0 || carCisderoVerifyAmout!=0) && impairmentType eq '1'}">
+			                <option value=''></option>
+							<option value='1'>故意虚构保险标的</option>
+							<option value='2'>编造未曾发生的保险事故</option>
+							<option value='3'>编造虚假的事故原因</option>
+							<option value='4'>夸大损失程度</option>
+							<option value='5'>故意造成保险事故</option>
+			        </c:when>
+			        <c:otherwise>
+			          <option value='' selected="selected"></option>
+			        </c:otherwise>
+			        </c:choose>
+					</select>
+					</div>
+				</c:if>
+				
+			</c:if>
+		</div>
+	</div>
+</div>

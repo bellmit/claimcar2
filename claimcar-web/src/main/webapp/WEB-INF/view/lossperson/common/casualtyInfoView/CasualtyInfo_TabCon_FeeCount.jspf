@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 金额统计 -->
+
+<div class="table_wrap">
+	<div class="table_title f14">金额统计</div>
+	<div class="table_cont  table_list ">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>金额统计</th>
+					<th>估损金额总计</th>
+					<th>索赔金额总计</th>
+					<th>定损金额总计</th>
+					<th>减损金额总计</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<tr>
+					<th class="Bth">人伤跟踪金额</th>
+					<td>
+						<input type="hidden" name="${tabPageNo}_sumReportFee" value="${persTrace.sumReportFee }">
+						<fmt:formatNumber type="number" value="${persTrace.sumReportFee }" pattern="0.00" maxFractionDigits="2" />
+					</td>
+					<td>
+						<fmt:formatNumber type="number" value="${persTrace.sumRealFee }" pattern="0.00" maxFractionDigits="2" />
+					</td>
+					<td>
+						<input type="hidden" name="${tabPageNo}_sumdefLoss" value="${persTrace.sumdefLoss }">
+						<fmt:formatNumber type="number" value="${persTrace.sumdefLoss }" pattern="0.00" maxFractionDigits="2" />
+					</td>
+					<td>
+						<fmt:formatNumber type="number" value="${persTrace.sumDetractionFee }" pattern="0.00" maxFractionDigits="2" />
+					</td>
+				</tr>
+				<c:choose>
+					<c:when test="${fn:contains(flowNodeCode,'PLVerify')||fn:contains(flowNodeCode,'PLCharge') }">
+						<tr>
+							<th class="Bth">审核金额</th>
+							<td>
+								<input style="border: none" class="text-c" type="input-text" id="${tabPageNo}_sumVeriReportFee" name="prpLDlossPersTraceVos[${tabPageNo }].sumVeriReportFee"
+									value="<fmt:formatNumber type="number" value="${empty persTrace.sumVeriReportFee ? persTrace.sumReportFee : persTrace.sumVeriReportFee }" pattern="0.00" maxFractionDigits="2" />"
+									readonly="readonly">
+							</td>
+							<td>
+								<input style="border: none" class="text-c" type="input-text" id="${tabPageNo}_sumVeriRealFee" name="prpLDlossPersTraceVos[${tabPageNo }].sumVeriRealFee"
+									value="<fmt:formatNumber type="number" value="${empty persTrace.sumVeriRealFee ? persTrace.sumRealFee : persTrace.sumVeriRealFee }" pattern="0.00" maxFractionDigits="2" />"
+									readonly="readonly">
+							</td>
+							<td>
+								<input style="border: none" class="text-c" type="input-text" id="${tabPageNo}_sumVeriDefloss" name="prpLDlossPersTraceVos[${tabPageNo }].sumVeriDefloss"
+									value="<fmt:formatNumber type="number" value="${empty persTrace.sumVeriDefloss ? persTrace.sumdefLoss : persTrace.sumVeriDefloss}" pattern="0.00" maxFractionDigits="2" />"
+									readonly="readonly">
+							</td>
+							<td>
+								<input style="border: none" class="text-c" type="input-text" id="${tabPageNo}_sumVeriDetractionFee" name="prpLDlossPersTraceVos[${tabPageNo }].sumVeriDetractionFee"
+									value="<fmt:formatNumber type="number" value="${empty persTrace.sumVeriDetractionFee ? persTrace.sumDetractionFee : persTrace.sumVeriDetractionFee }" pattern="0.00" maxFractionDigits="2" />"
+									readonly="readonly">
+							</td>
+						</tr>
+					</c:when>
+					<c:when test="${flowNodeCode =='PLNext'&&!empty persTrace.sumVeriReportFee }">
+						<tr>
+							<th class="Bth">审核金额</th>
+							<td>
+								<fmt:formatNumber type="number" value="${persTrace.sumVeriReportFee}" pattern="0.00" maxFractionDigits="2" />
+							</td>
+							<td>
+								<fmt:formatNumber type="number" value="${persTrace.sumVeriRealFee}" pattern="0.00" maxFractionDigits="2" />
+							</td>
+							<td>
+								<fmt:formatNumber type="number" value="${persTrace.sumVeriDefloss}" pattern="0.00" maxFractionDigits="2" />
+							</td>
+							<td>
+								<fmt:formatNumber type="number" value="${persTrace.sumVeriDetractionFee}" pattern="0.00" maxFractionDigits="2" />
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 金额统计 -->

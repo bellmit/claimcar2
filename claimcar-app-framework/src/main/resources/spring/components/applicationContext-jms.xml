@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+default-autowire="byName" default-lazy-init="true">
+
+	<!-- JNDI上下文模板 -->
+	<bean id="jndiTemplate"
+		class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<!-- ip 地址 -->
+				<prop key="java.naming.provider.url">localhost</prop>
+				<prop key="java.naming.factory.initial">
+					org.jnp.interfaces.NamingContextFactory
+				</prop>
+				<prop key="java.naming.factory.url.pkgs">
+					org.jnp.interfaces:org.jboss.naming
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 连接工厂配置-->
+	<bean id="jmsConnectionFactory"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>ConnectionFactory</value>
+		</property>
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+	</bean>
+
+	<!-- 队列目标配置 -->
+	<bean id="destinatinForQueue"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>queue/JMSQueue</value>
+		</property>
+	</bean>
+
+	<!-- 监听目标配置 -->
+	<bean id="destinatinForListener"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>queue/Listener</value>
+		</property>
+	</bean>
+
+	<!-- 消息转换 -->
+	<bean id="jmsConverter"
+		class="org.springframework.jms.support.converter.SimpleMessageConverter" />
+
+	<!-- JMS Queue template配置 -->
+	<bean id="jmsQueueTemplate"
+		class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref bean="jmsConnectionFactory" />
+		</property>
+		<property name="defaultDestination">
+			<ref bean="destinatinForQueue" />
+		</property>
+		<property name="messageConverter">
+			<ref bean="jmsConverter" />
+		</property>
+	</bean>
+
+	<!-- JMS Queue Listener template配置 -->
+	<bean id="jmsListenerTemplate"
+		class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref bean="jmsConnectionFactory" />
+		</property>
+		<property name="defaultDestination">
+			<ref bean="destinatinForListener" />
+		</property>
+		<property name="messageConverter">
+			<ref bean="jmsConverter" />
+		</property>
+	</bean>
+
+
+	<!-- 消息监听类 -->
+	<bean id="jmsMessageListener"
+		class="ins.common.jms.JmsMessageListener" />
+
+	<!-- 消息监听容器类 -->
+	<bean id="jmsQueueContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destination" ref="destinatinForListener" />
+		<property name="messageListener" ref="jmsMessageListener" />
+	</bean>
+
+	<!-- 自封装工具类配置 -->
+	<bean id="jmsExecuteTemplate"
+		class="ins.common.jms.JmsExecuteTemplate">
+	</bean>
+</beans>

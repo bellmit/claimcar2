@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<c:forEach var="checkThirdCarVo" items="${checkThirdCarVos}" varStatus="status">
+	<c:set var="inputIdx"  value="${status.index}"/>
+	<tr class="text-c" id="carLossTr">
+		<input type="hidden" id="thCarId${inputIdx}" name="checkThirdCarVos[${inputIdx}].carid" value="${checkThirdCarVo.carid}">
+		<input type="hidden" id="serialNo${inputIdx}" name="checkThirdCarVos[${inputIdx}].serialNo" value="${checkThirdCarVo.serialNo}">
+		<input type="hidden" id="thScheduleItem${inputIdx}" name="checkThirdCarVos[${inputIdx}].scheduleitem" value="${checkThirdCarVo.scheduleitem}">
+		<input type="hidden" id="thLicenseNo${inputIdx}" name="checkThirdCarVos[${inputIdx}].prpLCheckCarInfo.licenseNo" value="${checkThirdCarVo.prpLCheckCarInfo.licenseNo}">
+		<input type="hidden" id="thBrandName${inputIdx}" name="checkThirdCarVos[${inputIdx}].prpLCheckCarInfo.brandName" value="${checkThirdCarVo.prpLCheckCarInfo.brandName}">
+		<input type="hidden" id="thDriverName${inputIdx}" name="checkThirdCarVos[${inputIdx}].prpLCheckDriver.driverName" value="${checkThirdCarVo.prpLCheckDriver.driverName}">
+		<input type="hidden" name="checkThirdCarVos[${inputIdx}].prpLCheckDriver.linkPhoneNumber" value="${checkThirdCarVo.prpLCheckDriver.linkPhoneNumber}">
+		<input type="hidden" name="checkThirdCarVos[${inputIdx}].lossPart" value="${checkThirdCarVo.lossPart}">
+		<input type="hidden" name="checkThirdCarVos[${inputIdx}].lossFee" value="${checkThirdCarVo.lossFee}">
+		
+		<td>${checkThirdCarVo.prpLCheckCarInfo.licenseNo}</td>
+		<td>${checkThirdCarVo.prpLCheckCarInfo.brandName}</td>
+		<td>${checkThirdCarVo.prpLCheckDriver.driverName}</td>
+		<td>${checkThirdCarVo.prpLCheckDriver.linkPhoneNumber}</td>
+		<td><app:codetrans codeType="LossPart" codeCode="${checkThirdCarVo.lossPart}"/></td>
+		<td id="thLossFee" value="${checkThirdCarVo.lossFee}">${checkThirdCarVo.lossFee}</td>
+
+		<td></td>	
+		<td><input type="button" class="btn btn-zd" onclick="" value="详情"></td>	
+	</tr>
+	<%-- <a class="btn btn-zd fl" href="javascript:;" id="initThirdCar" onclick="checkCarEdit(${inputIdx})">处理</a> --%>
+</c:forEach>

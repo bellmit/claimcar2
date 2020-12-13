@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+nav.navbar.navbar-default.navbar-fixed-top{
+	/* height:10%; */
+	/* background:url("../../img/header_bg.png"); */
+}
+div.navbar-default.navbar-static-side{
+	/* top: 26px; */
+	background: #f3f6fb;
+}
+div.first-menu{
+	display: block;
+	position: fixed;
+	margin-top: -15px;
+}
+div.ul{
+	margin-left: 30px;
+}
+div.li{
+	font-size:14px;font-family:Tahoma;font-family:Arial, Hel,Microsoft YaHei;
+	float: left;
+	height: 20px;
+	padding-left:50px;
+}
+h4.panel-title{
+	font-size:14px;font-family:Tahoma;font-family:Arial, Hel,Microsoft YaHei;
+	font-weight: bold;
+}
+label.label{
+	
+}
+

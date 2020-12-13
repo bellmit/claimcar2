@@ -1,0 +1,184 @@
+@charset "utf-8";
+
+.f_cont .tabcon-tit {
+	margin-top: 10px;
+}
+.form .row{
+	margin-top: 10px;
+}
+ 
+
+.s_car .borderbttom{
+	border-bottom:none;
+	}
+.tabcon-tit img {
+	display:none;
+}
+.form-horizontal .form-label {
+	margin-top: 0px;
+}
+.form-horizontal .formControls {
+	padding-right: 0px;
+}
+/* .col-1 {
+	width: 12%;
+}
+.col-3 {
+	width: 20%;
+} */
+.form-horizontal .form-label, .form-horizontal .formControls {
+	height: 30px;
+	line-height: 30px;
+}
+
+.btn-footer {
+	width: 100%;
+	padding: 10px 0px 0px 0px;
+}
+.btn-kk {
+	margin: 0px 20px;
+}
+.btn-primary {
+	background: #1a6fb8;
+	border-color: #1a6fb8;
+}
+.btn-success {
+	background: #7dac0c;
+	border-color: #7dac0c;
+}
+.bg-danger {
+	background: #fc5454;
+	border-color: #fc5454;
+}
+
+
+.w_45 {
+	width: 45%;
+	padding-right: 0px;
+}
+.w_50 {
+	width: 50%;
+}
+.w_12 {
+	width: 12%;
+}
+.w_25 {
+	width: 25%;
+}
+.btn-zd {
+	color: #1a6fb8;
+	background: #e5f2fe;
+	border: 1px solid #9dbcd7;
+}
+.s_car {
+	padding: 5px;
+	border: 1px solid #1a6fb8;
+	background-color: #FFF1E1;
+}
+.s_carcont {
+	margin: 2px 0px;
+}
+.pl-40 {
+	padding-left: 40px;
+}
+.car_title {
+	height: 38px;
+	padding-left: 15px;
+	background: #e9f4fe;
+	border-bottom: 2px solid #91c9f9;
+	line-height: 38px;
+}
+.car_cont {
+	border: 1px solid #DDDDDD;
+	border-top: none;
+}
+.btop {
+	border-top: 1px solid #ddd;
+	border-top: 1px solid rgba(0,0,0,.1);
+}
+.formControls span.check-box {
+	padding-left: 0px;
+}
+ 
+.mb-3 {
+	margin-bottom: 3px;
+}
+.cxjg {
+	height: 45px;
+	border-top: 1px solid #ddd;
+}
+.cxjg a {
+	margin: 8px;
+}
+.btn-disabled {
+	background: #b2b5b8;
+	color: #fff;
+	border: 1px solid #b2b5b8;
+}
+.addtr, .jiantr {
+	margin: 0 auto;
+	width: 20px;
+	height: 20px;
+	display: block;
+	color: #2174ba;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	border: 1px solid #9dbcd7;
+}
+.zdsc{
+	border:1px solid #ddd;
+	width:95%;
+	position:relative;
+	padding:2px 0px;
+	text-indent:10px;
+	background:#fff;
+	margin-top:-1px;
+	box-sizing:border-box;
+	}
+textarea.w90{
+	width:95% !important;
+	}
+/*浮动窗口*/
+.flaotWindow{
+	position:fixed;
+	width:400px;
+	min-height:200px;
+	background:#fff;
+	z-index:1000;
+	right:20px;
+	top:10px;
+	box-shadow: 0 0 8px #bbb;
+	border:1px solid #ddd;
+	}
+.floatHead{
+	background:#fc5454;
+	height:36px;
+	line-height:36px;
+	text-indent:20px;
+	color:#fff;
+	}
+.close{
+	width:36px;
+	height:36px;
+	background:url(../images/close.gif) center center;
+	display:inline-block;
+	float:right;
+	opacity:0.8;
+	}
+.close:hover{
+	opacity:1;
+	}
+.line-dashed{
+	padding:0;
+	margin:0;
+	border:none;
+	border-bottom:1px dashed #ddd;
+	}
+.floatTable{
+	margin:10px 0;
+	}
+.floatTable tr td{
+	padding:4px 10px;
+	}

@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">事故信息</div>
+	<div class="table_cont ">
+		<input type="hidden" id="tempRegistFlag" value="${courtMessageVo.prpLCourtAccident.id}">
+		<div class="formtable tableoverlable">
+			<div class="row  cl">
+				<label class="form_label col-1">事故认定书编号：</label>
+				<div class="form_input col-3">${courtMessageVo.prpLCourtAccident.dutyNo}</div>
+				<label class="form_label col-1">事故编号：</label>
+				<div class="form_input col-3">${courtMessageVo.prpLCourtAccident.acciNo}</div>
+				<label class="form_label col-1">事故地点：</label>
+				<div class="form_input col-3">${courtMessageVo.prpLCourtAccident.acciAddress}</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">事故类型：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="acciType" codeCode="${courtMessageVo.prpLCourtAccident.acciType}" /></div>
+				<label class="form_label col-1">是否高速：</label>
+				<div class="form_input col-3"> <app:codetrans codeType="IsValid" codeCode="${courtMessageVo.prpLCourtAccident.highSpeed}" /></div>
+				<label class="form_label col-1">事故发生时间：</label>
+				<div class="form_input col-3">
+					<fmt:formatDate  value="${courtMessageVo.prpLCourtAccident.reportDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">数据来源：</label>
+				<div class="form_input col-3">${courtMessageVo.prpLCourtAccident.dataSource}</div>
+				<label class="form_label col-1">天气：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="Weather" codeCode="${courtMessageVo.prpLCourtAccident.weather}" /> 
+				</div>
+			</div>
+		</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">当事方情况：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark"
+						value="${courtMessageVo.prpLCourtAccident.dsfqk}">${courtMessageVo.prpLCourtAccident.dsfqk}</textarea>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">事故描述：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark"
+						value="${courtMessageVo.prpLCourtAccident.acciDescribe}">${courtMessageVo.prpLCourtAccident.acciDescribe}</textarea>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">事故责任认定结果：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark"
+						value="${courtMessageVo.prpLCourtAccident.acciResult}">${courtMessageVo.prpLCourtAccident.acciResult}</textarea>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">事故原因：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark"
+						value="${courtMessageVo.prpLCourtAccident.baryj}">${courtMessageVo.prpLCourtAccident.baryj}</textarea>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">事故原因分析：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark" 
+						value="${courtMessageVo.prpLCourtAccident.rdnr}">${courtMessageVo.prpLCourtAccident.rdnr}</textarea>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1 text-c">基本事实：</label>
+				<div class="form_input col-10">
+					<textarea class="textarea" style="height: 80px;" id="dangerRemark" 
+						value="${courtMessageVo.prpLCourtAccident.jbss}">${courtMessageVo.prpLCourtAccident.jbss}</textarea>
+				</div>
+			</div>
+	</div>
+</div>

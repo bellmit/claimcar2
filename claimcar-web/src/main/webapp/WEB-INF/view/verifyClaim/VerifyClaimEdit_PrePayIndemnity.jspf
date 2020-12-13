@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<br />
+<!-- 预付基本信息  -->
+<div class="table_wrap">
+	<div class="table_title f14">预付基本信息</div>
+	<div class="table_cont">
+		<div class="formtable">
+			<div class="row cl">
+				<label class="form_label col-2">预付号：</label>
+				<div class="form_input col-2">${compeVo.compensateNo}</div>
+				<label class="form_label col-2">立案号：</label>
+				<div class="form_input col-2">${compeVo.claimNo}</div>
+				<label class="form_label col-2">预付类型：</label>
+				<div class="form_input col-2">
+					<c:if test="${compeVo.riskCode eq '1101' }">交强预付</c:if>
+					<c:if test="${compeVo.riskCode ne '1101' }">商业预付</c:if>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-2">本次预付金额合计：</label>
+				<div class="form_input col-2">
+					<input type="text" style="border: none" readonly="readonly"
+						class="input-text ready-only" name="compensateVo.sumAmt"
+						value="${empty compeVo.sumAmt?0.00:compeVo.sumAmt}">
+				</div>
+				<label class="form_label col-2">已预付金额：</label>
+				<div class="form_input col-2">${sumAllAmt}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+
+
+<!-- 预付赔款 -->
+<div class="table_wrap">
+	<div class="table_title f14">预付赔款</div>
+	<div class="table_cont table_list">
+		<table border="1" class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>险别</th>
+					<th>预付损失类型</th>
+					<th>预付款项类型</th>
+					<th>预付金额</th>
+					<th>收款人</th>
+					<th>例外标志</th>
+					<th>例外原因</th>
+					<th>收款人帐号</th>
+					<th>开户银行</th>
+					<th>摘要<font class="must">*</font></th>
+					
+				</tr>
+			</thead>
+			<tbody class="text-c" id="IndemnityTbody">
+				<input type="hidden" id="indeSize" value="${fn:length(prePayPVos)}">
+				<c:forEach var="prePayPVo" items="${prePayPVos}" varStatus="status">
+					<c:set var="index" value="${status.index}" />
+					<tr class="detail-body">
+						<td><app:codetrans codeType="KindCode" codeCode="${prePayPVo.kindCode}" riskCode="${registVo.riskCode}" /></td>
+						<td>${prePayPVo.lossName}</td>
+						<td><app:codetrans codeType="PrePayFeeType" codeCode="${prePayPVo.chargeCode}" /></td>
+						<%-- <td>${prePayPVo.insuredName}</td>
+						<td>${prePayPVo.licenseNo}</td> --%>
+						<td>${prePayPVo.payAmt}</td>
+						<td>${prePayPVo.payeeName}</td>
+						<td><app:codetrans codeType="YN10"
+								codeCode="${prePayPVo.otherFlag}" /></td>
+						<td><app:codetrans codeType="OtherCase"
+								codeCode="${prePayPVo.otherCause}" /></td>
+						<td>${prePayPVo.accountNo}</td>
+						<td>
+							<app:codetrans codeType="BankCode" codeCode="${prePayPVo.bankName}" />
+						</td>
+						<td>
+							<input type="text" class="input-text"  value="${prePayPVo.summary}" readonly="readonly"/>
+						</td>
+						<input type="hidden" name="payeeIdPPs" value="${prePayPVo.payeeId}"/>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+	

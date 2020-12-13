@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<input type="hidden" class="input-text" name="tabPageNo" value="${tabPageNo }">
+<div class="panel-body">
+	<%@include file="CasualtyInfo_TabCon_PersonBaseInfo.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_InjuredPart.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_HospitalCase.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_TraceRecord.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_FeeCount.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_NurseInfo.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_RaiseInfo.jspf"%>
+	<%@include file="CasualtyInfo_TabCon_TraceContentInfo.jspf"%>
+</div>

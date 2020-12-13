@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="机动车辆损伤确认书_subreport2" pageWidth="277" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="277" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3a70f9ff-4f60-40f0-88aa-bb5aa7e45d1b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="veriQuantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[veriQuantity]]></fieldDescription>
+	</field>
+	<field name="compName" class="java.lang.String">
+		<fieldDescription><![CDATA[compName]]></fieldDescription>
+	</field>
+	<field name="sumVeriLoss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumVeriLoss]]></fieldDescription>
+	</field>
+	<variable name="index" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer("1")]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="176" height="20" uuid="20e65021-75d6-4f2d-8da7-a9c4ac4b2c9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[更换配件名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="0" width="50" height="20" uuid="7daa0b35-ca53-41be-a96e-c8e69655cd1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[数量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="0" width="50" height="20" uuid="31b0b3b6-53e7-43e0-a803-c54687a055e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[配件价格]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="090e50fa-6b69-4703-8385-36c269ae155f"/>
+			</line>
+			<line>
+				<reportElement x="177" y="0" width="1" height="20" uuid="4d57ca93-2cfe-4f83-a668-8f37e12bb8c8"/>
+			</line>
+			<line>
+				<reportElement x="277" y="0" width="1" height="20" uuid="362a3200-4f1b-4766-a83c-6939b4b58342"/>
+			</line>
+			<line>
+				<reportElement x="227" y="0" width="1" height="20" uuid="03b0f3e6-e02a-4dac-ae5c-1574ddb14555"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="277" height="1" uuid="27127184-9272-44b6-b3c1-081904885f6c"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="57a7f65d-7b3b-43ba-b0cd-907250959f4b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="277" height="1" uuid="73106113-bc92-4bed-b1dd-d164526698de"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="176" height="20" uuid="2346b0f4-d1b5-4686-8deb-c239937dca33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="0" width="50" height="20" uuid="7673fbc6-df3d-46f5-a26c-724e000e3f65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumVeriLoss}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="178" y="0" width="50" height="20" uuid="92631cd7-63ef-4e37-ab9b-a323ac05d131"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{veriQuantity}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="177" y="0" width="1" height="20" uuid="47b51ec7-ea55-49fc-8da5-1877a12b71a6"/>
+			</line>
+			<line>
+				<reportElement x="227" y="0" width="1" height="20" uuid="1aa6e582-f6d8-4a2f-82f9-7e4aa6443cf4"/>
+			</line>
+			<line>
+				<reportElement x="277" y="0" width="1" height="20" uuid="be0c52d2-f800-4a85-8b8e-3d071f01ed30"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="57a7f65d-7b3b-43ba-b0cd-907250959f4b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="277" height="1" uuid="e5b281ed-75b0-4b8c-8752-f2bd515d84c3"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

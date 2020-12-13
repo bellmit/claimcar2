@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">		
+				<div class="table_title f14">核赔规则明细信息列表</div>
+				<div class="table_cont table_list">
+					<table class="table table-border">
+						<thead class="text-c">
+							<tr>
+								<th width="10%">触发节点</th>
+								<th width="10%">触发时间</th>
+								<th width="10%">提交人</th>		
+								<th width="15%">规则库名称</th>
+								<th width="15%">规则名称</th>
+								<th width="10%">规则类型</th>
+								<th width="10%">返回结果</th>	
+								<th width="20%">规则提示信息</th>	
+ 							</tr>
+						</thead>
+						<tbody class="text-c" style="font-size: 5px">
+						<c:forEach var="ruleDetailInfoVo" items="${vClaimDetailInfoVoList}" varStatus="status">
+							<tr class="text-c">
+								<td align="right"><app:codetrans codeType="FlowNode" codeCode="${ruleDetailInfoVo.triggerNode}"/></td>
+								<td align="right"><app:date date="${ruleDetailInfoVo.createTime}" format="yyyy-MM-dd HH:mm:ss"/></td>								
+								<td align="right"><app:codetrans codeType="UserCode" codeCode="${ruleDetailInfoVo.operatorCode}"/></td> 
+								<td align="right">${ruleDetailInfoVo.ruleLibrary}</td> 								
+								<td align="right">${ruleDetailInfoVo.ruleEntryDetail}</td>
+								<td align="right"><app:codetrans codeType="IlogRuleType" codeCode="${ruleDetailInfoVo.ruleType }"/></td>
+								<td align="right"><app:codetrans codeType="IlogRuleResult" codeCode="${ruleDetailInfoVo.ruleResult }"/></td>
+								<td align="right" title="${ruleDetailInfoVo.ruleContent}">
+								<c:choose>
+								<c:when test="${fn:length(ruleDetailInfoVo.ruleContent) gt 11}">
+									${fn:substring(ruleDetailInfoVo.ruleContent,0,11)}...
+								</c:when>
+								<c:otherwise>${ruleDetailInfoVo.ruleContent}</c:otherwise>
+								</c:choose> 
+								</td>
+ 							</tr>
+						</c:forEach>	
+					</tbody>
+					</table>
+				</div>
+			</div>

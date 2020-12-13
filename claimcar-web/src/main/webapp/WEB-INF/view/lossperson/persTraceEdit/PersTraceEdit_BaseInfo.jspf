@@ -1,0 +1,224 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">人伤跟踪基本信息</div>
+	<div class="table_cont ">
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">报案号</label>
+					<div class="form_input col-3">
+						<input type="hidden" id="traceMainId" name="prpLDlossPersTraceMainVo.id" value="${prpLDlossPersTraceMainVo.id }">
+						<input type="text" class="input-text ready-only" style="border: none" id="registNo" name="prpLDlossPersTraceMainVo.registNo" value="${prpLDlossPersTraceMainVo.registNo}"
+							readonly="readonly" />
+						<input type="hidden" name="prpLDlossPersTraceMainVo.riskCode" value="${prpLDlossPersTraceMainVo.riskCode }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.flag" value="${prpLDlossPersTraceMainVo.flag }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.reportType" value="${prpLDlossPersTraceMainVo.reportType }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.mercyFlag" value="${prpLDlossPersTraceMainVo.mercyFlag }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.traceTimes" value="${prpLDlossPersTraceMainVo.traceTimes }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.intermediaryFlag" value="${prpLDlossPersTraceMainVo.intermediaryFlag }">
+						<input type="hidden" name="prpLDlossPersTraceMainVo.intermediaryInfoId" value="${prpLDlossPersTraceMainVo.intermediaryInfoId }">
+						
+						
+						<c:if test="${flowNodeCode == 'PLFirst' and intermediaryFlag =='0' }">
+							<input type="hidden" name="prpLDlossPersTraceMainVo.plfName" value="${prpLDlossPersTraceMainVo.plfName }">
+						</c:if>
+						<c:if test="${flowNodeCode =='PLFirst' }">
+							<input type="hidden" name="prpLDlossPersTraceMainVo.plCode" value="${prpLDlossPersTraceMainVo.plCode }">
+						</c:if>
+						<c:if test="${flowNodeCode !='PLFirst' }">
+							<input type="hidden" name="prpLDlossPersTraceMainVo.operatorCode" value="${prpLDlossPersTraceMainVo.operatorCode }">
+						</c:if>
+						<c:if test="${flowNodeCode !='PLFirst' and intermediaryFlag == '0'}">
+							<input type="hidden" name="prpLDlossPersTraceMainVo.operatorName" value="${prpLDlossPersTraceMainVo.operatorName }">
+						</c:if>
+						<input type="hidden" id="flowNodeCode" name="flowNodeCode" value="${flowNodeCode }">
+						<input type="hidden" id="flowNodeName" name="flowNodeName" value="${flowNodeName }">
+						<input type="hidden" id="handlerStatus" name="handlerStatus" value="${handlerStatus }">
+						<input type="hidden" id="flowTaskId" name="submitNextVo.flowTaskId" value="${flowTaskId }">
+						<input type="hidden" id="reconcileFlag" name="reconcileFlag" value="${reconcileFlag }">
+						<input type="hidden" id="checkDate" name="checkDate" value="<app:date date='${checkDate }'/>">
+						<input type="hidden" id="sumCheckLossFee" name="sumCheckLossFee" value="${sumCheckLossFee }">
+						<input type="hidden" id="isChecked" name="isChecked" value="${isChecked }">
+						<input type="hidden" id="tempRegistFlag" value="${registVo.tempRegistFlag}">
+						<input type="hidden" id="registTaskFlag" value="${registVo.registTaskFlag}">
+						<input type="hidden" id="oldClaim" value="${registVo.flag}">
+					</div>
+				</div>
+				<input type="hidden" name="prpLCheckDutyVo.id" value="${prpLCheckDutyVo.id }">
+				<input type="hidden" name="prpLCheckDutyVo.registNo" id="registNo" value="${prpLCheckDutyVo.registNo }">
+				<input type="hidden" name="prpLCheckDutyVo.serialNo" value="${prpLCheckDutyVo.serialNo }">
+				<c:if test="${prpLDlossPersTraceMainVo.reportType =='2'||prpLDlossPersTraceMainVo.reportType =='3'}">
+					<div>
+						<label class="form_label col-1">交强责任类型</label>
+						<div class="form_input col-3">
+							<span class="select-box"> <app:codeSelect codeType="CiIndemDuty" type="select" name="prpLCheckDutyVo.ciDutyFlag" value="${prpLCheckDutyVo.ciDutyFlag }" />
+							</span> <font class="must">*</font>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${prpLDlossPersTraceMainVo.reportType =='1'||prpLDlossPersTraceMainVo.reportType =='3'}">
+					<div>
+						<label class="form_label col-1">事故责任比例</label>
+						<div class="col-3">
+							<div class="form_input col-6">
+								<span class="select-box"> <app:codeSelect codeType="IndemnityDuty" id="indemnityDuty" type="select" name="prpLCheckDutyVo.indemnityDuty" onchange="changeDuty()"
+										value="${prpLCheckDutyVo.indemnityDuty }" />
+								</span>
+							</div>
+							<div class="form_input col-6">
+								<input type="text" id="indemnityDutyRate" datatype="rate" style="width: 92%" class="input-text" name="prpLCheckDutyVo.indemnityDutyRate" onchange="compareDutyRate(this)"
+									value="${prpLCheckDutyVo.indemnityDutyRate }" maxlength="3"/>
+								<font class="must">*</font>
+							</div>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">案件处理类型</label>
+					<div class="form_input col-3">
+						<span class="select-box"> <app:codeSelect codeType="CaseProcessType" type="select" id="caseProcessType" name="prpLDlossPersTraceMainVo.caseProcessType"
+								value="${prpLDlossPersTraceMainVo.caseProcessType }"  datatype="*"/>
+						<font class="must">*</font>
+						</span>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">定损类别</label>
+					<div class="form_input col-3">
+						<input type="hidden" id="intermediaryFlag" value="${intermediaryFlag }" />
+						<app:codetrans codeType="InterMediaryType" codeCode="${intermediaryFlag }" />
+					</div>
+				</div>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+					<label class="form_label col-1 intermediary">公估公司</label>
+					<div class="form_input col-3 intermediary">
+						<input type="hidden" id="intermediaryInfoId"  value="${IntermediaryInfoId}" />
+						<app:codetrans codeType="GongGuPayCode" codeCode="${IntermediaryInfoId}" />
+					</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+			<c:choose>
+				<c:when test="${flowNodeCode == 'PLFirst'}">
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+						<label class="form_label col-1 intermediary">公估人员</label>
+						<div class="form_input col-3">
+							<input type="text" class="input-text" datatype="*" name="prpLDlossPersTraceMainVo.plfName" value="${prpLDlossPersTraceMainVo.plfName }">
+						</div>
+					</c:if>
+					<c:if test="${intermediaryFlag =='0' }">
+						<label class="form_label col-1 persTracePerson">跟踪人员</label>
+						<div class="form_input col-3">${prpLDlossPersTraceMainVo.plfName }</div>
+					</c:if>
+				</div>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+						<label class="form_label col-1 intermediary">公估员身份证</label>
+					</c:if>
+					<c:if test="${intermediaryFlag =='0' }">
+						<label class="form_label col-1 persTracePerson">跟踪员身份证</label>
+					</c:if>
+					<div class="form_input col-3">
+						<input type="text" class="input-text" datatype="idcard" name="prpLDlossPersTraceMainVo.plfCertiCode" value="${prpLDlossPersTraceMainVo.plfCertiCode }" onchange="toUpperCase(this)">
+						<font class="must">*</font>
+					</div>
+				</div>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+					<label class="form_label col-1 intermediary">公估人电话</label>
+					<div class="form_input col-3 intermediary">
+						<input type="text" class="input-text"  id="plfPhone" nullmsg="请输入电话!" name="prpLDlossPersTraceMainVo.plfPhone" value="${prpLDlossPersTraceMainVo.plfPhone }" datatype="m|/^0\d{2,3}-\d{7,8}$/"  />
+						<font class="must">*</font>
+					</div>
+					</c:if>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+						<label class="form_label col-1 intermediary">公估人员</label>
+						<div class="form_input col-3">
+							<input type="text" class="input-text" datatype="*" name="prpLDlossPersTraceMainVo.operatorName" value="${prpLDlossPersTraceMainVo.operatorName }">
+						</div>
+					</c:if>
+					<c:if test="${intermediaryFlag =='0' }">
+						<label class="form_label col-1 persTracePerson">跟踪人员</label>
+						<div class="form_input col-3">${prpLDlossPersTraceMainVo.operatorName }</div>
+					</c:if>
+				</div>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+						<label class="form_label col-1 intermediary">公估员身份证</label>
+					</c:if>
+					<c:if test="${intermediaryFlag =='0' }">
+						<label class="form_label col-1 persTracePerson">跟踪员身份证</label>
+					</c:if>
+					<div class="form_input col-3">
+						<c:if test="${not empty prpLDlossPersTraceMainVo.operatorCertiCode}">
+							<input type="text" class="input-text" datatype="idcard" name="prpLDlossPersTraceMainVo.operatorCertiCode" value="${prpLDlossPersTraceMainVo.operatorCertiCode }" onchange="toUpperCase(this)">
+						</c:if>
+						<c:if test="${ empty prpLDlossPersTraceMainVo.operatorCertiCode}">
+							<input type="text" class="input-text" datatype="idcard" name="prpLDlossPersTraceMainVo.operatorCertiCode" value="${prpLDlossPersTraceMainVo.plfCertiCode }" onchange="toUpperCase(this)">	
+						</c:if>
+						<font class="must">*</font>
+					</div>
+				</div>
+				<div>
+					<c:if test="${intermediaryFlag =='1' }">
+						<label class="form_label col-1 intermediary">公估人电话</label>
+						<div class="form_input col-3 intermediary">
+							<input type="text" class="input-text"  id="plfPhone" nullmsg="请输入电话!" name="prpLDlossPersTraceMainVo.plfPhone" value="${prpLDlossPersTraceMainVo.plfPhone }" datatype="m|/^0\d{2,3}-\d{7,8}$/"  />
+							<font class="must">*</font>
+						</div>
+					</c:if>
+				</div>
+			</c:otherwise>
+			</c:choose>
+			</div>
+		</div>
+		<div class="formtable ">
+		<div class="row cl">
+			<label class="form_label col-1.5 " style="text-align:left;">是否小额人伤案件</label>
+			<div class="form_input col-3 ">
+			<app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" name="prpLDlossPersTraceMainVo.isMinorInjuryCases" value="${prpLDlossPersTraceMainVo.isMinorInjuryCases}"/>
+			</div>
+			<input type="hidden" value="${reOpenFlag}" id="reOpenFlag">
+			<c:if test="${reOpenFlag=='0'}">
+			<label class="form_label col-1 " style="text-align:left;">是否减损</label>
+			<div class="form_input col-3 ">
+			<app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" name="prpLDlossPersTraceMainVo.isDeroFlag" value="${prpLDlossPersTraceMainVo.isDeroFlag}"/>
+			</div>
+			<div class="hide" id="isDero">
+			<label class="form_label col-1 " style="text-align:left;">减损金额</label>
+			<div class="form_input col-2.5 ">
+			<input type="text" class="input-text"  id="isDeroAmout" name="prpLDlossPersTraceMainVo.isDeroAmout" value="${prpLDlossPersTraceMainVo.isDeroAmout}" datatype="isDeroAmout"   errormsg="请输入大于0的整数或者保留两位小数"/>
+			                                                                                                                                                             
+			</div>
+			</div>
+			
+			</c:if>
+		</div>
+		</div>
+		<div class="formtable ">
+		 <div class="row cl">
+		   <div class="hide" id="isSideDero">
+			  <label class="form_label col-1 " style="text-align:left;">内部减损</label>
+			   <div class="form_input col-3 ">
+			   <app:codeSelect codeType="YN10" type="radio"  clazz="mr-5" nullToVal="0" name="prpLDlossPersTraceMainVo.inSideDeroFlag" value="${prpLDlossPersTraceMainVo.inSideDeroFlag}"/>
+			  </div>
+		   </div>
+		</div>
+		</div>
+		
+	</div>
+</div>

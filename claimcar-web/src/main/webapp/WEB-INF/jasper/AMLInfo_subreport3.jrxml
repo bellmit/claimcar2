@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AMLInfo_subreport3" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4b8c2946-56e2-4da0-b7aa-d685a930c726">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" isDefault="true" fontName="宋体" fontSize="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="favoreeIdentifyCode" class="java.lang.String"/>
+	<field name="favoreelRevenueRegistNo" class="java.lang.String"/>
+	<field name="favoreelBusinessCode" class="java.lang.String"/>
+	<field name="favoreelCertifyDate" class="java.lang.String"/>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement style="style1" x="1" y="1" width="114" height="25" uuid="2eca15e5-771e-47c4-b38a-74f8ee7fd1d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[组织机构代码]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="288" y="27" width="79" height="23" uuid="31a305e3-2dba-4bc7-8b9d-51a98e644598"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[证件有效期]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="368" y="26" width="186" height="25" uuid="800d45ac-cb39-4ddb-b4b4-bf0326eaa66d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{favoreelCertifyDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" x="1" y="27" width="115" height="24" uuid="6d44ee07-d01b-4902-bb6d-6157889179eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[营业执照编码]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="26" width="554" height="1" uuid="169d5523-ea12-4161-9726-e1e911901e5c"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="116" y="26" width="171" height="24" uuid="91d44e85-f7ed-41f9-8de0-4daf49f5e227"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{favoreelBusinessCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="117" y="1" width="170" height="25" uuid="8b287840-9d85-4d07-ad34-32dc8cdd7e98"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{favoreeIdentifyCode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="50" width="553" height="1" uuid="81a0ee20-b864-4b5e-b3c8-b0b0b3753a0f"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="288" y="2" width="79" height="25" uuid="ab2c671c-a945-4b65-85e3-f634ce72da9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[税务登记号码]]></text>
+			</staticText>
+			<line>
+				<reportElement x="287" y="1" width="1" height="49" uuid="e9698ea2-22fd-4fbe-b7d6-0f4f0d2d14c6"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="368" y="1" width="186" height="25" uuid="e6a0c0d0-a462-4ba9-9ff4-323e5c4e6098"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{favoreelRevenueRegistNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="554" y="0" width="1" height="51" uuid="b32e06a2-470e-4784-ba7b-6e6573a06e3f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="50" uuid="ed7f3051-88c7-4fe4-b5c6-d8b42bfc88ef"/>
+			</line>
+			<line>
+				<reportElement x="116" y="0" width="1" height="49" uuid="592f140d-a972-41ae-9cc5-3f6a266f58b9"/>
+			</line>
+			<line>
+				<reportElement x="367" y="0" width="1" height="49" uuid="48291281-0623-4496-b942-6a908a253bd3"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

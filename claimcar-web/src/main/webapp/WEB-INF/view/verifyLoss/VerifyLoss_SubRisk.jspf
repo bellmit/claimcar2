@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+			
+			<div class="table_wrap">
+				<div class="table_title f14">附加险</div>
+				<div class="table_cont table_list">
+					<table class="table table-border">
+							<thead class="text-c">
+								<tr>
+									<th>附加险险别</th>
+									<th>车财名称</th>
+									<th>数量/天数</th>
+									<th>定损金额</th>
+									<th>核损金额</th>
+								</tr>
+							</thead>
+							<tbody class="text-c" id="subRiskTbody">
+								<c:forEach var="carSubRiskVo" items="${lossCarMainVo.prpLDlossCarSubRisks }" varStatus="status">
+									<tr>
+										<td>
+											${carSubRiskVo.kindName }
+											<input type="hidden" class="input-text" name="lossCarMainVo.prpLDlossCarSubRisks[${status.index   }].id" value="${carSubRiskVo.id }"/>
+											<input type="hidden" id="prpLDlossCarSubRisks_${status.index }_kindName" value="${carSubRiskVo.kindName }"/>
+											
+										</td>
+										<td>
+											${carSubRiskVo.itemName }
+										</td>
+										<td>
+											${carSubRiskVo.count }
+										</td>
+										<td>
+											${carSubRiskVo.subRiskFee }
+											<input type="hidden" id="prpLDlossCarSubRisks_${status.index }_subRiskFee" value="${carSubRiskVo.subRiskFee }"/>
+										</td>
+										<td width="20%">
+											<input type="text" class="input-text"  datatype="amount" value="${empty carSubRiskVo.veriSubRiskFee  ? carSubRiskVo.subRiskFee : carSubRiskVo.veriSubRiskFee }"
+											name="lossCarMainVo.prpLDlossCarSubRisks[${status.index  }].veriSubRiskFee" onblur="checkSubRiskFee(this)" />
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+					</table>
+					<div class="formtable ">
+				    <div class="row cl">	
+					<label class="form_label col-2">定损合计</label>
+					<div class="form_input col-3">
+					 ${lossCarMainVo.sumSubRiskFee }
+					</div>
+					<label class="form_label col-2">核损合计</label>
+						<div class="form_input col-3">
+					<input type="text" class="input-text" name="lossCarMainVo.sumVeriSubRiskFee" id="sumVeriSubRiskFee" value=" ${!empty lossCarMainVo.sumVeriSubRiskFee  ? lossCarMainVo.sumVeriSubRiskFee : lossCarMainVo.sumSubRiskFee }" readonly="readonly"/>
+					 
+						</div>	
+				
+			</div>
+		</div>
+				</div>
+			</div>
+			

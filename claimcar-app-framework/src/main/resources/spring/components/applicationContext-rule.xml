@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+default-autowire="byName" default-lazy-init="true">
+ 
+	<!-- 规则引擎服务 -->
+
+	<!--  
+		<bean id="ruleService"
+		class="ins.framework.rule.DroolsRuleServiceImpl">
+		<property name="ruleFiles" value="classpath:/rules/User.drl" />
+		</bean>
+		
+		<bean id="ruleService"
+		class="ins.framework.rule.ILogRuleServiceImpl">
+		<property name="URL" value="/UserRuleApp/UserRule" />
+		</bean>
+	-->
+	<!-- <bean id="ruleService"
+		class="ins.framework.rule.ILogRuleServiceImpl">
+		<property name="URL" value="/Compensate_getIndemityDutyRateApp/Compensate_getIndemityDutyRateRule" />
+	</bean> -->
+	
+	<!-- 远程调用 ，需要传入guvnor的用户名和密码-->
+	<!--   <bean id="ruleService" class="ins.framework.rule.Drools5RuleRemoteServiceImpl">
+		<property name="userName" value="admin"/>
+		<property name="password" value="admin"/>
+		<property name="urlPrefix" value="http://192.168.20.225:8088/guvnor-5.5.0.Final-jboss-as-7.0/rest/packages/"/>
+		<property name="urlSuffix" value="/binary"/>
+		
+	</bean>   -->
+	
+	<!-- 本地调用 -->
+	 <bean id="ruleService" class="ins.framework.rule.Drools5RuleServiceImpl">
+	   <property name="urlPrefix" value="./rules"/>
+	</bean> 
+	
+</beans>

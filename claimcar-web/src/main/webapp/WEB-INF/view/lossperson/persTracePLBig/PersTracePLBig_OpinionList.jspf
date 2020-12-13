@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 意见列表 -->
+<div class="table_wrap">
+	<div class="table_title f14">意见列表</div>
+	<div class="table_cont  table_list ">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>归属环节</th>
+					<th>操作人员</th>
+					<th>提交时间</th>
+					<th>业务动作</th>
+					<th>意见</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<c:forEach var="claimText" items="${prpLClaimTextVos }" varStatus="chargeStatus">
+					<tr>
+						<td>
+							<app:codetrans codeType="FlowNode" codeCode="${claimText.nodeCode }"/>
+						</td>
+						<td>${claimText.operatorName }</td>
+						<td>
+							<fmt:formatDate value='${claimText.inputTime}' pattern='yyyy-MM-dd HH:mm:ss' />
+						</td>
+						<td>
+							<app:codetrans codeType="AuditStatus" codeCode="${claimText.status }" />
+						</td>
+						<td>
+							<app:codetrans codeType="AuditStatus" codeCode="${claimText.description }" />
+						</td>
+						<td>${claimText.remark }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 意见列表 -->

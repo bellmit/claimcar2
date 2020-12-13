@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">人员基本情况</div>
+	<div class="table_cont ">
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">案件类型</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="TreatSituation" codeCode="${persTrace.prpLDlossPersInjured.treatSituation }" />
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">伤者姓名</label>
+				<input type="hidden" name="prpLDlossPersTraceVos[${tabPageNo }].id" value="${persTrace.id }">
+				<div class="form_input col-3">${persTrace.prpLDlossPersInjured.personName }</div>
+				<label class="form_label col-1">证件类型</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="IdentifyType" codeCode="${persTrace.prpLDlossPersInjured.certiType }" />
+				</div>
+				<label class="form_label col-1">证件号码</label>
+				<div class="form_input col-3">${persTrace.prpLDlossPersInjured.certiCode }</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">人员属性</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="LossItemType" codeCode="${persTrace.prpLDlossPersInjured.lossItemType }" />
+				</div>
+				<label class="form_label col-1">伤者年龄</label>
+				<div class="form_input col-3">${persTrace.prpLDlossPersInjured.personAge }</div>
+				<label class="form_label col-1">伤者性别</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="SexCode" codeCode="${persTrace.prpLDlossPersInjured.personSex }" />
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">从事行业</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="TicCode" codeCode="${persTrace.prpLDlossPersInjured.ticCode }" />
+				</div>
+				<label class="form_label col-1">收入状况</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="Income" codeCode="${persTrace.prpLDlossPersInjured.income }" />
+				</div>
+				<label class="form_label col-1">户口性质</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="Domicile" codeCode="${persTrace.prpLDlossPersInjured.domicile }" />
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">联系电话</label>
+				<div class="form_input col-3">${persTrace.prpLDlossPersInjured.phoneNumber }</div>
+				<label class="form_label col-1">伤情类别</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="WoundCode" codeCode="${persTrace.prpLDlossPersInjured.woundCode }" />
+				</div>
+				<label class="form_label col-1">车牌号码</label>
+				<div class="form_input col-3">
+					${persTrace.prpLDlossPersInjured.licenseNo }
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">鉴定机构名称</label>
+					<div class="form_input col-3">${persTrace.prpLDlossPersInjured.chkComName }</div>
+				</div>
+				<div>
+					<label class="form_label col-1">组织机构代码</label>
+					<div class="form_input col-3">${persTrace.prpLDlossPersInjured.chkComCode }</div>
+				</div>
+				<div>
+					<c:if test="${persTrace.prpLDlossPersInjured.woundCode =='03' }">
+						<label class="form_label col-1">死亡时间</label>
+						<div class="form_input col-3">
+							<fmt:formatDate value='${persTrace.prpLDlossPersInjured.deathTime}' pattern='yyyy-MM-dd HH:mm:ss' />
+						</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+	<!-- add by lujijiang -->
+	<description>Shiro安全配置</description>
+	
+	<!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <!-- 会话Cookie模板 -->
+   <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="-1"/>
+    </bean>
+    
+    <!-- 会话验证调度器 -->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="activeSessionsCacheName" value="shiroCache"/>
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+	</bean>
+
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- <property name="realm" ref="shiroDbRealm" /> -->
+		<property name="realms">  
+	        <list>  
+	            <ref bean="sysUserDbRealm" />  
+	            <!--realm可以配置多个，securityManager会按照realm声明的顺序进行使用  -->
+	            <!-- <ref bean="demoRealm" />   -->
+	        </list>  
+    	</property>
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="sessionManager" ref="sessionManager"/>
+	</bean>
+	
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <!-- <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/> -->
+        <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+    
+    <!-- 密码验证  -->
+	<bean id="credentialsMatcher" class="ins.platform.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5"/>
+		<property name="hashIterations" value="1"/>
+	</bean>
+
+	<!-- 項目自定义的Realm，目前仅使用非加盐非多级循环的MD5密码校验，有安全隐患，建议适时修正为SHA256等高级加密 -->
+	<bean id="sysUserDbRealm" class="ins.platform.shiro.service.spring.SysUserDbRealm">
+		<property name="sysUserService" ref="sysUserService"/>
+		<property name="cachingEnabled" value="true"/>
+		<property name="authenticationCachingEnabled" value="true"/>
+		<property name="authorizationCachingEnabled" value="true"/>
+		<property name="credentialsMatcher" ref="credentialsMatcher"/>
+	</bean>
+	<bean id="demoRealm" class="ins.platform.shiro.service.spring.DemoRealm">
+		<property name="cachingEnabled" value="true"/>
+		<property name="authenticationCachingEnabled" value="true"/>
+	</bean>
+	
+	 <bean id="chainDefinitionSectionMetaSource" class="ins.platform.shiro.source.ChainDefinitionSectionMetaSource">  
+	 	<property name="filterChainDefinitions">
+			<value>
+				<!-- 静态资源区 -->
+				/js/** = anon
+               	/css/** = anon
+               	/img/** = anon
+               	/plugins/** = anon
+               	/h-ui/** = anon
+               	/images/** = anon
+               	/lib/** = anon
+               	/xmlDemoServlet = anon
+               	/favicon.ico = anon
+               	/sysUser/prePassword = anon
+               	/sysUser/authEmail = anon
+               	/sysUser/preResetPassword = anon
+               	/sysUser/safeCodeCaptcha = anon
+               	/sysUser/resetPassword = anon
+               	/sysUser/sendMail = anon
+               	/sysUser/preRegist = anon
+               	/verification/imageCode = anon
+               	/sysUser/register = anon
+               	/sysUser/checkedSysUser = anon
+               	/sysUser/checkedEmail = anon
+               	/servlet/captchaCode = anon
+               	/showcase/anonymous/**  = anon
+               	/jxCourtReceive = anon
+               	/jiangxicourt/** = anon
+               	/addValueServicesServlet = anon
+               	/clearCacheServlet = anon
+				/imageQueryServlet = anon
+               	/claimMarketingQueryServlet = anon
+               	/middleStageQuery = anon
+				/public/push/dataNotice = anon
+				/public/push/platformDataNotice = anon
+               	/founderToClaimAction/** = anon
+               	/remoteService = anon
+               	/login = authc
+               	/index.jsp = authc
+               	/unauthorized = authc
+               	
+			</value>
+		</property>
+    </bean> 
+	
+	<bean id="anyRolesFilter" class="ins.platform.shiro.web.filter.AnyRolesAuthorizationFilter">
+    </bean>
+    <bean id="myCaptchaFilter" class="ins.platform.shiro.web.filter.FormAuthenticationCaptchaFilter"/>
+    <bean id="forceLogoutFilter" class="ins.platform.shiro.web.filter.ForceLogoutFilter"/>
+    <bean id="kickoutFilter" class="ins.platform.shiro.web.filter.KickoutSessionControlFilter">
+    	<property name="cacheManager" ref="shiroEhcacheManager"/>
+		<property name="sessionManager" ref="sessionManager"/>
+		<property name="kickoutAfter" value="false"/>
+		<property name="maxSession" value="1"/>
+		<property name="kickoutUrl" value="/login"/>
+    </bean>
+    
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="ins.platform.shiro.web.util.MyShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/" />
+		<property name="unauthorizedUrl" value="/unauthorized"/>
+		<property name="filters">
+            <util:map>
+                <entry key="anyRoles" value-ref="anyRolesFilter"/>
+                <entry key="authc" value-ref="myCaptchaFilter"/>
+                <entry key="forceLogout" value-ref="forceLogoutFilter"/>
+                <entry key="kickout" value-ref="kickoutFilter"/>
+            </util:map>
+        </property>
+		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />  
+	</bean>
+	
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml"/>
+	</bean>
+	
+	
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
+	</bean>
+</beans>

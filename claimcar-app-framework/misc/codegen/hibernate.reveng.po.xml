@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+<hibernate-reverse-engineering>
+	<type-mapping>
+		<sql-type jdbc-type="DATE" hibernate-type="timestamp"></sql-type>
+		<sql-type jdbc-type="NUMERIC" precision='5' hibernate-type="Integer" />
+	</type-mapping>
+	<!-- 配置table-filter时，可以指定默认报名，配置table时全类名优先，否则使用默认包名 -->
+	<table-filter match-name="SDD_.*" match-schema=".*" package="ins.platform.schema" />
+	<table-filter match-name="SYS_.*" match-schema=".*" package="ins.platform.schema" />
+	<table-filter match-name="SAA_.*" match-schema=".*" package="ins.platform.saa.schema" />
+	<table-filter match-name="PRPC.*" match-schema=".*" package="ins.sino.claimcar.regist.po" />
+	<table-filter match-name="PRPLREGIST.*" match-schema=".*" package="ins.sino.claimcar.regist.po" />
+	<table-filter match-name="PRPLCHECK.*" match-schema=".*" package="ins.sino.claimcar.check.po" />
+
+</hibernate-reverse-engineering>

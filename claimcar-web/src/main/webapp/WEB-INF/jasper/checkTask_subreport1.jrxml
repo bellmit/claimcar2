@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="checkTask_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2b6956ea-b605-4363-9322-639bdf2d4db9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="prpLCheckCarInfo" class="ins.sino.claimcar.check.vo.PrpLCheckCarInfoVo">
+		<fieldDescription><![CDATA[prpLCheckCarInfo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="100">
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" uuid="6fb7f17b-9988-4925-a145-f18f12938abc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[施救情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="60" height="20" uuid="8e4b9290-50b8-467c-984b-6448f73e2b25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[三者车信息]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="20" width="50" height="20" uuid="9cd61f6c-d324-4ed4-b8fa-974b40ea9826"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[车牌号：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="20" width="100" height="20" uuid="514245f7-24a3-48eb-ad35-2b0618e2fb45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[三者交强险承保公司：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="20" width="50" height="20" uuid="03bee960-3f91-4371-af1b-98e83f0bb45b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[联系电话：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="9ab8bdfc-d22f-4d45-b23c-498d9981b38d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="abfacbf4-1933-4419-9319-28f3f1a2de35"/>
+			</line>
+			<line>
+				<reportElement x="0" y="60" width="555" height="1" uuid="3c3375e0-723e-4e08-9f34-1a8ad7cc9759"/>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1" uuid="1b379614-1754-45b2-ba9a-1ddfc86b0a58"/>
+			</line>
+			<line>
+				<reportElement x="0" y="99" width="555" height="1" uuid="6a5bb07e-da7b-41b8-b3f6-201716c7688e"/>
+			</line>
+			<line>
+				<reportElement x="60" y="0" width="1" height="40" uuid="832b0f02-9e1a-45c4-bbae-cbc21bc71a86"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="100" uuid="1dfeaf5c-5ec6-4780-afbc-fa67e08b72e9"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="100" uuid="bab9cc43-5bcd-45ff-9765-9c1cd973ee55"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="110" y="21" width="90" height="20" uuid="e9c0dd43-d5fe-447e-9c5e-0bc48c992c06"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prpLCheckCarInfo}.getLicenseNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="21" width="100" height="20" uuid="4991f0ef-5202-4641-b4b4-fe5a0df8daf2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prpLCheckCarInfo}.getCiInsureComCode()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="450" y="20" width="94" height="20" uuid="b2820a97-9e9e-4030-8566-dba47b98f174"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prpLCheckCarInfo}.getPhone()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<!--  车俩损失-->
+			<div class="table_wrap">		
+				<div class="table_title f14">车辆损失</div>
+				<div class="table_cont table_list">
+					<table class="table table-border">
+						<thead class="text-c">
+							<tr>
+								<th>序号</th>
+								<th>损失方</th>
+								<th>车牌号</th>
+								<th>定损金额</th>
+								<th>核价金额</th>
+								<th>核损金额</th>
+								<th>定损员</th>
+								<th>核价员</th>
+								<th>核损员</th>
+								<th>
+									<c:choose> 
+										<c:when test="${fn:contains(taskVo.subNodeCode,'VLCar') ==true}">
+											是否追加定损
+										</c:when>
+										<c:otherwise>
+											任务类型
+										</c:otherwise>
+									</c:choose>	
+							</th>		
+								<th>查看</th>
+							</tr>
+						</thead>
+						<tbody class="text-c">
+							<c:forEach var="lossCarMain" items="${commonVo.lossCarMainList }" varStatus="status">
+								<tr>
+									<td>${status.index+1 }</td>
+									<td>
+										<c:choose>
+											<c:when test="${lossCarMain.deflossCarType eq '1'}"> 主车</c:when>
+											<c:otherwise>三者车</c:otherwise>
+										</c:choose>
+									</td>
+									<td>${lossCarMain.licenseNo }</td>
+									<td>${lossCarMain.sumLossFee }</td>
+									<td>${lossCarMain.sumVeripLoss }</td>
+									<td>${lossCarMain.sumVeriLossFee }</td>
+									<td>${lossCarMain.handlerName }</td>
+									<td>${lossCarMain.veripHandlerName }</td>
+									<td>${lossCarMain.underWriteName }</td>
+									<td>
+										<c:choose> 
+										<c:when test="${fn:contains(taskVo.subNodeCode,'VLCar') ==true}">
+											<c:if test="${lossCarMain.deflossSourceFlag eq '2' }"> 是</c:if>
+											<c:if test="${lossCarMain.deflossSourceFlag ne '2' }"> 否</c:if>
+										</c:when>
+										<c:otherwise>
+											<app:codetrans codeType="DefLossSource" codeCode="${lossCarMain.deflossSourceFlag }"/>
+										</c:otherwise>
+									</c:choose>	
+									</td>
+									<td>
+									<c:if test="${lossCarMain.id != lossCarMainVo.id }">
+										<a target="_self"  onClick="deflossView('car',${lossCarMain.id})"  href="javascript:void(0)">查看</a>
+									</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--  车俩损失结束-->

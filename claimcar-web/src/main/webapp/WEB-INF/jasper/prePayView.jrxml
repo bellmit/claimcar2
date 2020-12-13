@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prePadpayView" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ba8afb3-52cb-4156-a658-496008d66205">
+	<property name="ireport.zoom" value="0.9090909090909095"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="style1" fill="Solid" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="style2" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H">
+		<box>
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="22797db4-11de-419c-b8fd-71e9a70e7f66"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\willingRan\\Desktop\\ireportFile\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="insuredName" class="java.lang.String"/>
+	<parameter name="insuredDate" class="java.lang.String"/>
+	<parameter name="damageTime" class="java.util.Date"/>
+	<parameter name="damageReason" class="java.lang.String"/>
+	<parameter name="rescueReport" class="java.lang.String"/>
+	<parameter name="lossList" class="java.util.List"/>
+	<parameter name="chargeList" class="java.util.List"/>
+	<parameter name="claimLoss" class="java.math.BigDecimal"/>
+	<parameter name="thirdClaimLoss" class="java.math.BigDecimal"/>
+	<parameter name="insuredDateBegin" class="java.util.Date"/>
+	<parameter name="insuredDateEnd" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="claimNo" class="java.lang.String">
+		<fieldDescription><![CDATA[claimNo]]></fieldDescription>
+	</field>
+	<field name="compensateNo" class="java.lang.String">
+		<fieldDescription><![CDATA[compensateNo]]></fieldDescription>
+	</field>
+	<field name="registNo" class="java.lang.String">
+		<fieldDescription><![CDATA[registNo]]></fieldDescription>
+	</field>
+	<field name="policyNo" class="java.lang.String">
+		<fieldDescription><![CDATA[policyNo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement x="148" y="20" width="279" height="42" uuid="56c04293-3bb9-455b-904c-801ae28e25d7"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"image/logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="159" y="70" width="257" height="20" uuid="f62a577a-44c0-454d-b43f-1074b130a453"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="16" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[预 付（垫付）赔 款 审 批 表 ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="101" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="6c5efb04-3d6c-452c-af4a-ce6430c47f1e"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="2" y="0" width="60" height="20" uuid="ff6efefd-f8df-4f76-8396-03beb5637ec6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[报案号：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="279" y="0" width="60" height="20" uuid="8d090c79-d33f-4c9b-ba5d-a7c24a2aed72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[立案号：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="0f049df9-4544-4821-94a5-630eed9adb7b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="60" width="555" height="1" uuid="80763682-f88e-4641-996f-c14dde640e5f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1" uuid="a9cd8ba5-6ead-4044-906d-6cfb46c09eb1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="100" width="555" height="1" uuid="8c68ae4d-c160-42c9-a8f6-54439939e68b"/>
+			</line>
+			<line>
+				<reportElement x="60" y="20" width="1" height="80" uuid="7627b858-ff05-4da7-b298-75c90bfcf1fb"/>
+			</line>
+			<line>
+				<reportElement x="275" y="20" width="1" height="80" uuid="dab3621c-9984-42d8-938e-62f61851e9cb"/>
+			</line>
+			<line>
+				<reportElement x="335" y="20" width="1" height="80" uuid="204e00bd-0e01-4150-99ab-50f766c370dd"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="0" y="20" width="60" height="20" uuid="38301101-5dbd-44a3-b23b-c739e4e34c1f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[保单号码]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="40" width="60" height="20" uuid="05958627-5093-4396-aa08-0fe1787b7958"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[被保险人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="61" width="60" height="20" uuid="e3ad3f52-e005-4542-b717-1d0138968747"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[出险日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="80" width="60" height="20" uuid="150a6707-928c-4786-b1be-d83450d6fa85"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[出险原因]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="275" y="21" width="60" height="20" uuid="c31268a7-566b-42c9-af48-e2185c911bd2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[预/垫付号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="275" y="41" width="60" height="20" uuid="2f15cbd3-e382-4e06-8791-bfe9f0f916df"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[保险期限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="275" y="62" width="60" height="20" uuid="adbc4a69-cf70-47c6-910d-a41602a0f842"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[三者险金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="276" y="80" width="60" height="20" uuid="ecd1f76b-462d-4bca-9a06-53377b6fb180"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[估计赔款]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="1" height="80" uuid="744c9c79-1bce-462f-ae33-ef2d07002e27"/>
+			</line>
+			<line>
+				<reportElement x="555" y="20" width="1" height="80" uuid="20b5a28f-1d60-432a-8861-d5ea6880d4a1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="0" width="200" height="20" uuid="625de07b-a5fe-4ed1-9357-d2c7a13aeb84"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="339" y="0" width="200" height="20" uuid="37be4e43-290d-4a80-8c21-51b0f0557fda"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{claimNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="20" width="200" height="20" uuid="b373670d-109e-4ea0-a928-98df33f596aa"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{policyNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="339" y="20" width="200" height="20" uuid="c061325b-af9e-4b4a-b7b3-453e426d1bd4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{compensateNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="40" width="100" height="20" uuid="91b21072-0e83-4d07-9d19-f1b7afb94e00"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{insuredName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd hh:mm:ss" isBlankWhenNull="true">
+				<reportElement x="64" y="60" width="212" height="20" uuid="8b762144-6a22-42b6-8c17-c4115b67856b"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{damageTime}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="80" width="100" height="20" uuid="c0bf997b-da93-43f4-bf7f-9a1611a25d32"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{damageReason}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement x="356" y="40" width="60" height="20" uuid="071ca930-6bf0-48b5-a50a-100c9282a589"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{insuredDateBegin}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="339" y="60" width="100" height="20" uuid="1ae29a0f-04ef-4cd6-aed3-acad1188e75b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{thirdClaimLoss}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="339" y="80" width="100" height="20" uuid="7ea75d86-7e86-4a3b-a422-d5efaadfe34c"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{claimLoss}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" x="336" y="41" width="17" height="20" uuid="484b3df8-0b3c-4444-9ba3-fdea15a7d32f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[自]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="416" y="40" width="30" height="19" uuid="e9a560f5-d389-4303-ad34-5a079adb3138"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[时起至]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement x="448" y="40" width="67" height="20" uuid="8501db38-7969-4a33-b468-4667c64b5959"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{insuredDateEnd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" x="513" y="40" width="30" height="19" uuid="ff95006f-ec5b-4827-8958-8370dfcf16d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[时止]]></text>
+			</staticText>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="6a2f7bd0-0161-4d42-b1c0-165c37a3c007"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{lossList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "prePayView_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" uuid="2f6b22db-ede4-490a-8374-8eb1b938206f"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{chargeList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "prePayView_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="450">
+			<line>
+				<reportElement x="0" y="0" width="1" height="150" uuid="dbfa97bb-1b98-4821-93ce-3ee23bc519cb"/>
+			</line>
+			<line>
+				<reportElement x="60" y="250" width="1" height="100" uuid="1d947f39-ed4f-4829-9ed4-2365e9054dff"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="0" y="90" width="60" height="20" uuid="c3960e46-b386-4faf-8590-a9f4afa0018b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[申请理由]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="60" y="0" width="495" height="150" uuid="fe7edd40-7cc5-4144-a701-c676a3a39dba"/>
+				<textElement>
+					<font pdfFontName="STSong-Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rescueReport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" x="275" y="130" width="60" height="20" uuid="b8047de8-6caf-4f54-95d2-74a50091e6e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[签章：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="404" y="129" width="60" height="20" uuid="bdeced31-499a-4864-b39d-98621b28114b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[日期：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="250" width="555" height="1" uuid="7f6d3d8c-1c94-47e9-b2ae-90628a621df7"/>
+			</line>
+			<line>
+				<reportElement x="0" y="350" width="555" height="1" uuid="d3997643-2eb3-492c-9b51-312747c2328a"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="0" y="180" width="60" height="60" uuid="e0c8e47f-f500-4a5a-9b1c-094bcb5e8a71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[分公司核赔人意见]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="270" width="60" height="60" uuid="4d639362-af47-4729-ba2d-137e475fccc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[分公司客服部意见]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="366" width="60" height="60" uuid="33ac0675-099c-47be-aa32-7aed8a5ab701"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[分公司总经理室意见]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="276" y="230" width="60" height="20" uuid="8592d80a-57c4-4a28-b476-04af16f440c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[签章：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="404" y="230" width="60" height="20" uuid="6cb7c109-b744-496a-8ebc-87a9a631ba16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="276" y="330" width="60" height="20" uuid="cda49c17-2eed-48b3-b0ac-a6320c01d97f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[签章：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="404" y="330" width="60" height="20" uuid="ed021178-cd36-4510-9c5a-ad0a77875fce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="404" y="430" width="60" height="20" uuid="c02c0fe2-6c05-4f1d-8045-2a2ac3571b3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="276" y="430" width="60" height="20" uuid="ca003961-ae96-4af7-99f1-4e2074f96b54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[签章：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="449" width="555" height="1" uuid="2238b881-8d20-453f-8374-98f4ff16af44"/>
+			</line>
+			<line>
+				<reportElement x="555" y="350" width="1" height="100" uuid="abd7872f-52a1-4681-bb28-0d0d7626ceb0"/>
+			</line>
+			<line>
+				<reportElement x="60" y="150" width="1" height="100" uuid="fb4aae31-9134-415f-89ab-62214df80b7c"/>
+			</line>
+			<line>
+				<reportElement x="555" y="250" width="1" height="100" uuid="6da36258-719c-4155-903e-af29dc806d89"/>
+			</line>
+			<line>
+				<reportElement x="60" y="350" width="1" height="100" uuid="82f61984-672e-4b24-8e77-426f789c9bc9"/>
+			</line>
+			<line>
+				<reportElement x="0" y="350" width="1" height="100" uuid="3f721a28-518c-4b28-ac2f-726fd2e7e75b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="250" width="1" height="100" uuid="7c69a8e3-1176-475e-92b1-608a4f1b3082"/>
+			</line>
+			<line>
+				<reportElement x="555" y="150" width="1" height="100" uuid="ebdb901c-fd6b-49bb-b440-304f50a205c0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="150" width="1" height="100" uuid="4c423ddd-a7a5-42b7-a276-0d1c34a7718a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="150" width="555" height="1" uuid="10424f35-1650-4054-926a-930b26a21e1c"/>
+			</line>
+			<line>
+				<reportElement x="60" y="0" width="1" height="150" uuid="722e3789-abbf-422b-a88b-3b9dce510b5f"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="150" uuid="e2775323-01c6-4ebd-afb4-96126036eb3b"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,141 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div id="checkExtInfo" class="table_title f14">查勘扩展信息</div>
+	<div class="table_cont table_list ">
+		<table class="table table-border table-hover">
+			<tbody>
+				<%-- <input type="hidden" name="checkExtVo.registNo" value="${checkExtVo.registNo}">
+				<input type="hidden" name="checkExtVo.id" value="${checkExtVo.id}"> --%>
+				<tr>
+					<td><lable>保险车辆的车牌号码、发动机号、车架号码与保险单上是否相符</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[0].id" value="${checkExtVos[0].id}">
+						<input type="hidden" name="checkExtVos[0].checkExtName" value="保险车辆的车牌号码、发动机号、车架号码与保险单上是否相符">
+						<app:codeSelect  name="checkExtVos[0].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[0].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>出险时间是否在有效期内</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[1].id" value="${checkExtVos[1].id}">
+						<input type="hidden" name="checkExtVos[1].checkExtName" value="出险时间是否在有效期内">
+						<app:codeSelect  name="checkExtVos[1].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[1].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>出险时间接近保险起讫期的，有无相应时间证明</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[2].id" value="${checkExtVos[2].id}">
+						<input type="hidden" name="checkExtVos[2].checkExtName" value="出险时间接近保险起讫期的，有无相应时间证明">
+						<app:codeSelect  name="checkExtVos[2].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[2].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>实际使用性质与保单上所载明的是否一致</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[3].id" value="${checkExtVos[3].id}">
+						<input type="hidden" name="checkExtVos[3].checkExtName" value="实际使用性质与保单上所载明的是否一致">
+						<app:codeSelect  name="checkExtVos[3].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[3].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员情况与报案人所述是否一致</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[4].id" value="${checkExtVos[4].id}">
+						<input type="hidden" name="checkExtVos[4].checkExtName" value="实保险车辆驾驶员情况与报案人所述是否一致">
+						<app:codeSelect  name="checkExtVos[4].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[4].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员的驾驶证是否有效</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[5].id" value="${checkExtVos[5].id}">
+						<input type="hidden" name="checkExtVos[5].checkExtName" value="保险车辆驾驶员的驾驶证是否有效">
+						<app:codeSelect  name="checkExtVos[5].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[5].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员准驾车型与实际驾驶车辆是否相符</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[6].id" value="${checkExtVos[6].id}">
+						<input type="hidden" name="checkExtVos[6].checkExtName" value="保险车辆驾驶员准驾车型与实际驾驶车辆是否相符">
+						<app:codeSelect  name="checkExtVos[6].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[6].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>使用专用机械车、特种车的人员是否有国家核发的有效操作证</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[7].id" value="${checkExtVos[7].id}">
+						<input type="hidden" name="checkExtVos[7].checkExtName" value="使用专用机械车、特种车的人员是否有国家核发的有效操作证">
+						<app:codeSelect  name="checkExtVos[7].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[7].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>驾驶营业性客车的驾驶员是否有国家行政管理部门核发的有效资格证</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[8].id" value="${checkExtVos[8].id}">
+						<input type="hidden" name="checkExtVos[8].checkExtName" value="驾驶营业性客车的驾驶员是否有国家行政管理部门核发的有效资格证">
+						<app:codeSelect  name="checkExtVos[8].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[8].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员是否为被保险人允许的驾驶员</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[9].id" value="${checkExtVos[9].id}">
+						<input type="hidden" name="checkExtVos[9].checkExtName" value="保险车辆驾驶员是否为被保险人允许的驾驶员">
+						<app:codeSelect  name="checkExtVos[9].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[9].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员是否为保险合同约定的驾驶员</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[10].id" value="${checkExtVos[10].id}">
+						<input type="hidden" name="checkExtVos[10].checkExtName" value="保险车辆驾驶员是否为保险合同约定的驾驶员">
+						<app:codeSelect  name="checkExtVos[10].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[10].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>保险车辆驾驶员是否为酒后驾驶</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[11].id" value="${checkExtVos[11].id}">
+						<input type="hidden" name="checkExtVos[11].checkExtName" value="保险车辆驾驶员是否为酒后驾驶">
+						<app:codeSelect  name="checkExtVos[11].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[11].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>事故车辆损失痕迹与事故现场痕迹是否吻合</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[12].id" value="${checkExtVos[12].id}">
+						<input type="hidden" name="checkExtVos[12].checkExtName" value="事故车辆损失痕迹与事故现场痕迹是否吻合">
+						<app:codeSelect  name="checkExtVos[12].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[12].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>第三者车辆是否已向其承保公司报案，索赔</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[13].id" value="${checkExtVos[13].id}">
+						<input type="hidden" name="checkExtVos[13].checkExtName" value="第三者车辆是否已向其承保公司报案，索赔">
+						<app:codeSelect  name="checkExtVos[13].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[13].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>事故是否涉及第三方人员伤亡</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[14].id" value="${checkExtVos[14].id}">
+						<input type="hidden" name="checkExtVos[14].checkExtName" value="事故是否涉及第三方人员伤亡">
+						<app:codeSelect  name="checkExtVos[14].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[14].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>事故是否涉及第三方财产损失</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[15].id" value="${checkExtVos[15].id}">
+						<input type="hidden" name="checkExtVos[15].checkExtName" value="事故是否涉及第三方财产伤亡">
+						<app:codeSelect  name="checkExtVos[15].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[15].columnValue}"/>
+						</span></td></tr>
+				<tr>
+					<td><lable>事故是否涉及本车上人员伤亡</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[16].id" value="${checkExtVos[16].id}">
+						<input type="hidden" name="checkExtVos[16].checkExtName" value="事故是否涉及本车上人员伤亡">
+						<app:codeSelect  name="checkExtVos[16].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[16].columnValue}"/>
+						</span></td></tr>
+						
+						<tr>
+					<td><lable>保险车辆行驶证是否有效</lable></td>
+					<td><span class="radio-box">
+						<input type="hidden" name="checkExtVos[17].id" value="${checkExtVos[17].id}">
+						<input type="hidden" name="checkExtVos[17].checkExtName" value="保险车辆行驶证是否有效">
+						<app:codeSelect  name="checkExtVos[17].columnValue" codeType="CheckExtValue" type="radio" nullToVal="9" value="${checkExtVos[17].columnValue}"/>
+						</span></td></tr>
+			</tbody>
+		</table>
+	</div>
+</div>

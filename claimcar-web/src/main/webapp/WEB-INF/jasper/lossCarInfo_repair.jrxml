@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="机动车辆损伤确认书_subreport3" pageWidth="277" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="277" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e25fb4ad-fce6-46d1-951e-ea53b90a6e6e">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="repairName" class="java.lang.String">
+		<fieldDescription><![CDATA[repairName]]></fieldDescription>
+	</field>
+	<field name="compName" class="java.lang.String">
+		<fieldDescription><![CDATA[compName]]></fieldDescription>
+	</field>
+	<field name="manHourFee" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[manHourFee]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="227" height="20" uuid="c69dd97b-1a96-42d4-974d-bf170194af48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[修理项目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="0" width="50" height="20" uuid="c3265b28-aef2-4313-8470-895b76b634d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[工时费]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="277" height="1" uuid="f1d496aa-b288-4596-bbf1-95d63313d392"/>
+			</line>
+			<line>
+				<reportElement x="226" y="0" width="1" height="20" uuid="539c8c90-94a7-4c62-952c-b03c6f30626e"/>
+			</line>
+			<line>
+				<reportElement x="277" y="0" width="1" height="20" uuid="01604e5c-8afe-4eae-8985-631244099ae8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="277" height="1" uuid="eb88c14a-f6fb-4f2d-9f80-fd5a1feedf14"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isBlankWhenNull="true">
+				<reportElement x="127" y="0" width="100" height="20" uuid="1d85d8b1-6054-47c3-8dee-596082656447"/>
+				<textElement>
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="17" y="0" width="83" height="20" uuid="3579eda8-fa20-49f4-b8f1-8ae79939469f"/>
+				<textElement>
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{repairName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="227" y="0" width="50" height="20" uuid="ef049391-b460-4647-bb03-8bcb88f42109"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{manHourFee}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="0" width="27" height="20" uuid="35c2ee85-81fb-496a-b278-f7c6fe4b2748">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($F{repairName}!=null||$F{compName}!=null)]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="226" y="0" width="1" height="20" uuid="a5f250f6-4901-4199-b803-21d0e247263f"/>
+			</line>
+			<line>
+				<reportElement x="277" y="0" width="1" height="20" uuid="20c32729-c247-49f7-9308-e1568375e529"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="277" height="1" uuid="083c0d27-15e7-4179-bd8a-b3e2b4c91843"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

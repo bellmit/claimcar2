@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!--人员伤亡处理     开始-->
+<div class="table_wrap">
+	<div
+		style="height: 20px; line-height: 20px; color: #1A6FB8; cursor: pointer; 
+		padding: 5px 0px; background: url(../images/s.png) left center no-repeat; 
+		text-indent: 18px;" class="title" id="person_title">人员伤亡&nbsp;&nbsp;&nbsp;</div>
+		<div class="row cl">
+		<label class="form_label col-1">是否现场调解：</label>
+		<div class="form_input col-3" >
+	 <span class="radio-box"> <app:codeSelect codeType="IsValid"
+				type="radio" name="checkVo.reconcileFlag"  onclick="reconcileClick(this)"
+				value="${checkVo.reconcileFlag}"  />
+	</span>
+	</div>
+	<label class="form_label col-1">案件处理类型：</label>
+	<div class="form_input col-2" >
+	<span class="select-box"> <app:codeSelect
+								codeType="CaseProcessType" type="select"  clazz="must"
+								name="checkVo.persHandleType" value="${checkVo.persHandleType}"
+								onchange="changePersHandleType(this)" />
+						</span>
+	</div>
+	</div>
+	
+	<div class="table_cont table_list" id="person_cont">
+		<table class="table table-border table-hover">
+			<thead>
+				<tr class="text-c">
+					<!-- <th style="width: 10%">损失方<font class="must">*</font></th>
+					<th style="width: 9%">人员属性<font class="must">*</font></th>
+					<th style="width: 6%">姓名<font class="must">*</font></th>
+					<th style="width: 6%">性别<font class="must">*</font></th>
+					<th style="width: 9%">证件类型<font class="must">*</font></th>
+					<th style="width: 6%">证件号码<font class="must">*</font></th>
+					<th style="width: 4%">年龄</th>
+					<th style="width: 8%">从事行业</th>
+					<th style="width: 9%">查勘处理方式<font class="must">*</font></th>
+					<th style="width: 8%">伤亡类型<font class="must">*</font></th>
+					<th style="width: 6%">就诊医院</th>
+					<th style="width: 6%">估损金额<font class="must">*</font></th>
+					<th style="width: 6%">伤情描述</th>
+					<th style="width: 6%">受伤部位</th>
+					<th style="width: 4%">操作</th> -->
+					
+					
+					<!--  -->
+					<th>损失方<font class="must">*</font></th>
+					<th style="width: 6%">姓名<font class="must">*</font></th>
+					<th style="width: 9%">人员属性<font class="must">*</font></th>
+					<th style="width: 5%">性别<font class="must">*</font></th>
+					<th>证件类型<font class="must">*</font></th>
+					<th style="width: 8%">证件号码<font class="must">*</font></th>
+					<th style="width: 5%">年龄</th>
+					<th style="width: 8%">从事行业</th>
+					<th>处理方式<font class="must">*</font></th>
+					<th>伤亡类型<font class="must">*</font></th>
+					<th style="width: 6%">就诊医院</th>
+					<th style="width: 6%">定损金额<font class="must">*</font></th>
+					<th style="width: 6%">伤情描述</th>
+					<th style="width: 6%">受伤部位</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<input type="hidden" id="personLossSize" value="${fn:length(checkPersonVos)}">
+			<tbody id="personLossTbody" name="personLossTbody">
+				<%--tbody内容,财产损失项 --%>
+				<%@include file="PersonLossItem.jsp"%>
+			</tbody>
+			<tr>
+				<c:if test="${taskParamVo.subNodeCode eq 'Chk'}">
+					<td>
+						<button type="button"
+							class="btn btn-plus Hui-iconfont Hui-iconfont-add"
+							onclick="addPersonItem('${taskParamVo.subNodeCode}')">
+							</button>
+					</td>
+				</c:if>
+			</tr>
+		</table>
+	</div>
+</div>
+<!--人员伤亡处理     结束-->

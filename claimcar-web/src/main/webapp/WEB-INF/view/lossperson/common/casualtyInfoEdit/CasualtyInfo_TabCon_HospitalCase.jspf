@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+    <div class="table_title f14">住院情况</div>
+    <div class="table_cont  table_list">
+        <table class="table table-border">
+            <thead class="text-c">
+                <tr>
+                	<th width="6%">
+                	<!--<input class="btn btn-secondary radius" type="button" onclick="add_HospitalCase(this)" value="添加"> -->
+                	<button type="button"   class="btn btn-plus Hui-iconfont Hui-iconfont-add" onclick="add_HospitalCase(this)"></button>
+                	</th>
+                    <th width="15%">入院时间</th>
+                    <th width="15%">出院时间</th>
+                    <th width="40%">就诊医院</th>
+                    <th width="20%">备注</th>
+                </tr>
+            </thead>
+            <tbody id="hospitalCase_Tbody" class="text-c">
+            <c:choose>
+            <c:when test="${fn:length(persTrace.prpLDlossPersInjured.prpLDlossPersHospitals)>0 }">
+                <c:forEach var="persHospital" items="${persTrace.prpLDlossPersInjured.prpLDlossPersHospitals }" varStatus="caseStatus">
+                    <c:set var="hospitalCaseSize" value="${caseStatus.index}" />
+                    <%@ include file="TabCon_HospitalCase_Tr.jspf"%>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+            	<c:set var="hospitalCaseSize" value="0" />
+                    <%@ include file="TabCon_HospitalCase_Tr.jspf"%>
+            </c:otherwise>
+            </c:choose>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+//给医院增加搜索框
+	$(function(){
+		
+		var hospitalAttr = new Array();
+		$("[id$='_hospital']").each(function() {
+			var hospitalId = $(this).attr("id");
+			if (!isBlank(hospitalId)) {
+				hospitalAttr = hospitalId.split("_");
+			}
+			$("#prpDHospitalarea_" + hospitalAttr[1] + "_hospital").select2();
+		});
+	});
+
+</script>

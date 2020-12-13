@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 1999-2011 Alibaba Group.
+ -  
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -  
+ -      http://www.apache.org/licenses/LICENSE-2.0
+ -  
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+--> 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-autowire="byName" default-lazy-init="false">
+ 
+
+    <dubbo:application name="claimcar-claim" owner="zhangyu" organization="sinosoft"/>
+
+  	<dubbo:registry id="default" address="${api.registry.address}" timeout="100000"/>
+	<dubbo:registry id="base" address="${api.registry.address.base}" check="false" timeout="100000"/>
+	<dubbo:registry id="flow" address="${api.registry.address.flow}" check="false" timeout="100000"/>
+	<dubbo:registry id="regist" address="${api.registry.address.regist}" check="false" timeout="100000"/>
+	<dubbo:registry id="check" address="${api.registry.address.check}" check="false" timeout="100000"/>
+	<dubbo:registry id="loss" address="${api.registry.address.loss}" check="false" timeout="100000"/>
+	<dubbo:registry id="certify" address="${api.registry.address.certify}" check="false" timeout="100000"/>
+  
+    <!--uncomment this if you want to test dubbo's monitor-->
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- here we demonstrate both annotation-based and xml-based configs -->
+    <dubbo:annotation package="ins.sino.claimcar" /> 
+
+   <!--  <dubbo:protocol name="dubbo" serialization="kryo" optimizer="com.alibaba.dubbo.demo.SerializationOptimizerImpl"/> -->
+    <!--<dubbo:protocol name="dubbo" serialization="fst" optimizer="com.alibaba.dubbo.demo.SerializationOptimizerImpl"/>-->
+
+    <!--<dubbo:protocol name="dubbo" serialization="nativejava"/>-->
+    <!--<dubbo:protocol name="dubbo" serialization="hessian2"/>-->
+    <!--<dubbo:protocol name="dubbo" serialization="fastjson"/>-->
+    <dubbo:protocol name="dubbo" serialization="dubbo" port="-1" threadpool="cached"/>
+ 
+
+    <!--TODO according to the spring convention, we should use something like keep-alive-->
+    <!-- use netty server 
+    <dubbo:protocol name="rest" port="8888" keepalive="true" server="netty" iothreads="5" threads="100" contextpath="services"/>
+-->
+    <!-- use tjws server -->
+    <!--<dubbo:protocol name="rest" port="8888" server="tjws" contextpath="services"/>-->
+
+    <!-- use tomcat server -->
+   <dubbo:protocol name="rest" port="8880" threads="500" contextpath="services" server="tomcat" accepts="500" /> 
+
+    <!-- use the external tomcat or other server with the servlet approach; the port and contextpath must be exactly the same as those in external server -->
+   <!--  <dubbo:protocol name="rest" port="9080" contextpath="platform-app/services" server="servlet"/> -->
+
+<!--     <dubbo:protocol name="http" port="8889"/>
+    <dubbo:protocol name="hessian" port="8890"/>
+    <dubbo:protocol name="webservice" port="8892"/> -->
+ 
+   <dubbo:consumer check="false" timeout="60000" retries="0" filter="userInfoFilter"  />
+   
+   <!-- flow service -->
+   <dubbo:reference registry="flow" id="wfTaskHandleService"  interface="ins.sino.claimcar.flow.service.WfTaskHandleService"  />
+   <dubbo:reference registry="flow" id="lossChargeService" interface="ins.sino.claimcar.common.losscharge.service.LossChargeService" />
+   <dubbo:reference registry="flow" id="claimTextService" interface="ins.sino.claimcar.common.claimtext.service.ClaimTextService" />
+   <dubbo:reference registry="flow" id="claimRuleApiService" interface="ins.sino.claimcar.rule.service.ClaimRuleApiService" />
+   <dubbo:reference registry="flow" id="wfFlowQueryService" interface="ins.sino.claimcar.flow.service.WfFlowQueryService" />
+   <dubbo:reference registry="flow" id="bankAccountService" interface="ins.sino.claimcar.bankaccount.service.BankAccountService" />
+   <dubbo:reference registry="flow" id="assignService"  interface="ins.sino.claimcar.flow.service.AssignService" />
+   <dubbo:reference registry="flow" id="managerService" interface="ins.sino.claimcar.manager.service.ManagerService" />
+   <dubbo:reference registry="flow" id="smsService" interface="ins.sino.claimcar.sms.service.SmsService" />
+   <dubbo:reference registry="flow" id="accountInfoService"  interface="ins.sino.claimcar.other.service.AccountInfoService"/>
+   <dubbo:reference registry="flow" id="payCustomService" interface="ins.sino.claimcar.flow.service.PayCustomService" />
+   <dubbo:reference registry="flow" id="repairFactoryService" interface="ins.sino.claimcar.flow.service.RepairFactoryService" />
+   <dubbo:reference registry="flow" id="recLossService" interface="ins.sino.claimcar.recloss.service.RecLossService"/>
+   
+   <!-- regist service -->
+   <dubbo:reference registry="regist" id="policyViewService" interface="ins.sino.claimcar.regist.service.PolicyViewService" />
+   <dubbo:reference registry="regist" id="registQueryService" interface="ins.sino.claimcar.regist.service.RegistQueryService" />
+   <dubbo:reference registry="regist" id="registService" interface="ins.sino.claimcar.regist.service.RegistService" />
+   <dubbo:reference registry="regist" id="scheduleService"  interface="ins.sino.claimcar.schedule.service.ScheduleService"/>
+   <dubbo:reference registry="regist" id="registToPaltformService" interface="ins.sino.claimcar.platform.service.RegistToPaltformService" />
+   <dubbo:reference registry="regist" id="founderCustomService" interface="ins.sino.claimcar.regist.service.FounderCustomService" />
+   <dubbo:reference registry="regist" id="prpLCMainService" interface="ins.sino.claimcar.regist.service.PrpLCMainService" />
+   <dubbo:reference registry="regist" id="registTmpService" interface="ins.sino.claimcar.regist.service.RegistTmpService" />
+   <dubbo:reference registry="regist" id="registToCarRiskPaltformService" interface="ins.sino.claimcar.trafficplatform.service.RegistToCarRiskPaltformService" />
+   <dubbo:reference registry="regist" id="prpLRegistToLossService" interface="ins.sino.claimcar.claimjy.service.PrpLRegistToLossService" />
+   <dubbo:reference registry="regist" id="policyInfoRegisterService" interface="ins.sino.claimcar.regist.service.PolicyInfoRegisterService" />
+
+
+   <dubbo:reference registry="regist" id="policyQueryService" interface="ins.sino.claimcar.regist.service.PolicyQueryService" />
+   
+   
+   <!-- check service -->
+   <dubbo:reference registry="check" id="checkTaskService" interface="ins.sino.claimcar.check.service.CheckTaskService" />
+   <dubbo:reference registry="check" id="checkToPlatformService" interface="ins.sino.claimcar.platform.service.CheckToPlatformService" />
+   <dubbo:reference registry="check" id="checkHandleService" interface="ins.sino.claimcar.check.service.CheckHandleService" />
+   <dubbo:reference registry="check" id="carRiskImagesUpdateService" interface="ins.sino.claimcar.trafficplatform.service.CarRiskImagesUpdateService" />
+   <dubbo:reference registry="check" id="checkToWarnService" interface="ins.sino.claimcar.trafficplatform.service.CheckToWarnService" />
+   <dubbo:reference registry="check" id="imagesDownLoadService" interface="ins.sino.claimcar.sunyardimage.service.ImagesDownLoadService" />
+   
+   
+   <!-- base service -->
+   <dubbo:reference registry="base" id="claimInterfaceLogService" interface="ins.sino.claimcar.carinterface.service.ClaimInterfaceLogService" />
+   <dubbo:reference registry="base" id="assessorService" interface="ins.sino.claimcar.other.service.AssessorService" />
+   <dubbo:reference registry="base" id="sendMsgService" interface="ins.sino.claimcar.other.service.SendMsgService" />
+   <dubbo:reference registry="base" id="msgModelService" interface="ins.sino.claimcar.other.service.MsgModelService" />
+   <dubbo:reference registry="base" id="sendMsgToMobileService" interface="ins.sino.claimcar.mobilecheck.service.SendMsgToMobileService" />
+   <dubbo:reference registry="base" id="receiveResultService"  interface="ins.sino.claimcar.hnbxrest.service.ReceiveResultService" />
+   <dubbo:reference registry="base" id="carchildService" interface="ins.sino.claimcar.carchild.service.CarchildService" />
+   <dubbo:reference registry="base" id="reportInfoService" interface="ins.sino.claimcar.genilex.ReportInfoService" />
+   <dubbo:reference registry="base" id="claimToGenilexService" interface="ins.sino.claimcar.genilex.service.ClaimToGenilexService" />
+   <dubbo:reference registry="base" id="szpoliceCaseService" interface="ins.sino.claimcar.trafficplatform.service.SzpoliceCaseService" />
+   <dubbo:reference registry="base" id="szpoliceRegistService"  interface="ins.sino.claimcar.trafficplatform.service.SzpoliceRegistService"/>
+   <dubbo:reference registry="base" id="ilogRuleService"  interface="ins.sino.claimcar.ilog.rule.service.IlogRuleService"/>
+   <dubbo:reference registry="base" id="acheckService"  interface="ins.sino.claimcar.other.service.AcheckService"/>
+   <dubbo:reference registry="base" id="carXyImageService"  interface="ins.sino.claimcar.carYxImage.service.CarXyImageService"/>
+   <dubbo:reference registry="base" id="pingAnDataNoticeService"  interface="ins.sino.claimcar.pinganUnion.service.PingAnDataNoticeService"/>
+   
+   <!-- loss  service -->
+   <dubbo:reference registry="loss" id="persTraceDubboService" interface="ins.sino.claimcar.lossperson.service.PersTraceDubboService" />
+   <dubbo:reference registry="loss" id="lossCarService" interface="ins.sino.claimcar.losscar.service.LossCarService" />
+   <dubbo:reference registry="loss" id="propTaskService" interface="ins.sino.claimcar.lossprop.service.PropTaskService" />
+   <dubbo:reference registry="loss" id="lossToPlatformService" interface="ins.sino.claimcar.platform.service.LossToPlatformService" />
+   <dubbo:reference registry="loss" id="deflossHandleService" interface="ins.sino.claimcar.losscar.service.DeflossHandleService" />
+
+   <dubbo:reference registry="loss" id="sdpoliceService" interface="ins.sino.claimcar.trafficplatform.service.SdpoliceService" />
+
+   <dubbo:reference registry="loss" id="persTraceService" interface="ins.sino.claimcar.lossperson.service.PersTraceService" />
+   <dubbo:reference registry="loss" id="claimJxService" interface="ins.sino.claimcar.genilex.dlossService.ClaimJxService" />   
+
+   <dubbo:reference registry="loss" id="jyTaskService" interface="ins.sino.claimcar.claimjy.service.JyTaskService" />   
+   <dubbo:reference registry="loss" id="jyCleanDataService" interface="ins.sino.claimcar.claimjy.service.JyCleanDataService" />   
+   <dubbo:reference registry="loss" id="jyZeroNoticeService" interface="ins.sino.claimcar.claimjy.service.JyZeroNoticeService" /> 
+   <dubbo:reference registry="loss" id="claimcarYJService" interface="ins.sino.claimcar.claimcarYJ.service.ClaimcarYJService" />
+   <!-- certify service -->
+   <dubbo:reference registry="certify" id="certifyPubService" interface="ins.sino.claimcar.certify.service.CertifyPubService" />
+   <dubbo:reference registry="certify" id="certifyToPaltformService" interface="ins.sino.claimcar.platform.service.CertifyToPaltformService" />
+   <dubbo:reference registry="certify"  id="certifyService" interface="ins.sino.claimcar.certify.service.CertifyService" />
+   <dubbo:reference registry="certify"  id="certifyIlogService" interface="ins.sino.claimcar.certify.service.CertifyIlogService" />
+   
+   
+   <!-- claim  service -->
+<!--    
+	<dubbo:reference registry="claim" id="subrogationService" interface="ins.sino.claimcar.subrogation.service.SubrogationService" />
+   <dubbo:reference registry="claim" id="claimSummaryService"  interface="ins.sino.claimcar.claim.service.ClaimSummaryService" />
+   <dubbo:reference registry="claim" id="reOpenCaseService"  interface="ins.sino.claimcar.endcase.service.ReOpenCaseService" />
+    -->
+   
+    <!-- base  service -->
+   <dubbo:reference registry="base" id="prpdLawFirmService" interface="ins.sino.claimcar.claim.service.PrpdLawFirmService" />
+   <dubbo:reference registry="base" id="platformReUploadService"  interface="ins.sino.claimcar.platform.service.PlatformReUploadService" />
+   <dubbo:reference registry="base" id="ruleReturnDataSaveService"  interface="ins.sino.claimcar.ilog.rule.service.RuleReturnDataSaveService" />
+   <dubbo:reference registry="base" id="earlyWarnService"  interface="ins.sino.claimcar.trafficplatform.service.EarlyWarnService" />
+   <dubbo:reference registry="base" id="accidentService"  interface="ins.sino.claimcar.ciitc.service.AccidentService" />
+   <dubbo:reference registry="base" id="claimToMiddleStageOfCaseService"  interface="ins.sino.claimcar.middlestagequery.service.ClaimToMiddleStageOfCaseService" />
+
+</beans>

@@ -1,0 +1,197 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+<div class="table_title f14">机构信息</div>
+
+     <div class="table_cont">
+         <div class="formtable">
+      <input type="hidden" name="prpdIntermMainVo.Id"  id="prpdIntermMainID"
+						value="${prpdIntermMain.id}" />
+					<c:set var="createTime">
+						<fmt:formatDate value="${prpdIntermMain.createTime }"
+							pattern="yyyy-MM-dd" />
+					</c:set>
+					<input type="hidden" name="prpdIntermMainVo.CreateTime"
+						value="${createTime}" /> <input type="hidden"
+						name="prpdIntermMainVo.CreateUser"
+						value="${prpdIntermMain.createUser }" /> <input type="hidden" 
+						name="ComCode" value="${prpdIntermMain.comCode}" />
+
+					<div class="row cl">
+						<label class="form_label col-3">归属机构：</label>
+						<div class="form_input col-2">
+							<span class="select-box"> <app:codeSelect
+									codeType="ComCodeLv2" name="prpdIntermMainVo.ComCode"  id="comCode"
+									type="select" clazz="must" value="${prpdIntermMain.comCode}" />
+							</span>
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">公估机构代码：</label>
+						<div class="form_input col-2">
+							<app:codeSelect codeType="GongGuPayCode" type="select" id="intermCode" lableType="code-name" 
+									name="prpdIntermMainVo.IntermCode"  value="${prpdIntermMain.intermCode}" clazz="must" onchange="insertIntermName()"/>
+							<%-- <input type="text" class="input-text" name="prpdIntermMainVo.IntermCode" value="${prpdIntermMain.intermCode}" 
+							datatype="*2-10" nullmsg="机构代码不能为空！" errormsg="机构代码输入错误！" id="intermCode" ignore="ignore"/> --%>
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">公估机构名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.IntermName"
+								value="${prpdIntermMain.intermName}" datatype="*" nullmsg="公估机构名称不能为空！" id="intermName" />
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">银行信息：</label>
+						<div class="form_input col-2">
+							<a class="btn btn-zd mr-10 fl" id="bankInfoC"
+								onClick="layerShowBankInfo()">银行信息</a>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">上级机构名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.UpperCode"
+								value="${prpdIntermMain.upperCode}" />
+						</div>
+						<span class="col-1"></span> <label class="form_label col-2">开户银行：</label>
+						<div class="form_input col-2">
+						 <input type="hidden" id="BankCodeA" name="prpdIntermBankVo.BankName"  value="${prpdIntermBank.bankName}" /> 
+							 <c:set var="bankName">
+								<app:codetrans codeType="BankCode"
+									codeCode="${prpdIntermBank.bankName}" />
+							</c:set> 
+							<input type="text" class="input-text" id="IntermBankName" 
+							 value="${bankName}" datatype="*" nullmsg="开户银行信息不能为空！" readonly />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">账号：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" id="IntermBankAccountNo"
+								name="prpdIntermBankVo.AccountNo" value="${prpdIntermBank.accountNo}" datatype="*"
+								nullmsg="请完善账号信息！" readonly />
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">开户人名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" id="IntermBankAccountName"
+								name="prpdIntermBankVo.AccountName" value="${prpdIntermBank.accountName}" datatype="*"
+								nullmsg="开户人名称不能为空！" readonly />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">成立日期：</label>
+						<div class="form_input col-2">
+							<c:set var="establishDate">
+								<fmt:formatDate value="${prpdIntermMain.establishDate}"
+									pattern="yyyy-MM-dd" />
+							</c:set>
+							<input type="text" class="Wdate" id="dgDateMin"
+								name="prpdIntermMainVo.EstablishDate"
+								onfocus="WdatePicker({maxDate:'\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd'})"
+								style="width: 97%" value="${establishDate}">
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">总部住所：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.OfficeAddress"
+								value="${prpdIntermMain.officeAddress}" />
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">联系人：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.Linker" value="${prpdIntermMain.linker}"
+								datatype="*" ignore="ignore" />
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">邮政编码：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.PostOde"
+								value="${prpdIntermMain.postOde}" datatype="p"
+								errormsg="请输入正确的邮政编码！" ignore="ignore" />
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">传真：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" name="prpdIntermMainVo.Fax"
+								value="${prpdIntermMain.fax}" maxlength="30"/>
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">固定电话：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								value="${prpdIntermMain.telNo}" name="prpdIntermMainVo.TelNo"
+								datatype="m|/^0\d{2,3}-\d{7,8}$/" errormsg="请输入正确的电话号码！" nullmsg="电话号码不能为空！" />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">是否有效：</label>
+						<div class="form_input col-2">
+							<span class="select-box"> 
+								<app:codeSelect
+									codeType="validFlag" name="prpdIntermMainVo.ValidStatus"
+									type="select" clazz="must" value="${prpdIntermMain.validStatus}" />
+							</span>
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">电子邮箱：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								value="${prpdIntermMain.email}" name="prpdIntermMainVo.Email"
+								datatype="e" errormsg="请输入正确的电子邮箱！" ignore="ignore"/>
+						</div>
+					</div>
+					
+					<div class="row cl">
+						<label class="form_label col-3">支付标准：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdIntermMainVo.PayStandard"
+								value="${prpdIntermMain.payStandard}" />
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">资费标准：</label>
+						<div class="form_input col-2">
+							<a class="btn btn-zd mr-10 fl" id="info"
+								onClick="layerShowServ('资费信息','ServerInfo')">详细信息</a>
+						</div>
+					</div>
+					
+					<div class="row cl">
+						<label class="form_label col-3">最高资费标准：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" name="prpdIntermMainVo.PayStandardMax"
+								value="${prpdIntermMain.payStandardMax}" maxlength="60"/>
+						</div>
+						
+					</div>
+
+					<div class="formtable mt-10" style="height: 60px">
+						<div class="row cl">
+							<label class="form_label col-3">查勘内容分类：</label>
+							<div class="form_input col-7">
+								<textarea class="textarea" style="height: 60px"
+									name="prpdIntermMainVo.CheckRemark" placeholder="请输入查勘内容分类">${prpdIntermMain.checkRemark}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="formtable mt-10" style="height: 65px">
+						<div class="row cl">
+							<label class="form_label col-3">备注：</label>
+							<div class="form_input col-7">
+								<textarea class="textarea" style="height: 65px"
+									name="prpdIntermMainVo.Remark" placeholder="请输入备注">${prpdIntermMain.remark}</textarea>
+							</div>
+						</div>
+					</div>
+               
+           </div>
+          </div>
+
+   </div>
+
+</div>

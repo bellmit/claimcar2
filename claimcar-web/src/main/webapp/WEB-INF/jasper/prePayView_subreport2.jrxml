@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prePadpayView_subreport2" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8629f5fd-a1b3-4bbd-93b9-ea2fd5293789">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" fill="Solid" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true">
+		<box>
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="style2" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="accountNo" class="java.lang.String">
+		<fieldDescription><![CDATA[accountNo]]></fieldDescription>
+	</field>
+	<field name="bankName" class="java.lang.String">
+		<fieldDescription><![CDATA[bankName]]></fieldDescription>
+	</field>
+	<field name="feeType" class="java.lang.String">
+		<fieldDescription><![CDATA[feeType]]></fieldDescription>
+	</field>
+	<field name="payAmt" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[payAmt]]></fieldDescription>
+	</field>
+	<field name="payeeName" class="java.lang.String">
+		<fieldDescription><![CDATA[payeeName]]></fieldDescription>
+	</field>
+	<field name="lossName" class="java.lang.String">
+		<fieldDescription><![CDATA[lossName]]></fieldDescription>
+	</field>
+	<field name="chargeName" class="java.lang.String">
+		<fieldDescription><![CDATA[chargeName]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement style="style1" x="0" y="0" width="555" height="20" uuid="f5ac9f3c-ab2b-4623-93c6-85ec75c38788"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[费用明细]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="0" y="20" width="111" height="20" uuid="5c214aa5-65c8-4c28-8b4d-7934242b2008"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[费用名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="111" y="20" width="61" height="20" uuid="23040a0a-808d-41f3-a2b5-6b1d4fe673ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[费用金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="172" y="20" width="161" height="20" uuid="8b723678-1f08-4f07-b828-8f499913ddc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[收款人姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="333" y="20" width="111" height="20" uuid="d7c7d3cd-9ce2-42bd-bd68-cd4441931694"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[收款人账号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="444" y="20" width="111" height="20" uuid="8e367a6f-6b36-48ef-9a1e-69d27abfa09d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[开户银行]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="0" y="0" width="111" height="30" uuid="977c9c75-55ad-44cc-ae0d-842e0c8788ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{chargeName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="111" y="0" width="61" height="30" uuid="05f1eda7-f84d-4d05-beed-9cc5b512bb95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{payAmt}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="172" y="0" width="161" height="30" uuid="bc2aeffb-b68c-46ee-a84a-f242574a0012"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{payeeName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="333" y="0" width="111" height="30" uuid="e2ad811b-d239-47bb-ae41-81369a80c03f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{accountNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="444" y="0" width="111" height="30" uuid="04b4b0c9-b925-4cde-a3bd-68b508c1d262"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{bankName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

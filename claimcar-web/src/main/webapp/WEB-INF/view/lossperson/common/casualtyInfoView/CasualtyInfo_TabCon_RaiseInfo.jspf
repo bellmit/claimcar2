@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">被抚养人信息</div>
+	<div class="table_cont  table_list ">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th width="10%">姓名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>户口性质</th>
+					<th>与受害人关系</th>
+				</tr>
+			</thead>
+			<tbody id="${tabPageNo }_raiseInfo_Tbody" class="text-c">
+				<c:forEach var="persRaise" items="${persTrace.prpLDlossPersInjured.prpLDlossPersRaises }" varStatus="raiseStatus">
+					<c:set var="raiseInfoSize" value="${raiseStatus.index}" />
+					<%@ include file="TabCon_RaiseInfo_Tr.jspf"%>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>

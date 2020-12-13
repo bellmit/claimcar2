@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td>
+		<app:date date="${persHospital.inHospitalDate }" />
+	</td>
+	<td>
+		<app:date date="${persHospital.outHospitalDate }" />
+	</td>
+	<td>
+		<%-- <app:codetrans codeType="AreaCode" codeCode="${persHospital.hospitalCity }" />
+		- --%>
+		<app:codetrans codeType="HospitalCode" codeCode="${persHospital.hospitalCode }" upperCode="${persHospital.hospitalCity }" />
+	</td>
+	<td title="${persHospital.remark }">
+		${fn:length(persHospital.remark)>4?fn:substring(persHospital.remark,0,4):persHospital.remark }
+		<c:if test="${fn:length(persHospital.remark)>4 }">......</c:if>
+	</td>
+</tr>

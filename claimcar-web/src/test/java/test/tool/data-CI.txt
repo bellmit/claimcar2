@@ -1,0 +1,8 @@
+序号	名称	代码	数据类型	非空	编码	备注
+1	请求类型	REQUEST_TYPE	CHAR(2)	Y	Y	见1.1.1
+2	用户名	USER	VARCHAR2(30)	Y		根据保险公司而定
+3	密码	PASSWORD	VARCHAR2(30)	Y		根据保险公司而定
+4	理赔编码	CLAIM_CODE	VARCHAR2(50)	Y		
+5	拒赔理由	REJECT_REASON	VARCHAR2(900)			
+6	公司注销时间	COM_CANCEL_TIME	DATE	Y		YYYYMMDDHHMMSS
+7	直接理赔费用总金额	DirectClaimAmount	NUMBER(12,2)	Y		金额不可为负，若无直接理赔费用上传0

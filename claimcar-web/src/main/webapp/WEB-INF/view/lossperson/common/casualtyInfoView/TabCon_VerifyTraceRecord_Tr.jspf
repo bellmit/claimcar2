@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td>
+	<input type="hidden" name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriLevel" value="${flowNodeCode }">
+	${flowNodeName }审核意见</td>
+	<td>
+		<input type="text" class="input-text" datatype="amount" ignore="ignore" id="${tabPageNo }_veriReportFee_${traceRecordSize }" onchange="changeVeriReportFee(${tabPageNo })"
+			name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriReportFee"
+			value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriReportFee ? persTraceFee.reportFee : persTraceFee.veriReportFee }" pattern="0.00" maxFractionDigits="2" />" />
+	</td>
+	<td>
+		<input type="text" class="input-text detractionfee" datatype="amount" ignore="ignore" id="${tabPageNo }_veriRealFee_${traceRecordSize }" onchange="changeVeriRealFee(${tabPageNo })"
+			name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriRealFee"
+			value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriRealFee ? persTraceFee.realFee : persTraceFee.veriRealFee }" pattern="0.00" maxFractionDigits="2" />" />
+	</td>
+	<td>
+		<c:choose>
+			<c:when test="${persTraceFee.feeTypeCode=='4' }">
+    		当地国家机关一般工作人员出差伙食标准</br>
+				<input class="multiplication detractionfee" style="width: 80px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元X
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="n" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='6'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='3'&&fn:startsWith(comCode,'22')) }">
+    		误工收入
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元X
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="n" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='7'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='5'&&fn:startsWith(comCode,'22'))}">
+    		护理劳务报酬标准
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元X
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="n" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='8'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='6'&&fn:startsWith(comCode,'22'))}">
+    		上一年度城镇居民人均可支配收入(农村人均纯收入标准)</br>
+				<input class="multiplication detractionfee" style="width: 40px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元/年X
+    		<input class="multiplication detractionfee" style="width: 40px" datatype="d" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">年X残疾系数
+    		<input class="multiplication detractionfee" style="width: 40px" datatype="d" ignore="ignore" id="${tabPageNo }_veriWoundRate_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriWoundRate'
+					value="${empty persTraceFee.veriWoundRate?persTraceFee.woundRate:persTraceFee.veriWoundRate }">
+			</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='11'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='9'&&fn:startsWith(comCode,'22'))}">
+    		上一年度城镇居民人均可支配收入(农村人均纯收入标准)</br>
+				<input class="multiplication detractionfee" style="width: 80px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元/年X
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="d" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">年
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='12'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='8'&&fn:startsWith(comCode,'22'))}">
+    		上一年度职工月平均工资标准</br>
+				<input class="multiplication detractionfee" style="width: 80px" datatype="amount" ignore="ignore" id="${tabPageNo }_veriUnitAmount_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriUnitAmount'
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriUnitAmount?persTraceFee.unitAmount:persTraceFee.veriUnitAmount }" pattern="0.00" maxFractionDigits="2" />">元/月X
+    		<input class="multiplication detractionfee" style="width: 80px" datatype="d" ignore="ignore" id="${tabPageNo }_veriQuantity_${traceRecordSize }"
+					name='prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriQuantity'
+					value="${empty persTraceFee.veriQuantity?persTraceFee.quantity:persTraceFee.veriQuantity }">月
+    		</c:when>
+		</c:choose>
+	</td>
+	<td>
+		<c:choose>
+			<c:when test="${fn:contains('4,6,7,8,11,12', persTraceFee.feeTypeCode)&&persTraceFee.feeTypeCode !='1'&&persTraceFee.feeTypeCode!='2'}">
+				<input type="text" class="input-text detractionfee" datatype="amount" ignore="ignore" id="${tabPageNo }_veriDefloss_${traceRecordSize }" onchange="changeVeriDefLoss(${tabPageNo })"
+					name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriDefloss"
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriDefloss ? persTraceFee.defloss : persTraceFee.veriDefloss}" pattern="0.00" maxFractionDigits="2" />" />
+			</c:when>
+			<c:when test="${fn:startsWith(comCode,'22')&&fn:contains('3,4,5,6,8,9', persTraceFee.feeTypeCode)}">
+				<input type="text" class="input-text detractionfee" datatype="amount" ignore="ignore" id="${tabPageNo }_veriDefloss_${traceRecordSize }" onchange="changeVeriDefLoss(${tabPageNo })"
+					name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriDefloss"
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriDefloss ? persTraceFee.defloss : persTraceFee.veriDefloss}" pattern="0.00" maxFractionDigits="2" />" />
+			</c:when>
+			<c:otherwise>
+				<input type="text" class="input-text detractionfee" datatype="amount" ignore="ignore" id="${tabPageNo }_veriDefloss_${traceRecordSize }" onchange="changeVeriDefLoss(${tabPageNo })"
+					name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriDefloss"
+					value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriDefloss ? persTraceFee.defloss : persTraceFee.veriDefloss}" pattern="0.00" maxFractionDigits="2" />" />
+			</c:otherwise>
+		</c:choose>
+	</td>
+	<td>
+		<input type="text" class="input-text" readonly="readonly" id="${tabPageNo }_veriDetractionFee_${traceRecordSize }" onchange="changeVeriDetractionFee(${tabPageNo })"
+			name="prpLDlossPersTraceVos[${tabPageNo }].prpLDlossPersTraceFees[${traceRecordSize }].veriDetractionFee"
+			value="<fmt:formatNumber type="number" value="${empty persTraceFee.veriDetractionFee ? persTraceFee.detractionfee : persTraceFee.veriDetractionFee }" pattern="0.00" maxFractionDigits="2" />" />
+	</td>
+	<td>
+		<input type="text" class="input-text" name="prpLDlossPersTraceVo.prpLDlossPersTraceFees[${traceRecordSize }].veriRemark" value="${persTraceFee.veriRemark }" />
+	</td>
+</tr>

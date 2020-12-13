@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="The Technology Team" default="help" basedir=".">
+	<!-- 环境变量 -->
+	<property file="build.properties" />
+
+	<!-- 源文件路径 -->
+	<property name="source.home" value="${basedir}/../../src/main/java" />
+	<!-- 资源文件路径 -->
+	<property name="resource.home" value="${basedir}/../../src/main/resources" />  
+	<!-- 其他Jar包路径  -->
+	<property name="misc-jar.home" value="${basedir}/../../misc/lib" />
+
+	<!-- 版本构建时间 -->
+	<tstamp>
+		<format property="version.date" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+	<!-- 编译路径 -->
+	<path id="classpath.build"> 
+		<fileset dir="${misc-jar.home}">
+			<patternset>
+				<include name="*.jar" />
+			</patternset>
+		</fileset>
+	</path>
+
+	<target name="help">
+		<echo message="" />
+		<echo message="" />
+		<echo message="${app.name}构建说明" />
+		<echo message="-------------------------------------------------------------" />
+		<echo message="可用的目标有:" />
+		<echo message="-------------------------------------------------------------" />
+		<echo message="   help      -- 提供使用这个构建工具的帮助 " /> 
+		<echo message="   codegen   -- 生成POJO " />
+		<echo message="-------------------------------------------------------------" />
+	</target>
+
+
+	<target name="init"> 
+	</target> 
+ 
+	 
+	<target name="codegen-vo-custom">
+		<path id="classpath.hiberantetool">
+			<pathelement path="${basedir}" />
+			<path refid="classpath.build" />
+		</path>
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath.hiberantetool" />
+		<!-- Declare the destination directory -->
+		<hibernatetool destdir="${source.home}">
+			<jdbcconfiguration packagename="test" revengfile="${basedir}/hibernate.reveng.vo.xml" configurationfile="${basedir}/hibernate.cfg.xml" />
+			<!-- Convert the mapping file to Java source files -->
+			<hbmtemplate templatepath="template" template="vo/custom/Pojo.ftl"  
+                filepattern="{package-name}/{class-name}Vo.java">  
+                <property key="ejb3" value="false"/>  
+                <property key="jdk5" value="true"/>  
+            </hbmtemplate>   
+		</hibernatetool>
+	</target>
+	
+	<target name="codegen-vo-base">
+		<path id="classpath.hiberantetool">
+			<pathelement path="${basedir}" />
+			<path refid="classpath.build" />
+		</path>
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath.hiberantetool" />
+		<!-- Declare the destination directory -->
+		<hibernatetool destdir="${source.home}">
+			<jdbcconfiguration packagename="test" revengfile="${basedir}/hibernate.reveng.vo.xml" configurationfile="${basedir}/hibernate.cfg.xml" />
+			<!-- Convert the mapping file to Java source files -->
+			<hbmtemplate templatepath="template" template="vo/base/Pojo.ftl"  
+                filepattern="{package-name}/{class-name}VoBase.java">  
+                <property key="ejb3" value="false"/>  
+                <property key="jdk5" value="true"/>  
+            </hbmtemplate>   
+		</hibernatetool>
+	</target>
+
+	<target name="codegen-po">
+		<path id="classpath.hiberantetool">
+			<pathelement path="${basedir}" />
+			<path refid="classpath.build" />
+		</path>
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath.hiberantetool" />
+		<!-- Declare the destination directory -->
+		<hibernatetool destdir="${source.home}">
+			<jdbcconfiguration packagename="test" revengfile="${basedir}/hibernate.reveng.po.xml" configurationfile="${basedir}/hibernate.cfg.xml" />
+			<!-- Convert the mapping file to Java source files -->
+			<hbmtemplate templatepath="template" template="po/Pojo.ftl"  
+                filepattern="{package-name}/{class-name}.java">  
+                <property key="ejb3" value="true"/>  
+                <property key="jdk5" value="true"/>  
+            </hbmtemplate>   
+		</hibernatetool>
+	</target>
+	 
+</project>

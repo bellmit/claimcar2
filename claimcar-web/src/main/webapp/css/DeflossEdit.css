@@ -1,0 +1,51 @@
+
+/* 车辆定损 */
+div.top_btn {
+	border-bottom: none;
+}
+
+#tab_demo .tabCon {
+	display: block;
+	position: relative;
+	top: 2px;
+	z-index: 999;
+}
+
+/* 设置表格边框 */
+#jyCertain .table_wrap  .table_cont {
+	padding: 0;
+	border: 1px solid #5a98de
+}
+
+ #jyCertain .table_wrap  .table {
+	padding: 5px 8px 8px;
+
+}
+
+.table_wrap  .table_cont.noPaddingLR {
+	padding: 0 8px 0;
+}
+#defossform .table_cont.dingsun-notice {
+	 border: none !important;
+}
+
+.table_cont.dingsun-notice  textarea.w90 {
+	width: 98.88% !important;
+	 border: 1px solid #2A81CC !important;
+	
+	
+}
+
+#check {
+	background: #009CFF;
+	color: #fff;
+	padding: 0;
+  width: 100%;
+}
+.tableoverlable .form_input.col-3.checkBtn{margin-left:-3px;}
+.tableoverlable label.form_label.col-1{width:9.3333%;padding-right:0;}
+.tableoverlable div.col-3{  width: 23%;margin-left: 1%;}
+.tableoverlable .form_input.col-2{  width: 15%;margin-left: 0.6%;}
+.losspartTit{margin-right:10px;}
+.lossPart{margin-top:5px;}
+/* 车辆定损 end */

@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<link href="/claimcar/plugins/editableselect/jquery.editable-select.min.css" rel="stylesheet" type="text/css" />
+<style>
+.mustBox{position:relative;}
+.must{position:absolute;right:0;}
+.trackingTable,.trackingTable td,.trackingTable th{ box-sizing: border-box;}
+.trackingTable td,.trackingTable th{ padding:8px 0;}
+.table_cont .table tbody .Bth{border-bottom:0;  border-top: 1px solid #ddd;}
+.table tbody tr:first-child .Bth{border-top: 0;}
+.Wdate.Validform_error {background: #fbe2e2 url(/claimcar/images/calendar_1.png) no-repeat right;}
+</style>
+<form name="fm" id="casualtyform" class="form-horizontal" role="form">
+	<input type="hidden" class="input-text" name="tabPageNo" value="${tabPageNo }">
+	<div class="panel-body">
+		<%@include file="CasualtyInfo_TabCon_PersonBaseInfo.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_InjuredPart.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_HospitalCase.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_TraceRecord.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_FeeCount.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_NurseInfo.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_RaiseInfo.jspf"%>
+		<%@include file="CasualtyInfo_TabCon_TraceContentInfo.jspf"%>
+	</div>
+</form>
+<script type="text/javascript" src="/claimcar/plugins/editableselect/jquery.editable-select.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/loss-common/CasualtyInfoEdit.js"></script>
+<script type="text/javascript" src="${ctx}/js/loss-common/CasualtyInfoEditRow.js"></script>
+<script type="text/javascript" src="/claimcar/js/common/application.js"></script>

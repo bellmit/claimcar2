@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AMLInfoPersonal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6388e789-1300-415e-aee2-5380eff3c90d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="72"/>
+	<style name="style1" isDefault="true" fontName="宋体" fontSize="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Users\\ly\\Desktop\\ireport\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="insuredName" class="java.lang.String"/>
+	<parameter name="sex" class="java.lang.String"/>
+	<parameter name="adressType" class="java.lang.String"/>
+	<parameter name="adress" class="java.lang.String"/>
+	<parameter name="educationCode" class="java.lang.String"/>
+	<parameter name="identifyType" class="java.lang.String"/>
+	<parameter name="identifyNumber" class="java.lang.String"/>
+	<parameter name="certifyDate" class="java.lang.String"/>
+	<parameter name="profession" class="java.lang.String"/>
+	<parameter name="mobile" class="java.lang.String"/>
+	<parameter name="payAccountNo" class="java.lang.String"/>
+	<parameter name="acconutNo" class="java.lang.String"/>
+	<parameter name="isConsistent" class="java.lang.String"/>
+	<parameter name="insureRelation" class="java.lang.String"/>
+	<parameter name="favoreelInsureRelation" class="java.lang.String"/>
+	<parameter name="flag" class="java.lang.String"/>
+	<parameter name="favoreelList" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="favoreenList" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="279" height="42" uuid="59f7509a-b490-408a-88f7-a367c8ef8cec"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"image/logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="114" y="42" width="342" height="20" uuid="3897388c-d68f-4064-867a-9a5747866cf7"/>
+				<textElement>
+					<font fontName="宋体" size="16" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[自然人客户理赔或保险金给付身份资料填写表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="251">
+			<line>
+				<reportElement x="0" y="1" width="554" height="1" uuid="1b428eee-3093-45f3-8a27-1bc8662c1963"/>
+			</line>
+			<line>
+				<reportElement x="2" y="75" width="552" height="1" uuid="3c896e87-ffa5-4ad2-a515-3ab35bb44eed"/>
+			</line>
+			<line>
+				<reportElement x="2" y="100" width="552" height="1" uuid="45617d83-2f1c-447e-a397-acfe010d1699"/>
+			</line>
+			<line>
+				<reportElement x="2" y="125" width="552" height="1" uuid="d1555347-9299-40d9-bd85-ff6ef95e7d76"/>
+			</line>
+			<line>
+				<reportElement x="2" y="150" width="552" height="1" uuid="4e649a21-b16c-46e6-9d96-7c0b4cbefe0b"/>
+			</line>
+			<line>
+				<reportElement x="2" y="175" width="552" height="1" uuid="d2a226a2-a40c-48ce-bc7f-fdd8d6d33c82"/>
+			</line>
+			<line>
+				<reportElement x="2" y="200" width="552" height="1" uuid="c37f24e5-e043-4573-badb-91a31b95d18e"/>
+			</line>
+			<line>
+				<reportElement x="2" y="225" width="552" height="1" uuid="9b5d7f6c-0634-4807-8c21-ef5cc0fa3bf7"/>
+			</line>
+			<line>
+				<reportElement x="0" y="250" width="554" height="1" uuid="f9712af7-17ce-47e0-89a9-0b39b9770569"/>
+			</line>
+			<line>
+				<reportElement x="82" y="1" width="1" height="98" uuid="091f7114-3cd4-4e55-abc2-050b734b0809"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="2" y="2" width="80" height="23" uuid="d0b30512-63ce-45db-9f44-ea8d20d872a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[被保险人姓名]]></text>
+			</staticText>
+			<line>
+				<reportElement x="164" y="2" width="1" height="23" uuid="85b323af-29d4-44fa-b9ac-fca2d505d1a1"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="165" y="2" width="36" height="22" uuid="8670b654-b98b-499c-9679-118896a8539e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<line>
+				<reportElement x="201" y="2" width="1" height="23" uuid="e3d64dfe-9177-48a7-97cb-082bdecbb13a"/>
+			</line>
+			<line>
+				<reportElement x="335" y="2" width="1" height="23" uuid="bce5f486-a7b7-4d4d-befc-de0e65b2791a"/>
+			</line>
+			<line>
+				<reportElement x="378" y="0" width="1" height="25" uuid="a61aa3eb-ce59-4042-a5f0-72365a7ff9ee"/>
+			</line>
+			<rectangle>
+				<reportElement x="214" y="7" width="11" height="11" uuid="2acbc48c-9eb5-4b52-82af-9898f3b2ba68"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="236" y="1" width="32" height="23" uuid="e772f07b-859b-453b-9366-27ca8dab9d4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[男]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="279" y="7" width="11" height="11" uuid="bab08bc8-167c-494d-ada7-db9a3de41b00"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="303" y="2" width="32" height="22" uuid="5debdf44-2b1c-431b-948c-2167cc069ef7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[女]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="336" y="2" width="42" height="22" uuid="c196cb97-61a6-4c22-a6dd-d180ed5492b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[国籍]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="392" y="7" width="11" height="11" uuid="a8a08109-fc39-40be-91cd-57ac5542b99a"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="419" y="2" width="37" height="22" uuid="ea67cc89-827d-41fe-9df2-05f5bc6be61e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[中国]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="473" y="7" width="11" height="11" uuid="1ac50c54-0422-4f33-9bc5-e2725da1f097"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="498" y="1" width="37" height="24" uuid="f359368c-ec8d-48a2-808b-1a3ddf5f8a1e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[其他]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="2" y="26" width="70" height="24" uuid="8614e591-171a-4fa0-9183-42446ac788e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[证件类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="2" y="51" width="70" height="24" uuid="8b83c6fb-3fa4-4f1d-a92e-9d431fc846d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[证件号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="93" y="32" width="11" height="11" uuid="9b04bf2e-92a7-4906-ac97-c7b6cbc8df39"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="115" y="25" width="42" height="25" uuid="45e66a13-3ff5-4ca1-ab68-73e15d779dc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[身份证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="167" y="32" width="11" height="11" uuid="ea5486d2-21d7-4e17-83a5-89237d6d3258"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="191" y="25" width="42" height="25" uuid="aa59b257-526d-4e82-9432-563210a350ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light"/>
+				</textElement>
+				<text><![CDATA[户口本]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="243" y="32" width="11" height="11" uuid="7618d31d-55e1-4752-b930-27ddf572d1b1"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="268" y="25" width="42" height="25" uuid="26955037-1ed4-4ef5-8331-c8e2dff28e7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[护照]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="321" y="32" width="11" height="11" uuid="cb49e4f1-ef2a-427b-b3cd-ecdfb4d60fd7"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="348" y="26" width="42" height="24" uuid="d62d72c4-c806-487f-8511-3d7db8c89195"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[军官证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="403" y="32" width="11" height="11" uuid="94be1767-312b-4292-8cc6-d135eca2e366"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="426" y="26" width="42" height="24" uuid="5241bf70-324f-4254-acd5-be9717366a45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[返乡证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="483" y="32" width="11" height="11" uuid="2b3b8b6a-9f80-408f-97ee-cef22eaf45b5"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="511" y="26" width="42" height="24" uuid="6d90c777-3830-4914-b72a-4949322fe9d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[其他]]></text>
+			</staticText>
+			<line>
+				<reportElement x="290" y="50" width="1" height="49" uuid="82991935-6232-4220-9005-724c9baf94de"/>
+			</line>
+			<line>
+				<reportElement x="371" y="50" width="1" height="49" uuid="f5632a21-bbc2-49d7-af8d-f97a5536424d"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="291" y="51" width="80" height="24" uuid="63ebe975-7ea4-4f2d-bb03-caafc6eab0ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[证件有效期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="2" y="75" width="70" height="25" uuid="0b73dd86-f36d-477f-b4ec-4ebb291936f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[职业]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="291" y="76" width="80" height="24" uuid="250b02f8-0d2c-4e20-879a-134ce1aa9374"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[联系方式]]></text>
+			</staticText>
+			<line>
+				<reportElement x="159" y="101" width="1" height="25" uuid="d9f7ed01-b431-4720-8938-6f44731068c1"/>
+			</line>
+			<rectangle>
+				<reportElement x="14" y="107" width="11" height="11" uuid="fe6791a2-d5ce-4e6e-aec2-f302205a9ca5"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="31" y="101" width="31" height="25" uuid="9d1a8526-33a5-4ef8-820e-0f07b3b661be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[住所]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="73" y="107" width="11" height="11" uuid="9a561455-6838-40cd-9a7b-630bafab0ffa"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="94" y="101" width="54" height="25" uuid="a48f443e-3630-4f62-991a-01566017be12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[单位地址]]></text>
+			</staticText>
+			<line>
+				<reportElement x="82" y="126" width="1" height="25" uuid="f08a55e2-25ff-495e-aa66-dba04e27699f"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="2" y="125" width="69" height="25" uuid="57e58331-2360-4476-be21-b5fc324bafa9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[缴费账户]]></text>
+			</staticText>
+			<line>
+				<reportElement x="268" y="126" width="1" height="24" uuid="2cdac33e-e421-4a7c-9fd2-5f37948dd727"/>
+			</line>
+			<line>
+				<reportElement x="338" y="125" width="1" height="25" uuid="8fb0643b-617f-4c56-9608-a92c19924047"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="269" y="126" width="69" height="24" uuid="6327cee9-cf21-420c-b79e-1b11241bed00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[赔款账户]]></text>
+			</staticText>
+			<line>
+				<reportElement x="135" y="151" width="1" height="74" uuid="9f7ae6bd-9a12-42be-a07f-a1dc2ba013c0"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="4" y="152" width="131" height="23" uuid="c96116f0-e462-4d65-b362-244f7b04116d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[缴费与赔款账户一致性]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement style="style1" x="165" y="155" width="15" height="15" uuid="55616c85-fcb9-4e7f-8d19-aa7d92e50b90"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="194" y="150" width="31" height="25" uuid="9e251775-7263-4b91-a102-44f96e81cbc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[是]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement style="style1" x="250" y="155" width="15" height="15" uuid="1c51ce75-25b7-4ec0-9516-05a5b1cf92d3"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="279" y="150" width="31" height="25" uuid="057e3817-6c7d-409b-abf6-22b04e48ef8a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[否]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="4" y="175" width="131" height="25" uuid="180b86c3-0a5d-4daf-a9ad-6ba0924ef0b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[被保险人与投保人关系]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="4" y="201" width="131" height="24" uuid="0614622b-5cde-435f-8836-d3f075c4ab2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[受益人与被保险人关系]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="139" y="182" width="11" height="11" uuid="47601d7c-494c-44c6-b9e2-4f4dd594e9d9"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="158" y="176" width="30" height="24" uuid="41046632-607e-405e-af46-ec2dac4642f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[本人]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="192" y="182" width="11" height="11" uuid="17e1f081-ec66-4bdc-8c3b-c202d4feaa90"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="213" y="177" width="30" height="24" uuid="0753a997-02ed-4e9d-9397-c4caadbfad57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" pdfFontName="STSong-Light"/>
+				</textElement>
+				<text><![CDATA[夫妻]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="250" y="182" width="10" height="11" uuid="e9944496-bf66-44a7-b188-14adb0d0a3f4"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="271" y="175" width="42" height="24" uuid="c99c8299-dd95-4fd3-83eb-92483a4f32ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[父子/女]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="316" y="182" width="11" height="11" uuid="e788a5f4-9066-4644-b328-7bd16bb50699"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="341" y="177" width="44" height="22" uuid="a021a433-d70c-4fc8-9328-11ac4d0797b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[母子/女]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="390" y="182" width="11" height="11" uuid="6645a613-8f6d-4d0d-ad9d-d35f029dfb82"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="412" y="176" width="27" height="23" uuid="69187885-d455-4c8e-8023-81b093ab7fed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[雇佣]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="504" y="182" width="11" height="11" uuid="af91437e-b7d7-47b6-ae96-5b0947c80983"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="524" y="177" width="30" height="22" uuid="c3f55636-f01a-4f18-8798-5b4175b294c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[其他]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="139" y="207" width="11" height="11" uuid="fa63e894-b569-435c-bce6-32ed30c426e8"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="157" y="199" width="30" height="24" uuid="cfe2e6b3-529c-4240-91db-d5068edb8261"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[本人]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="193" y="207" width="11" height="11" uuid="3e868127-c45f-4e42-b913-c6425d3bb0b0"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="213" y="201" width="30" height="24" uuid="71003ad0-b509-471d-b4ba-39e01b561809"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[夫妻]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="251" y="207" width="11" height="11" uuid="72a14a88-da44-4a3d-acda-dc8393e42815"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="271" y="201" width="42" height="23" uuid="2438dc9d-3561-4cae-8d61-d01906dfe404"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[父子/女]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="321" y="207" width="11" height="11" uuid="387bfd59-680d-4004-bd57-c10141271f18"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="341" y="200" width="44" height="25" uuid="199fedf1-9e43-4bb8-9db6-e55d42f10f2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[母子/女]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="393" y="207" width="11" height="11" uuid="45d38c08-b70d-4609-b93b-1ea862109877"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="411" y="201" width="29" height="23" uuid="70e69fd3-a5f8-4718-87c5-73a7c103db76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[雇佣]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="507" y="207" width="11" height="11" uuid="697ea552-9ed3-47d2-a03b-f42c1ba93938"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="524" y="201" width="30" height="24" uuid="e4909e96-abd5-4036-8deb-7bd5a751ee24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[其他]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="14" y="232" width="11" height="11" uuid="5605dfe8-bcde-416c-b429-2af0d4f7ce00"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="34" y="226" width="239" height="23" uuid="68454b58-7828-440a-98e6-020c41679e54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[受益人与被保险人为同一人时，信息同上]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="306" y="232" width="11" height="11" uuid="af7f8ca8-7068-4365-ae52-31813a693aef"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="330" y="227" width="212" height="23" uuid="ea827e10-04f2-4375-b4a2-839d0248a90b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[受益人与被保险人信息不同（见下）]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="83" y="2" width="81" height="22" uuid="71452723-48f6-441a-a9f0-5045c797ac50"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" pdfFontName="STSong-Light"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{insuredName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="167" y="101" width="386" height="24" uuid="364ea452-779a-4730-bd06-75573fc48d75"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{adress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="93" y="51" width="197" height="24" uuid="42033f27-c388-4df2-ad2e-6adf5258cead"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{identifyNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="93" y="76" width="197" height="23" uuid="9606658b-94a3-44d0-8b9b-2a0899b2ae3d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{profession}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="372" y="75" width="182" height="24" uuid="93221725-8a4f-4fa3-8959-8d2cb221a309"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{mobile}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="348" y="126" width="207" height="24" uuid="2da5a44e-1bf2-43bc-8adc-3edafe25cf22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{acconutNo}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="446" y="207" width="12" height="11" uuid="7fc63478-19e7-42c9-91a6-6f436fb8e2e6"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="466" y="202" width="33" height="23" uuid="497b6abc-f6b5-4b97-9473-0dfbc8e5aa36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[劳动]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="444" y="182" width="12" height="11" uuid="13a7501d-74a9-4572-97ad-2a4a150e2a4f"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="style1" x="466" y="175" width="33" height="23" uuid="ae9bd576-310f-48f3-9864-01a4bc373ec6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[劳动]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="372" y="50" width="177" height="25" uuid="f88358e1-bb23-4e33-815e-3afa05a0a730"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{certifyDate}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="214" y="4" width="20" height="20" uuid="374b09a3-a836-496d-b5fc-934cd4b86ac5"/>
+				<imageExpression><![CDATA[( "1".equals($P{sex}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="277" y="4" width="20" height="20" uuid="ec81d7ea-a14c-4fc4-a377-b1de600930e0"/>
+				<imageExpression><![CDATA[( "2".equals($P{sex}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="389" y="4" width="20" height="20" uuid="48118204-7d17-4a81-b7a4-8369db2eb8f6"/>
+				<imageExpression><![CDATA[( "1".equals($P{educationCode}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="468" y="4" width="20" height="20" uuid="fb288064-3de1-4503-bd34-bd014c8afc5c"/>
+				<imageExpression><![CDATA[( "2".equals($P{educationCode}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="89" y="28" width="20" height="20" uuid="b64e9d2d-7ddb-4c00-99ef-cdbd3788c80e"/>
+				<imageExpression><![CDATA[( "01".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="163" y="28" width="20" height="20" uuid="40663b6c-339e-461f-8c1a-8a7470707c6c"/>
+				<imageExpression><![CDATA[( "02".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="241" y="28" width="20" height="20" uuid="2a937bb0-5f10-4b94-ba06-2db305336b4d"/>
+				<imageExpression><![CDATA[( "03".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="319" y="28" width="20" height="20" uuid="f25800e4-b820-44f5-a995-7a8c20a2191f"/>
+				<imageExpression><![CDATA[( "04".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="399" y="28" width="20" height="20" uuid="22232cbb-622d-491c-92c8-a5696908c154"/>
+				<imageExpression><![CDATA[( "43".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="481" y="28" width="20" height="20" uuid="642b46e6-5f89-4714-8e4c-3590c74c8f52"/>
+				<imageExpression><![CDATA[( "99".equals($P{identifyType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="8" y="103" width="20" height="20" uuid="58f19819-4f2c-4b0f-ace8-acd09776d793"/>
+				<imageExpression><![CDATA[( "1".equals($P{adressType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="67" y="103" width="20" height="20" uuid="cc3aa760-fa7f-4acc-8c57-5a196a135284"/>
+				<imageExpression><![CDATA[( "2".equals($P{adressType}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="502" y="178" width="20" height="20" uuid="ce7ff06d-7072-438b-a72c-ccba986c26f2"/>
+				<imageExpression><![CDATA[( "0".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="442" y="178" width="20" height="20" uuid="6ba3ffc2-7632-4796-b2bc-83aada7bea2f"/>
+				<imageExpression><![CDATA[( "6".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="389" y="178" width="20" height="20" uuid="e1741b71-27db-4038-b486-55207130645b"/>
+				<imageExpression><![CDATA[( "5".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="316" y="178" width="20" height="20" uuid="16d76a83-5eb2-4811-a94a-d4f4c6622d41"/>
+				<imageExpression><![CDATA[( "4".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="247" y="178" width="20" height="20" uuid="05d7e97d-e435-4b01-b1d5-9c739b050d03"/>
+				<imageExpression><![CDATA[( "3".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="190" y="178" width="20" height="20" uuid="5889cb06-8da6-4679-8ea4-723f2dc2398d"/>
+				<imageExpression><![CDATA[( "2".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="137" y="178" width="20" height="20" uuid="8f6ca0a6-8282-4b37-a476-2ad3f9a327a1"/>
+				<imageExpression><![CDATA[( "1".equals($P{insureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="502" y="203" width="20" height="20" uuid="a77190f9-cbc9-4e7e-bee1-dd1840d97b7f"/>
+				<imageExpression><![CDATA[( "0".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="442" y="203" width="20" height="20" uuid="5ebdc4a3-628b-42be-9954-3452ded39402"/>
+				<imageExpression><![CDATA[( "6".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="389" y="202" width="20" height="20" uuid="c200314f-5d93-4fbe-82a2-8c62ae001a0f"/>
+				<imageExpression><![CDATA[( "5".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="315" y="203" width="20" height="20" uuid="a8ff3dac-9cc8-4ca4-84ab-87e666efb405"/>
+				<imageExpression><![CDATA[( "4".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="247" y="203" width="20" height="20" uuid="625d0ac9-161a-4e3b-8b8f-5c84d6dad451"/>
+				<imageExpression><![CDATA[( "3".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="190" y="202" width="20" height="20" uuid="026c0ace-d231-40e6-82c5-0206f0496791"/>
+				<imageExpression><![CDATA[( "2".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="137" y="203" width="20" height="20" uuid="6ac29791-b7a6-42a7-944c-5152b9c86ebb"/>
+				<imageExpression><![CDATA[( "1".equals($P{favoreelInsureRelation}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="8" y="228" width="20" height="20" uuid="7b393860-65ee-4976-9937-0bba97eaa84a"/>
+				<imageExpression><![CDATA[( "1".equals($P{flag}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="303" y="228" width="20" height="20" uuid="0b45804b-c62d-4421-a10d-91b4209dd724"/>
+				<imageExpression><![CDATA[( "2".equals($P{flag}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="555" y="1" width="1" height="250" uuid="93dc7fc4-0209-4e25-9b78-01b8be875605"/>
+			</line>
+			<line>
+				<reportElement x="2" y="25" width="552" height="1" uuid="4b60650a-9172-437c-abcd-11d42bac4dfa"/>
+			</line>
+			<line>
+				<reportElement x="2" y="50" width="552" height="1" uuid="b24a8652-cfcb-4cd9-9519-fc2b862313eb"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="251" uuid="2a4e5ff6-d0be-411b-aea3-85bb27d1d904"/>
+			</line>
+			<image>
+				<reportElement x="163" y="153" width="20" height="20" uuid="7562ae96-5cc6-40f2-b039-904fafd69221"/>
+				<imageExpression><![CDATA[( "1".equals($P{isConsistent}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="248" y="153" width="20" height="20" uuid="c797936a-d7b6-44fd-984a-96fad96e095f"/>
+				<imageExpression><![CDATA[( "0".equals($P{flag}) ? $P{SUBREPORT_DIR}+"image/gou.png" : $P{SUBREPORT_DIR}+"image/kong.png" )]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="93" y="126" width="175" height="24" uuid="4ce8ffc3-11d3-4893-b472-aea755210191"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{payAccountNo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="77">
+			<subreport>
+				<reportElement x="0" y="0" width="556" height="77" isRemoveLineWhenBlank="true" uuid="84bfff11-ec2b-403d-a047-9fec53651947"/>
+				<subreportParameter name="favoreelName"/>
+				<subreportParameter name="favoreelAdress"/>
+				<subreportParameter name="favoreelBusinessArea"/>
+				<subreportParameter name="favoreelComcode"/>
+				<subreportParameter name="favoreelRevenueRegistNo"/>
+				<subreportParameter name="favoreelBusinessCode"/>
+				<subreportParameter name="favoreelCertifyDate"/>
+				<subreportParameter name="favoreelInsureRelation"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{favoreelList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "AMLInfo_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="124">
+			<subreport>
+				<reportElement x="0" y="-1" width="556" height="124" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="51c95771-1b71-47c4-8df8-9d3244e83f87"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="favoreenName"/>
+				<subreportParameter name="favoreenSex"/>
+				<subreportParameter name="favoreenNatioNality"/>
+				<subreportParameter name="favoreenCertifyType"/>
+				<subreportParameter name="favoreenIdentifyCode"/>
+				<subreportParameter name="favoreenCertifyDate"/>
+				<subreportParameter name="favoreenProfession"/>
+				<subreportParameter name="favoreenPhone"/>
+				<subreportParameter name="favoreenAdressType"/>
+				<subreportParameter name="favoreenAdress"/>
+				<subreportParameter name="possessNature"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{favoreenList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "AMLInfo_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

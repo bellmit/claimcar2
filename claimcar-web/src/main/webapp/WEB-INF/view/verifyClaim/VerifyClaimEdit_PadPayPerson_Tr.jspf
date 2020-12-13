@@ -1,0 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%-- 第${status.index + size + 1}个 --%>
+<div class="table_cont table_list" id="ttttt_${pe_Idx}">
+	<input type="hidden" name="padPayPersonVo[${pe_Idx}].id"
+		value="${padPayPersonVo.id}">
+	<%-- <input type="hidden" name="padPayPersonVo[${pe_Idx}].padPayId" value="${padPayPersonVo.padPayId}"> --%>
+	<table border="1" class="table table-border" id="padPay_${pe_Idx}">
+		<thead class="text-c">
+			<tr class="text-c">
+				<th>序号 <!-- 点击增加、删除按钮的时候，人员损失信息的两张表同时增加同时删除 -->
+					<!-- <button type="button"
+						class="btn btn-plus Hui-iconfont Hui-iconfont-add"
+						onclick="addPadPayTr()"></button> -->
+				</th>
+				<th>姓名</th>
+				<th>人伤类型</th>
+				<th>伤情类型</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>单位/住址</th>
+				<th>车牌号</th>
+				<th colspan="3">医疗机构</th>
+				<!-- <th style="width: 10%">身份证号</th> -->
+			</tr>
+		</thead>
+		<tbody class="text-c" id="padPayTbOne_${pe_Idx}">
+			<tr>
+				<td>${pe_Idx + 1}</td>
+				<td>${padPayPersonVo.injuredName}</td>
+				<td>三者人员伤亡<font class="must">*</font></td>
+				<td>
+					<app:codetrans codeType="PersonPayType" codeCode="${padPayPersonVo.injuryType}"/>
+				</td>
+				<td>${padPayPersonVo.personAge}</td>
+
+				<td>
+					<app:codetrans codeType="SexCode" codeCode="${padPayPersonVo.personSex}"/>
+				</span><font class="must">*</font></td>
+
+				<td>${padPayPersonVo.personAddress}</td>
+
+				<td>${padPayPersonVo.licenseNo}</td>
+				<td colspan="3">
+				
+				<app:areaSelect
+						targetElmId="hospitalArea_${pe_Idx}"
+						areaCode="${padPayPersonVo.hospitalCity}"
+						hospitalCode="${padPayPersonVo.hospitalCode}" showLevel="3"
+						isHospital="Y" style="width:100px" />
+				</td>
+			</tr>
+		</tbody>
+		<thead class="text-c">
+			<tr>
+				<th></th>
+				<th>费用名称</th>
+				<th>险别</th>
+				<th>垫付抢救费用</th>
+				<th>身份证号</th>
+				<th>例外标志</th>
+				<th>例外原因</th>
+				<th>收款人</th>
+				<th>收款方帐号</th>
+				<th>开户银行</th>
+				<th>摘要</th>
+			</tr>
+		</thead>
+		<tbody class="text-c">
+			<tr>
+				<td>
+				</td>
+				<td>
+					<app:codetrans codeType="FeeType" codeCode="${padPayPersonVo.feeNameCode}"/>
+				</td>
+				<td>交通强制责任险</td>
+				<td>${padPayPersonVo.costSum}</td>
+				<td>${padPayPersonVo.personIdfNo}</td>
+				<td>
+					<app:codetrans codeType="IsValid" codeCode="${padPayPersonVo.otherFlag}"/>
+				</td>
+				<td>
+					<app:codetrans codeType="OtherCase" codeCode="${padPayPersonVo.otherCause}"/>
+					<font class="must">*</font>
+				</td>
+				<td>${padPayPersonVo.payeeName}<%-- <app:codeSelect codeType="" type="select"
+						dataSource="${customMap}"
+						onchange="changeCustom(this,'${pe_Idx}')"
+						name="padPayPersonVo[${pe_Idx}].payeeName"
+						value="${padPayPersonVo.payeeName}" /> --%>
+				</td>
+				<td>${padPayPersonVo.accountNo}<font class="must">*</font></td>
+				<td>
+					<app:codetrans codeType="BankCode" codeCode="${padPayPersonVo.bankName}"/>
+					<font class="must">*</font>
+				</td>
+				<td>
+					<input type="text" class="input-text"  value="${padPayPersonVo.summary}" readonly="readonly"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

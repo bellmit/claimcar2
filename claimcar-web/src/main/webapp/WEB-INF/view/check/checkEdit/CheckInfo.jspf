@@ -1,0 +1,189 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">查勘基本信息</div>
+	<div class="table_cont ">
+		<div class="formtable">
+			<!--  -->
+			<input type="hidden" name="checkRegistNo" value="${prpLcheck.registNo}">
+			<%-- <input type="hidden" id="id" name="prpLcheck.id" value="${prpLcheck.id}"> 
+			<input type="hidden" id="id" name="prpLcheckTask.id" value="${prpLcheckTask.id}"> --%>
+			<input type="hidden" id="oldIndemnityDutyRateValue" value="${MainCarVo.indemnityDutyRate}">
+			<!--  -->
+			<div class="row  cl">
+				<label class="form_label col-1">是否单车事故</label>
+				<div class="form_input col-3" id="singleAccidentRadio">
+					<span class="radio" style="width: 96%"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.singleAccidentFlag}" onchange="singleChange()"
+							id="singleAccidentFlag" name="prpLcheck.singleAccidentFlag"/>
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">事故类型</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 96%"> <app:codeSelect
+							codeType="AccidentDutyType" type="select" id="damageCaseCode"
+							lableType="code-name" name="prpLcheck.damageCaseCode"
+							value="${prpLcheck.damageCaseCode}"/>
+					</span> <font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">事故处理类型</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 96%"> <app:codeSelect
+							codeType="AccidentManageType" type="select" clazz="must"
+							id="damagetype" name="prpLcheck.damagetype"
+							value="${prpLcheck.damagetype}" />
+					</span> <font class="" color="red">*</font>
+				</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">出险原因</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 48%"> <app:codeSelect
+							codeType="AccidentDutyType" type="select" id="damageCode"
+							name="prpLcheck.damageCode"
+							value="${prpLcheck.damageCode}" />
+					</span> <span class="select-box" style="width: 46%"> <app:codeSelect
+							codeType="AccidentDutyType" type="select" id="damageName"
+							clazz="must" name="prpLcheck.damageName"
+							value="${prpLcheck.damageName}" />
+					</span>
+				</div>
+				<label class="form_label col-1">赔案类别</label>
+				<div class="form_input col-3">正常赔案</div>
+				<label class="form_label col-1">案件紧急程度</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 96%"> <app:codeSelect
+							codeType="MercyFlag" type="select" id="mercyFlag" clazz="must"
+							name="prpLcheck.mercyFlag" value="${prpLcheck.mercyFlag}" />
+					</span>
+				</div>
+			</div>
+			<div class="row  cl">
+				<label class="form_label col-1">是否全损</label>
+				<div class="form_input col-3" id="lossType">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.lossType}" id="lossType"
+							name="prpLcheck.lossType" />
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">查勘地点</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkAddress"
+							name="prpLcheckTask.checkAddress" datatype="*" nullmsg="查看地点不能为空！"
+						 	value="${prpLcheckTask.checkAddress}" style="width: 96%"/>
+					<font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">查勘日期</label>
+				<div class="form_input col-3">
+					<input type="text" class="Wdate" id="checkTime"
+						name="prpLcheckTask.checkTime" dataType="*"
+						onfocus="WdatePicker({Date:'#F{$dp.$D(\'checkTime\')||\'%y-%M-%d\'}'})"
+						value="<app:date date='${prpLcheckTask.checkTime}'/>" style="width: 95%">
+						<font class="form_text" color="red">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">查勘类型</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 96%"> <app:codeSelect
+							codeType="CheckType" type="select" id="checkType"
+							name="prpLcheck.checkType" value="${prpLcheck.checkType}" />
+					</span>
+				</div>
+				<label class="form_label col-1">查勘人</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checker"
+						name="prpLcheckTask.checker" value="${prpLcheckTask.checker}"
+						style="width: 96%" datatype="*0-30" readonly="readonly"/>
+					<font color="red">*</font>
+				</div>
+				<label class="form_label col-1">查勘人身份证号</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="checkeridfno"
+						name="prpLcheckTask.checkeridfno"
+						value="${prpLcheckTask.checkeridfno}" style="width: 96%"
+						datatype="*0-30" />
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">查勘类别</label>
+				<div class="form_input col-3">
+					<span class="select-box" style="width: 96%"> <app:codeSelect
+							codeType="CheckCategory" type="select" id="interMediaryFlag"
+							clazz="must" lableType="code-name"
+							name="prpLcheck.interMediaryFlag" onchange="interMediary()"
+							value="${prpLcheck.interMediaryFlag}" />
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">是否第一现场查勘</label>
+				<div class="form_input col-3" id="firstFlag">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheckTask.firstaddressflag}"
+							id="firstaddressflag" name="prpLcheckTask.firstaddressflag" />
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">是否互碰自赔</label>
+				<div class="form_input col-3" id="ClaimSelf">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.isClaimSelf}" id="isClaimSelf"
+							name="prpLcheck.isClaimSelf"/>
+					</span><font class="form-text" color="red">*</font>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">是否包含财损</label>
+				<div class="form_input col-3" id="propLoss">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.isPropLoss}" id="isPropLoss"
+							name="prpLcheck.isPropLoss" />
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">是否包含人伤</label>
+				<div class="form_input col-3" id="personLoss">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.isPersonLoss}" id="isPersonLoss"
+							name="prpLcheck.isPersonLoss" />
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<label class="form_label col-1">是否重大赔案上报</label>
+				<div class="form_input col-3" id="reportFlag">
+					<span class="radio-box"> <app:codeSelect codeType="YN"
+							type="radio" value="${prpLcheck.claimsReportFlag}"
+							name="prpLcheck.claimsReportFlag" onchange="reportFlag()"/>
+					</span><font class="form-text" color="red">*</font>
+				</div>
+				<div class="row cl">
+					<c:if test="${not empty MainCarVo.indemnityduty}">
+					<label class="form_label col-1">事故责任比例</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width: 40%"> <app:codeSelect
+								codeType="IndemnityDuty" type="select" id="indemnityDutyRate"
+								name="MainCarVo.indemnityduty"
+								value="${MainCarVo.indemnityduty}" />
+						</span> <input type="text" class="input-text" id="indemnityDutyRateValue"
+							name="MainCarVo.indemnityDutyRate" style="width: 54%" readonly="readonly"
+							value="${MainCarVo.indemnityDutyRate}">
+						<font class="" color="red" style="width: 1%">*</font>
+					</div>
+					</c:if>
+					<c:if test="${not empty MainCarVo.ciIndemDuty}">
+					<label class="form_label col-1">交强险是否有责</label>
+					<div class="form_input col-3">
+						<span class="select-box" style="width:96%"> <app:codeSelect
+								codeType="CiIndemDuty" type="select" id="ciIndemDuty"
+								name="MainCarVo.ciIndemDuty"
+								value="${MainCarVo.ciIndemDuty}"/>
+						</span>
+					</div>
+					</c:if>
+					<div id="claimsreportopinion">
+						<label class="form_label col-1">重大赔案意见</label>
+						<div class="form_input col-3">
+							<input type="text" class="input-text" name="prpLcheckTask.claimsreportopinion"
+								value="${prpLcheckTask.claimsreportopinion}">
+						</div></div>
+				</div>
+			</div>
+		</div>
+	</div>

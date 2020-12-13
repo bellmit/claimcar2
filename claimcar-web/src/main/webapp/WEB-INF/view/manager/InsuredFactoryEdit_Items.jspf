@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr class="text-c">
+<input type="hidden" name="insuredFactoryVo[${insuredId }].factoryId" value="${insuredFactoryVo.factoryId }" />
+<input type="hidden" name="insuredFactoryVo[${insuredId }].id" value="${insuredFactoryVo.id }" />
+	<td>
+		<button type="button"
+			class="btn btn-plus Hui-iconfont Hui-iconfont-jianhao" onclick="delInsuredItem(this)"
+			 name="delInsuredItem_${insuredId }"></button> 
+	</td>
+
+	<td>
+                <%--    <c:if test="${!empty insuredFactoryVo.insuredMap }">
+                   <input type="text"  id="insuredId${insuredId}" class="input-text" name="insuredFactoryVo[${insuredId }].insuredName" onchange="insuredCodeChange(this,'${insuredId }')" value="${insuredFactoryVo.insuredName}" />
+                   <app:codeSelect codeType="" type="select" lableType="code-name"  onchange="insuredCodeChange(this,'${insuredId }')"
+			name="insuredName${insuredId }" dataSource="${insuredFactoryVo.insuredMap }" value="${insuredFactoryVo.insuredCode }" nullToVal="0" datatype="selectMust"/> 
+                          </c:if> --%>
+			<%-- <app:codeSelect codeType="" type="select" lableType="code-name"  onchange="insuredCodeChange(this,'${insuredId }')"
+			name="insuredName${insuredId }" dataSource="${resultMap }" value="${insuredFactoryVo.insuredCode }" nullToVal="0" datatype="selectMust"/> 
+			<c:if test="${empty resultMap}"> <select  class="select "   value=""  dataType="selectMust"> </select> </c:if> --%>
+		<%-- 	<c:if test="${empty insuredFactoryVo.insuredMap }">
+		<input type="hidden"  id="insuredId${insuredId}" name="insuredFactoryVo[${insuredId }].insuredName" onchange="insuredCodeChange(this,'${insuredId }')" value="${insuredFactoryVo.insuredName}" />
+		</c:if> --%>
+		<input type="text"  id="insuredId${insuredId}" class="input-text" name="insuredFactoryVo[${insuredId }].insuredName"  value="${insuredFactoryVo.insuredName}" readonly="readonly"/>
+	</td>
+
+	<td><input type="text" id="insuredCode${insuredId}" class="input-text" name="insuredFactoryVo[${insuredId }].insuredCode" value="${insuredFactoryVo.insuredCode }" datatype="*" readonly="readonly">
+	</td>
+
+</tr>

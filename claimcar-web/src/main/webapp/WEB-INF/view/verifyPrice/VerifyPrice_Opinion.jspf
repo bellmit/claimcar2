@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+	<div class="table_wrap">
+		<div class="table_title f14">核价意见</div>
+		<div class="table_cont formtable">
+			<div class="row cl">
+				<label class="form_label col-1"><strong>核价意见: </strong></label>
+				<div class="form_input col-11">
+					<app:codeSelect codeType="veripOpionType" name="claimTextVo.opinionCode"  value="${claimTextVo.opinionCode }" onchange="changeOpinion(true)" type="radio"/>
+				</div>
+				<br>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1"><strong>意见内容: </strong></label>
+			</div>
+			<div class="row cl">
+				<div class="form_input " id="contentDiv">
+					<div id="content_a" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veripOpiona" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox" onclick="contentClick()" dictFlag="false" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_b" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veripOpionb" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox" onclick="contentClick()" dictFlag="false" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_c" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veripOpionc" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox" onclick="contentClick()" dictFlag="false" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_d" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veripOpiond" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox" onclick="contentClick()" dictFlag="false" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_e" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veripOpione" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox" onclick="contentClick()" dictFlag="false" value="${claimTextVo.contentCode }"/>
+					</div>
+				</div>
+			</div>
+			<div class="row cl">
+				<textarea class="textarea w90" name="claimTextVo.description" id="description" maxlength="500" nullmsg="请输入核价意见" placeholder="请输入...">${claimTextVo.description }</textarea>
+				<font class="must">*</font> 
+			</div>
+		</div>
+	</div>
+			

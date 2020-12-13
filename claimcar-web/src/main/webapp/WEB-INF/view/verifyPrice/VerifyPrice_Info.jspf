@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+		<div class="table_wrap">
+			<div class="table_title f14">基本信息</div>
+				<div class="table_cont basicInforoVer">
+				    <input type="hidden" value="${jy2Flag}" id="jy2Flag">
+					<input type="hidden" name="lossCarMainVo.id" id="lossMainId" value="${lossCarMainVo.id }"/>
+					<input type="hidden" name="lossCarMainVo.registNo" id="registNo" value="${lossCarMainVo.registNo }"/>
+					<input type="hidden"  name="lossCarMainVo.validFlag" value="${lossCarMainVo.validFlag}" />
+					<input type="hidden"  id="deflossCarType" name="lossCarMainVo.deflossCarType" value="${lossCarMainVo.deflossCarType}" />
+					<input type="hidden" id="certainType" value="${lossCarMainVo.cetainLossType }" />
+					<input type="hidden" id="saveType" name="lossCarMainVo.auditStatus" />
+					<input type="hidden" id="flowTaskId" name ="taskVo.taskId" value="${taskVo.taskId}">
+					<input type="hidden" id="currentNode" name ="taskVo.subNodeCode" value="${taskVo.subNodeCode}">
+					<input type="hidden" id="handleStatus" value="${taskVo.handlerStatus }" />
+					<input type="hidden" id="carAmount" value="${commonVo.carAmount }" />
+					<input type="hidden" id="sumpaidDef" value="${commonVo.sumpaidDef }" />
+					<input type="hidden" id="otherAmount" value="${commonVo.otherAmount }" />
+					<input type="hidden" id="verifyPassFlag" value="${commonVo.verifyPassFlag }" />
+					<input type="hidden" id="newSumLossFee" value="${lossCarMainVo.sumCompFee + lossCarMainVo.sumMatFee }" />
+					<!-- 山东影像对比 -->
+					<input type="hidden" id="carRiskUserName" value="${carRiskUserName}"/>
+					<input type="hidden" id="carRiskPassWord" value="${carRiskPassWord}"/>
+					<input type="hidden" id="claimPeriod" value="${claimPeriod}"/>
+					<input type="hidden" id="comparePicURL" value="${comparePicURL}"/>
+					<input type="hidden" id="claimSequenceNo" value="${claimSequenceNo}"/>
+					<div class="formtable">	
+						<div class="row cl">
+							<label class="form_label col-2">报案号</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.registNo }
+							</div>
+							<label class="form_label col-2">案件紧急程度</label>
+							<div class="form_input col-2">
+								<span class="select-box">
+									<app:codeSelect codeType="MercyFlag" clazz="must" type="select" name='lossCarMainVo.mercyFlag' value="${lossCarMainVo.mercyFlag }" />
+								</span>	
+							</div>
+							<label class="form_label col-2">出险时间</label>
+							<div class="form_input col-2">
+								<app:date  date="${commonVo.damageDate }"/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">出险地点</label>
+							<div class="form_input col-2">
+								<app:codetrans  codeType="AreaCode" codeCode="${commonVo.damageAreaCode}"/>${commonVo.damageAddress }
+							</div>
+							<label class="form_label col-2">是否第一现场查勘</label>
+							<div class="form_input col-2">
+								<app:codetrans codeCode="${commonVo.firstAddressFlag}" codeType="YN10"/>
+							</div>
+							<label class="form_label col-2">查勘人</label>
+							<div class="form_input col-2">
+									${commonVo.checker}
+							</div>
+						</div>
+						</div>
+						<div class="formtable">	
+						<div class="row cl">
+							<label class="form_label col-2">查勘人身份证号码</label>
+							<div class="form_input col-2">
+								${commonVo.checkerIdfNo}
+							</div>
+							<label class="form_label col-2">查勘日期</label>
+							<div class="form_input col-2">
+								<app:date date="${commonVo.checkTime}" /> 
+							</div>
+							<label class="form_label col-2">查勘地点</label>
+							<div class="form_input col-2">
+								${commonVo.checkAddress}
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">定损员</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.handlerName }
+							</div>
+							<label class="form_label col-2">定损员身份证号码</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.handlerIdNo }
+							</div>
+							<label class="form_label col-2">定损日期</label>
+							<div class="form_input col-2">
+								<app:date date="${lossCarMainVo.deflossDate }" /> 
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">偏差核价金额</label>
+							<div class="form_input col-2" id="offsetVeri">
+								${commonVo.offsetVeri }
+							</div>
+							<label class="form_label col-2">偏差核价比例</label>
+							<div class="form_input col-2" id="offsetVeriRate" >
+								<font <c:if test="${commonVo.offsetVeriRate >20 }">color="red" </c:if> > ${commonVo.offsetVeriRate }
+										<c:if test="${commonVo.offsetVeriRate >0 }">%</c:if>
+								 </font>
+							</div>
+							<label class="form_label col-2">被保险人</label>
+							<div class="form_input col-2">
+							${insuredName}
+							</div>
+						</div>
+						<div class="row cl">
+						  <label class="form_label col-2">标的驾驶员</label>
+							<div class="form_input col-2">
+							${driverName}
+							</div>
+							<label class="form_label col-2">报案时间</label>
+							<div class="form_input col-2">
+							<fmt:formatDate value="${registTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</div>
+							<label class="form_label col-2">标的车架号</label>
+							<div class="form_input col-2">
+							${frameNo}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	

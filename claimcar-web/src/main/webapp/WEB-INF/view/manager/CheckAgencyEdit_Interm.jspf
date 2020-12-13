@@ -1,0 +1,197 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+<div class="table_title f14">机构信息</div>
+
+     <div class="table_cont">
+         <div class="formtable">
+      <input type="hidden" name="prpdCheckBankMainVo.Id"  id="prpdCheckMainID"
+						value="${prpdCheckBankMain.id}" />
+					<c:set var="createTime">
+						<fmt:formatDate value="${prpdCheckBankMain.createTime }"
+							pattern="yyyy-MM-dd" />
+					</c:set>
+					<input type="hidden" name="prpdCheckBankMainVo.CreateTime"
+						value="${createTime}" /> <input type="hidden"
+						name="prpdCheckBankMainVo.CreateUser"
+						value="${prpdCheckBankMain.createUser }" /> <input type="hidden" 
+						name="ComCode" value="${prpdCheckBankMain.comCode}" />
+
+					<div class="row cl">
+						<label class="form_label col-3">归属机构：</label>
+						<div class="form_input col-2">
+							<span class="select-box"> <app:codeSelect
+									codeType="ComCodeLv2" name="prpdCheckBankMainVo.ComCode"  id="comCode"
+									type="select" clazz="must" value="${prpdCheckBankMain.comCode}" />
+							</span>
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">查勘机构代码：</label>
+						<div class="form_input col-2">
+							<app:codeSelect codeType="CheckPayCode" type="select" id="checkCode" lableType="code-name" 
+									name="prpdCheckBankMainVo.checkCode"  value="${prpdCheckBankMain.checkCode}" clazz="must" onchange="insertCheckName()"/>
+							<%-- <input type="text" class="input-text" name="prpdCheckBankMainVo.checkCode" value="${prpdCheckBankMain.checkCode}" 
+							datatype="*2-10" nullmsg="机构代码不能为空！" errormsg="机构代码输入错误！" id="checkCode" ignore="ignore"/> --%>
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">查勘机构名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.checkName"
+								value="${prpdCheckBankMain.checkName}" datatype="*" nullmsg="查勘机构名称不能为空！" id="checkName" />
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">银行信息：</label>
+						<div class="form_input col-2">
+							<a class="btn btn-zd mr-10 fl" id="bankInfoC"
+								onClick="layerShowBankInfo()">银行信息</a>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">上级机构名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.upperCode"
+								value="${prpdCheckBankMain.upperCode}" />
+						</div>
+						<span class="col-1"></span> <label class="form_label col-2">开户银行：</label>
+						<div class="form_input col-2">
+						 <input type="hidden" id="BankCodeA" name="prpdcheckBankVo.BankName"  value="${prpdcheckBank.bankName}" /> 
+							 <c:set var="bankName">
+								<app:codetrans codeType="BankCode"
+									codeCode="${prpdcheckBank.bankName}" />
+							</c:set> 
+							<input type="text" class="input-text" id="checkBankName" 
+							 value="${bankName}" datatype="*" nullmsg="开户银行信息不能为空！" readonly />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">账号：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" id="checkBankAccountNo"
+								name="prpdcheckBankVo.AccountNo" value="${prpdcheckBank.accountNo}" datatype="*"
+								nullmsg="请完善账号信息！" readonly />
+						</div>
+						<span class="c-red col-1">*</span> <label class="form_label col-2">开户人名称：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" id="checkBankAccountName"
+								name="prpdcheckBankVo.AccountName" value="${prpdcheckBank.accountName}" datatype="*"
+								nullmsg="开户人名称不能为空！" readonly />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">成立日期：</label>
+						<div class="form_input col-2">
+							<c:set var="establishDate">
+								<fmt:formatDate value="${prpdCheckBankMain.establishDate}"
+									pattern="yyyy-MM-dd" />
+							</c:set>
+							<input type="text" class="Wdate" id="dgDateMin"
+								name="prpdCheckBankMainVo.EstablishDate"
+								onfocus="WdatePicker({maxDate:'\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd'})"
+								style="width: 97%" value="${establishDate}">
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">总部住所：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.OfficeAddress"
+								value="${prpdCheckBankMain.officeAddress}" />
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">联系人：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.Linker" value="${prpdCheckBankMain.linker}"
+								datatype="*" ignore="ignore" />
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">邮政编码：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.PostOde"
+								value="${prpdCheckBankMain.postOde}" datatype="p"
+								errormsg="请输入正确的邮政编码！" ignore="ignore" />
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">传真：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" name="prpdCheckBankMainVo.Fax"
+								value="${prpdCheckBankMain.fax}" maxlength="30"/>
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">固定电话：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								value="${prpdCheckBankMain.telNo}" name="prpdCheckBankMainVo.TelNo"
+								datatype="m|/^0\d{2,3}-\d{7,8}$/" errormsg="请输入正确的电话号码！" nullmsg="电话号码不能为空！" />
+						</div>
+						<span class="c-red col-1">*</span>
+					</div>
+					<div class="row cl">
+						<label class="form_label col-3">是否有效：</label>
+						<div class="form_input col-2">
+							<span class="select-box"> 
+								<app:codeSelect
+									codeType="validFlag" name="prpdCheckBankMainVo.ValidStatus"
+									type="select" clazz="must" value="${prpdCheckBankMain.validStatus}" />
+							</span>
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">电子邮箱：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								value="${prpdCheckBankMain.email}" name="prpdCheckBankMainVo.Email"
+								datatype="e" errormsg="请输入正确的电子邮箱！" ignore="ignore"/>
+						</div>
+					</div>
+					
+					<div class="row cl">
+						<label class="form_label col-3">支付标准：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text"
+								name="prpdCheckBankMainVo.PayStandard"
+								value="${prpdCheckBankMain.payStandard}" />
+						</div>
+						<span class="c-red col-1"></span> <label class="form_label col-2">资费标准：</label>
+						<div class="form_input col-2">
+							<a class="btn btn-zd mr-10 fl" id="info"
+								onClick="layerShowServ('资费信息','ServerInfo')">详细信息</a>
+						</div>
+					</div>
+					
+					<div class="row cl">
+						<label class="form_label col-3">最高资费标准：</label>
+						<div class="form_input col-2">
+							<input type="text" class="input-text" name="prpdCheckBankMainVo.PayStandardMax"
+								value="${prpdCheckBankMain.payStandardMax}" maxlength="60"/>
+						</div>
+						
+					</div>
+
+					<div class="formtable mt-10" style="height: 60px">
+						<div class="row cl">
+							<label class="form_label col-3">查勘内容分类：</label>
+							<div class="form_input col-7">
+								<textarea class="textarea" style="height: 60px"
+									name="prpdCheckBankMainVo.CheckRemark" placeholder="请输入查勘内容分类">${prpdCheckBankMain.checkRemark}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="formtable mt-10" style="height: 65px">
+						<div class="row cl">
+							<label class="form_label col-3">备注：</label>
+							<div class="form_input col-7">
+								<textarea class="textarea" style="height: 65px"
+									name="prpdCheckBankMainVo.Remark" placeholder="请输入备注">${prpdCheckBankMain.remark}</textarea>
+							</div>
+						</div>
+					</div>
+               
+           </div>
+          </div>
+
+   </div>
+
+</div>

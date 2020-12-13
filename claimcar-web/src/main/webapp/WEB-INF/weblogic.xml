@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.3/weblogic-web-app.xsd">
+    <wls:weblogic-version>10.3.6</wls:weblogic-version>
+    <wls:session-descriptor>
+        <wls:timeout-secs>3600</wls:timeout-secs>
+        <wls:cookie-name>JSESSIONIDCLAIMCAR</wls:cookie-name>
+    </wls:session-descriptor>
+    <wls:jsp-descriptor>
+        <wls:keepgenerated>true</wls:keepgenerated>
+        <wls:page-check-seconds>3</wls:page-check-seconds>
+        <wls:precompile>false</wls:precompile>
+         <wls:working-dir>./WorkingDir/claimcar-web</wls:working-dir>
+        <wls:print-nulls>true</wls:print-nulls>
+        <wls:encoding>UTF-8</wls:encoding>
+    </wls:jsp-descriptor>
+    <wls:container-descriptor>
+        <wls:servlet-reload-check-secs>3</wls:servlet-reload-check-secs>
+        <wls:resource-reload-check-secs>3</wls:resource-reload-check-secs>
+        <wls:prefer-web-inf-classes>false</wls:prefer-web-inf-classes>
+    </wls:container-descriptor>
+	<wls:context-root>claimcar</wls:context-root>
+</wls:weblogic-web-app>

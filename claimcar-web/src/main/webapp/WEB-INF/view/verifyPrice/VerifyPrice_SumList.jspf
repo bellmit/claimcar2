@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">
+				<div class="table_title f14">金额合计</div>
+				<div class="table_cont table_list">
+						<input type="hidden" name="lossCarMainVo.sumRemnant" value="${lossCarMainVo.sumRemnant }" />
+						<input type="hidden" name="lossCarMainVo.sumLossFee" value="${lossCarMainVo.sumLossFee }" />
+						<input type="hidden" name="lossCarMainVo.sumRescueFee" value="${lossCarMainVo.sumRescueFee }" /> 
+						<input type="hidden" id="sumCompFee" value="${lossCarMainVo.sumCompFee }" /> 
+						<input type="hidden" id="sumMatFee" value="${lossCarMainVo.sumMatFee }" /> 
+						<input type="hidden" id="sumManageFee" value="${lossCarMainVo.sumManageFee }" /> 
+					<div  id="certainSumList">
+					<table class="table table-border">
+							<thead class="text-c">
+								<tr >
+									<th>工作环节</th>
+									<th>零部件更换金额</th>
+									<th>辅料金额</th>
+									<th>残值金额</th>
+									<th>合计</th>
+								</tr>
+							</thead>
+							<tbody class="text-c">
+								<tr>
+									<td> 定损 </td>
+									<td> ${lossCarMainVo.sumCompFee } </td>
+									<td> ${lossCarMainVo.sumMatFee } </td>
+									<td> ${lossCarMainVo.sumRemnant } </td> 
+									<td> ${lossCarMainVo.sumLossFee} </td><!-- 改动前lossCarMainVo.sumCompFee + lossCarMainVo.sumMatFee - lossCarMainVo.sumRemnant -->
+								</tr>
+								<tr>
+								<c:choose>
+	        					<c:when test="${lossCarMainVo.cetainLossType eq '06'}">
+									<td> 核价 </td>
+									<td> <input type="text" class="input-text" id="sumVeripCompFee"   onchange="countVeriPLoss()" datatype="amount" name="lossCarMainVo.sumVeripCompFee" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripCompFee : lossCarMainVo.sumCompFee }" /> </td>
+									<td> <input type="text" class="input-text" id="sumVeripMatFee"   onchange="countVeriPLoss()" datatype="amount" name="lossCarMainVo.sumVeripMatFee" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripMatFee : lossCarMainVo.sumMatFee }" /> </td>
+									<td> <input type="text" class="input-text" id="sumVeripRemnant"  onchange="countVeriPLoss()" datatype="amount" name="lossCarMainVo.sumVeripRemnant" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripRemnant : lossCarMainVo.sumRemnant }" /> </td> 
+									<td> <input type="text" class="input-text" id="sumVeripLoss"  readonly="readonly" name="lossCarMainVo.sumVeripLoss" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripLoss : lossCarMainVo.sumCompFee + lossCarMainVo.sumMatFee - lossCarMainVo.sumRemnant }" /> </td>
+								</c:when>
+								<c:otherwise>
+									<td> 核价 </td>
+									<td> <input type="text" class="input-text" id="sumVeripCompFee"  readonly="readonly" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripCompFee : lossCarMainVo.sumCompFee }" /> </td>
+									<td> <input type="text" class="input-text" id="sumVeripMatFee" readonly="readonly"  
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripMatFee : lossCarMainVo.sumMatFee }" /> </td>
+									<td> <input type="text" class="input-text" id="sumVeripRemnant" readonly="readonly" 
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripRemnant : lossCarMainVo.sumRemnant }" /> </td> 
+									<td> <input type="text" class="input-text" id="sumVeripLoss"  readonly="readonly"
+												value="${!empty lossCarMainVo.sumVeripLoss ? lossCarMainVo.sumVeripLoss : lossCarMainVo.sumCompFee + lossCarMainVo.sumMatFee - lossCarMainVo.sumRemnant }" /> </td>
+								</c:otherwise>
+								</c:choose>
+								</tr>
+								<c:if test="${!empty lossCarMainVo.sumVeriLossFee }" > 
+									<tr>
+										<td> 核损 </td>
+										<td> ${lossCarMainVo.sumVeriCompFee } </td>
+										<td> ${lossCarMainVo.sumVeriMatFee } </td>
+										<td> ${lossCarMainVo.sumVeriRemnant } </td> 
+										<td> ${lossCarMainVo.sumVeriLossFee} </td><!-- 改动前--lossCarMainVo.sumVeriCompFee + lossCarMainVo.sumVeriMatFee - lossCarMainVo.sumVeriRemnant -->
+									</tr>
+								</c:if>
+							</tbody>
+					</table>
+					</div> 
+					<div class="formtable ">
+						<div class="row cl">
+							合计=零配件更换金额+辅料金额-残值金额
+						</div>
+					</div>		
+				</div>
+			</div>

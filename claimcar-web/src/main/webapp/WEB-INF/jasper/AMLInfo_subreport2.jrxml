@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AMLInfo_subreport2" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="85dcc88d-4345-4c8e-bf6d-d7537f2389f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" isDefault="true" fontName="宋体" fontSize="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="favoreeName" class="java.lang.String"/>
+	<field name="favoreeAdress" class="java.lang.String"/>
+	<field name="favoreelBusinessArea" class="java.lang.String"/>
+	<field name="amlOneCertificateList" class="java.util.List">
+		<fieldDescription><![CDATA[amlOneCertificateList]]></fieldDescription>
+	</field>
+	<field name="amlThreeCertificateList" class="java.util.List">
+		<fieldDescription><![CDATA[amlThreeCertificateList]]></fieldDescription>
+	</field>
+	<field name="SUBREPORT_DIR" class="java.lang.String"/>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="246" y="1" width="139" height="37" uuid="ac6a32af-9af7-41a3-a433-99ee6daa8831"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{favoreeAdress}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="38" uuid="15b465a8-c352-4084-a298-64aca257cc5c"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="103" y="1" width="84" height="37" uuid="bde04706-1ce6-4042-aa4a-66819c01c7ec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{favoreeName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="446" y="1" width="1" height="37" uuid="cafe416e-d100-4a64-b77f-9ccb18023102"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="style1" x="447" y="1" width="107" height="37" uuid="1b9c57cc-5dbd-44a1-baaa-558c9d1eb0ff"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{favoreelBusinessArea}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="245" y="1" width="1" height="37" uuid="a3b36ebd-400d-4e0d-95dc-a0a52fc864fe"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="386" y="1" width="60" height="37" uuid="7d3eca22-597f-4fce-900e-b71adaa9dce9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[经营范围]]></text>
+			</staticText>
+			<line>
+				<reportElement x="385" y="1" width="1" height="37" uuid="f84c6086-39d2-45f1-bc62-ad82c13b24fd"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="188" y="1" width="57" height="37" uuid="1e34d9f9-2e96-4586-8cd2-0b9c5a151586"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[单位地址]]></text>
+			</staticText>
+			<line>
+				<reportElement x="187" y="1" width="1" height="37" uuid="d8edfd8a-a385-4abf-b965-ba80332cf13d"/>
+			</line>
+			<line>
+				<reportElement x="1" y="38" width="553" height="1" uuid="3b2206c3-8bcf-4102-bb61-57e1da5ad8cd"/>
+			</line>
+			<staticText>
+				<reportElement style="style1" x="1" y="2" width="102" height="36" uuid="0e391e39-c557-4600-9ddb-b49df877714c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[受益人姓名(法人)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="102" y="2" width="1" height="36" uuid="78943a17-d3e5-48a1-9b1c-6b527d43a25c"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="38" uuid="5c24a725-ae73-482e-9245-5875741e9818"/>
+			</line>
+		</band>
+		<band height="76">
+			<subreport>
+				<reportElement x="1" y="1" width="556" height="75" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="0ac0cf04-6258-4945-870d-7c69429b98ca"/>
+				<subreportParameter name="favoreelComcode"/>
+				<subreportParameter name="favoreelRevenueRegistNo"/>
+				<subreportParameter name="favoreelBusinessCode"/>
+				<subreportParameter name="favoreelCertifyDate"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{amlThreeCertificateList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{SUBREPORT_DIR} + "AMLInfo_subreport3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="27">
+			<subreport>
+				<reportElement x="1" y="0" width="556" height="27" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="4204ecc6-ed1f-4d83-aba6-6ea1e7d45f93"/>
+				<subreportParameter name="favoreelBusinessCode"/>
+				<subreportParameter name="favoreelCertifyDate"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{amlOneCertificateList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{SUBREPORT_DIR} + "AMLInfo_subreport4.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

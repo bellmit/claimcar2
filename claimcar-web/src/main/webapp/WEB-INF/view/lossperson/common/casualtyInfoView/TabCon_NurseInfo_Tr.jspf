@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td>${persNurses.payPersonName }</td>
+	<td>
+		<app:codetrans codeType="SexType" codeCode="${persNurses.sex }" />
+	</td>
+	<td>
+		<app:codetrans codeType="TicCode" codeCode="${persNurses.occupationCode }" />
+	</td>
+	<td>
+		<app:codetrans codeType="Income" codeCode="${persNurses.income }" />
+	</td>
+	<td title="${persNurses.relationship }">
+		${fn:length(persNurses.relationship)>4?fn:substring(persNurses.relationship,0,4):persNurses.relationship }
+		<c:if test="${fn:length(persNurses.relationship)>4 }">......</c:if>
+	</td>
+</tr>

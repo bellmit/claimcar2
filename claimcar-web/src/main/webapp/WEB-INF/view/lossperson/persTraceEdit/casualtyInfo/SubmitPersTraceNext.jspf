@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<div id="MajorcaseOption">
+	<c:if test="${isAppointTime == 'Y' }">
+		<div class="formtable ">
+			<label class="form_label col-2 col-offset-3">预约时间:</label>
+			<div class="form_input col-7">
+				<input name="prpLDlossPersTraceMainVo.appointmentTime" value="<app:date date='${appointmentTime }' />" type="text" class="Wdate" style="width: 44.6%" id="dgDateMin"
+					onfocus="WdatePicker({minDate: '%yyyy-%MM-%dd',maxDate : '<app:date date='${appointmentTime }' />',dateFmt:'yyyy-MM-dd'})" />
+			</div>
+		</div>
+	</c:if>
+	<div class="line"></div>
+	<div class="formtable ">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>当前环节</th>
+					<th>下个环节</th>
+					<th>人员选择</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<tr>
+					<td>
+						<input type="hidden" name="submitNextVo.comCode" value="${nextVo.comCode}" />
+						<input type="hidden" name="submitNextVo.currentNode" value="${nextVo.currentNode }">
+						<input type="hidden" name="submitNextVo.currentName" value="${nextVo.currentName }">
+						<input type="hidden" name="submitNextVo.auditStatus" value="${nextVo.auditStatus }">
+						${nextVo.currentName }
+					</td>
+					<td>
+						<input type="hidden" name="submitNextVo.nextNode" value="${nextVo.nextNode }">
+						<input type="hidden" name="submitNextVo.nextName" value="${nextVo.nextName }">
+						${nextVo.nextName }
+					</td>
+					<td>
+						<input type="hidden" name="submitNextVo.assignUser" value="${nextVo.assignUser}">
+						<input type="hidden" name="submitNextVo.assignCom" value="${nextVo.assignCom}">
+						<input type="hidden" name="submitNextVo.submitLevel" value="${nextVo.submitLevel}">
+						<input type="hidden" name="submitNextVo.maxLevel" value="${nextVo.maxLevel}">
+						<select class="select" name="submitNextVo.assignName" value="${nextVo.assignName}">
+							<option value="${nextVo.assignName}">${nextVo.assignName}</option>
+						</select>
+					</td>
+				</tr>
+				<c:if test="${majorcaseFlag == '1'&& !empty nextVo.otherNodes}">
+					<tr>
+						<td>${nextVo.currentName }</td>
+						<td>
+							<input type="hidden" name="submitNextVo.otherNodes" value="${nextVo.otherNodes }">
+							<input type="hidden" name="submitNextVo.otherNodesName" value="${nextVo.otherNodesName }">
+							${nextVo.otherNodesName }
+						</td>
+						<td>
+						</td>
+					</tr>
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+	<div class="line"></div>
+	<%--是否发送邮件
+	<input type="radio" name="isEmail" value="1">
+	是
+	<input type="radio" name="isEmail" value="0">
+	否--%>
+	<div class="layui-layer-btn">
+		<a class="layui-layer-btn0" id="submitNextNode">确认提交</a>
+	</div>
+</div>

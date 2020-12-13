@@ -1,0 +1,131 @@
+#editform .fixedmargin{margin-top:0;  padding-top: 5px;}
+#propTbody td select{border:1px solid  #666;height:28px;line-height:28px;}
+#propTbody td input{border:1px solid  #666;height:26px;line-height:26px;}
+.acc-over {
+  color: #1A6FB8;
+}
+.tableInputCss .input-text {
+	width: 20%;
+}
+
+.tableInputCss td {
+	border: none;
+	text-align: center;
+}
+.policyIsCheck {
+	background-color: #ebf2fc;
+}
+.bottomNotice {
+	padding: 0 5px 5px 15px;
+}
+
+.aciidentWrap {
+	padding: 0 5px 5px 15px;
+}
+
+.noticeLeft {
+	margin-left: 0;
+}
+
+.noticeLeft  .notice_title {
+	padding-left: 0;
+}
+
+.noticeRight {
+	float: right;
+	width: 48%;
+	margin-right: 0px;
+}
+
+.bottomNotice textarea {
+	border: 1px solid #2A81CC;
+}
+
+.noticeRight  .notice_title {
+	padding-left: 5%;
+}
+
+.noticeRight .textarea {
+	margin-left: 5%;
+}
+#thirdCars .formtable {
+	position: relative;
+}
+
+.delSancheBtn {
+	position: absolute;
+	top: 30%;
+	right: 0;
+}
+
+
+
+#WuSunTable {
+	position: relative;
+}
+
+.acc-over {
+	color: #1A6FB8;
+}
+
+.mspy.btn.size-MINI {
+	margin-right: -4px;
+}
+
+.addSancheBtn {
+	float: right;
+	margin-top: 2px;
+}
+
+
+
+.is-you-Check {
+	position: relative;
+}
+
+.isyoucheck {
+	position: absolute;
+	right: 0;
+} 
+
+
+
+
+.accident-over-add {
+	height: 36px;
+	line-height: 36px;
+}
+
+#pend {
+	margin: 0 10px;
+}
+
+.wusun-details th,.wusun-detail-body td {
+	width: 22%;
+}
+
+.wusun-details th.wusun-add-btn,.wusun-detail-body td.wusun-del-btn {
+	width: 12%;
+}
+
+.detailInformation .row .form_label.col-1,#thirdCars .formtable .row .form_label.col-1{
+	width: 10%;
+}
+
+.detailInformation .row .form_input.col-3 ,#thirdCars .formtable .row .form_input.col-3{
+	width: 23%;
+}
+#RenShangTable thead th,#RenShangTable  tbody td,.txt-center {
+	text-align: center;
+}
+.allLossCbx,.allLossCbx_3{  margin-left: -4px;}
+.detailInformation .row .form_label.col-1{
+	line-height: 14px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.detailInformation.formtable .form_input {
+	line-height: 34px;
+	padding-top:0;
+	padding-bottom:0;
+}

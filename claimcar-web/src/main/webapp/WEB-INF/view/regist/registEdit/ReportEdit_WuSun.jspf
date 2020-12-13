@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!--物损信息  开始-->
+		<div class="table_title f14">财产损失信息</div>
+			<table class="table table_cont table-border table-hover" id="thridCarList">
+				<thead>
+					<tr class="text-c wusun-details">
+					<th class="wusun-add-btn">
+					<button type="button"   class="btn btn-plus Hui-iconfont Hui-iconfont-add" onclick="addProp(this)"></button>
+				    </th>
+						<th>物体名称</th>
+						<th>物体方</th>
+						<th>是否有损</th>
+						<th>备注</th>
+						
+					</tr>
+				</thead>
+				<tbody class="" id="propTbody" >
+				<c:if test="${fn:length(prpLRegistPropLosses)>=1}">
+					<input type="hidden" id="propSize" value="${fn:length(prpLRegistPropLosses)}">
+				</c:if>
+					<c:if test="${fn:length(prpLRegistPropLosses)<1}">
+					<input type="hidden" id="propSize" value="1">
+							<tr class="text-c wusun-detail-body">
+								<td class="wusun-del-btn">
+									<button type="button"
+										class="btn btn-minus Hui-iconfont Hui-iconfont-jianhao delwusunrowBtn"
+										name="delProp_0" onclick="delProp(this)"></button>
+								</td>
+								<td><input
+									name="prpLRegistPropLosses[0].lossitemname"
+									 id="lossitemname"
+									 maxlength="30"
+									datatype="*1-30" /></td>
+								<td><app:codeSelect type="select" id="licenseNo"
+										codeType="DefLossItemType" dataSource="${carNoMap}"
+										onchange="writeLossParty(this, 0)"
+										name="prpLRegistPropLosses[0].licenseNo"/> 
+										<input type="hidden"
+									name="prpLRegistPropLosses[0].lossparty"/> 
+								</td>
+								<td><!-- <input
+									name="prpLRegistPropLosses[0].damagelevel"
+									id="damagelevel" 
+									maxlength="40" datatype="*0-40" /> -->
+									
+									<app:codeSelect codeType="YN10" type="radio" name="prpLRegistPropLosses[0].damagelevel" value="${prpLRegistPropLosses[0].damagelevel }" nullToVal="0" onclick="writeAccidentTypes()" />
+									</td>
+								<td><input
+									name="prpLRegistPropLosses[0].lossremark" maxlength="100"
+									datatype="*0-100" /> <input type="hidden"
+									name="prpLRegistPropLosses[0].id"/> <input type="hidden"
+									name="prpLRegistPropLosses[0].createUser"
+									value="${prpLRegistPropLoss.createUser}" /> <input type="hidden"
+									name="prpLRegistPropLosses[0].createTime"
+									value="<fmt:formatDate value='${prpLRegistPropLoss.createTime}' type='both'/>" />
+									<input type="hidden"
+									name="prpLRegistPropLosses[0].updateUser"
+									value="${prpLRegistPropLoss.updateUser}" /> <input type="hidden"
+									name="prpLRegistPropLosses[0].updateTime"
+									value="<fmt:formatDate value='${prpLRegistPropLoss.updateTime}' type='both'/>" />
+								</td>
+								<%-- <td>
+								<a class="btn btn-zd fl" id="delProp" onclick="delProp(this)">删除</a>
+							</td> --%>
+							</tr>
+						</c:if>
+		<%@include file="ReportEdit_Prop.jsp" %>
+				</tbody>
+			      
+			</table>
+		</div>
+<!--物损信息   结束-->

@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+    <div class="table_title f14">受伤部位</div>
+    <div class="table_cont table_list">
+        <div class="formtable ">
+            <app:codeSelect clazz="checkbox mr-5" codeType="InjuredPart" type="checkbox" name="prpLDlossPersTraceVo.prpLDlossPersInjured.injuryPart" value="${persTrace.prpLDlossPersInjured.injuryPart}" onclick="check_InjuredParts(this)" />
+        </div>
+        <table class="table table-border">
+            <thead class="text-c">
+                <tr>
+                    <th width="10%">受伤部位<font class="must" style="position: relative;">*</font></th>
+                    <th width="15%">伤情诊断<font class="must" style="position: relative;">*</font></th>
+                    <th width="10%">治疗方式</th>
+                    <th width="15%">治疗途径</th>
+                    <th width="10%">预后情况</th>
+                    <th width="10%">伤残程度</th>
+                    <th width="15%">具体诊断</th>
+                    <th width="15%">跟踪信息备注</th>
+                </tr>
+            </thead>
+            <tbody id="injuredPart_Tbody" class="text-c">
+                <c:forEach var="persExt" items="${persTrace.prpLDlossPersInjured.prpLDlossPersExts }" varStatus="extStatus">
+                    <c:set var="injuredPartSize" value="${extStatus.index}" />
+                    <%@ include file="TabCon_InjuredPart_Tr.jspf"%>
+                </c:forEach>
+                <tr>
+                    <td align="center" colspan="8">（选中受伤部位增加信息，取消选中删除信息）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

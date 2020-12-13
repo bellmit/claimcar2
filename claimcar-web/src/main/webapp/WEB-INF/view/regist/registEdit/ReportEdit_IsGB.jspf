@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">联共保信息:</div>
+	<div class="table_cont table_list">
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">联共保标志:</label>
+				<div class="form_input col-1 clearfix">
+					<c:choose>
+						<c:when test="${prpLCMains[0].coinsFlag eq 1 }">主共
+						</c:when>
+						<c:when test="${prpLCMains[0].coinsFlag eq 3 }">主联
+						</c:when>
+						<c:when test="${prpLCMains[0].coinsFlag eq 2 }">从共
+						</c:when>
+						<c:when test="${prpLCMains[0].coinsFlag eq 4 }">从联
+						</c:when>
+					</c:choose>
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">手续费计入方式:</label>
+				<div class="form_input col-1 clearfix">份额计入</div>
+			</div>
+		</div>
+		<table class="table table-border" border="1">
+			<thead class="text-c">
+				<tr>
+					<th>主保单号码（商业险）</th>
+					<th>主保单号（交强险）</th>
+					<th>联/共保身份</th>
+					<th>是否首席</th>
+					<th>联/共保人机构代码</th>
+					<th>联/共保人名称</th>
+					<th>联/共保份额（%）</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<c:forEach items="${prpccoins}" var="prpccoins">
+					<tr>
+						<c:choose>
+							<c:when test="${empty prpccoins.policyNo }">
+								<td>-</td>
+							</c:when>
+							<c:otherwise>
+								<td>${prpccoins.policyNo }</td>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${empty prpccoins.mainPolicyNo  }">
+								<td>-</td>
+							</c:when>
+							<c:otherwise>
+								<td>${prpccoins.mainPolicyNo }</td>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${prpccoins.coinsType eq 1 }">
+								<td>我方</td>
+							</c:when>
+							<c:when test="${prpccoins.coinstype eq 2 }">
+								<td>系统内他方</td>
+							</c:when>
+							<c:otherwise>
+								<td>系统外他方</td>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${prpccoins.chiefFlag eq 1}">
+								<td>是</td>
+							</c:when>
+							<c:otherwise>
+								<td>否</td>
+							</c:otherwise>
+						</c:choose>
+						<td>${prpccoins.coinsCode }</td>
+						<td>${prpccoins.coinsName}</td>
+						<td>${prpccoins.coinsRate }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>

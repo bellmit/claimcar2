@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.formtable label.form-label.col-1 {
+  width: 10%;
+}
+.formtable .formControls.col-3 {
+  width: 23%;
+}
+.tabCon{
+	padding:0;  overflow: hidden;
+}
+.Wdate{
+	 width: 45%;
+}

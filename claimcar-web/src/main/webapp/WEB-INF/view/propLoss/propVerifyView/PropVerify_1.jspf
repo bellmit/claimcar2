@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 基本信息开始 -->
+<div class="table_wrap">
+     <div class="table_title f14">基本信息</div>   	 	
+				<div class="table_cont ">
+					<div class="formtable ">
+						<div class="row  cl">
+							<label class="form_label col-1">报案号</label>
+							<div class="form_input col-3">
+								${prpLdlossPropMainVo.registNo }
+							</div>
+							<label class="form_label col-1">赔案类别</label>
+							<div class="form_input col-3">
+								${prpLdlossPropMainVo.claimType=='0'?'正常赔案':'快速赔案' }
+							</div>
+							<label class="form_label col-1">案件紧急程度</label>
+							<div class="form_input col-3">
+									${prpLdlossPropMainVo.mercyFlag }
+							</div>
+						</div>
+
+						<div class="row  cl">
+							<label class="form_label col-1">*车牌号码</label>
+							<div class="form_input col-3">
+									${prpLdlossPropMainVo.license }
+							</div>
+							<label class="form_label col-1 ">定损员</label>
+							<div class="form_input col-3">
+								${prpLdlossPropMainVo.handlerName }
+							</div>
+							<label class="form_label col-1">定损员身份证号码</label>
+							<div class="form_input col-3">
+								${prpLdlossPropMainVo.handlerIdCard }
+							</div>
+						</div>
+						<div class="row  cl">
+							<label class="form_label col-1">*定损日期</label>
+							<div class="form_input col-3">
+								${prpLdlossPropMainVo.defLossDate }
+							</div>
+							<label class="form_label col-1 ready-only">核损人员</label>
+							<div class="form_input col-3">
+								<input type="text" class="input-text" name="prpLdlossPropMainVo.underWriteName" value="${prpLdlossPropMainVo.underWriteName }" readonly="readonly"/>
+							</div>
+							<label class="form_label col-1 ready-only">核损员身份证号码</label>
+							<div class="form_input col-3">
+								<input type="text" class="input-text" name="prpLdlossPropMainVo.underWriteIdCard" value="${prpLdlossPropMainVo.underWriteIdCard }" readonly="readonly"/>
+							</div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+</div>
+<!-- 基本信息结束 -->

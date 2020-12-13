@@ -1,0 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">
+				<div class="table_title f14">车辆信息</div>
+					<div class="table_cont basicInforoVer">
+					    <input type="hidden" value="${jy2Flag}" id="jy2Flag">
+						<input type="hidden" name="lossCarMainVo.id" id="lossMainId" value="${lossCarMainVo.id }"/>
+						<input type="hidden" name="lossCarMainVo.riskCode" id="lossCarMainRiskCode" value="${lossCarMainVo.riskCode }"/>
+						<input type="hidden"  name="carInfoVo.id" value="${carInfoVo.id}" />
+						<input type="hidden" name="lossCarMainVo.registNo" id="registNo" value="${lossCarMainVo.registNo }"/>
+						<input type="hidden"  id="deflossCarType" name="lossCarMainVo.deflossCarType" value="${lossCarMainVo.deflossCarType}" />
+						<input type="hidden" id="theftAmount" value="${commonVo.theftAmount}" />
+						<input type="hidden" id="saveType" name="lossCarMainVo.auditStatus" />
+						<input type="hidden" id="flowTaskId" name ="taskVo.taskId" value="${taskVo.taskId}">
+						<input type="hidden" id="currentNode" name ="taskVo.subNodeCode" value="${taskVo.subNodeCode}">
+						<input type="hidden" id="handleStatus" value="${taskVo.handlerStatus }" />
+						<input type="hidden" id="flowFlag"  value="${lossCarMainVo.flowFlag}">
+						<input type="hidden" id="carAmount" value="${commonVo.carAmount }" />
+						<input type="hidden" id="sumpaidDef" value="${commonVo.sumpaidDef }" />
+						<input type="hidden" id="nodeCode" value="${taskVo.subNodeCode}">
+						<input type="hidden" id="verifyPassFlag" value="${commonVo.verifyPassFlag }" />
+						<input type="hidden" id="reLossFlag" value="${commonVo.reLossFlag }" />
+						<input type="hidden" id="cetainLossType" name="lossCarMainVo.cetainLossType" value="${lossCarMainVo.cetainLossType}" />
+						<input type="hidden" id="newSumLossFee" value="${lossCarMainVo.sumVeripLoss + lossCarMainVo.sumRepairFee + lossCarMainVo.sumOutFee }" />
+						<!-- 山东影像对比 -->
+						<input type="hidden" id="carRiskUserName" value="${carRiskUserName}"/>
+						<input type="hidden" id="carRiskPassWord" value="${carRiskPassWord}"/>
+						<input type="hidden" id="claimPeriod" value="${claimPeriod}"/>
+						<input type="hidden" id="comparePicURL" value="${comparePicURL}"/>
+						<input type="hidden" id="claimSequenceNo" value="${claimSequenceNo}"/>
+						<input type="hidden" id="jyFlag" value="0"/>
+						<div class="formtable">	
+							<div class="row cl">
+								<label class="form_label col-2">报案号</label>
+								<div class="form_input col-2">
+									${lossCarMainVo.registNo }
+								</div>
+								<label class="form_label col-2">赔案类别</label>
+								<div class="form_input col-2">
+									<app:codetrans codeType="CaseCode" codeCode="${commonVo.claimType }"/>
+								</div>
+								<label class="form_label col-2">案件紧急程度</label>
+								<div class="form_input col-2">
+									<app:codetrans codeType="MercyFlag" codeCode="${lossCarMainVo.mercyFlag}" />
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form_label col-2">车牌号码</label>
+								<div class="form_input col-2">
+									${carInfoVo.licenseNo }
+								</div>
+								<label class="form_label col-2">损失方</label>
+								<div class="form_input col-2">
+									<c:choose>
+										<c:when test="${lossCarMainVo.deflossCarType eq '1'}"> 
+											主车
+										</c:when>
+										<c:otherwise>
+											三者车
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<label class="form_label col-2">车主</label>
+								<div class="form_input col-2">
+									${carInfoVo.carOwner }
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form_label col-2">初登日期</label>
+								<div class="form_input col-2">
+									<app:date  date='${carInfoVo.enrollDate }'/>
+								</div>
+								<label class="form_label col-2">车辆种类</label>
+								<div class="form_input col-2"> 
+									<c:choose>
+										 <c:when test="${lossCarMainVo.deflossCarType eq '1'}"> 
+											<app:codetrans codeType="VehicleTypeShow" codeCode="${prpLCItemCarVo.carType }" />
+										 </c:when>
+									     <c:otherwise>
+									     	<app:codetrans codeType="VehicleType" codeCode="${carInfoVo.platformCarKindCode }" />
+									    </c:otherwise>
+							 		</c:choose>
+								</div>
+								<label class="form_label col-2">车架号</label>
+								<div class="form_input col-2">
+									${carInfoVo.frameNo }
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form_label col-2">车牌种类</label>
+								<div class="form_input col-2">
+									<app:codetrans codeType="LicenseKindCode" codeCode="${carInfoVo.licenseType }" />
+								</div>
+								<label class="form_label col-2">车型名称</label>
+								<div class="form_input col-2 overTextPre">
+									${carInfoVo.modelName }
+								</div>
+								<label class="form_label col-2">VIN码</label>
+								<div class="form_input col-2">
+									${carInfoVo.vinNo }
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form_label col-2">发动机号</label>
+								<div class="form_input col-2">
+									${carInfoVo.engineNo }
+								</div>
+								
+								<label class="form_label col-2">偏差核损金额</label>
+								<div class="form_input col-2" id="offsetVeri">
+									${commonVo.offsetVeri }
+								</div>
+								<label class="form_label col-2">偏差核损比例</label>
+								<div class="form_input col-2" id="offsetVeriRate">
+									<font <c:if test="${commonVo.offsetVeriRate >20 }">color="red" </c:if> > ${commonVo.offsetVeriRate }
+										<c:if test="${commonVo.offsetVeriRate >0 }">%</c:if>
+									</font>
+								</div>
+							</div>
+							<div class="row cl">
+								<c:if test="${lossCarMainVo.deflossCarType eq '1'}">
+									<label class="form_label col-2">承保公司</label>
+									<div class="form_input col-2">
+										${carInfoVo.insureComName }
+									</div>
+									<label class="form_label col-2">交强险责任类型</label>
+									<div class="form_input col-2">
+										<app:codetrans codeType="CiIndemDuty" codeCode="${lossCarMainVo.ciDutyFlag }" />
+									</div>
+								</c:if>
+								<label class="form_label col-2">事故责任比例</label>
+								<div class="col-2">
+									<div class="form_input col-6 select-acc">
+										<app:codetrans codeType="IndemnityDuty" codeCode="${lossCarMainVo.indemnityDuty }"/> &nbsp;&nbsp;&nbsp; ${lossCarMainVo.indemnityDutyRate }
+									</div>
+								</div>
+							</div>
+					</div>	
+				</div>
+			</div>	

@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 金额统计 -->
+
+<div class="table_wrap">
+	<div class="table_title f14">金额统计</div>
+	<div class="table_cont  table_list">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>金额统计</th>
+					<th>估损金额总计</th>
+					<th>索赔金额总计</th>
+					<th>定损金额总计</th>
+					<th>减损金额总计</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<tr>
+					<th class="Bth">人伤跟踪金额</th>
+					<td>
+						<input style="border: none" type="text" class="input-text text-c" id="sumReportFee" name="prpLDlossPersTraceVo.sumReportFee"
+							value="<fmt:formatNumber type="number" value="${persTrace.sumReportFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+					</td>
+					<td>
+						<input style="border: none" type="text" class="input-text text-c" id="sumRealFee" name="prpLDlossPersTraceVo.sumRealFee"
+							value="<fmt:formatNumber type="number" value="${persTrace.sumRealFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+					</td>
+					<td>
+						<input style="border: none" type="text" class="input-text text-c" id="sumdefLoss" name="prpLDlossPersTraceVo.sumdefLoss"
+							value="<fmt:formatNumber type="number" value="${persTrace.sumdefLoss }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+					</td>
+					<td>
+						<input style="border: none" type="text" class="input-text text-c" id="sumDetractionFee" name="prpLDlossPersTraceVo.sumDetractionFee"
+							value="<fmt:formatNumber type="number" value="${persTrace.sumDetractionFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+					</td>
+				</tr>
+				<c:if test="${!empty persTrace.sumVeriReportFee }">
+					<tr>
+						<th class="Bth">审核金额</th>
+						<td>
+							<input style="border: none" type="text" class="input-text text-c" id="sumVeriReportFee" name="prpLDlossPersTraceVo.sumVeriReportFee"
+								value="<fmt:formatNumber type="number" value="${persTrace.sumVeriReportFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+						</td>
+						<td>
+							<input style="border: none" type="text" class="input-text text-c" id="sumVeriRealFee" name="prpLDlossPersTraceVo.sumVeriRealFee"
+								value="<fmt:formatNumber type="number" value="${persTrace.sumVeriRealFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+						</td>
+						<td>
+							<input style="border: none" type="text" class="input-text text-c" id="sumVeriDefloss" name="prpLDlossPersTraceVo.sumVeriDefloss"
+								value="<fmt:formatNumber type="number" value="${persTrace.sumVeriDefloss }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+						</td>
+						<td>
+							<input style="border: none" type="text" class="input-text text-c" id="sumVeriDetractionFee" name="prpLDlossPersTraceVo.sumVeriDetractionFee"
+								value="<fmt:formatNumber type="number" value="${persTrace.sumVeriDetractionFee }" pattern="0.00" maxFractionDigits="2"/>" readonly="readonly">
+						</td>
+					</tr>
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 金额统计 -->

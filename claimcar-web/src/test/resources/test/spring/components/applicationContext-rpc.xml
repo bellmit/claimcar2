@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:test/config/rpc.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="ins.framework.rpc.scanner.RpcClientScanner">
+		<property name="url" value="${rpc.platform.urlPrefix}" />
+		<property name="basePackage" value="ins" />
+		<property name="proxyFactoryBeanClass" value="${rpc.platform.excportClassName}" />
+		<property name="extendProperties">
+			<map>
+				<entry key="connectTimeout" value="60000" />
+				<entry key="readTimeout" value="120000" />
+				<entry key="username" value="admin" />
+				<entry key="password" value="sinosoft" />
+			</map>
+		</property>
+	</bean>
+</beans>

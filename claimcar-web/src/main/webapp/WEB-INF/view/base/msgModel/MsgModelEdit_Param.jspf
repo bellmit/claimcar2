@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="row cl">
+    <label class="form_label col-1">操作说明：</label>
+	    <div class="form_label col-10">
+			<B>包含有{}的内容将被替换为相关的案件信息：在模板中请使用<font color="red"> 
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{流水号}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{报案号}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{报案时间}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{当前时间}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{调度时间}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{被保险人名称}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{被保险人手机}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车牌号码}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{保险单号码}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险地点}</a>、
+			
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险时间}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险原因}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车商经办}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{承保险种}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{前往目的地}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{现场查勘员}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{现场查勘员电话}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{现场}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{交强出险次数}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{商业出险次数}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{人伤跟踪员}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{人伤跟踪员电话}</a>、
+			
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{核损价格}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{残值后核损价格}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{报案人名称}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{报案人电话}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{驾驶人名称}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{驾驶人电话}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{产品标识}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{修理厂名称}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{修理厂地址}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{修理厂联系人}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{修理厂电话}</a>、
+			<!-- <a style="cursor: hand" onclick="setTemplateContent(this)">{VIP类型}</a>、 -->
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险经过}</a>、
+			
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{损失类型}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{联系人姓名}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{联系人电话}</a>、
+			<!-- <a style="cursor: hand" onclick="setTemplateContent(this)">{出险省份}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险市}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{出险区}</a>、 -->
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车辆类型}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车架号}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{使用性质}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{约定查勘地点}</a>、
+			
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{损失项}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{损失项内容}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{定损类型}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{约定定损地点}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{客户是否接受快撤}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{报案三者车牌号}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{保险期间}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{*伤*亡}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{标的*伤*亡}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{三者*伤*亡}</a>、
+			
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{商业/交强}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{赔款金额}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{银行账户}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{收款人名称}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{业务板块}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{会员分类}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{核心客户}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{主险保额}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{三者责任险保额（万）}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{车上人员责任险保额（万）}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{盗抢险保额（万）}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{自助视频链接}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{案件评价链接}</a>、
+			<a style="cursor: hand" onclick="setTemplateContent(this)">{业务员}</a>
+			</font> 代替案件信息！单击{}即可将匹配符插入模板内容中。</B>
+		</div>
+</div>

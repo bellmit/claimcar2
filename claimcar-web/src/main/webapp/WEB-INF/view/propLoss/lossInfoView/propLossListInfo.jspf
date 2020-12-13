@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 财产损失 -->
+
+<div class="table_wrap">
+	<div class="table_title f14">财产损失</div>
+	<div class="table_cont table_list">
+		<table class="table table-border text-c">
+			<thead class="text-c">
+				<tr>
+					<th>序号</th>
+					<th>损失方</th>
+					<th>财产名称</th>
+					<th>定损金额</th>
+					<th>核损金额</th>
+					<th>定损员</th>
+					<th>核损员</th>
+					<th>任务类型</th>
+					<th>查看</th>
+				</tr>
+			</thead>
+			<tbody class="text-c">
+				<c:forEach var="lossPropMainVo" items="${lossPropMainVos}" varStatus="status">
+				<c:set var="dlossPropMain" value="${lossPropMainVo}"></c:set>
+				<c:forEach var="lossPropVo" items="${lossPropMainVo.prpLdlossPropFees}" varStatus="status">
+					<tr>
+						<td>${status.index+1}</td>
+						<td>${dlossPropMain.license}</td>
+						<td>${lossPropVo.lossItemName}</td>
+						<td>${lossPropVo.sumDefloss }</td>
+						<td>${lossPropVo.sumVeriLoss }</td>
+						<td>${prpLdlossPropMainVo.handlerName }</td>
+						<td>${prpLdlossPropMainVo.underWriteName }</td>
+						<td>
+							<!-- 0 查勘调度定损 1 新增调度定损 2 定损修改 3 追加定损 -->
+							<c:if test="${prpLdlossPropMainVo.deflossSourceFlag eq '0'}">查勘调度定损</c:if>
+							<c:if test="${prpLdlossPropMainVo.deflossSourceFlag eq '1'}">新增调度定损</c:if>
+							<c:if test="${prpLdlossPropMainVo.deflossSourceFlag eq '2'}">定损修改</c:if>
+							<c:if test="${prpLdlossPropMainVo.deflossSourceFlag eq '3'}">追加定损 </c:if>
+						</td>
+						<td>
+						    <c:if test="${dlossPropMain.id != prpLdlossPropMainVo.id }">
+									<a target="_self" onClick="deflossView('prop',${dlossPropMain.id})" href="javascript:void(0)">查看</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 财产损失 -->

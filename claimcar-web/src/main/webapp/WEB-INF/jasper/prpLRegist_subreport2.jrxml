@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prpLRegist_subreport2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f1a822aa-01a4-430b-bc80-b2c4fc025a5d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="kindName" class="java.lang.String">
+		<fieldDescription><![CDATA[kindName]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="9d138474-08f5-4f67-bb1f-2744075d03ae"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="20" uuid="feddf401-462c-4159-9914-bcf5821bbc01"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="2c7ffdd7-cf4f-4caa-8b87-0ef5660acbcc"/>
+			</line>
+			<line>
+				<reportElement x="34" y="0" width="1" height="20" uuid="1459e6e7-4d5e-492e-9a13-052e8485278f"/>
+			</line>
+			<line>
+				<reportElement x="300" y="0" width="1" height="20" uuid="ebb2a713-7ae6-428b-a55d-720b3cc4ff9f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" backcolor="#FFFFFF" uuid="8fca5cef-dec5-4cc5-8f80-8cc95ed560bc"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="34" height="20" uuid="b80fc578-8d60-4665-aef1-fc341f6e74de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="0" width="114" height="20" uuid="a8edba38-3422-4bf4-8e02-3ea5233e94f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[承保险种(代码)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="0" width="114" height="20" uuid="7044fa8b-245b-4663-9e6e-90c9527fb3ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[保险金额/责任金额]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="70ac0669-0ee6-4bba-b84e-4c5f4a28c7a8"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="20" uuid="bca9f42a-dddb-4a81-9d17-c76bcefbb6f5"/>
+			</line>
+			<line>
+				<reportElement x="34" y="0" width="1" height="20" uuid="6f038a38-dc68-41b2-a42b-07ea14d3dcbf"/>
+			</line>
+			<line>
+				<reportElement x="300" y="0" width="1" height="20" uuid="720f3cd4-d3d4-491b-adc0-c1604af40a6e"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="0" width="34" height="20" uuid="478d8aa2-7b37-4f4d-b32d-fc793e8ef0b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="97" y="0" width="150" height="20" uuid="b9d59a8b-873b-4c5f-b1f1-d5832094f9ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kindName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="367" y="0" width="150" height="20" uuid="d49f9382-d5bb-42af-a7e8-f8163d852120"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" backcolor="#FFFFFF" uuid="f6981a5a-58e8-4992-9b20-c6b23be25c60"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <context-param>
+    <description>Spring集成Web环境的通用配置,用于加载除Web层的Bean</description>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+			classpath*:spring/*.xml 
+		</param-value>
+  </context-param>
+  <context-param>
+    <param-name>spring.profiles.active</param-name>
+    <param-value>development</param-value>
+  </context-param>
+  <context-param>
+    <description>缓存类型，支持redis、ehcache和hashmap三种</description>
+    <param-name>cacheType</param-name>
+    <param-value>redis</param-value>
+  </context-param>
+
+  <!-- 配置日志拦截器 -->
+  <filter>
+    <filter-name>logFilter</filter-name>
+    <filter-class>ins.sino.claimcar.base.filter.LogFilter</filter-class>
+    <init-param>
+      <param-name>enabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>excludes</param-name>
+      <param-value>/system/notice/*</param-value>
+    </init-param>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>logFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name></web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>PUT</http-method>
+      <http-method>DELETE</http-method>
+      <http-method>HEAD</http-method>
+      <http-method>OPTIONS</http-method>
+      <http-method>TRACE</http-method>
+    </web-resource-collection>
+    <auth-constraint/>
+  </security-constraint>
+  	<servlet>
+		<servlet-name>remoteService</servlet-name>
+		<servlet-class>com.sinosoft.api.servlet.RemoteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>remoteService</servlet-name>
+		<url-pattern>/remoteService</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 河南快赔入口 -->
+	<servlet>
+		<description></description>
+		<display-name>Submitcaseimageinfor</display-name>
+		<servlet-name>Submitcaseimageinfor</servlet-name>
+		<servlet-class>ins.sino.claimcar.hnbxrest.Submitcaseimageinfor</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Submitcaseimageinfor</servlet-name>
+		<url-pattern>/submitcaseimageinfor/query</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Submitcaseinfor</display-name>
+		<servlet-name>Submitcaseinfor</servlet-name>
+		<servlet-class>ins.sino.claimcar.hnbxrest.Submitcaseinfor</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Submitcaseinfor</servlet-name>
+		<url-pattern>/submitcaseinfor/query</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Submitcasestate</display-name>
+		<servlet-name>Submitcasestate</servlet-name>
+		<servlet-class>ins.sino.claimcar.hnbxrest.Submitcasestate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Submitcasestate</servlet-name>
+		<url-pattern>/submitcasestate/query</url-pattern>
+	</servlet-mapping>
+	<!-- 德联易控 -->
+	 <servlet>
+		<description></description>
+		<display-name>DlCeResInfostate</display-name>
+		<servlet-name>DlCeResInfostate</servlet-name>
+		<servlet-class>ins.sino.claimcar.base.service.DlCeResInfostate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DlCeResInfostate</servlet-name>
+		<url-pattern>/dlCeResInfostate/result</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 精励联讯 -->
+	<servlet>
+		<description></description>
+		<display-name>GenilexScoreService</display-name>
+		<servlet-name>GenilexScoreService</servlet-name>
+		<servlet-class>ins.sino.claimcar.genilex.service.ScoreServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenilexScoreService</servlet-name>
+		<url-pattern>/genilexScoreService/scoreService</url-pattern>
+	</servlet-mapping>
+	<!-- 高院通知接口 -->
+	<servlet>
+		<description></description>
+		<display-name>CourtServerServlet</display-name>
+		<servlet-name>CourtServerServlet</servlet-name>
+		<servlet-class>ins.sino.claimcar.court.CourtServerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CourtServerServlet</servlet-name>
+		<url-pattern>/litigation/messageNotic</url-pattern>
+	</servlet-mapping>
+</web-app>

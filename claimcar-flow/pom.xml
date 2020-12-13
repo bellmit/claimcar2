@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ins.sino.claimcar</groupId>
+    <artifactId>claimcar</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>claimcar-flow</artifactId>
+  	<packaging>war</packaging>
+  	<name>claimcar-folw</name>
+  	<description>claimcar-folw module</description>
+  
+	<dependencies>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.69</version>
+	    </dependency>
+		<dependency>
+			<groupId>ins.sino.claimcar</groupId>
+			<artifactId>claimcar-app-framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ins.sino.claimcar</groupId>
+			<artifactId>claimcar-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>5.2.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>5.2.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mvel</groupId>
+			<artifactId>mvel2</artifactId>
+			<version>2.1.3.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>knowledge-api</artifactId>
+			<version>5.2.0.Final</version>
+		</dependency>
+		
+		<dependency> 
+			<groupId>org.eclipse.jdt.core.compiler</groupId> 
+			<artifactId>ecj</artifactId>
+ 			<version>3.5.1</version> 
+ 		</dependency>
+ 		
+ 		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		    <version>3.1</version>
+		</dependency>
+ 		<dependency>
+		    <groupId>org.mvel</groupId>
+		    <artifactId>mvel2</artifactId>
+		    <version>2.1.8.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sinosoft</groupId>
+		    <artifactId>sms-api</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.6.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sinosoft</groupId>
+		    <artifactId>sms</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>commons-codec</groupId>
+		  <artifactId>commons-codec</artifactId>
+		  <version>1.6</version>
+		</dependency>
+		<dependency>
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-persistence-jpa</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-spring</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-templates</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.protobuf</groupId> -->
+<!-- 			<artifactId>protobuf-java</artifactId> -->
+<!-- 			<version>2.4.1</version> -->
+<!-- 		</dependency>		 -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.jdt</groupId> -->
+<!-- 			<artifactId>ecj</artifactId> -->
+<!-- 			<version>3.5.1</version> -->
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>${basedir}/lib/ecj-3.5.1.jar</systemPath> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.btm</groupId> -->
+<!-- 			<artifactId>btm</artifactId> -->
+<!-- 			<version>2.1.2</version> -->
+<!-- 		</dependency> -->
+
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-persistence-jpa</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-spring</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.drools</groupId> -->
+<!-- 			<artifactId>drools-templates</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.protobuf</groupId> -->
+<!-- 			<artifactId>protobuf-java</artifactId> -->
+<!-- 			<version>2.4.1</version> -->
+<!-- 		</dependency>		 -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.eclipse.jdt</groupId> -->
+<!-- 			<artifactId>ecj</artifactId> -->
+<!-- 			<version>3.5.1</version> -->
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>${basedir}/lib/ecj-3.5.1.jar</systemPath> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.btm</groupId> -->
+<!-- 			<artifactId>btm</artifactId> -->
+<!-- 			<version>2.1.2</version> -->
+<!-- 		</dependency> --> 
+		<dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.8.5</version>
+  		</dependency>
+		
+	</dependencies>
+	
+	<build>
+	        <finalName>claimcar-flow</finalName>
+	</build>
+</project>

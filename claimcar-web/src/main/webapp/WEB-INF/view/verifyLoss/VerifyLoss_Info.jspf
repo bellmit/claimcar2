@@ -1,0 +1,152 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+		<div class="table_wrap">
+			<div class="table_title f14">基本信息</div>
+				<div class="table_cont basicInforoVer">
+					<div class="formtable">
+						<div class="row cl">
+							<label class="form_label col-2">定损方式</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="CertainLossType" codeCode="${lossCarMainVo.cetainLossType }"/>
+							</div>
+							<label class="form_label col-2">定损车种</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="DefModelType" codeCode="${carInfoVo.lossCarKindCode }"/>
+							</div>
+							<label class="form_label col-2">出险时间</label>
+							<div class="form_input col-2">
+								<fmt:formatDate value="${commonVo.damageDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">修理厂代码</label>
+								<div class="form_input col-2">
+									${lossCarMainVo.repairFactoryCode }
+								</div>
+							<label class="form_label col-2">修理厂名称</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.repairFactoryName}
+							</div>
+							<label class="form_label col-2">推修时间</label>
+							<div class="form_input col-2">
+								<app:date date='${lossCarMainVo.sendDate }'/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">修理厂类型</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="RepairFactoryType" codeCode="${lossCarMainVo.repairFactoryType }" />
+							</div>
+							<label class="form_label col-2">修理厂电话</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.factoryMobile }
+							</div>
+							<label class="form_label col-2">定损日期</label>
+								<div class="form_input col-2">
+									<app:date date='${lossCarMainVo.deflossDate }'/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">定损地点</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.defSite }
+							</div>
+							<label class="form_label col-2">损失程度</label>
+							<div class="form_input col-2">
+								<app:codetrans codeType="LossLevel" codeCode="${lossCarMainVo.lossLevel }" />
+							</div>
+							<label class="form_label col-2">预计修理完成日期</label>
+							<div class="form_input col-2">
+								<app:date date='${lossCarMainVo.estimatedDate }'/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">定损员</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.handlerName }
+							</div>
+							<label class="form_label col-2">定损员身份证号码</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.handlerIdNo }
+							</div>
+							<label class="form_label col-2">是否第一现场查勘</label>
+								<div class="form_input col-2">
+									<app:codetrans codeType="YN01" codeCode="${commonVo.firstAddressFlag }"/>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form_label col-2">核损员</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.underWriteName }
+							</div>
+							<label class="form_label col-2">核损员身份证号码</label>
+							<div class="form_input col-2">
+								${lossCarMainVo.underWiteIdNo }
+							</div>
+							<label class="form_label col-2">损失部位</label>
+							<div class="form_input col-2">
+							<app:codetrans codeType="LossPart" codeCode="${lossCarMainVo.lossPart }"/>
+							</div>
+						
+					</div>
+						<div class="row cl">
+							<c:choose>
+								<c:when test="${lossCarMainVo.deflossCarType eq '1'}" >
+									<label class="form_label col-2">互碰自赔</label>
+									<div class="form_input col-2">
+										<app:codetrans codeType="YN10" codeCode="${lossCarMainVo.isClaimSelf }"/>
+									</div>
+									<label class="form_label col-2">车损险保额</label>
+									<div class="form_input col-2">
+										${commonVo.carAmount}
+									</div>
+								</c:when>
+							</c:choose>
+							
+						</div>
+						<div class="row cl">
+						  <label class="form_label col-2">标的驾驶员</label>
+							<div class="form_input col-2">
+							${driverName}
+							</div>
+							<label class="form_label col-2">报案时间</label>
+							<div class="form_input col-2">
+							<fmt:formatDate value="${registTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</div>
+							<label class="form_label col-2">标的车架号</label>
+							<div class="form_input col-2">
+							${frameNo}
+							</div>
+						</div>
+						<div class="row cl">
+						<label class="form_label col-2">被保险人</label>
+							<div class="form_input col-2">
+							${insuredName}
+							</div>
+							<label class="form_label col-2">推修方式</label>
+							<div class="form_input col-2">
+								<span class="select-box moddisable">
+									<app:codetrans codeType="SendRepairType"  codeCode="${lossCarMainVo.repairType}"  />
+					 			</span>
+							</div>
+						</div>
+
+						<div class="row cl" id = "isGlassBrokenAndThird">
+							<label class="form_label col-2">是否玻璃单独破碎</label>
+							<div class="form_input col-2">
+								<span class="radio-box"> <app:codeSelect codeType="IsValid"
+										type="radio" value="${lossCarMainVo.isGlassBroken}"
+										name="lossCarMainVo.isGlassBroken" />
+								</span><font class="must">*</font>
+							</div>
+							<label class="form_label col-2">是否属于无法找到第三方</label>
+							<div class="form_input col-3">
+								<span class="radio-box"> <app:codeSelect codeType="IsValid"
+										type="radio" value="${lossCarMainVo.isNotFindThird}"
+										name="lossCarMainVo.isNotFindThird" />
+								</span><font class="must">*</font>
+							</div>
+						</div>
+		</div> 
+				</div>
+			</div>	

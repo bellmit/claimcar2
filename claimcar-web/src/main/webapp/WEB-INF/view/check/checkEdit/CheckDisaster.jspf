@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 巨灾 开始 -->
+<div class="table_wrap">
+	<div id="disaster_title" class="table_title f14">巨灾</div>
+	<div class="table_cont ">
+		<div class="formtable tableoverlable">
+			<input type="hidden" name="disasterVo.id" value="${disasterVo.id}">
+			<input type="hidden" name="disasterVo.registNo" value="${disasterVo.registNo}">
+			<input type="hidden" name="disasterVo.policyNo" value="${disasterVo.policyNo}">
+			<input type="hidden" name="disasterVo.claimNo" value="${disasterVo.claimNo}">
+			<div class="row cl">
+				<label class="form_label col-1">巨灾一级代码</label>
+				<div class="form_input col-3">
+					<span class=select-box> <app:codeSelect
+							codeType="Disasterone" type="select" onchange="disaster_ones()"
+							lableType="code-name" id="disaster_one"
+							name="disasterVo.disasterCodeOne"
+							value="${disasterVo.disasterCodeOne}"/>
+					</span>
+				</div>
+				<label class="form_label col-1">巨灾名称</label>
+				<div class="form_input col-3">
+					<input class="input-text" id="disaster_oneName"
+						name="disasterVo.disasterNameOne" readonly="readonly"
+						value="${disasterVo.disasterNameOne}">
+				</div>
+			</div>
+			<%-- <c:set var="disaster_el" value="${008,其他}"></c:set> --%>
+			<div class="row  cl">
+				<label class="form_label col-1">巨灾二级代码</label>
+				<div class="form_input col-3">
+					<span class=select-box>
+						<select onchange="disaster_twos()" class="select" id="disaster_two" name="disasterVo.disasterCodeTwo">
+						</select>
+						<input type="hidden" name="lastSelectCode" value="${disasterVo.disasterCodeTwo}">
+					</span>
+				</div>
+				<label class="form_label col-1">巨灾名称</label>
+				<div class="form_input col-3">
+					<input class="input-text" id="disaster_twoName"
+						name="disasterVo.disasterNameTwo" readonly="readonly"
+						value="${disasterVo.disasterNameTwo}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 巨灾 结束 -->
+
+
+
+

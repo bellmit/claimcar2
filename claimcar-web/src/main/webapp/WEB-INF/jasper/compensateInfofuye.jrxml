@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compensateInfofuye" pageWidth="620" pageHeight="842" columnWidth="580" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68e28b91-f2a5-48c7-9105-d2e41b8e33d7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="32"/>
+	<style name="style1" mode="Transparent" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" pattern="" isBlankWhenNull="false" fontName="宋体" fontSize="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H">
+		<box bottomPadding="0" rightPadding="0">
+			<pen lineWidth="1.0"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<parameterDescription><![CDATA[SUBREPORT_DIR]]></parameterDescription>
+	</parameter>
+	<field name="claimNo" class="java.lang.String">
+		<fieldDescription><![CDATA[claimNo]]></fieldDescription>
+	</field>
+	<field name="compensateNo" class="java.lang.String">
+		<fieldDescription><![CDATA[compensateNo]]></fieldDescription>
+	</field>
+	<field name="lcText" class="java.lang.String">
+		<fieldDescription><![CDATA[lcText]]></fieldDescription>
+	</field>
+	<group name="1">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<image>
+				<reportElement x="138" y="10" width="279" height="42" uuid="29d12773-78f3-4cd1-b9e7-41650fef786f"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"image/logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="164" y="60" width="226" height="20" uuid="2840b976-4c22-4031-b273-fa78355fe5a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[机动车辆保险赔款理算书附页]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="50" height="20" uuid="2abeb9a5-4f35-4da3-bab2-b91c53f0a483"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[赔款编号:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="100" width="235" height="20" uuid="398dc32c-680c-4282-90c0-a2eed70b0e1a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claimNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="285" y="99" width="50" height="20" uuid="f9a946ed-c4d2-457a-9bcf-1aee4bfd40dc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[理算书号:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="99" width="245" height="20" uuid="f38edfe6-635f-48f8-9f1d-ee07d264967e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compensateNo}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="448" y="80" width="40" height="19" uuid="34f8d72c-3228-45ef-ab90-e58c1edacae5"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["共" + $V{PAGE_NUMBER} + "页"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="488" y="80" width="40" height="19" uuid="36cea2c7-4ed8-407a-8ac8-97ff4039da90"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第"+$V{PAGE_NUMBER}+"页"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="77ab7f7e-aad1-4902-8be6-6a4b36fda1ca"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="65b96a53-dbec-4e17-b01f-3732ab171a55"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="20" uuid="e5828e5e-4c7a-4bae-9949-c72d092afcf5"/>
+			</line>
+			<staticText>
+				<reportElement x="205" y="0" width="130" height="20" uuid="e89117b9-e919-4e3b-9e07-7697a591d7ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[赔款理算书]]></text>
+			</staticText>
+		</band>
+		<band height="500">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="1" y="0" width="555" height="500" uuid="2bb7b272-ae73-4d3f-8d6e-480b84d38e8d"/>
+				<textElement>
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lcText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap">
+				<div class="table_title f14">零部件修理费用清单</div>
+				<div class="table_cont ">
+					<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+						<c:set var="kindcol" 	value="1"/> 
+					</c:if>
+					 <table border="1" class="table table-border">
+						 	<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+								<thead class="text-c">
+									<tr>
+										<th colspan="${kindcol +2}"></th>
+										<th style="border-left:2px solid #91c9f9;" colspan="4">定损	</th>
+										<th style="border-left:2px solid #91c9f9;" colspan="3">核损</th>
+									</tr>
+								</thead>
+							</c:if>
+					 		<thead class="text-c">
+					 			<tr>
+					 				<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+					 					<th>险别</th>
+					 				</c:if>
+					 				<th>修理项目</th>
+					 				<th>工种</th>
+					 				<th style="border-left:2px solid #91c9f9;">定损工时单价</th>
+					 				<th>定损工时</th>
+					 				<th>定损工时总价</th>
+					 				<th>备注</th>
+					 				<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+						 				<th style="border-left:2px solid #91c9f9;">核损工时单价</th>
+										<th>核损工时</th>
+										<th>核损工时总价</th>
+									</c:if>
+					 			</tr>
+					 		</thead>
+					 		<tbody class="text-c" id="repairBody">
+					 			<c:forEach var="carRepair" items="${lossCarMainVo.prpLDlossCarRepairs }" varStatus="status">
+					 				<c:if test="${carRepair.repairFlag =='0'}">
+										<tr>
+											<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+												<td>
+													<app:codetrans codeType="KindCode" codeCode="${commonVo.compKindName}" riskCode="${riskCode }" />
+												</td>	
+											</c:if>
+											<td> ${carRepair.compName } </td>
+											<td> ${carRepair.repairName } </td>
+											<td style="border-left:2px solid #91c9f9;"> ${carRepair.manHourUnitPrice } </td>
+											<td> ${carRepair.manHour } </td>
+											<td> ${carRepair.sumDefLoss } </td>
+											<td>
+												<div <c:if test="${fn:length(carRepair.remark ) > 4}">title="${carRepair.remark }"</c:if> >
+													<c:choose> 
+														<c:when test="${fn:length(carRepair.remark ) > 4}"> 
+															${fn:substring(carRepair.remark, 0, 4)}......
+														</c:when>
+														<c:otherwise>  
+															${carRepair.remark }
+														</c:otherwise>  
+													</c:choose> 
+												</div>
+											 </td>
+											<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+												<td style="border-left:2px solid #91c9f9;"> ${carRepair.veriManUnitPrice } </td>
+												<td> ${carRepair.veriManHour } </td>
+												<td> ${carRepair.sumVeriLoss } </td>
+											</c:if>
+										</tr>
+									</c:if>
+								</c:forEach>
+					 		</tbody>
+					 </table>
+				</div>
+				<div style="margin:4px 0;overflow:hidden;">
+					<input style="display:none;" type='button' title='更多' id="repairBodyButton" onclick="showMore('repairBody')" class='btn btn-zd fl nodisable' value='更多' />
+				</div>
+			</div>
+			

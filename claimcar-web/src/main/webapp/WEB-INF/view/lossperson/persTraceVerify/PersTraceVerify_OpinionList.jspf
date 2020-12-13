@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 意见列表 -->
+<div class="table_wrap">
+	<div class="table_title f14">意见列表</div>
+	<div class="table_cont  table_list ">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>归属环节</th>
+					<th>操作人员</th>
+					<th>提交时间</th>
+					<th>业务动作</th>
+					<th>金额总计</th>
+					<th>意见</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody id="opinionListTbody" class="text-c">
+				<%@include file="PersTraceVerify_Opinion_Tr.jspf"%>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 意见列表 -->

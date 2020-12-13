@@ -1,0 +1,110 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 基本信息开始 -->
+<div class="table_wrap">
+	
+     <div class="table_title f14">基本信息</div>
+     				<input type="hidden" name="lossPropMainVo.id" id="lossMainId" value="${lossPropMainVo.id }"/>   	 
+     				<input type="hidden" id="saveType" name="lossPropMainVo.auditStatus" />
+						<input type="hidden" id="flowTaskId" name ="lossPropMainVo.flowTaskId" value="${lossPropMainVo.flowTaskId}">
+						<input type="hidden" id="currentNode" name ="lossPropMainVo.currentNode" value="${lossPropMainVo.currentNode}">
+						<input type="hidden" id="handlerStatus" name ="lossPropMainVo.handlerStatus" value="${lossPropMainVo.handlerStatus}">
+						<input type="hidden" id="verifyLevel" name ="lossPropMainVo.verifyLevel" value="${lossPropMainVo.verifyLevel}">
+						<input type="hidden" id="taskInNode" name ="taskVo.taskInNode" value="${taskVo.taskInNode}">
+						<input type="hidden" id="existBackLower"  value="${existBackLower}">
+						<input type="hidden" id="verifyPassFlag" value="${verifyPassFlag }" />
+						
+				<div class="table_cont ">
+					<div class="formtable tableoverlable">
+						<div class="row  cl">
+							<label class="form_label col-1">报案号</label>
+							<div class="form_input col-3">
+						<input type="hidden"  name="lossPropMainVo.registNo"  id="registNo" value="${lossPropMainVo.registNo }" />
+							
+								${lossPropMainVo.registNo }
+							</div>
+							<label class="form_label col-1">赔案类别</label>
+							<div class="form_input col-3">
+								${lossPropMainVo.claimType=='0'?'正常赔案':'快速赔案' }
+							</div>
+							<label class="form_label col-1">案件紧急程度</label>
+							<div class="form_input col-3">
+									
+									<app:codetrans codeType="MercyFlag" codeCode="${lossPropMainVo.mercyFlag }"/>
+							</div>
+						</div>
+
+						<div class="row  cl">
+							<label class="form_label col-1">车牌号码</label>
+							<div class="form_input col-3">
+								<c:choose>
+									<c:when test="${lossPropMainVo.lossType eq('1')}">
+										 标的车(${lossPropMainVo.license})
+									</c:when>
+									<c:when test="${lossPropMainVo.lossType eq('0')}">
+										 地面(无)
+									</c:when>
+									<c:otherwise>
+										${lossPropMainVo.license}
+									</c:otherwise>
+								</c:choose>
+							<%-- <c:if test="${lossPropMainVo.lossType eq('1')}">
+          				       标的车(${lossPropMainVo.license})
+		                 </c:if>
+		                 <c:if test="${lossPropMainVo.lossType eq('3')}">
+		          				       三者车(${lossPropMainVo.license})
+		                 </c:if>
+		                 <c:if test="${lossPropMainVo.lossType eq('0')}">
+		          				       地面(无)
+		                 </c:if> --%>
+							</div>
+							<label class="form_label col-1 ">定损员</label>
+							<div class="form_input col-3">
+								${lossPropMainVo.handlerName }
+							</div>
+							<label class="form_label col-1">定损员身份证</label>
+							<div class="form_input col-3">
+								${lossPropMainVo.handlerIdCard }
+							</div>
+						</div>
+						<div class="row  cl">
+							<label class="form_label col-1">定损日期</label>
+							<div class="form_input col-3">
+							<fmt:formatDate value='${lossPropMainVo.defLossDate}' type="date" />
+							</div>
+							<label class="form_label col-1 ready-only">核损人员</label>
+							<div class="form_input col-3">
+								${lossPropMainVo.underWriteName}
+							</div>
+							<label class="form_label col-1 ready-only">核损员身份证</label>
+							<div class="form_input col-3">
+								${lossPropMainVo.underWriteIdCard }
+							</div>
+						</div>
+					<div class="row cl">
+						  <label class="form_label col-1">标的驾驶员</label>
+							<div class="form_input col-3">
+							${driverName}
+							</div>
+							<label class="form_label col-1">报案时间</label>
+							<div class="form_input col-3">
+							<fmt:formatDate value="${registTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</div>
+							<label class="form_label col-1">标的车架号</label>
+							<div class="form_input col-3">
+							${frameNo}
+							</div>
+						</div>
+						<div class="row cl">
+						<label class="form_label col-1">被保险人</label>
+							<div class="form_input col-3">
+							${insuredName}
+							</div>
+							
+						</div>	
+					
+					</div>
+				</div>
+</div>
+<!-- 基本信息结束 -->

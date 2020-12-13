@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">人员损失信息</div>
+	<div class="table_cont" id="person_table">
+		<input type="hidden" id="personVo_size" value="${fn:length(padPayPersonVos)}">
+		<c:set var="personVoSize" value="${fn:length(padPayPersonVos)}" />
+
+		<%-- <button type="button"
+			class="btn btn-plus Hui-iconfont Hui-iconfont-add"
+			onclick="addPadPayTr('${cMainVo.registNo}')"></button> --%>
+		<!-- <div class="formtable" id="person_table"> -->
+		<!--人员损失信息-->
+		<c:forEach var="padPayPersonVo" items="${padPayPersonVos}" varStatus="status">
+			<c:set var="pe_Idx" value="${status.index + size}" />
+			<%@include file="VerifyClaimEdit_PadPayPerson_Tr.jspf"%>
+		</c:forEach>
+		<p>
+		<div class="row cl text-c">
+			<label class="form_label col-2">本次垫付金额：</label>
+			<div class="form_input col-3 text-l">${costNum}.00</div>
+			<label class="form_label col-2">累计已垫付金额：</label>
+			<div class="form_input col-3 text-l">${costNum}.00</div>
+		</div>
+	</div>
+</div>
+
+<div class="table_wrap">
+	<div class="table_title f14">备注信息<font class="must">*</font>
+	</div>
+	<div class="formtable">
+		<div class="col-12">
+			<textarea class="textarea h100" id="contexts" maxlength="254"
+				name="padPayMainVo.remark" datatype="*0-250" nullmsg="请输入备注信息！"
+				placeholder="请输入..." readonly="readonly">${padPayMainVo.remark}</textarea>
+		</div>
+	</div>
+</div>
+
+<div class="table_wrap">
+	<div class="table_title f14">预支付抢救费报告</div>
+	<div class="formtable">
+		<div class="col-12">
+			<textarea class="textarea h100" id="contexts" maxlength="250"name="padPayMainVo.rescueReport" 
+			datatype="*0-250" readonly="readonly">${padPayMainVo.rescueReport}</textarea>
+		</div>
+	</div>
+</div>

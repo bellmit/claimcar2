@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compensateInfo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8615076-a014-4598-b1d5-628b996d1f32">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="136"/>
+	<parameter name="prpLCMainVo" class="ins.sino.claimcar.regist.vo.PrpLCMainVo"/>
+	<parameter name="prpLRegistVo" class="ins.sino.claimcar.regist.vo.PrpLRegistVo"/>
+	<parameter name="prpLCheckDutyVo" class="ins.sino.claimcar.check.vo.PrpLCheckDutyVo"/>
+	<parameter name="paymentFeeMap" class="java.util.Map"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\harvery\\Desktop\\机动车辆损伤确认书\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CICompensateNo" class="java.lang.String"/>
+	<parameter name="BICompensateNo" class="java.lang.String"/>
+	<parameter name="CIprePayTimes" class="java.lang.String">
+		<parameterDescription><![CDATA[CIprePayTimes]]></parameterDescription>
+	</parameter>
+	<parameter name="BIprePayTimes" class="java.lang.String">
+		<parameterDescription><![CDATA[BIprePayTimes]]></parameterDescription>
+	</parameter>
+	<parameter name="CIsumprepay" class="java.lang.String">
+		<parameterDescription><![CDATA[CIsumprepay]]></parameterDescription>
+	</parameter>
+	<parameter name="BIsumprepay" class="java.lang.String">
+		<parameterDescription><![CDATA[BIsumprepay]]></parameterDescription>
+	</parameter>
+	<parameter name="prpLPaymentVo" class="ins.sino.claimcar.claim.vo.PrpLPaymentVo">
+		<parameterDescription><![CDATA[prpLPaymentVo]]></parameterDescription>
+	</parameter>
+	<parameter name="prpLCItemKindVo" class="ins.sino.claimcar.regist.vo.PrpLCItemKindVo">
+		<parameterDescription><![CDATA[prpLCItemKindVo]]></parameterDescription>
+	</parameter>
+	<parameter name="accidentDeductVo" class="ins.sino.claimcar.claim.vo.PrpDAccidentDeductVo">
+		<parameterDescription><![CDATA[accidentDeductVo]]></parameterDescription>
+	</parameter>
+	<parameter name="sumpaidAmt" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{sumPaidAmt}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumAmt" class="java.lang.String">
+		<parameterDescription><![CDATA[sumAmt]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="makeCom" class="java.lang.String">
+		<fieldDescription><![CDATA[makeCom]]></fieldDescription>
+	</field>
+	<field name="prpLPayments" class="java.util.List">
+		<fieldDescription><![CDATA[prpLPayments]]></fieldDescription>
+	</field>
+	<field name="sumAmt" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumAmt]]></fieldDescription>
+	</field>
+	<field name="handler1Code" class="java.lang.String">
+		<fieldDescription><![CDATA[handler1Code]]></fieldDescription>
+	</field>
+	<field name="sumPaidAmt" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[sumPaidAmt]]></fieldDescription>
+	</field>
+	<field name="underwriteUser" class="java.lang.String">
+		<fieldDescription><![CDATA[underwriteUser]]></fieldDescription>
+	</field>
+	<field name="createUser" class="java.lang.String">
+		<fieldDescription><![CDATA[createUser]]></fieldDescription>
+	</field>
+	<title>
+		<band height="80">
+			<image>
+				<reportElement x="138" y="10" width="279" height="42" uuid="b8422056-d4db-4814-95fb-fb65e1283d44"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"image/logo.jpg"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="164" y="60" width="226" height="20" uuid="709b40c4-a3d6-4d67-a70e-1e2bfbb79c18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="16" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{prpLCMainVo}.getRiskCode().equals("1101") ? "机动车辆交强保险赔款计算书" : "机动车辆商业保险赔款计算书" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="20" uuid="c2fca5bb-cfbe-4a41-a861-24cd70f1e9bd"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[承保公司（签章）：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="5a0dcf62-d6dc-4ef2-bf26-78d41be75807"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[交强险赔款计算书号：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="110" height="20" uuid="4792c6b7-df61-4adb-ba53-460575dd9388"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[商业保险赔款计算书号：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="20" width="80" height="20" uuid="b3acccfb-7e4d-436f-89a5-2d74efd9d54a"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[交强险承保公司：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="380" y="20" width="174" height="20" uuid="68c23820-e62e-4911-a1de-3d14a2eb3449"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{makeCom}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="154" height="20" uuid="a162a221-386f-405a-bcf6-2edfc2e4d84c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CICompensateNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="110" y="20" width="190" height="20" uuid="55de3c94-f707-4345-9fc6-d1c8dcc75079"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BICompensateNo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="240">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="5129b19d-d0fe-4325-a46b-865ff24e1c30"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[被保险人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="80" height="20" uuid="472a0acc-53fe-4200-a373-fc0cdfe589a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[厂牌型号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="80" height="20" uuid="1d5dcea7-7716-475c-a7b7-4f144616053c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[新车购置价]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="80" height="20" uuid="fac2529a-428c-498c-bbee-2041bed2e296"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[出险原因]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="55" height="20" uuid="a23a704f-ddee-4d9d-8ea6-1f31e6e5a482"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[出险时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="80" height="20" uuid="c1809af8-99b8-4d2b-92a5-36e1d2cf90c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[指定驾驶员]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="80" height="20" uuid="90027e4a-0ce4-49c0-a36e-2daaa8611ad3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[出险驾驶员]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="80" height="20" uuid="9908db35-3443-4c31-9b1c-5634372927cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[行驶区域]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="80" height="20" uuid="e3cbc044-7808-41ed-8e97-78cacb2d8234"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[事故处理部门]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="80" height="20" uuid="c8b4a362-e7ec-4859-a4c4-599091a1bda3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[损失程度]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="80" height="20" uuid="c8f950bd-35b4-45e4-8207-a459dce3c1f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[被保险人账户名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="180" height="20" uuid="1398ded5-0bdb-474b-b8b6-2e33f79f4300"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[责任交强险赔偿情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="40" width="80" height="20" uuid="6f044855-fc84-4182-8bbb-584641a2fe94">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[号牌号码]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="60" width="80" height="20" uuid="749d68f1-2d06-445b-8608-4a5b27095565">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[事故责任]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="80" width="80" height="20" uuid="5bc40f20-b399-4a3a-a643-54f3cab71cf3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[责任免赔率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="100" width="80" height="20" uuid="7e8f358d-00a2-4aa3-810b-11289ebe482a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[绝对免赔率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="140" width="80" height="20" uuid="70450a10-7b20-4f4b-ad43-542943c6d8f9">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[出险地点]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="160" width="80" height="20" uuid="e97a4998-051b-4d68-9dec-cff2f0476fa9">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[出险区域类别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="180" width="80" height="20" uuid="9af09701-a8a7-4055-b729-e27263378f2a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[人员伤亡情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="200" width="50" height="20" uuid="e0ed04ea-b47f-4ef5-adcb-b79b990f927b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[保险期限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="120" width="80" height="20" uuid="56414e07-b02f-47a6-8eba-9545315ba403">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[绝对免赔额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="220" width="80" height="20" uuid="b85c672d-5d04-46b1-a8a6-6ecdf8c18eae">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[被保险人银行账号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="20" width="85" height="20" uuid="de11fa1c-4f28-4a63-b1d5-ec88c938cb73"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[医疗费用赔偿限额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="40" width="85" height="20" uuid="7c8180a0-090b-4ca2-a6ab-0ffab9f6930f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[死亡伤残赔偿限额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="60" width="85" height="20" uuid="fe28e1cd-7e41-459e-8fb6-ccacdde0ec61"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[财产损失赔偿限额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="80" width="85" height="20" uuid="e971689f-d73f-4f21-a654-69483fac8e26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[责任比例]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="100" width="85" height="20" uuid="02b95bf3-a8e9-49a2-8cee-a123c192e993"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[赔偿比例]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="120" width="85" height="20" uuid="274cdf1f-46fe-4e0d-b1cc-93b7d1418c36"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[赔案类别]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="0" width="294" height="20" uuid="44c7ffce-17de-4359-bd17-b98011ba3850">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getInsuredName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="20" width="148" height="20" uuid="0dac3fa8-4fd6-412a-bf43-e134892d1cd5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getPolicyNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="40" width="110" height="20" uuid="0ff207a5-c11f-4846-b2ea-702d5f90bb1e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getPrpCItemCars().get(0).getBrandName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="271" y="20" width="104" height="20" uuid="402be3df-8204-4762-920b-877755b7ab42"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getEndorseNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="462" y="20" width="92" height="20" uuid="6498e63c-b757-43a1-b3d4-cb6d0aad73fd">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{prpLCheckDutyVo}.getCiDutyFlag().equals("1") ? "10000.00" : "0.00" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="462" y="40" width="92" height="20" uuid="cfe4285f-220b-43b4-9baf-ce2a98850431">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{prpLCheckDutyVo}.getCiDutyFlag().equals("1") ? "110000.00" : "0.00" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="462" y="60" width="92" height="20" uuid="560ee0e5-73b8-46f9-b290-55115bedb370">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{prpLCheckDutyVo}.getCiDutyFlag().equals("1") ? "2000.00" : "0.00" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="60" width="105" height="20" uuid="6064267e-5fc4-4342-981c-fddc178a6e5f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCheckDutyVo}.getIndemnityDuty()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="462" y="80" width="93" height="20" uuid="b74b8fdf-df87-4bd2-a93c-8f7d583338d1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCheckDutyVo}.getIndemnityDutyRate()+($P{prpLCheckDutyVo}.getIndemnityDutyRate()!=null?"%":"")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="40" width="105" height="20" uuid="53a4e6c4-ee33-44f0-bdc1-b01b12d2ff82"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getPrpCItemCars().get(0).getLicenseNo()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="60" width="110" height="20" uuid="5240c11e-0f0f-483a-8074-dd297697762a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getPrpCItemCars().get(0).getPurchasePrice()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="80" width="110" height="20" uuid="dbb24db5-d85f-472f-b9cb-6e82cf83d962">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLRegistVo}.getDamageCode()]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd  HH :mm :ss" isBlankWhenNull="true">
+				<reportElement x="56" y="101" width="135" height="20" uuid="eae22f8c-ffee-42d7-a5fa-2dc0a6fe56e2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLRegistVo}.getDamageTime()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="140" width="110" height="20" uuid="8e75625a-cbe0-41bc-a399-8c713dfd296c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLRegistVo}.getDriverName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="140" width="284" height="20" uuid="2351b5bf-482a-459b-8e3b-61218a513d35"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLRegistVo}.getDamageAddress()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="160" width="284" height="20" uuid="a8bd7c8b-1d18-4611-b74a-3afe52967cc1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLRegistVo}.getDamageAreaCode()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="220" width="235" height="20" uuid="d31b4696-71d6-4c26-8ab0-5d4338a1d5a4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLPaymentVo}.getPayeeName()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="395" y="220" width="159" height="20" uuid="7cd7e2a2-386b-4ec3-a8a5-7525927bebca"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLPaymentVo}.getAccountNo()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="03374d5c-88dc-40f6-a0e3-f29cbfd570f7"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="240" uuid="d2088f9f-d1d7-4983-a7f4-bb67e15b3150"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="240" uuid="aa8991d0-ad5d-40db-8613-990a0bbbd08a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="6cef7ab9-489a-4ba5-be97-2a74d3f88e54"/>
+			</line>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="98362856-2099-48bc-8d90-2fb433680268"/>
+			</line>
+			<line>
+				<reportElement x="0" y="60" width="555" height="1" uuid="855779a1-5d7b-473f-b4de-e9f0c096ad82"/>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1" uuid="d14591bc-a85f-40ba-8306-f5aa38ff2ea8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="100" width="555" height="1" uuid="4630b26a-8890-4b8c-ba6e-90889facc7ec"/>
+			</line>
+			<line>
+				<reportElement x="0" y="120" width="555" height="1" uuid="0735cc5d-791a-476f-b518-9204d0e2a7d3"/>
+			</line>
+			<line>
+				<reportElement x="0" y="140" width="555" height="1" uuid="d32a8fac-67a6-462e-97f2-568f2a1127cf"/>
+			</line>
+			<line>
+				<reportElement x="0" y="160" width="555" height="1" uuid="588ee805-89f7-476d-af6a-4b93bbca5755"/>
+			</line>
+			<line>
+				<reportElement x="0" y="180" width="555" height="1" uuid="72013b6a-b25c-41e2-842d-d3f7ba43a8fb"/>
+			</line>
+			<line>
+				<reportElement x="0" y="200" width="555" height="1" uuid="4a176228-f462-4b81-8372-fde0ba0ad2bb"/>
+			</line>
+			<line>
+				<reportElement x="0" y="220" width="555" height="1" uuid="fb559958-cb67-4e1f-9139-1c116031648f"/>
+			</line>
+			<line>
+				<reportElement x="0" y="239" width="555" height="1" uuid="ee04cdd3-ab62-4128-bd2a-5d209a4b2dbc"/>
+			</line>
+			<line>
+				<reportElement x="80" y="120" width="1" height="120" uuid="c553c23f-77b6-42e4-a23a-5ba298f2aa3d"/>
+			</line>
+			<line>
+				<reportElement x="190" y="40" width="1" height="180" uuid="017cbd7b-fb49-4a8f-8db9-caaf12c9c43e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="270" y="40" width="1" height="160" uuid="31279577-e88f-49f7-8b20-4b3e34b945d0"/>
+			</line>
+			<line>
+				<reportElement x="375" y="0" width="1" height="140" uuid="915681d1-0bf6-445b-b29d-e7a33615d393"/>
+			</line>
+			<line>
+				<reportElement x="460" y="20" width="1" height="120" uuid="99ecee70-824b-47a5-9257-fdf1427ca4ab"/>
+			</line>
+			<textField pattern="yyyy-MM-dd  HH : mm : ss" isBlankWhenNull="true">
+				<reportElement x="241" y="200" width="155" height="20" uuid="bc82685d-e95d-4de5-8aa9-f36d74a9a41e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getStartDate()]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd  HH : mm : ss" isBlankWhenNull="true">
+				<reportElement x="410" y="200" width="144" height="20" uuid="ac5f455b-3eab-49b5-93d0-935b6be626fc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCMainVo}.getEndDate()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="200" width="10" height="20" uuid="75a9917f-7235-4fa7-a440-d64f7b1062d5"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="20" width="60" height="20" uuid="7996e810-e282-4e37-ae5b-21b673f8845e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1101".equals($P{prpLCMainVo}.getRiskCode())?"交强险保单号":"商业险保单号"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="210" y="20" width="60" height="20" uuid="5ae17700-174e-432e-88d2-e1d49e893192"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1101".equals($P{prpLCMainVo}.getRiskCode())?"交强险批单号":"商业险批单号"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="80" y="0" width="1" height="20" uuid="3b41c4ea-8d71-4923-a5f6-ee549717d386"/>
+			</line>
+			<line>
+				<reportElement x="60" y="20" width="1" height="20" uuid="601711ef-2dad-4da9-8d6d-9db1c5defb24"/>
+			</line>
+			<line>
+				<reportElement x="209" y="20" width="1" height="20" uuid="c877f44e-f3c9-4947-83c3-cc7d69cd510a"/>
+			</line>
+			<line>
+				<reportElement x="270" y="20" width="1" height="20" uuid="aad6a371-e1a6-4c26-af18-01e487147cc3"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="462" y="101" width="92" height="20" uuid="bf403059-dbb2-4a40-bcb7-0a497870b1e7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCheckDutyVo}.getIndemnityDutyRate()+($P{prpLCheckDutyVo}.getIndemnityDutyRate()!=null?"%":"")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="462" y="121" width="93" height="20" uuid="b12f9921-6239-415b-ab33-36f2cd2b5038"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[一般赔案]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="272" y="81" width="104" height="20" uuid="8212132c-52c4-4b93-9398-130c088489e5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{accidentDeductVo}.getDeductibleRate()+($P{accidentDeductVo}.getDeductibleRate()!=null?"%":"")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="272" y="100" width="105" height="20" uuid="5f7927d2-3cc4-4fab-aa08-7dc5ef9a31af"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{accidentDeductVo}.getDeductibleRate()!=null?"0.00%":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="272" y="121" width="105" height="20" uuid="caae53b2-8a16-4824-84ca-17de6b5e7aab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLCItemKindVo}.getDeductible()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="395" y="220" width="1" height="20" uuid="8cdc5ae6-8586-4505-9fe8-6c32e8c3a8fc"/>
+			</line>
+			<line>
+				<reportElement x="315" y="220" width="1" height="20" uuid="3671474e-bd67-4302-a7b8-16bc0da6d002"/>
+			</line>
+			<line>
+				<reportElement x="240" y="200" width="1" height="20" uuid="9ee97365-c2bc-49b0-8c05-957d193b5265"/>
+			</line>
+			<line>
+				<reportElement x="80" y="40" width="1" height="60" uuid="beebf730-f3e6-4b18-aec5-52821664d4f2"/>
+			</line>
+			<line>
+				<reportElement x="55" y="100" width="1" height="20" uuid="81dbe422-88d2-4bb2-b23a-cd32e8824f3e"/>
+			</line>
+		</band>
+		<band height="42">
+			<staticText>
+				<reportElement x="189" y="1" width="49" height="19" uuid="eafb780b-bded-48bc-b290-da9b76d108c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[例外原因]]></text>
+			</staticText>
+			<line>
+				<reportElement x="189" y="-1" width="1" height="21" uuid="7ac5240e-da05-42c5-98dc-143b62331bfb"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="79" height="19" uuid="7bea2319-edea-4582-a400-c36c66bfbfc0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[是否例外]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="20" uuid="657c23c8-2497-427a-868c-c5411b68a887"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[分    险    种    赔    款     计    算    公    式]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="1" height="40" uuid="e0a5e677-38c1-4ac4-ba6a-b94fb7cada8d"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="40" uuid="c01066df-448c-4cdc-8d8c-3ecd05c4ff5b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="8408cc4e-c0c4-4183-bfc6-8705dca54dc5"/>
+			</line>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="1f0d84ee-a5d1-451b-bcda-28e315e425de"/>
+			</line>
+			<line>
+				<reportElement x="80" y="1" width="1" height="19" uuid="37dfb0aa-1a0b-433c-a0e0-be91e1596c0c"/>
+			</line>
+			<line>
+				<reportElement x="237" y="0" width="1" height="21" uuid="4c7ec1a6-c880-4f4c-8bfe-2e60d4a700c2"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="1" width="108" height="19" uuid="8795a1c0-29b4-4df4-8315-716749de6b13"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLPaymentVo}.getOtherFlag()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="237" y="1" width="317" height="19" uuid="698022c6-1cb4-4a3f-83e8-491bf5d1a364"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prpLPaymentVo}.getOtherCause()]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="80">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="20" uuid="9ead971e-0699-4bd7-bff0-10162381a319"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[计算书信息过多，请详见清单。]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="1" height="80" uuid="08fed28c-11ac-4e3a-8924-f1986464fea7"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="80" uuid="2c768c09-49d9-429d-91cc-a1fbfaca9792"/>
+			</line>
+		</band>
+		<band height="100">
+			<staticText>
+				<reportElement x="1" y="0" width="60" height="20" uuid="a8802099-8127-4b06-8c4b-40e10c262887"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[已预付次数：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="20" width="45" height="20" uuid="2a695258-2add-4602-846b-4c0ac2ff77c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[律师费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="40" width="45" height="20" uuid="a595761a-10a7-4771-bec8-f5fa1ccc8919"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[公估费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="20" height="20" uuid="0adc43f5-79b1-4733-a1b9-26dbe43755f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[次]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="20" width="20" height="20" uuid="dcf74d62-d98d-45db-b36c-6cb4c2276be1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="40" width="20" height="20" uuid="9b0f86aa-a2f7-43cf-9488-ce96c7310553"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="0" width="60" height="20" uuid="0f24007d-8372-4e66-9ad5-541b30a330f1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[已预付赔款：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="20" width="45" height="20" uuid="21005cd4-d236-4dd9-8491-e135d64721c3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[诉讼费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="40" width="45" height="20" uuid="818c1ad4-2433-4d4b-a60b-d4977f953c32"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[奖励费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="20" width="20" height="20" uuid="ad91028c-2b91-4668-a9a5-6284016e393b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="40" width="20" height="20" uuid="ed1f8073-c4c9-408f-86f4-ff634a136978"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="0" width="20" height="20" uuid="8369df11-4061-4b5c-8f0d-b763b5951a33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="100" height="20" uuid="950a53e3-7fb1-40d6-afef-a0e08e27d485"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[损余物资/残值金额：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="20" width="100" height="20" uuid="364d6722-f2f9-427e-9420-f0074781ddce"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[代查勘费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="40" width="100" height="20" uuid="f67d9c42-bf36-405b-a2d4-2ee9a2ee2148"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[检测费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="60" width="60" height="20" uuid="d2036d88-2775-46d0-b0df-1acadd90cfa5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[咨询顾问费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="60" width="45" height="20" uuid="1d59849d-260a-4209-b507-9705624c8ca9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[差旅费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="60" width="100" height="20" uuid="6310b978-e315-49e8-8fe4-50f3dd711c47"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[鉴定费：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="80" width="50" height="20" uuid="0ccd23b5-e33c-4f34-8b7e-e56019901969"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[其他费用：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="60" width="20" height="20" uuid="e680bfbd-1aba-4750-9c46-fec479a3bf29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="80" width="20" height="20" uuid="b3c47ea9-dad4-417f-9ed0-6dc0be0c005a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="60" width="20" height="20" uuid="22756203-864d-4c4e-8db8-1d51667ae221"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="0" width="20" height="20" uuid="cdbc214c-0adb-4a62-ac8a-08b883d5f148"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="20" width="20" height="20" uuid="aae18fef-89b0-426b-8cd0-6e11d5b15a7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="60" width="20" height="20" uuid="a2e3d0a9-25d3-4f39-b7ce-9f0dc0ceaf5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="40" width="20" height="20" uuid="eb8afdd4-6d8b-47dd-bec9-de897881b443"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="70" height="20" uuid="e161d6e3-0102-4b50-8434-04462860a76f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1101".equals($P{prpLCMainVo}.getRiskCode())?$P{CIprePayTimes}:$P{BIprePayTimes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="20" width="85" height="20" uuid="216eade9-ddbf-4229-a3f1-7c8dfd6b9f60"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("06")?$P{paymentFeeMap}.get("06"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="200" y="20" width="85" height="20" uuid="eeced099-7368-441b-8c68-ad682d035d39"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("07")?$P{paymentFeeMap}.get("07"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="20" width="100" height="20" uuid="a43173b9-2b44-4ffa-bcac-5e1fdee897db"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("08")?$P{paymentFeeMap}.get("08"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="40" width="85" height="20" uuid="07863272-4af1-41d2-b116-7d2dcd033d16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("13")?$P{paymentFeeMap}.get("13"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="200" y="40" width="85" height="20" uuid="59fdbba2-c579-48aa-ad64-466b8bdffd29"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("14")?$P{paymentFeeMap}.get("14"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="40" width="100" height="20" uuid="65a062df-d3ec-474b-909a-9584beda805f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("15")?$P{paymentFeeMap}.get("15"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="60" width="70" height="20" uuid="791c2ae2-b66f-4c10-a1f1-6efa69e8ffa4"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("16")?$P{paymentFeeMap}.get("16"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="200" y="60" width="85" height="20" uuid="b0abc042-a9d7-4f0f-abd7-eb5332c37a2f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("17")?$P{paymentFeeMap}.get("17"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="61" width="100" height="20" uuid="392f364f-9553-4eac-84e4-f185332f7585"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("18")?$P{paymentFeeMap}.get("18"):"0.00"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="80" width="85" height="20" uuid="6cdf192d-a61c-40f5-ab36-c53b41f50079"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentFeeMap}.containsKey("99")?$P{paymentFeeMap}.get("99"):"0.00"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="e87c5755-1e17-4bb0-8006-e80d7a50d25a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="5009adba-3b60-4dc4-b7cf-9d2afd45e10c"/>
+			</line>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="414b5dbe-4950-456d-8aa2-c1529363551a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="60" width="555" height="1" uuid="7c023c64-4ca5-45c0-b998-f316a132fed1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1" uuid="daf9247a-d83d-462f-ac05-2d4ead915533"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="100" uuid="9725d585-1184-4196-988b-417286c31eee"/>
+			</line>
+			<line>
+				<reportElement x="150" y="0" width="1" height="100" uuid="12520a9a-fe44-4658-8d6b-743c64c4a951"/>
+			</line>
+			<line>
+				<reportElement x="305" y="0" width="1" height="80" uuid="3e6a8b31-52e6-4190-bceb-416cfe6367c2"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="100" uuid="0b96770e-3cf1-443f-aa5c-c0c9f303de46"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="215" y="1" width="70" height="20" uuid="b9300bdc-139a-4851-9160-a52358da297f"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1101".equals($P{prpLCMainVo}.getRiskCode())?$P{CIsumprepay}:$P{BIsumprepay}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="40">
+			<staticText>
+				<reportElement x="0" y="0" width="140" height="20" uuid="9b273b5e-a9c7-46cc-88b8-56c330bd1984"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[本次实付赔款（人民币大写）：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="20" width="120" height="20" uuid="3bf59ba4-7e63-4813-8326-96350cc25604"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[赔款合计（人民币大写）：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="20" width="35" height="20" uuid="f5f4acab-11b7-465b-91b2-90b0de576041"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[（￥：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="20" width="45" height="20" uuid="755f584d-002d-4a5c-a289-697146ef3cab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[元）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="35" height="20" uuid="b56c7794-9fe5-496e-b669-2a9c480e0643"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[（￥：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="0" width="45" height="20" uuid="999a05e3-1f8e-45a9-be98-75c794f28e80"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[元）]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="395" y="0" width="115" height="20" uuid="db722f14-36e6-405b-aa84-d276970df4d8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPaidAmt}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="9b309148-4fab-420a-8fdc-7c461eaae158"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="24d4cffb-6db6-478c-b1f3-020a76a81783"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="40" uuid="45ea6f1a-bd61-4e84-b9c0-67bfe0a931c5"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="40" uuid="0aba28a5-bfaa-45b9-9610-6b9d910506bc"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="395" y="20" width="115" height="20" uuid="a969b9c7-9f78-4df0-827c-272cc673d048"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumAmt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="138" y="1" width="222" height="20" uuid="0e2ab09b-9749-4ef7-8857-07cc1df0065f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumpaidAmt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="121" y="20" width="239" height="20" uuid="a0e3c375-fe1e-4086-afb3-054ae54fce3c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumAmt}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="80">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="3ada74dc-6cef-4b5e-867d-7b7a5e1cf940"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[分公司总经理室：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="100" height="20" uuid="4c7a0dc0-2906-4a29-a211-344e6ede455b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[部门负责人：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="40" height="20" uuid="391a2930-312e-4b42-a149-266e3074a179"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[核赔人：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="100" height="20" uuid="4cbbb18f-c0ac-459c-9a44-442fffc22150"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[经办人：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="d4669f30-34e8-49b0-afc6-c85b82df5b7b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="80" uuid="683e9566-04f6-424e-bd7f-df1efef11deb"/>
+			</line>
+			<line>
+				<reportElement x="140" y="0" width="1" height="80" uuid="ae028746-236f-44e7-9a1b-35e773a8a453"/>
+			</line>
+			<line>
+				<reportElement x="280" y="0" width="1" height="80" uuid="44e8abcd-956b-4f03-8c96-e4d6f9a6d53a"/>
+			</line>
+			<line>
+				<reportElement x="420" y="0" width="1" height="80" uuid="3744a704-069e-4314-8c41-972a8d925883"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="80" uuid="9a4b6f00-2989-4f97-b299-c90f5fd98425"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="321" y="1" width="100" height="19" uuid="f7a31d14-eb94-4120-9af7-d3c8bd197318"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{underwriteUser}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="1" y="1" width="100" height="20" uuid="8c3f105a-e99b-4071-8eaa-9e07172d9ed9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[总公司审批意见：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="e982e36f-f34e-4a3d-80d2-9ee65355daca"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="60" uuid="dc76521a-1574-44bb-a51d-9cf18085809a"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="60" uuid="8331ef10-a17c-422d-95c6-1193d44616b5"/>
+			</line>
+		</band>
+		<band height="20">
+			<staticText>
+				<reportElement x="30" y="0" width="40" height="20" uuid="23a10c8d-5617-494c-a748-4fe32107e77b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[理算员：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="55" height="20" uuid="342fa417-34af-459d-a37c-be10599214d3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[打印日期：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="0" width="130" height="20" uuid="256b718a-b7c3-4c2d-b08f-67f842910a92"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{createUser}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd HH : mm : ss" isBlankWhenNull="true">
+				<reportElement x="375" y="0" width="130" height="20" uuid="6d6e8358-1303-41e8-b38e-1471c5713451">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="a9cb6e70-668c-43ee-9f2f-51559af1f240"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

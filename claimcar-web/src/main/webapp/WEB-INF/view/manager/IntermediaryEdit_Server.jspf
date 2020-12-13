@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+
+	<div class="table_wrap">
+		<div class="formtable">
+		<div class="FeeStandard mt-15 text-c">
+			<form action="#" id="IntermServerEditform">
+				<div class="table_cont">
+					
+					<table class="table table-bordered table-bg">
+						<thead>
+							<tr>
+								<th>公估服务类型</th>
+								<th>资费标准</th>
+							</tr>
+						</thead>
+						<tbody class="addrow">
+						<input type="hidden" id="prpdIntermId"  name="intermId" value="${intermId }" />
+						<c:forEach var="prpdIntermServer" items="${prpdIntermServers}" varStatus="status">						
+							<tr>									
+								<td>
+									<input type="hidden" name="prpdIntermServerVos[${status.index }].serviceType" value="${prpdIntermServer.serviceType }"/>
+									<input type="text" class="input-text" readonly="readonly" value="${prpdIntermServer.serviceName}"/>
+								</td>
+								<td>
+									<input type="text" class="input-text" name="prpdIntermServerVos[${status.index }].feeStandard" 
+											value="${prpdIntermServer.feeStandard}" maxlength="10"/>
+									<input type="hidden" name="prpdIntermServerVos[${status.index }].id" value="${prpdIntermServer.id}"/>
+									<input type="hidden" name="prpdIntermServerVos[${status.index }].createTime" value="${prpdIntermServer.createTime }"/>
+									<input type="hidden" name="prpdIntermServerVos[${status.index }].createUser" value="${prpdIntermServer.createUser }"/>
+								</td>
+							</tr>							       
+						</c:forEach>	
+						</tbody>
+						<tr>
+							<td colspan="3"><div class="btn-footer clearfix text-c">
+									<a class="btn btn-zd mr-10" id="submitServer">保存</a> 
+									<a class="btn btn-zd mr-10 ml-5" onclick="layerHidden()">关闭</a>
+
+								</div></td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+
+			$("#submitServer").click(function(){	//提交表单	
+				$("#prpdIntermId").val($("#prpdIntermMainID").val());
+				$("#IntermServerEditform").submit();
+				//防止重复提交
+				$("[name^='prpdIntermServerVo']").attr("disabled","disabled");
+				$("[name^='prpdIntermServerVo']").attr("name","submitService");
+			    $("#submitServer").css("display","none");
+			   // $("#submitServer").attr("id","submitService");
+				//layer.close(index);			
+				
+			});
+		
+		$(function (){
+			var ajaxEdit = new AjaxEdit($('#IntermServerEditform'));
+			ajaxEdit.targetUrl = "/claimcar/manager/saveIntermServerInfo.do"; 
+			ajaxEdit.afterSuccess=function(data){
+
+			}; 
+			//绑定表单
+			ajaxEdit.bindForm();
+		});
+		
+		
+	</script>
+
+
+

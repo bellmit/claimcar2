@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+    <td>
+        <app:codetrans codeType="InjuredPart" codeCode="${persExt.injuredPart }" />
+    </td>
+    <td>
+        <app:codetrans codeType="InjuredDiag" codeCode="${persExt.injuredDiag }" />
+    </td>
+    <td>
+        <app:codetrans codeType="TreatMethod" codeCode="${persExt.treatMethod }"/>
+    </td>
+    <td>
+        <app:codetrans codeType="TreatWay" codeCode="${persExt.treatWay }"/>
+    </td>
+    <td>
+        <app:codetrans codeType="ProgSituation" codeCode="${persExt.progSituation }"/>
+    </td>
+    <td>
+        <app:codetrans codeType="WoundGrade" codeCode="${persExt.woundGrade }"/>
+    </td>
+    <td title="${persExt.diagDetail }">
+        ${fn:length(persExt.diagDetail)>4?fn:substring(persExt.diagDetail,0,4):persExt.diagDetail }
+        <c:if test="${fn:length(persExt.diagDetail)>4 }" >......</c:if>
+    </td>
+    <td title="${persExt.trackRemark }">
+        ${fn:length(persExt.trackRemark)>4?fn:substring(persExt.trackRemark,0,4):persExt.trackRemark }
+        <c:if test="${fn:length(persExt.trackRemark)>4 }" >......</c:if>
+    </td>
+</tr>
+

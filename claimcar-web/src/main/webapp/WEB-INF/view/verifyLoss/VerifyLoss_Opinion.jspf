@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+	<div class="table_wrap">
+		<div class="table_title f14">核损意见</div>
+		<div class="table_cont formtable">
+			<div class="row cl">
+				<label class="form_label col-1"><strong>核损意见: </strong></label>
+				<div class="form_input col-11">
+					<app:codeSelect codeType="veriOpionType" name="claimTextVo.opinionCode"  value="${claimTextVo.opinionCode }" onchange="changeOpinion(false)" type="radio"/>
+				</div>
+				<br>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1"><strong>意见内容: </strong></label>
+			</div>
+			<div class="row cl">
+				<div class="form_input" id="contentDiv">
+					<div id="content_a" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veriOpiona" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox"  dictFlag="false" onclick="contentClick()" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_b" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veriOpionb" name="claimTextVo.contentCode" style="margin-left:1%" type="checkbox"  dictFlag="false" onclick="contentClick()" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_c" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veriOpionc" name="claimTextVo.contentCode" style="margin-left:1%"  type="checkbox"   dictFlag="false" onclick="contentClick()" value="${claimTextVo.contentCode }"/>
+					</div>
+					<div id="content_d" style="display: none">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<app:codeSelect codeType="veriOpiond" name="claimTextVo.contentCode" style="margin-left:1%"  type="checkbox" dictFlag="false" onclick="contentClick()" value="${claimTextVo.contentCode }"/>
+					</div>
+				</div>
+			</div>
+			<div class="row cl">
+				<textarea class="textarea w90" name="claimTextVo.description" id="description" maxlength="500" nullmsg="请输入核损意见" placeholder="请输入...">${claimTextVo.description }</textarea>
+				<font class="must">*</font> 
+			</div>
+		</div>
+	</div>
+			

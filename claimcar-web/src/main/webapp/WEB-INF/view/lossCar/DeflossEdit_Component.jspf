@@ -1,0 +1,176 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<style>
+.YJ{
+margin-top:5px;
+}
+</style>
+
+<!-- 零部件更换信息开始 -->
+		<div class="table_wrap">
+		<div class="table_title f14">
+				<span style="
+			    vertical-align: middle;
+			    margin-right: 20px;
+				">零部件更换费用清单</span>
+		<c:if test="${taskVo.subNodeCode eq 'DLChk' && yjReAskFlag eq '1'}">
+				<a class="btn btn-zd" onclick="showDlhk()" style="
+			    vertical-align: middle;
+			    display: inline;
+				">阳杰复检信息</a>
+		</c:if>
+		<%-- <c:if test="${yjFlag eq '1' }">
+	     <a class="btn btn-zd" onclick="supply('${lossCarMainVo.id}')" style="
+			    vertical-align: middle;
+			    display: inline;">阳杰配件下单</a>
+        </c:if> --%>
+		 </div>
+			<div class="table_cont YJ" >
+				<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+					<c:set var="kindcol" 	value="1"/> 
+				</c:if>
+				<c:if test="${lossCarMainVo.reCheckFlag eq '1'}" >
+					<c:set var="reChkCol" 	value="2"/> 
+				</c:if>
+				<table class="table table-border" border="1" id="componentTable">
+					<c:if test="${! empty lossCarMainVo.sumVeripLoss || ! empty lossCarMainVo.sumVeriLossFee}">
+						<thead class="text-c">
+							<tr>
+								<th colspan="${kindcol+reChkCol +1}"></th>
+								<c:choose>
+								<c:when test="${yjAskFlag eq '1' }">
+								<th style="border-left:2px solid #91c9f9;" colspan="7">定损	</th>
+								</c:when>
+								<c:otherwise>
+								<th style="border-left:2px solid #91c9f9;" colspan="6">定损</th>
+								</c:otherwise>
+								</c:choose>
+								<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+									<th style="border-left:2px solid #91c9f9;" colspan="4">核价</th>
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+									<th style="border-left:2px solid #91c9f9;" colspan="4">核损</th>
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.dLChkAuditPartSum}">
+									<th style="border-left:2px solid #91c9f9;" colspan="4">复检</th>
+								</c:if>
+							</tr>
+						</thead>
+					</c:if>
+					<thead class="text-c">
+						<tr>
+							<c:if test="${lossCarMainVo.reCheckFlag eq '1'}" >
+								<th>复检 </th>
+							</c:if>
+							<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+								<th>险别 </th>
+							</c:if>
+							<th>零部件名称</th>
+							<c:if test="${lossCarMainVo.reCheckFlag eq '1'}" >
+								<th>更换次数 </th>
+							</c:if>
+							<!-- <th>系统价格</th> -->
+							<th style="border-left:2px solid #91c9f9;">定损单价</th>
+							<th>数量</th>
+							<th>定损残值</th>
+							<th>定损小计</th>
+							<th>是否回收</th>
+							<th>备注</th>
+							<c:if test="${yjAskFlag eq '1'}">
+							<th>阳杰报价</th>
+							</c:if>
+							<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+								<th style="border-left:2px solid #91c9f9;">核价价格</th>
+								<th>核价数量</th>
+								<th>核价残值</th>
+								<th>核价小计</th>
+							</c:if>
+							<c:if test="${! empty lossCarMainVo.sumVeriLossFee}">
+								<th style="border-left:2px solid #91c9f9;">核损价格</th>
+								<th>核损数量</th>
+								<th>核损残值</th>
+								<th>核损小计</th>
+							</c:if>
+							<c:if test="${! empty lossCarMainVo.dLChkAuditPartSum}">
+								<th style="border-left:2px solid #91c9f9;">复检价格</th>
+								<th>复检数量</th>
+								<th>复检残值</th>
+								<th>复检小计</th>
+							</c:if>
+						</tr>
+					</thead>
+					<tbody class="text-c" id="componentBody">
+						<c:forEach var="carCompVo" items="${lossCarMainVo.prpLDlossCarComps }" varStatus="status">
+							<tr>
+								<c:if test="${lossCarMainVo.reCheckFlag eq '1'}" >
+									<td>
+										<input type="checkbox"  disabled="disabled"  <c:if test="${carCompVo.reCheckFlag eq '1' }">checked='checked'</c:if> />
+									 </td>
+								</c:if>
+								<c:if test="${lossCarMainVo.deflossCarType eq '1'}" >
+									<td>
+										<c:if test="${carCompVo.wadFlag eq '1' }">
+											<app:codetrans codeType="KindCode" codeCode="${carCompVo.kindCode}" riskCode="${riskCode }"/>
+										</c:if>
+										<c:if test="${carCompVo.wadFlag ne '1' }">
+											<app:codetrans codeType="KindCode" codeCode="${commonVo.compKindName}" riskCode="${riskCode }"/>
+										</c:if>
+									 </td>
+								</c:if>	
+								<td> ${carCompVo.compName } </td>
+								<c:if test="${lossCarMainVo.reCheckFlag eq '1'}" >
+									<td> ${carCompVo.replaceNum } </td>
+								</c:if>
+								<%-- <td> ${carCompVo.chgRefPrice } </td> --%>
+								<td style="border-left:2px solid #91c9f9;"> ${carCompVo.materialFee } </td>
+								<td> ${carCompVo.quantity } </td>
+								<td> <c:if test="${carCompVo.restFee !=0}"> ${carCompVo.restFee }</c:if> </td>
+								<td> ${carCompVo.sumDefLoss } </td>
+								<td> <c:if test="${carCompVo.recycleFlag eq '1'}">是</c:if></td>
+								<td>
+										<div <c:if test="${fn:length(carCompVo.remark ) > 4}">title="${carCompVo.remark }"</c:if> >
+									<c:choose> 
+										<c:when test="${fn:length(carCompVo.remark ) > 4}"> 
+											${fn:substring(carCompVo.remark, 0, 4)}......
+										</c:when>
+										<c:otherwise>  
+											${carCompVo.remark }
+										</c:otherwise>  
+										</c:choose> 
+										</div>
+								</td>
+								<c:if test="${yjAskFlag eq '1'}">
+								<td>
+								<c:if test="${carCompVo.yJAskPrivceFlag eq '1'}">
+								<a class="btn"  onclick="showInfo('${carCompVo.id}')" id="showInfo">查看</a>
+								</c:if>
+								</td><!-- 阳杰报价 -->
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.sumVeripLoss }">
+									<td style="border-left:2px solid #91c9f9;"> ${carCompVo.veripMaterFee } </td>
+									<td> ${carCompVo.auditCount } </td>
+									<td> <c:if test="${carCompVo.veripRestFee !=0}"> ${carCompVo.veripRestFee }</c:if> </td>
+									<td> ${carCompVo.sumCheckLoss } </td>
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.sumVeriLossFee }">
+									<td style="border-left:2px solid #91c9f9;"> ${carCompVo.veriMaterFee } </td>
+									<td> ${carCompVo.veriQuantity } </td>
+									<td>  <c:if test="${carCompVo.veriRestFee !=0}"> ${carCompVo.veriRestFee }</c:if> </td>
+									<td> ${carCompVo.sumVeriLoss } </td>
+								</c:if>
+								<c:if test="${! empty lossCarMainVo.dLChkAuditPartSum }">
+									<td style="border-left:2px solid #91c9f9;"> ${carCompVo.dLChkAuditMaterialFee } </td>
+									<td> ${carCompVo.dLChkAuditCount } </td>
+									<td>  <c:if test="${carCompVo.dLChkApprRemainsPrice !=0}"> ${carCompVo.dLChkApprRemainsPrice }</c:if> </td>
+									<td> ${carCompVo.dLChkApprPartSum } </td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					 </tbody>
+				</table>
+			</div>
+			<div style="margin:4px 0;overflow:hidden;">
+				<input style="display:none;" type='button' title='更多' id="componentBodyButton" onclick="showMore('componentBody')" class='btn btn-zd fl nodisable' value='更多' />
+			 </div>
+		</div>
+<!-- 零部件更换信息结束-->

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+	<!-- add by lujijiang -->
+	<description>Shiro安全配置</description> 
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="casRealm" />
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+        <property name="subjectFactory" ref="casSubjectFactory"/>
+	</bean>
+
+	<!-- 項目自定义的Realm，目前仅使用非加盐非多级循环的MD5密码校验，有安全隐患，建议适时修正为SHA256等高级加密 -->
+	
+	<bean id="casRealm" class="ins.platform.shiro.service.spring.MyCasRealm">
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+        <!--<property name="casServerUrlPrefix" value="${cas.casserver}"/>
+        <property name="casService" value="${cas.webapp}/cas"/>-->
+    </bean>
+    
+    <bean id="casFilter" class="ins.platform.shiro.web.filter.MyCasFilter">
+        <property name="failureUrl" value="/casError.jsp"/>
+    </bean>
+    
+    <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
+    
+	 <bean id="chainDefinitionSectionMetaSource" class="ins.platform.shiro.source.ChainDefinitionSectionMetaSource">  
+	 	<property name="filterChainDefinitions">
+			<value>
+				<!-- 静态资源区 -->
+				/js/** = anon
+               	/css/** = anon
+               	/img/** = anon
+               	/plugins/** = anon
+               	/h-ui/** = anon
+               	/images/** = anon
+               	/lib/** = anon
+               	/rpc/** = anon
+               	/plugins/** = anon
+               	/common/** = anon
+               	/favicon.ico = anon
+               	/error/**=anon
+               	/casError.jsp = anon
+               	/cas = cas
+               	/sysUser/preRegist = anon
+               	/sysUser/prePassword = anon
+               	/sysUser/sendMail = anon
+               	/sysUser/preResetPassword = anon
+               	/sysUser/resetPassword = anon
+               	/areaSelect/getChlidArea.do = anon
+               	/verification/imageCode = anon
+               	/sysUser/register = anon
+               	/sysUser/checkedSysUser = anon
+               	/sysUser/checkedEmail = anon
+               	/fittings =anon
+               	/jyPriceReceive =anon
+               	/jyVLossReceive =anon
+               	/reloadFittings =anon
+               	/jyDlossReceive = anon
+               	/jyDLChkReceive = anon
+               	/jxCourtReceive = anon
+               	/jiangxicourt/** = anon
+               	/addValueServicesServlet = anon
+               	/clearCacheServlet = anon
+				/imageQueryServlet = anon
+               	/middleStageQuery = anon
+				/receivepayment = anon
+				/public/push/dataNotice = anon
+				/public/push/platformDataNotice = anon
+               	/founderToClaimAction/** = anon
+               	/claimMarketingQueryServlet/** = anon
+               	/remoteService = anon
+               	/webservice/** = anon
+                /clearCache/** = anon
+                /vatResultInfoSerlvet/result = anon
+                /billBackSerlvet/result = anon
+               	/logout.action=logout
+               	/logout.do=logout
+               	/** = authc
+               	
+			</value>
+		</property>
+    </bean> 
+    
+    <!--<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<property name="redirectUrl" value="${cas.casserver}/logout?service=${cas.webapp}" />
+	</bean>-->
+	<bean id="logout" class="ins.platform.shiro.service.spring.MyLogoutFilter"/>
+	
+	<!-- <bean id="rabbitMq" class="ins.sino.claimcar.middlestagequery.servlet.RabbitUtils"></bean> -->
+	<bean id="anyRolesFilter" class="ins.platform.saa.filter.AnyRolesAuthorizationFilter">
+    </bean>	
+    
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="ins.platform.shiro.web.util.MyShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!--<property name="loginUrl" value="${cas.casserver}/login?service=${cas.webapp}/cas" />-->
+		<property name="successUrl" value="/" />
+		<property name="filters">
+            <util:map>
+            	<entry key="anyRoles" value-ref="anyRolesFilter"/>
+                <entry key="cas" value-ref="casFilter"/>
+                <entry key="logout" value-ref="logout"/>
+            </util:map>
+        </property>
+		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />  
+	</bean>
+
+		<!--  尝试根据地址栏获得cas.webapp
+	<property name="loginUrl" value="${cas.casserver}/login" />
+	<entry key="authc" value-ref="accessFilter" />
+	<bean id="accessFilter" class="ins.platform.shiro.web.filter.MyAccessControlFilter"></bean>
+	 -->
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml"/>
+	</bean>
+	
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
+	</bean>
+</beans>

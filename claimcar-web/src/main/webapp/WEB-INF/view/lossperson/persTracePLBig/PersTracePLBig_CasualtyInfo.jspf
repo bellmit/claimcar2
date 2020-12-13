@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<input type="hidden" id="persTracesNum" name="persTracesNum" value="${fn:length(prpLDlossPersTraces) }">
+<div class="panel panel-primary" style="border: none;">
+	<div class="panel-header ">伤亡人员处理信息</div>
+	<div id="persInfoTab" class="HuiTab">
+		<div class="tabBar cl">
+			<c:forEach var="persTrace" items="${prpLDlossPersTraces }" varStatus="status">
+				<c:if test="${persTrace.validFlag =='0' }">
+					<span style="background: gray">
+				</c:if>
+				<c:if test="${persTrace.validFlag =='1'&&persTrace.endFlag=='1' }">
+					<span style="background: #1A6FB8;">
+				</c:if>
+				<c:if test="${(empty persTrace.validFlag||persTrace.validFlag =='1')&&(empty persTrace.endFlag||persTrace.endFlag=='0') }">
+					<span>
+				</c:if>
+                ${persTrace.prpLDlossPersInjured.personName }</span>
+			</c:forEach>
+		</div>
+		<!--选项卡一 -->
+		<c:choose>
+			<c:when test="${fn:length(prpLDlossPersTraces)>0 }">
+				<c:forEach var="persTrace" items="${prpLDlossPersTraces }" varStatus="status">
+					<c:set var="tabPageNo" value="${status.index}" />
+					<div class="tabCon">
+						<input type="hidden" class="input-text" name="tabPageNo" value="${tabPageNo }">
+						<%@include file="../common/casualtyInfoView/CasualtyInfo_TabCon.jspf"%>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<h1 class="tips">暂时没有伤亡人员</h1>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</div>

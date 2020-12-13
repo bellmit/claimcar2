@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">费用赔款信息</div>
+	<div class="table_cont table_list">
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>险别</th>
+					<th>费用类型</th>
+					<th>费用金额</th>
+					<th>核损费用金额</th>
+					<th>收款人</th>
+				</tr>
+			</thead>
+			<tbody class="text-c" id="chargeTbody">
+			    <input type="hidden" id="lossChargeVosSize" value="${fn:length(lossChargeVos) }" />
+				<c:forEach var="chargeFeeVo" items="${lossChargeVos}" varStatus="status">
+					<tr>
+						<td>${chargeFeeVo.kindName }
+							<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].id" value="${chargeFeeVo.id }" />
+							<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].businessId" value="${chargeFeeVo.businessId }" /> 
+							<input type="hidden" class="input-text" name="lossChargeVos[${status.index }].registNo" value="${chargeFeeVo.registNo }" /> 
+							<input type="hidden" class="input-text " name="lossChargeVos[${status.index }].businessType" value="${chargeFeeVo.businessType }" />
+						</td>
+						<td>${chargeFeeVo.chargeName }</td>
+						<td>${chargeFeeVo.chargeFee }
+							
+						    <input type="hidden" class="input-text" id="lossChargeVos_${status.index }_chargeFeeId" value="${chargeFeeVo.chargeFee }"/>
+						</td>
+						<td width="20%">
+							<input type="text" class="input-text " datatype="amount" onchange="calSumChargeFee(this)"
+								name="lossChargeVos[${status.index }].veriChargeFee" 
+								value="${!empty chargeFeeVo.veriChargeFee ? chargeFeeVo.veriChargeFee : chargeFeeVo.chargeFee }"/>
+						</td>
+						<td>${chargeFeeVo.receiver }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div class="formtable">
+			<div class="row cl">
+				<label class="form_label col-offset-2 col-1">
+					<strong>费用合计 </strong>
+				</label>
+				<div class="form_input col-2">
+					<input type="hidden" class="input-text" name="lossPropMainVo.sumLossFee" value="${lossPropMainVo.sumLossFee}" />
+					${lossPropMainVo.sumLossFee}
+				</div>
+				<label class="form_label col-1" style="margin-left: 11%;" >
+					<strong>核损费用合计 </strong>
+				</label>	
+				<div class="form_input col-2" style="width: 24.2%;">
+					<input type="text" class="input-text" id="sumVeriChargeFee" name="lossPropMainVo.sumVeriFee"
+						value="${!empty lossPropMainVo.sumVeriFee ? lossPropMainVo.sumVeriFee : lossPropMainVo.sumLossFee}" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 费用赔款信息结束 -->

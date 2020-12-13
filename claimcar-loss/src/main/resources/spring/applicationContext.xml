@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<!-- 打开aspectj织入 -->
+	<!-- <context:load-time-weaver aspectj-weaving="off"/> -->
+	<!-- 支持 @Transactional 标记 -->
+	<!-- <tx:annotation-driven mode="aspectj" /> -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+	<!-- 启用类扫描机制，扫描ins包下的通过元数据标记为@Component、@Resource、@Service等的Bean并自动注入 -->
+	<context:component-scan base-package="ins">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<!-- 支持 @AspectJ 标记 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<bean id="springUtils" class="ins.platform.common.web.util.SpringUtils"></bean>
+	<!-- 暴露服务及调用远程服务 -->
+	<import resource="classpath:spring/components/applicationContext-dubbo.xml" />
+	
+	 <import resource="classpath:spring/components/applicationContext-billno.xml" />
+	
+	<!-- 启用类扫描机制，通过元数据配置Service，无元数据的在此配置 -->
+	<!-- 自定义的bean在下面定义 -->
+	<!-- Security -->
+	<!-- 以下两个配置二选一，如果用单点登陆，使用applicationContext-cas，否则用applicationContext-security -->
+	<!-- <import resource="classpath:spring/components/applicationContext-security.xml" /> -->
+	<!-- 安全认证使用Shiro实现 add by lujijiang -->
+	<!-- 不带单点登录 
+	<import resource="classpath:spring/components/applicationContext-shiro-nocas.xml" /> -->
+	<!-- 单点登录 -->
+	
+	<import resource="classpath:spring/components/applicationContext-aopsaa.xml" />
+
+	
+	<!-- 
+	<import resource="classpath:spring/components/applicationContext-aopsaa.xml" />
+	 -->
+		
+	<!-- <import resource="components/applicationContext-cas.xml" /> -->
+	<!-- Quartz <import resource="components/applicationContext-quartz.xml" 
+		/> -->
+	<!-- Mail
+	<import resource="components/applicationContext-mail.xml" />  -->
+	<!-- Quartz -->
+	<!-- <import resource="classpath:spring/components/applicationContext-quartz.xml" 
+		/> -->
+	<!-- log  -->
+	<import resource="classpath:spring/components/applicationContext-log.xml" />
+
+	<!--<import resource="classpath:spring/components/applicationContext-aoplog.xml" />-->
+	<!-- saa <import resource="classpath:spring/components/applicationContext-saa.xml" 
+		/> <import resource="classpath:spring/components/applicationContext-saa.xml" 
+		/> -->
+	<!-- rule 
+	<import resource="classpath:spring/components/applicationContext-rule.xml" />
+	--> 
+	<!-- RPC
+	<import resource="classpath:spring/components/applicationContext-rpc.xml" /> -->
+
+<!--  
+	<bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>dozer-bean-mappings.xml</value>
+			</list>
+		</property>
+	</bean>
+-->
+</beans>

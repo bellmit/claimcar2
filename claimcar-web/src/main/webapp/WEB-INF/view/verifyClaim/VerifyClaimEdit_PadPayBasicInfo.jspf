@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">基本信息</div>
+	<div class="table_cont">
+		<div class="formtable tableoverlable">
+		<!-- 隐藏域的值 -->
+
+		<div class="row cl">
+			<label class="form_label col-2">被保险人：</label>
+			<div class="form_input col-2">${policyInfo.insuredName}</div>
+			<label class="form_label col-2">归属机构：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="ComCode" codeCode="${policyInfo.comCode}" />
+			</div>
+			<label class="form_label col-2">车牌号码：</label>
+			<div class="form_input col-2">${checkCarVo.licenseNo}</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">号牌底色：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="LicenseColor"
+					codeCode="${checkCarVo.licenseColor}" />
+			</div>
+			<label class="form_label col-2">出险地点：</label>
+			<div class="form_input col-2">${registVo.damageAddress}</div>
+			<label class="form_label col-2">出险日期：</label>
+			<div class="form_input col-2">
+				<app:date date='${registVo.damageTime}' />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">交强责任类型：</label>
+			<div class="form_input col-2">
+				<app:codetrans codeType="CiIndemDuty" codeCode="${duty.ciDutyFlag}"/>
+			</div>
+			<label class="form_label col-2">交警联系电话：</label>
+			<div class="form_input col-2">${padPayMainVo.policePhone}
+			</div>
+			<label class="form_label col-2">通知书发出单位：</label>
+			<div class="form_input col-2">${padPayMainVo.noticeCom}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form_label col-2">交警通知书号：</label>
+			<div class="form_input col-2">${padPayMainVo.policeNoticeNo}
+			</div>
+			<label class="form_label col-2">通知日期：</label>
+			<div class="form_input col-2">
+				<app:date date='${padPayMainVo.noticeDate}'/>
+			</div>
+			<label class="form_label col-2">交警姓名：</label>
+			<div class="form_input col-2">${padPayMainVo.policeName}
+			</div>
+		</div>
+		<%-- <div class="row cl">
+			<label class="form_label col-2">是否发起追偿：</label>
+			<div class="form_input col-2">
+				是
+				<app:codeSelect codeType="YN10" type="radio" value="1" readonly="readonly"/>
+			</div>
+		</div> --%>
+	</div>
+	</div>
+</div>

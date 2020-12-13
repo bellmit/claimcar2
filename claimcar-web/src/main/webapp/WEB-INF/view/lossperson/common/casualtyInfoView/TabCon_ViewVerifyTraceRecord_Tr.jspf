@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<tr>
+	<td>
+	<app:codetrans codeType="FlowNode" codeCode="${persTraceFee.veriLevel }"/>审核意见
+	</td>
+	<td>
+		<fmt:formatNumber type="number" value="${persTraceFee.veriReportFee }" pattern="0.00" maxFractionDigits="2" />
+	</td>
+	<td>
+		<fmt:formatNumber type="number" value="${persTraceFee.veriRealFee }" pattern="0.00" maxFractionDigits="2" />
+	</td>
+	<td>
+		<c:choose>
+			<c:when test="${persTraceFee.feeTypeCode=='4' }">
+    		当地国家机关一般工作人员出差伙食标准<br>
+			<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元X
+    		${persTraceFee.veriQuantity}天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='6'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='3'&&fn:startsWith(comCode,'22'))}">
+    		误工收入
+    		<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元X
+    		${persTraceFee.veriQuantity }天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='7'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='5'&&fn:startsWith(comCode,'22'))}">
+    		护理劳务报酬标准
+    		<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元X
+    		${persTraceFee.veriQuantity}天
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='8'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='6'&&fn:startsWith(comCode,'22'))}">
+    		上一年度城镇居民人均可支配收入(农村人均纯收入标准)<br>
+			<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元/年X
+    		${persTraceFee.veriQuantity}年X残疾系数
+    		${persTraceFee.veriWoundRate}
+			</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='11'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='9'&&fn:startsWith(comCode,'22'))}">
+    		上一年度城镇居民人均可支配收入(农村人均纯收入标准)<br>
+			<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元/年X
+    		${persTraceFee.veriQuantity}年
+    		</c:when>
+			<c:when test="${(persTraceFee.feeTypeCode=='12'&&!fn:startsWith(comCode,'22'))||(persTraceFee.feeTypeCode=='8'&&fn:startsWith(comCode,'22'))}">
+    		上一年度职工月平均工资标准<br>
+			<fmt:formatNumber type="number" value="${persTraceFee.veriUnitAmount}" pattern="0.00" maxFractionDigits="2" />元/月X
+    		${persTraceFee.veriQuantity}月
+    		</c:when>
+		</c:choose>
+	</td>
+	<td>
+		<fmt:formatNumber type="number" value="${persTraceFee.veriDefloss}" pattern="0.00" maxFractionDigits="2" />
+	</td>
+	<td>
+		<fmt:formatNumber type="number" value="${persTraceFee.veriDetractionFee}" pattern="0.00" maxFractionDigits="2" />
+	</td>
+	<td>${persTraceFee.veriRemark }</td>
+</tr>

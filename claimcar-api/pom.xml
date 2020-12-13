@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ins.sino.claimcar</groupId>
+		<artifactId>claimcar</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>claimcar-api</artifactId>
+	<packaging>jar</packaging>
+	
+		<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
+	<repositories>
+		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+		<repository>
+			<id>edhic</id>
+			<name>edhic maven</name>
+			<url>http://nexus.edhic.com:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
+	  <dependencies>
+		<dependency>
+			<groupId>ins.sino.claimcar</groupId>
+			<artifactId>claimcar-app-framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.69</version>
+	    </dependency>
+		</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<!-- 源码插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<!-- 发布时自动将源码同时发布的配置 -->
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 自动发布到snapshots -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://repo.jsptz.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>

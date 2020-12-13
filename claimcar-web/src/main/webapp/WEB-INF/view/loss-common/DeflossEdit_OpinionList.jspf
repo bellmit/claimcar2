@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+			<!--  意见列表开始-->
+			<div class="table_wrap">
+				<div class="table_title f14">意见列表</div>
+				<div class="table_cont table_list">
+					<table class="table table-border">
+						<thead class="text-c">
+							<tr>
+								<th width="5%">序号</th>
+								<th width="6%">角色</th>
+								<th width="9%">操作人员</th>
+								<th width="8%">机构</th>
+								<th width="10%">发表意见时间</th>
+								<th width="7%">意见</th>
+								<th width="5%">总金额</th>
+								<th width="10%">材料金额</th>
+								<th width="10%">其他金额</th>
+								<th width="10%">审核状态</th>
+								<th width="20%">意见说明</th>
+							</tr>
+						</thead>
+						<tbody class="text-c" style="font-size: 5px">
+						<c:forEach var="claimText" items="${claimTextVos }" varStatus="status">
+							<tr>
+								<td>${status.index + 1}</td>
+								<td>
+									<c:choose> 
+										<c:when test="${claimText.nodeCode =='DLChk'}">
+											复检员
+										</c:when>
+										<c:when test="${fn:contains(claimText.nodeCode,'VPCar') ==true}">
+											核价员
+										</c:when>
+										<c:when test="${fn:contains(claimText.nodeCode,'VLCar') ==true}">
+											核损员
+										</c:when>
+										<c:when test="${claimText.nodeCode =='ChkRe'}">
+											复勘员
+										</c:when>
+										<c:otherwise>
+											<c:choose> 
+												<c:when test="${claimText.textType =='2'}">
+													理算员
+												</c:when>
+												<c:otherwise>
+													定损员
+												</c:otherwise>
+											</c:choose>	
+										</c:otherwise>
+									</c:choose>	
+								</td> 
+								<td>${claimText.operatorName }</td>
+								<td><app:codetrans codeType="ComCode" codeCode="${claimText.comCode }"/> </td>
+								<td><app:date date="${claimText.inputTime }" format="yyyy-MM-dd HH:mm:ss"/>
+								</td>
+								<td >
+									<c:choose>
+										<c:when test="${fn:contains(claimText.nodeCode,'VPCar')}">
+											<app:codetrans codeType="veripOpionType" codeCode="${claimText.opinionCode }"/> 
+										</c:when>
+										<c:when test="${fn:contains(claimText.nodeCode,'VLCar')}">
+											<app:codetrans codeType="veriOpionType" codeCode="${claimText.opinionCode }"/>
+										</c:when>
+										<c:when test="${fn:contains(claimText.nodeCode,'DLCarMod')}">
+											<app:codetrans codeType="veriOpionType" codeCode="${claimText.opinionCode }"/>
+										</c:when>
+									</c:choose>
+								</td>
+								<td>${claimText.sumLossFee }</td>
+								<td>${claimText.sumMaterFee }</td>
+								<td>${claimText.sumOtherfee }</td>
+								<td><app:codetrans codeType="AuditStatus" codeCode="${claimText.status }" /></td>
+								<td>${claimText.description }</td>
+							</tr>
+						</c:forEach>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--  意见列表结束-->

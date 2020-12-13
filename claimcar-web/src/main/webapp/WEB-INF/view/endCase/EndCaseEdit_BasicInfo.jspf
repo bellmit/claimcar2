@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">基本信息</div>
+	<div class="table_cont">
+		<div class="formtable">
+			<div class="row cl">
+				<label class="form_label col-1">立案号：</label>
+				<div class="form_input col-3">${endCaseVo.claimNo}</div>
+				<label class="form_label col-1">报案号：</label>
+				<div class="form_input col-2">${endCaseVo.registNo}</div>
+				<label class="form_label col-2">结案号：</label>
+				<div class="form_input col-3">${endCaseVo.endCaseNo}</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">理赔类型：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="Lflag" codeCode="${dlossMainVo.lflag}"/>
+				</div>
+				<label class="form_label col-1">条款类别：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="CarRiskCode" codeCode="${endCaseVo.riskCode}"/>
+				</div>
+				<label class="form_label col-1">车牌号码：</label>
+				<div class="form_input col-3">${dlossCarVo.licenseNo}</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">号牌底色：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="LicenseColor" codeCode="${linceColor}"/>
+				</div>
+				<label class="form_label col-1">车型名称：</label>
+				<div class="form_input col-3">${dlossCarVo.modelName}</div>
+				<label class="form_label col-1">车辆种类：</label>
+				<div class="form_input col-3">
+						<c:choose>
+							 <c:when test="${dlossMainVo.deflossCarType eq '1'}"> 
+								<app:codetrans codeType="VehicleTypeShow" codeCode="${prpLCItemCarVo.carType }" />
+							 </c:when>
+						     <c:otherwise>
+						     	<app:codetrans codeType="VehicleType" codeCode="${dlossCarVo.platformCarKindCode }" />
+						    </c:otherwise>
+				 		</c:choose>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">立案日期：</label>
+				<div class="form_input col-3">
+					<fmt:formatDate value="${claimVo.claimTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</div>
+				<label class="form_label col-1">互碰自赔：</label>
+				<div class="form_input col-3">
+					<c:choose>
+						<c:when test="${compVo.caseType eq '2'}">
+							是
+						</c:when>
+						<c:otherwise>
+							否
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<label class="form_label col-1">是否诉讼：</label>
+				<div class="form_input col-3">
+					<app:codetrans codeType="YN10" codeCode="${compVo.lawsuitFlag}"/>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">归档号：</label>
+				<div class="form_input col-3">${endCaseVo.regressNo}</div>
+				<label class="form_label col-1">本结案日期：</label>
+				<div class="form_input col-3">
+					<fmt:formatDate value="${endCaseVo.endCaseDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</div>
+				<label class="form_label col-1">结案次数：</label>
+				<div class="form_input col-3">${num}</div>
+			</div>
+		</div>
+	</div>
+</div>

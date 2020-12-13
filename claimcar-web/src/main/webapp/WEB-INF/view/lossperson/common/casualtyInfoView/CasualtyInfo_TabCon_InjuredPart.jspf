@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_wrap">
+	<div class="table_title f14">受伤部位</div>
+	<div class="table_cont  table_list">
+		<div class="formtable ">
+			<app:codeSelect clazz=" checkbox mr-5" codeType="InjuredPart" disabled="true" type="checkbox" value="${persTrace.prpLDlossPersInjured.injuryPart}" />
+		</div>
+		<table class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<th>受伤部位<font class="must">*</font></th>
+					<th>伤情诊断<font class="must">*</font></th>
+					<th>治疗方式</th>
+					<th>治疗途径</th>
+					<th>预后情况</th>
+					<th>伤残程度</th>
+					<th>具体诊断</th>
+					<th>跟踪信息备注</th>
+				</tr>
+			</thead>
+			<tbody id="${tabPageNo }_injuredPart_Tbody" class="text-c">
+				<c:forEach var="persExt" items="${persTrace.prpLDlossPersInjured.prpLDlossPersExts }" varStatus="extStatus">
+					<c:set var="injuredPartSize" value="${extStatus.index}" />
+					<%@ include file="TabCon_InjuredPart_Tr.jspf"%>
+				</c:forEach>
+				<tr>
+					<td align="center" colspan="8">（选中受伤部位增加信息，取消选中删除信息）</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

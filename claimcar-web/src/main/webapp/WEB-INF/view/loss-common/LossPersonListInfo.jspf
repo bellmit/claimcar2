@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!--  车俩损失-->
+	<div class="table_wrap">		
+		<div class="table_title f14">人伤损失</div>
+		<div class="table_cont table_list">
+			<table class="table table-border">
+				<thead class="text-c">
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>联系方式</th>
+						<th>最近一次住院的医院名称</th>
+						<th>跟踪次数</th>
+						<th>估损总金额</th>
+						<th>查看</th>
+					</tr>
+				</thead>
+				<tbody class="text-c">
+					<c:forEach var="lossPersTrace" items="${commonVo.lossPersTraceList }" varStatus="status">
+						<tr>
+							<td>${status.index+1 }</td>
+							<td>${lossPersTrace.prpLDlossPersInjured.personName }</td>
+							<td> <app:codetrans codeType="SexCode" codeCode="${lossPersTrace.prpLDlossPersInjured.personSex }"/> </td>
+							<td>${lossPersTrace.prpLDlossPersInjured.personAge }</td>
+							<td>${lossPersTrace.prpLDlossPersInjured.phoneNumber }</td>
+							<td><app:codetrans codeType="HospitalCode" codeCode="${lossPersTrace.prpLDlossPersInjured.hospitalCode }" upperCode="${lossPersTrace.prpLDlossPersInjured.hospitalCity }"/></td>
+							<td>${lossPersTrace.remark  }</td>
+							<td>${lossPersTrace.sumVeriDefloss  }</td>
+							<td>	<a target="_self"  onClick="deflossView('person',${lossPersTrace.id})"  href="javascript:void(0)">查看</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+			<!--  车俩损失结束-->

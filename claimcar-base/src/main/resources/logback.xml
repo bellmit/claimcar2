@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+<!-- scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+<!-- debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!-- 用来定义变量值的标签，其中name的值是变量的名称，value的值时变量定义的值。通过<property>定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量 -->
+	<property name="APP_Name" value="claimcar" />
+	<!-- 每个logger都关联到logger上下文，默认上下文名称为“default”,可以使用<contextName>设置成其他名字，用于区分不同应用程序的记录。一旦设置，不能修改 -->
+	<contextName>${APP_Name}</contextName>
+ 	
+	<!--定义日志输出目录-->
+	<property name="LOG_HOME" value="./logs" />
+	<!--获取应用IP-->
+	<conversionRule conversionWord="ip" converterClass="ins.framework.aoplog.util.LogIP" />
+	
+	<!--系统日志 -->
+	<appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/system.%d{yyyy-MM-dd}.%i.log
+			</FileNamePattern>
+			<!-- 最大保存20天日志 -->
+			<MaxHistory>20</MaxHistory>
+			<maxFileSize>300MB</maxFileSize>
+			<totalSizeCap>6GB</totalSizeCap> 
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>     
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}]  [%thread]:[%logger{36},%method,%line]:[%msg]%n</pattern> -->
+		    <!--  <pattern>[%date] [%thread] [%level] [%ip] [%logger{60} %line] %msg%n</pattern> -->
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<appender name="PingAnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/pingAnLogLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+
+	<!-- 接口日志 -->
+	<appender name="INTERFACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/interface.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+            <!-- <pattern>[%date] [%thread] [%level] [%logger{50} %line] %msg%n</pattern>-->		
+        </encoder>
+	</appender>
+	
+	<!-- 切面日志 -->
+    <appender name="AOPLOG"  
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">   
+            <FileNamePattern>${LOG_HOME}/aoplog.%d{yyyy-MM-dd}.log</FileNamePattern>   
+            <!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>   
+        <layout class="ch.qos.logback.classic.PatternLayout">
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+            <!-- <pattern>[%date] [%thread] [%level] [%ip] [%logger{60} %line] %msg%n</pattern> -->
+       </layout>   
+    </appender>
+    
+    <!-- 控制台日志 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] [%logger{50} %line] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	
+	<!-- 移动端请求理赔日志 -->
+	<appender name="MobileToClaimLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/MobileToClaimLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] [%logger{50} %line] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	<!-- 自助理赔报案日志 -->
+	<appender name="SelfHelpClaimCarLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/SelfHelpClaimCarLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	
+	<!-- 民太安车童请求日志 -->
+	<appender name="MtnACtLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/MtnACtLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] [%logger{50} %line] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	<!-- 在线保监消息推送请求日志 -->
+	<appender name="PushAccidentLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/PushAccidentLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	<!-- 高院日志 -->
+	<appender name="CourtLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/CourtLog.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- 日志大小 -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+		   	<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] --- [%thread]:[%X{RequestURL},%line]:[%msg]%n</pattern>
+			<!-- <pattern>[%date] [%thread] [%level] %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	<!-- 配置logger -->
+	<!-- name: 用来指定受此loger约束的某一个包或者具体的某一个类。 -->
+	<!-- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。 
+		如果未设置此属性，那么当前loger将会继承上级的级别。 -->
+	<!-- addtivity: 是否向上级loger传递打印信息。默认是true。 
+
+	-->
+	<logger name="ins.sino" level="INFO" additivity="false">
+		<appender-ref ref="CONSOLE" /> 
+		<appender-ref ref="FILEINFO" /> 
+	</logger>
+	<!-- 接口日志使用独立的appender，不继承Root的appender -->    
+    <logger name="INTERFACE" additivity="false">
+    	<appender-ref ref="INTERFACE" />
+    </logger>
+    <logger name="ins.sino.claimcar.moblie" level="info" additivity="false">
+		<appender-ref ref="MobileToClaimLog" /> 
+	</logger>
+	<logger name="ins.sino.claimcar.selfHelpClaimCar.service" level="info" additivity="false">
+		<appender-ref ref="SelfHelpClaimCarLog" /> 
+	</logger>
+	
+	<logger name="ins.sino.claimcar.carchild" level="info" additivity="false">
+		<appender-ref ref="MtnACtLog" /> 
+	</logger>
+	<logger name="ins.sino.claimcar.court" level="info" additivity="false">
+		<appender-ref ref="CourtLog" /> 
+	</logger>
+	
+	<logger name="ins.sino.claimcar.ciitc" level="info" additivity="false">
+		<appender-ref ref="PushAccidentLog" /> 
+	</logger>
+	<logger name="ins.sino.claimcar.pinganUnion.service" level="info" additivity="false">
+		<appender-ref ref="PingAnLog" /> 
+	</logger>
+	
+    
+    <logger name="AOPLOG" additivity="false">
+    	<appender-ref ref="AOPLOG" />
+    </logger>
+    <!-- root也是<loger>元素，但是它是根loger。只有一个level属性，应为已经被命名为"root". -->
+	<!-- level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。 
+		默认是DEBUG。 -->
+    <root level="INFO">
+		<appender-ref ref="CONSOLE" /> 
+		<appender-ref ref="FILEINFO" />  
+	</root>
+
+</configuration>

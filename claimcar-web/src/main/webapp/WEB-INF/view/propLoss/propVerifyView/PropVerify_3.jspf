@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<!-- 施救情况开始 -->
+			<div class="table_wrap">
+            	<div class="table_title f14">施救情况</div>
+				<div class="table_cont ">
+					<div class="formtable ">
+						<div class="row  cl">
+							<label class="form_label col-1">定损施救金额</label>
+							<div class="form_input col-10">
+								${prpLdlossPropMainVo.defRescueFee }
+							</div>
+						</div>
+						<div class="row  cl">
+							<label class="form_label col-1">核损施救金额</label>
+							<div class="form_input col-10">
+								<input type="text" class="input-text" name="prpLdlossPropMainVo.verirescueFee" value="${prpLdlossPropMainVo.verirescueFee }"/>
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 施救情况结束 -->
+			
+			<!-- 定损意见开始 -->
+			<div class="table_wrap">
+            	<div class="table_title f14">核损意见</div>
+				<div class="table_cont ">
+					<div class="formtable ">			
+						<div class="row  cl">		
+							<!-- <div class="form_input col-4 off-set-2">
+								核损意见
+							</div>	 -->
+							<div class="form_input col-4">
+							<input type="radio" name="op"  value="核损通过" onclick="changeOp(this);">核损通过&nbsp;
+							<input type="radio" name="op"  value="价格异议" onclick="changeOp(this);">价格异议&nbsp;
+							<input type="radio" name="op"  value="信息不充分" onclick="changeOp(this);">信息不充分&nbsp;
+							<input type="radio" name="op"  value="其他" onclick="changeOp(this);">其他
+							</div>
+				
+						</div>	
+						
+							
+									<textarea class="textarea" name="" id="op" readonly="readonly"></textarea>
+									
+						
+					</div>
+				</div>
+			</div>
+			<!-- 定损意见结束 -->
+			
+			<!-- 财产损失 -->
+			
+			<div class="table_wrap">
+            	<div class="table_title f14">意见列表</div>
+				<div class="table_cont ">
+					 <table class="table table-border">
+					 		<thead class="text-c">
+   									 <tr>
+	   									 <th >角色</th>
+	   									 <th>操作人员</th>
+	   									 <th >机构</th>
+	   									 <th>发表意见时间</th>
+	   									 <th>意见</th>
+	   									 <th>意见说明</th>
+	   									 <th>金额</th>
+	   									 <th>审核状态</th>
+	   									
+   									 </tr>
+  							   </thead>
+					 		<tbody class="text-c">
+					 						<c:forEach var="prpLClaimTextVo" items="${prpLClaimTextVos }">
+					 								<tr>
+					 										<td>${prpLClaimTextVo.operatorName}</td>
+					 										<td>${prpLClaimTextVo.operatorName }</td>
+					 										<td>${prpLClaimTextVo.comName }</td>
+					 										<td>${prpLClaimTextVo.inputTime }</td>
+					 										<td>${prpLClaimTextVo.description }</td>
+					 										<td>${prpLClaimTextVo.description }</td>
+					 										<td>${prpLClaimTextVo.sumlossFee }</td>
+					 										<td>${prpLClaimTextVo.status }</td>
+					 								</tr>
+					 						</c:forEach>
+					 		</tbody>
+					 </table>
+				</div>
+			</div>
+			
+			<!-- 财产损失 -->
+			
+			

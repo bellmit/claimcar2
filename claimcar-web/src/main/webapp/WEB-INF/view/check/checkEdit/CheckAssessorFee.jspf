@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<!-- 公估费开始 -->
+<div class="table_wrap" id="mediaryFee">
+	<div class="table_title f14">公估费</div>
+	<div class="table_cont table_list">
+		<table class="table table-border">
+			<thead>
+				<tr class="text-c">
+					<th style="width:20%">险别</th>
+					<th style="width:10%">费用类型</th>
+					<th style="width:10%">公估服务类型</th>
+					<th style="width:15%">资费标准</th>
+					<th style="width:15%">费用金额</th>
+					<th style="width:15%">费用浮动原因</th>
+					<th style="width:15%">收款人</th>
+				</tr>
+			</thead>
+			<tbody id="lossChargeTr">
+				<tr class="text-c">
+					<input type="hidden" name="lossChargeVo.id" value="${lossChargeVo.id}"/>
+					<input type="hidden" name="lossChargeVo.registNo" value="${lossChargeVo.registNo}"/>
+					<input type="hidden" name="lossChargeVo.businessId" value="${lossChargeVo.businessId}"/>
+					<input type="hidden" name="lossChargeVo.businessType" value="${lossChargeVo.businessType}"/>
+					<td><span class=select-box><app:codeSelect codeType="" type="select" onchange="kindSelect(${taskParamVo.handlerStatus})"
+							name="lossChargeVo.kindCode" clazz="select" dataSource="${kindMap}" value="${lossChargeVo.kindCode}"/></span>
+							<%-- <input type="hidden" name="lossChargeVo.kindName"
+								value="<app:codetrans codeType="KindCode" codeCode="${lossChargeVo.kindCode}"/>/> --%>
+					</td>
+					<td><input class="input-text text-c" name="lossChargeVo.chargeName" value="公估费" readonly="readonly"/></td>
+					<td><span class=select-box> <app:codeSelect codeType="" type="select" dataSource="${GServiceType}"
+							clazz="must" name="lossChargeVo.serviceType" value="${lossChargeVo.serviceType}" nullToVal="0"/></span>
+					</td>
+					<td><%-- <input class="input-text" name="lossChargeVo.chargeStandard" value="${lossChargeVo.chargeStandard}"/> --%>
+						<span class=select-box><app:codeSelect codeType="" type="select" dataSource="${chargeStandard}"
+							name="lossChargeVo.chargeStandard" clazz="must" value="${lossChargeVo.chargeStandard}"/>
+					</td>
+					<td><input class="input-text" name="lossChargeVo.chargeFee" value="${lossChargeVo.chargeFee}" datatype="amount"/></td>
+					<td><input class="input-text" name="lossChargeVo.floatReason" value="${lossChargeVo.floatReason}"/></td>
+					<td><span class=select-box>
+						<app:codeSelect codeType="" type="select" dataSource="${customMap}" clazz="must"
+						name="lossChargeVo.receiver" value="${lossChargeVo.receiver}"/></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- 公估费结束 -->

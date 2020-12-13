@@ -1,0 +1,249 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+	<div  class="HuiTab" style="margin-top:10px">
+		<div class="tabBar cl" >
+		<c:if test="${!empty prpLDlossPersTraces }"> 
+		<span>伤者姓名：</span>
+		</c:if>
+			<c:forEach var="persTrace" items="${prpLDlossPersTraces }" varStatus="status">
+			<span> ${persTrace.prpLDlossPersInjured.personName }</span>
+			</c:forEach>
+			<p></p>
+		</div>
+		</div>
+<div class="table_wrap">
+	<div class="table_title f14">人员基本情况</div>
+	<div class="table_cont ">
+		<div class="formtable ">
+			<div class="row cl">
+				<label class="form_label col-1">案件类型</label>
+				<div class="form_input col-3 mustBox">
+					<span class="select-box">
+						<input type="hidden" name="registNo" id="registNo" value="${registNo }">
+						<input type="hidden" name="comCode" id="comCode" value="${comCode }">
+						<input type="hidden" name="hasDriver" id="hasDriver" value="${hasDriver }">
+						<input type="hidden" name="hasPassenger" id="hasPassenger" value="${hasPassenger }">
+						<input type="hidden" name="userName" id="userName" value="${userName }">
+						<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.registNo" value="${registNo }">
+						<app:codeSelect codeType="TreatSituation" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.treatSituation" onchange="changeTreatSituation(this)"
+							value="${persTrace.prpLDlossPersInjured.treatSituation }" />
+					</span>
+					<font class="must">*</font>
+				</div>
+				<div id="deathTimeDiv" style="display:none">
+						<label class="form_label col-1">死亡时间</label>
+						<div class="form_input col-3 mustBox">
+							<input  id="deathTime" name="prpLDlossPersTraceVo.prpLDlossPersInjured.deathTime" value="<fmt:formatDate value='${persTrace.prpLDlossPersInjured.deathTime}'  pattern='yyyy-MM-dd HH:mm:ss' />" type="text" class="Wdate" style="width: 96%"
+								onfocus="WdatePicker({maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+							<font class="must">*</font>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">伤者姓名</label>
+					<div class="form_input col-3 mustBox">
+					<span class="select-box">
+						<input type="hidden" name="prpLDlossPersTraceVo.id" value="${persTrace.id }">
+						<input type="hidden" name="prpLDlossPersTraceVo.persTraceMainId" value="${persTrace.persTraceMainId }">
+						<input type="hidden" id="tracePersonName" name="prpLDlossPersTraceVo.personName" value="${persTrace.prpLDlossPersInjured.personName }">
+						<c:choose>
+							<c:when test="${fn:length(checkPersonList)>0 }">
+							<input type="hidden" name="chkPersonID" id="chkPersonID" />
+							<app:codeSelect codeType="" type="select" dataSource="${checkPersonList }" id="injuredPersonName" name="prpLDlossPersTraceVo.prpLDlossPersInjured.personName" onchange="changePersonName(this)"
+								value="${persTrace.prpLDlossPersInjured.personName }" style="width:60%" />
+							<input class="btn btn-primary radius" type="button" onclick="syncChkPerson()" type="button" value="同查勘" />
+							</c:when>
+							<c:otherwise>
+							<input type="text" class="input-text" onchange="changePersonName(this)" name="prpLDlossPersTraceVo.prpLDlossPersInjured.personName" datatype="*"
+							value="${persTrace.prpLDlossPersInjured.personName }" />
+							</c:otherwise>
+						</c:choose>
+						<font class="must">*</font>
+						</span>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">证件类型</label>
+					<div class="form_input col-3 mustBox">
+						<span class="select-box">
+							<app:codeSelect codeType="IdentifyType" type="select" id="injuredCertiType" name="prpLDlossPersTraceVo.prpLDlossPersInjured.certiType" nullToVal="1"
+								value="${persTrace.prpLDlossPersInjured.certiType }" onchange="changeInjuredCertiType()" />
+						</span>
+						<font class="must">*</font>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">证件号码</label>
+					<div class="form_input col-3 mustBox">
+						<input type="text" class="input-text" id="injuredCertiCode" name="prpLDlossPersTraceVo.prpLDlossPersInjured.certiCode" value="${persTrace.prpLDlossPersInjured.certiCode }"
+							onchange="changeCertiCode(this)" />
+						<!--<font class="must">*</font>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="formtable ">
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">人员属性</label>
+					<div class="form_input col-3 mustBox">
+						<input type="hidden" name="prpLDlossPersTraceVo.lossFeeType" id="lossFeeType" value="${persTrace.prpLDlossPersInjured.lossItemType }">
+						<span class="select-box">
+							<app:codeSelect codeType="LossItemType" id="lossItemType" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.lossItemType" onchange="changeLossItemType(this)"
+								value="${persTrace.prpLDlossPersInjured.lossItemType }" />
+						</span>
+						<font class="must">*</font>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">伤者年龄</label>
+					<div class="form_input col-3 mustBox">
+						<input type="text" class="input-text" id="personAge" name="prpLDlossPersTraceVo.prpLDlossPersInjured.personAge" datatype="age" errormsg="录入格式不正确!"
+							value="${persTrace.prpLDlossPersInjured.personAge }" />
+						<font class="must">*</font>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label class="form_label col-1">伤者性别</label>
+						<div class="form_input col-3 mustBox">
+							<span class="select-box">
+								<app:codeSelect codeType="SexCode" type="select" id="personSex" name="prpLDlossPersTraceVo.prpLDlossPersInjured.personSex" value="${persTrace.prpLDlossPersInjured.personSex }" />
+							</span>
+							<font class="must">*</font>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="formtable ">
+				<div class="row cl">
+					<div>
+						<label class="form_label col-1">从事行业</label>
+						<div class="form_input col-3">
+							<span class="select-box">
+								<input type="hidden" name="prpLDlossPersTraceVo.prpLDlossPersInjured.ticName" id="ticName" value="${persTrace.prpLDlossPersInjured.ticName }">
+								<app:codeSelect codeType="TicCode" type="select" id="ticCode" name="prpLDlossPersTraceVo.prpLDlossPersInjured.ticCode" onchange="changeTicCode(this)"
+									value="${persTrace.prpLDlossPersInjured.ticCode }" exceptValue="20"/>
+							</span>
+						</div>
+					</div>
+					<div>
+						<label class="form_label col-1">收入状况</label>
+						<div class="form_input col-3">
+							<span class="select-box">
+								<app:codeSelect codeType="Income" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.income" value="${persTrace.prpLDlossPersInjured.income }" />
+							</span>
+						</div>
+					</div>
+					<div>
+						<label class="form_label col-1">户口性质</label>
+						<div class="form_input col-3">
+							<span class="select-box">
+								<app:codeSelect codeType="Domicile" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.domicile" value="${persTrace.prpLDlossPersInjured.domicile }" />
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="formtable ">
+				<div class="row cl">
+					<div>
+						<label class="form_label col-1">联系电话</label>
+						<div class="form_input col-3 mustBox">
+							<input type="text" class="input-text"  name="prpLDlossPersTraceVo.prpLDlossPersInjured.phoneNumber"
+								value="${persTrace.prpLDlossPersInjured.phoneNumber }" datatype="m|/^0\d{2,3}-\d{7,8}$/"  ignore="ignore"/>
+						</div>
+					</div>
+					<div>
+						<label class="form_label col-1">伤情类别</label>
+						<div class="form_input col-3">
+							<span class="select-box">
+								<app:codeSelect id="woundCode" codeType="WoundCode" type="select" name="prpLDlossPersTraceVo.prpLDlossPersInjured.woundCode" value="${persTrace.prpLDlossPersInjured.woundCode }" onchange="changeWoundCode(this)" />
+							</span>
+						</div>
+					</div>
+					<div>
+						<label class="form_label col-1">车牌号码</label>
+						<div class="form_input col-3 mustBox">
+							<span class="select-box">
+								<input type="hidden" id="licenseNo" name="prpLDlossPersTraceVo.prpLDlossPersInjured.licenseNo" value="${persTrace.prpLDlossPersInjured.licenseNo}">
+								<app:codeSelect codeType="" id="serialNoId" type="select" dataSource="${dataSourceMap}" name="prpLDlossPersTraceVo.prpLDlossPersInjured.serialNo"
+									value="${persTrace.prpLDlossPersInjured.serialNo}" onclick="changeSerialNo(this)"/>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="formtable ">
+				<div class="row cl">
+					<div>
+						<label class="form_label col-1">鉴定机构名称</label>
+						<div class="form_input col-7 mustBox">
+							<%-- <input type="text" class="input-text" id="chkComName" name="prpLDlossPersTraceVo.prpLDlossPersInjured.chkComName" value="${persTrace.prpLDlossPersInjured.chkComName }" /> --%>
+							<app:areaSelect targetElmId="chkComName" areaCode="${persTrace.prpLDlossPersInjured.appraisaCity}" appraisaCode="${persTrace.prpLDlossPersInjured.chkComCode}"  showLevel="3" isAppraisa="Y" style="width:122px"/>
+							 <%-- <app:areaSelect targetElmId="prpDHospitalarea_${hospitalCaseSize }" areaCode="${persHospital.hospitalCity }" hospitalCode="${persHospital.hospitalCode }"  showLevel="3" isHospital="Y" style="width:122px"/> --%>
+							
+							<!-- lableType="code-name" -->
+						<input type="hidden" id="chkComName" name="prpLDlossPersTraceVo.prpLDlossPersInjured.appraisaCity" value="${persTrace.prpLDlossPersInjured.appraisaCity}" />
+						<input type="hidden" class="input-text" id="chkComName1" name="prpLDlossPersTraceVo.prpLDlossPersInjured.chkComName" value="${persTrace.prpLDlossPersInjured.chkComName }" />
+						 
+						</div>
+					</div>
+					<div>
+						<label class="form_label col-1">组织机构代码</label>
+						<div class="form_input col-3">
+							<input type="text" class="input-text" id="chkComCode" name="prpLDlossPersTraceVo.prpLDlossPersInjured.chkComCode" value="${persTrace.prpLDlossPersInjured.chkComCode }" readonly="readonly"/>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$("#chkComName_lv1").blur(function(){
+		var chkComCode=$("#chkComName_appraisa").val();
+	     $("#chkComCode").val(chkComCode);
+		setName();
+	});
+	$("#chkComName_lv2").blur(function(){
+		var chkComCode=$("#chkComName_appraisa").val();
+	     $("#chkComCode").val(chkComCode);
+		setName();
+	});
+	$("#chkComName_appraisa").blur(function(){
+		var chkComCode=$("#chkComName_appraisa").val();
+		
+	     $("#chkComCode").val(chkComCode);
+		setName();
+	});
+	 
+	function setName(){
+		
+		//异步请求校验
+			if ($("#chkComCode").val() == "") {
+				return false;
+			}
+			
+			$.ajax({
+				url : "/claimcar/manager/findAppraisaName.do",
+				type : "post",
+				data : {
+					"appraisaCode" : $("#chkComCode").val()
+				},
+				dataType : "json",
+				success : function(result) {
+					var appraisaName = eval(result).data;
+					
+					$("#chkComName1").val(appraisaName);
+				}
+			});
+		
+	}
+	
+ 
+	</script>

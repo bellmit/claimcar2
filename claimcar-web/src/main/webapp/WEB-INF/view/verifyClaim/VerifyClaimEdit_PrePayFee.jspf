@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+
+<div class="table_wrap">
+	<div class="table_title f14">预付费用</div>
+	<div class="table_cont table_list">
+		<table border="1" class="table table-border">
+			<thead class="text-c">
+				<tr>
+					<!-- <th width="6%">
+								<button type="button"
+									class="btn btn-plus Hui-iconfont Hui-iconfont-add"
+									onclick=""></button>
+							</th> -->
+					<th>损失险别</th>
+					<th>费用名称</th>
+					<th>费用金额</th>
+					<th>收款人</th>
+					<th>收款人帐号</th>
+					<th>开户银行</th>
+					<th>摘要<font class="must">*</font></th>
+				</tr>
+			</thead>
+			<tbody class="text-c" id="FeeTbody">
+				<input type="hidden" id="feeSize" value="${fn:length(prePayFVos)}">
+				<c:forEach var="prePayFVo" items="${prePayFVos }" varStatus="status">
+					<c:set var="index" value="${status.index}" />
+					<tr class="detail-body">
+						<td><app:codetrans codeType="KindCode" codeCode="${prePayFVo.kindCode}" riskCode="${registVo.riskCode}"/></td>
+						<td><app:codetrans codeType="ChargeCode" codeCode="${prePayFVo.chargeCode}"/></td>
+						<td>${prePayFVo.payAmt}</td>
+						<td>${prePayFVo.payeeName}</td>
+						<%-- <td><app:codetrans codeType="YN10" codeCode="${prePayFVo.otherFlag }"/></td>
+						<td><app:codetrans codeType="OtherCase"
+								codeCode="${prePayFVo.otherCause}"/></td> --%>
+						<td>${prePayFVo.accountNo}</td>
+						<td>
+							<app:codetrans codeType="BankCode" codeCode="${prePayFVo.bankName}" />
+						</td>
+						<td>
+							<input type="text" class="input-text"  value="${prePayFVo.summary}" readonly="readonly"/>
+						</td>
+						<input type="hidden" name="payeeIdFFs" value="${prePayFVo.payeeId}"/>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>

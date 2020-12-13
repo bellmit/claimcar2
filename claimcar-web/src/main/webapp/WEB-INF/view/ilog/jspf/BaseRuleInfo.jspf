@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<div class="table_cont">
+	<div style="min-height: 50px;">
+		<div class="table_title f14">规则基本信息</div>
+		<div class="formtable">
+			<div class="table_cont">
+				<div class="row cl">
+					<label class="form_label col-1">报案号</label>
+					<div class="form_input col-3">${registNo}</div>
+					<label class="form_label col-1">车牌号</label>
+					<div class="form_input col-3">${licenseNo}</div>
+					<label class="form_label col-1">损失方</label>
+					<c:choose>
+					<c:when test="${lossParty eq '1' }">
+					<div class="form_input col-3">标的车</div>
+					</c:when>
+					<c:when test="${lossParty eq '0' }">
+					<div class="form_input col-3">地面</div>
+					</c:when>
+					<c:otherwise>
+					<div class="form_input col-3">三者车</div>
+					</c:otherwise>
+					</c:choose>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

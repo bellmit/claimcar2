@@ -1,0 +1,158 @@
+/*工作台页面样式开始*/
+.box{
+	height:auto;
+	overflow:hidden;
+	}
+.workbench_div {
+	height: auto;
+	padding: 20px;
+	margin: 0 auto;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Arial', "Microsoft YaHei", "微软雅黑", '宋体';
+}
+.clearfix:before, .clearfix:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+.clearfix:after {
+	clear: both;
+}
+.f14 {
+	font-size: 14px;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.f_gray4 {
+	color: rgba(0, 0,0,.6);
+}
+.vip {
+	padding: 0px 6px;
+	height: 18px;
+	color: #fff;
+	cursor: pointer;
+	margin-right: 5px;
+	line-height: 18px;
+	text-align: center;
+	background: #c5b129;
+	border-radius: 3px;
+	display: inline-block;
+	border: 1px solid #c5b129;
+}
+.hurried {
+	height: 18px;
+	color: #fff;
+	cursor: pointer;
+	margin-right: 5px;
+	padding: 0px 6px;
+	border-radius: 3px;
+	line-height: 18px;
+	text-align: center;
+	background: #fc5454;
+	border: 1px solid #fc5454;
+}
+.overtime {
+	height: 18px;
+	color: #fff;
+	cursor: pointer;
+	padding: 0px 6px;
+	line-height: 18px;
+	margin-right: 5px;
+	text-align: center;
+	background: #b7b7b7;
+	border: 1px solid #b7b7b7;
+	border-radius: 3px;
+}
+.fotter_cont {
+	width: 100%;
+	margin: 10px auto;
+}
+.fotter_notice {
+	width: 32%;
+}
+.notice_title {
+	padding: 0px 10px;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.more {
+	cursor: pointer;
+}
+.noticecont {
+	width: 100%;
+	height: 200px;
+	overflow: hidden;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+.noticelist {
+	padding-top: 15px;
+	padding-bottom: 10px;
+	overflow: hidden;
+	margin: 0px 15px;
+	margin-top: -1px;
+	border-top: 1px dashed #ddd;
+}
+.s_img {
+	margin: 0px 10px;
+}
+.notice {
+	width: 85%;
+}
+.message {
+	margin: 0px 20px;
+}
+.noticecont > img {
+	margin:80px 114px;
+}
+.noticecont ul {
+	display: table;
+	width: 100%;
+	margin: 20px 0px;
+}
+.noticecont ul li {
+	width: 33%;
+	list-style: none;
+	height: 110px;
+	float: left;
+	margin-left: -1px;
+	cursor: pointer;
+	border-left: 1px dashed #ddd;
+	text-align: center;
+}
+.noticecont ul li img {
+	margin-top: 10px;
+}
+.noticecont ul li p {
+	margin-top: 15px;
+}
+/*表格样式*/
+table a{
+	color:#1a6fb8;
+	}
+.table-border{
+	border-top:none;
+	}
+.table-border tr th{
+	border-bottom:2px solid #91c9f9;
+	}
+.table-border tr:last-child td{
+	border-bottom:none;
+	}
+.table-bordered{
+	border-top:1px solid #ddd;
+	}
+.table-bg thead th{
+	background:#e9f4fe;
+	}
+.table-bg tr:last-child td{
+	border-bottom:1px solid #ddd;
+	}
+/*工作台页面样式结束*/
+

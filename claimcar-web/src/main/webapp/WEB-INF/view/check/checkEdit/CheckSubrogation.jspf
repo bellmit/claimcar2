@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+<!-- 代位 开始 -->
+<div class="table_wrap" id="count">
+	<div style="height: 20px;line-height: 20px;color: #1A6FB8;cursor: pointer;
+	padding:5px 0px;background:url(../images/s.png) left center no-repeat;
+    text-indent:18px;" class="aa" name="subrogation_title">代位求偿类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="radio-box">
+			<app:codeSelect codeType="IsSubRogation" type="radio" name="checkVo.isSubRogation"
+					id="isSubRogation" value="${checkVo.isSubRogation}" nullToVal="0"/>
+		</span>
+	</div>
+	<input type="hidden" name="subrogationMain.id" value="${subrogationMain.id}">
+	<input type="hidden" name="subrogationMain.registNo" value="${subrogationMain.registNo}">
+			<input type="hidden" name="subrogationMain.subrogationFlag" value="${checkVo.isSubRogation}">
+	<div class="table_cont table_list" id="subrogation_cont">
+		<%-- <div class="formtable  tableoverlable">
+		<div class="row cl">
+			<div class="col-offset-1">
+				<span class="radio-box">
+					<app:codeSelect codeType="IsSubRogation" type="radio" name="subrationMain.subrogationFlag"  value=""  />
+				</span>
+				<input type="hidden" name="subrationMain.id" value="${subrogationMain.id }"/>
+			</div>
+		</div>
+		</div> --%>
+	<div class="table_list " id="subRogationDiV">
+		<input type="hidden" id="subrogationCarSize" value="${fn:length(subrogationMain.prpLSubrogationCars) }">
+		<table class="table-border table_sub" id="subrogationCarTable">
+			<thead class="text-c" id="subrogationCarThead">
+				<tr>
+					<th style="width: 5%;">
+						<button type="button" class="btn btn-plus Hui-iconfont Hui-iconfont-add" onclick="initSubrogationCar()"></button> 
+					</th>
+					<th style="width: 5%;text-align: center;font-weight: bold;">序号</th>
+					<th style="text-align: center;font-weight: bold;">责任对方内容（责任方为机动车）</th>
+				</tr>
+			</thead>
+					
+				<%@include file="CheckEdit_Subrogation_CarTr.jsp" %>
+		</table>
+		<br/>
+		
+		<table class="table-border table_sub">
+			<thead  class="text-c">
+				<tr>
+					<th style="width: 5%;">
+						<button type="button" class="btn btn-plus Hui-iconfont Hui-iconfont-add" onclick="initSubrogationPers(this)"></button>
+					</th>
+					<th style="width: 5%;text-align: center;font-weight: bold;">序号 </th>
+					<th style="text-align: center;font-weight: bold;">责任对方内容（责任方为非机动车） </th>
+				</tr>
+			</thead>
+			<tbody id="subrogationPerTbody">
+				<input type="hidden" id="subrogationPerSize" value="${fn:length(subrogationMain.prpLSubrogationPersons) }">
+				<%@include file="CheckEdit_Subrogation_PerTr.jsp" %>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>
+<!-- 代位结束 -->

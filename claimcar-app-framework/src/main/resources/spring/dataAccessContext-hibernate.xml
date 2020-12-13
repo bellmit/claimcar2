@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<!-- 采用数据库读取配置 -->
+	<bean id="propertyConfigurer"
+		class="ins.framework.config.CustomPropertyConfigurer"> 
+		<!-- 文件会覆盖数据库配置 -->
+		<property name="locations">
+			<list>
+				<value>classpath*:/config/*.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataBaseProperties" class="ins.framework.config.DatabaseProperties">
+		<constructor-arg type="javax.sql.DataSource" ref="claimDataSource" />
+		<constructor-arg value="SELECT codekey,codevalue FROM sys_config " />
+		<property name="propertyConfigurer" ref="propertyConfigurer" />
+	</bean>
+	
+	<!-- 建议使用应用服务器数据源 -->
+	<bean id="claimDataSource" class="ins.framework.jndi.JndiObjectFindFactoryBean" >
+		<property name="jndiName">
+			<value>claimDataSource</value>
+		</property>
+	</bean>
+
+	<bean id="nacosProperties" class="ins.framework.config.NacosProperties">
+	</bean>
+
+
+</beans>
+
+
+

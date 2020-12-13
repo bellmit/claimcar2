@@ -1,0 +1,316 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/layout/common/taglib.jspf"%>
+			<div class="table_wrap" id="carInfo_Div">
+				<div class="table_title f14">车辆信息</div>
+					<div class="table_cont " >
+						<%--<input type="hidden" name="carInfoVo.enrollDate " id="enrollDate_lgh" value="${carInfoVo.enrollDate}"/>
+						<input type="hidden" name="acceptlicensedate" id="acceptlicensedate" value="${acceptlicensedate}"/>--%>
+						<input type="hidden" name="lossCarMainVo.id" id="lossMainId" value="${lossCarMainVo.id }"/>
+						<input type="hidden" name="lossCarMainVo.registNo" id="registNo" value="${lossCarMainVo.registNo }"/>
+						<input type="hidden"  name="lossCarMainVo.reLossCarId" value="${lossCarMainVo.reLossCarId}" />
+						<input type="hidden"  name="carInfoVo.id" value="${carInfoVo.id}" />
+						<input type="hidden"  id="deflossCarType" name="lossCarMainVo.deflossCarType" value="${lossCarMainVo.deflossCarType}" />
+						<input type="hidden" id="theftAmount" value="${commonVo.theftAmount}" />
+						<input type="hidden" id="actualValuePo" value="${lossCarMainVo.actualValue}" />
+						<input type="hidden" id="certainLossTypePo" value="${lossCarMainVo.cetainLossType}">
+						<input type="hidden" name="lossCarMainVo.serialNo" id="serialNo" value="${lossCarMainVo.serialNo}">
+						<input type="hidden" id="acceptFlag" name ="commonVo.acceptFlag" value="${commonVo.acceptFlag}">
+						<input type="hidden" id="flowTaskId" name ="taskVo.taskId" value="${taskVo.taskId}">
+						<input type="hidden" id="currentNode" name="taskVo.subNodeCode" value="${taskVo.subNodeCode}">
+						<input type="hidden" id="handleStatus" value="${taskVo.handlerStatus }" />
+						<input type="hidden" name="lossCarMainVo.flowFlag" value="${lossCarMainVo.flowFlag}">
+						<input type="hidden" id="jyFlag" name="lossCarMainVo.jyFlag" value="">		
+						<input type="hidden" id="saveType" name="lossCarMainVo.auditStatus" />
+						<input type="hidden" id="intermStanders" value="${commonVo.intermStanders }" />
+						<input type="hidden" id="underWriteFlag" value="${lossCarMainVo.underWriteFlag }" />
+						<input type="hidden" id="veriPriceFlag" value="${lossCarMainVo.veriPriceFlag }" />
+						<input type="hidden" id="sumpaidDef" value="${commonVo.sumpaidDef }" />
+						<input type="hidden" id="jyFlag"  value="">
+						<input type="hidden" id="kindMap" value="${kindMap}"/>
+						<input type="hidden" id="riskCode" value="${riskCode}"/>
+						<input type="hidden" id="existEndCase" value="${existEndCase}"/>
+						<input type="hidden" id="reportType" value="${registVo.reportType}"/>
+						<input type="hidden" id="makeCom" value="${lossCarMainVo.makeCom}"/>
+						<input type="hidden" id="comcode" value="${lossCarMainVo.comCode}"/>
+						<input type="hidden" id="checkAddressCode" value="${registVo.prpLRegistExt.checkAddressCode}">
+						<input type="hidden" id="recLossFlag"  value="recLossFlag" />
+						<input type="hidden" id="sourceFlag" value="${scheduleDefLossVo.sourceFlag}"/>
+						<div class="formtable tableoverlable">
+							<div class="row cl">
+								<label class="form_label col-1">报案号</label>
+								<div class="form_input col-3">
+									${lossCarMainVo.registNo }
+								</div>
+								<label class="form_label col-1">赔案类别</label>
+								<div class="form_input col-3">
+									<app:codetrans codeType="CaseCode" codeCode="${commonVo.claimType }"/>
+								</div>
+								<label class="form_label col-1">案件性质</label>
+								<div class="form_input col-2">
+									<app:codetrans codeType="Lflag" codeCode="${lossCarMainVo.lflag }"/>
+								</div>
+								<a class="btn btn-primary col-1" onclick="sameCheck('${taskVo.taskId}')" id="sameCheck" type="button">同查勘</a>
+							</div>
+							<div class="row cl">
+						 		<label class="form_label col-1">紧急程度</label>
+								<div class="form_input col-3">
+									<span class="select-box">
+						 				<app:codeSelect codeType="MercyFlag" name="lossCarMainVo.mercyFlag" value="${lossCarMainVo.mercyFlag }" type="select" clazz="must"/>
+						 			</span>
+								</div>
+								<div>
+									<label class="form_label col-1">车牌号码</label>
+									<div class="form_input col-3">
+										<input type="text" class="input-text" datatype="carLicenseNo"  errormsg="请输入正确车牌号"  id="licenseNo" 
+										name="carInfoVo.licenseNo"  value="${carInfoVo.licenseNo }" />
+										<font class="must">*</font>
+									</div>
+								</div>
+								<label class="form_label col-1">损失方</label>
+								<div class="form_input col-3">
+									<c:choose>
+										<c:when test="${lossCarMainVo.deflossCarType eq '1'}"> 标的车</c:when>
+									<c:otherwise>三者车</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">车主</label>
+					<div class="form_input col-3">
+						<c:choose>
+							<c:when test="${fn:startsWith(lossCarMainVo.comCode , '22')}">
+								<input type="text" class="input-text" name="carInfoVo.carOwner" datatype="*" value="${carInfoVo.carOwner }" />
+								<font class="must">*</font>
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="input-text" name="carInfoVo.carOwner" value="${carInfoVo.carOwner }" />
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+				<label class="form_label col-1">初登日期</label>
+				<div class="form_input col-3">
+					<input type="text" class="Wdate" style="width: 96%;"  name="carInfoVo.enrollDate" id="enrollDate" 
+						value="<app:date  date='${carInfoVo.enrollDate }'/>" onfocus="WdatePicker({maxDate:'%y-%M-%d'})">
+				</div>
+				<label class="form_label col-1">车辆种类</label>
+				<div class="form_input col-3">
+					<span class="select-box"> 
+						<c:choose>
+							 <c:when test="${lossCarMainVo.deflossCarType eq '1'}"> 
+									<app:codeSelect
+									codeType="VehicleTypeShow" type="select" id="carKindCode"
+									lableType="code-name" clazz="must" nullToVal="02"
+									name="carInfoVo.platformCarKindCode" 
+									value="${prpLCItemCarVo.carType}" disabled="true"   />
+									<font class="must">*</font>
+							 </c:when>
+						     <c:otherwise>
+								<app:codeSelect codeType="VehicleType"
+							        name="carInfoVo.platformCarKindCode" clazz="must" nullToVal="11" value="${carInfoVo.platformCarKindCode }" datatype="*"   type="select"/>
+								<font class="must">*</font>
+						    </c:otherwise>
+					 </c:choose>
+					
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form_label col-1">车架号</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" datatype="vinNo" errormsg="请输入正确车架号" id="frameNo" 
+						maxlength="25" name="carInfoVo.frameNo" value="${carInfoVo.frameNo }" onkeyup="toUpperCase(this)"/>
+						<font color="red">*</font>
+				</div>
+				<label class="form_label col-1">车牌种类</label>
+				<div class="form_input col-3">
+					<span class="select-box"> 
+						<app:codeSelect codeType="LicenseKindCode" name="carInfoVo.licenseType"  
+							value="${carInfoVo.licenseType }" type="select" clazz="must" onchange="setVinChange(this)"/>
+							<font class="must">*</font>
+					</span>
+				</div>
+				<label class="form_label col-1">车型名称</label>
+				<div class="form_input col-3">${carInfoVo.modelName }</div>
+			</div>
+			
+			<div class="row cl">
+				<label class="form_label col-1">VIN码</label>
+				<div class="form_input col-3">
+					<input type="text" class="input-text" id="vinNo" datatype="vinNo"  errormsg="请输入正确VIN码" 
+						maxlength="25" name="carInfoVo.vinNo" value="${carInfoVo.vinNo }" onkeyup="toUpperCase(this)"/>
+						<font color="red">*</font>
+				</div>
+				<div>
+					<label class="form_label col-1">发动机号</label>
+					<div class="form_input col-3">
+						<input type="text" class="input-text ready-only" name="carInfoVo.engineNo" datatype="*" value="${carInfoVo.engineNo }" />
+						<font color="red">*</font>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">驾驶人姓名</label>
+					<div class="form_input col-3">
+						<input type="text" class="input-text" datatype="*" name="carInfoVo.driveName" value="${carInfoVo.driveName }" />
+						<font color="red">*</font>
+					</div>
+				</div>
+			</div>
+			<div class="row cl">
+				<div>
+					<label class="form_label col-1">驾驶人证件类型</label>
+					<div class="form_input col-3">
+						<app:codeSelect codeType="IdentifyType" id="identifyType" name="carInfoVo.identifyType" onchange="changeIdentifyType()" 
+							value="${carInfoVo.identifyType }" type="select" clazz="must"/>	
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">证件号码</label>
+					<div class="form_input col-3">
+						<input type="text" class="input-text" name="carInfoVo.identifyNo" id="identifyNo"  datatype="*" value="${carInfoVo.identifyNo }" 
+						onchange="changeIdentifyNo(this)"/>
+						<font color="red">*</font>
+					</div>
+				</div>
+				<div>
+					<label class="form_label col-1">驾驶证号码</label>
+					<div class="form_input col-3">
+						<input type="text" class="input-text" name="carInfoVo.drivingLicenseNo" datatype="*" value="${carInfoVo.drivingLicenseNo }" 
+						 onchange="toUpperCase(this)"/>
+						<font color="red">*</font>
+					</div>
+				</div>
+			</div>
+			<div class="row cl">
+					<div>
+					<label class="form_label col-1">初次领证日期</label>
+					<div class="form_input col-3">
+					<input type="text" class="Wdate" style="width: 96%;"  name="carInfoVo.acceptLicenseDate" id="acceptlicensedate"
+					value="<app:date  date='${carInfoVo.acceptLicenseDate}'/>" onfocus="WdatePicker({maxDate:'%y-%M-%d'})">
+					</div>
+					</div>
+			</div>
+			<c:if test="${lossCarMainVo.deflossCarType eq '1'}">
+				<div class="row cl">
+					<label class="form_label col-1">交强责任</label>
+					<div class="form_input col-3">
+					<span class="select-box">
+						<app:codeSelect codeType="CiIndemDuty" id="CiIndemDuty"
+							name="lossCarMainVo.ciDutyFlag" clazz="must"
+							value="${lossCarMainVo.ciDutyFlag }" type="select" />
+							</span>
+					</div>
+					<div>
+						<label class="form_label col-1">事故责任比例</label>
+						<div class="col-3" >
+							<div class="form_input col-6">
+								<span class="select-box"> 
+									<app:codeSelect codeType="IndemnityDuty" id="indemnityDuty" name="lossCarMainVo.indemnityDuty" onchange="changeDuty()"
+										value="${lossCarMainVo.indemnityDuty }" type="select" />
+								</span>
+							</div>
+							<div class="form_input col-6">
+								<input type="text" class="input-text" style="width: 92%;" name="lossCarMainVo.indemnityDutyRate" onchange="compareDutyRate(this)"
+									id="indemnityDutyRate"  datatype="/^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)$/" value="${lossCarMainVo.indemnityDutyRate}" maxlength="3"/>
+									<font class="must">*</font>
+							</div>
+						</div>
+					</div>
+					<label class="form_label col-1">承保公司</label><%--  ${carInfoVo.insureComName } --%>
+					<div class="form_input col-3"><app:codetrans codeType="ComCode" codeCode="${carInfoVo.insureComName }"/> </div>
+				</div>
+			</c:if>
+			<!-- 三者车才显示车辆承保信息 -->
+			<c:if test="${lossCarMainVo.deflossCarType eq '3'}">
+				<div class="row cl">
+					<label class="form_label col-1">商业险报案号</label>
+					<div class="form_input col-2">
+						<input type="text" class="input-text" name="carInfoVo.biRegistNo" value="${carInfoVo.biRegistNo }" />
+					</div>
+					<label class="form_label col-1">商业险保单号</label>
+					<div class="form_input col-2">
+						<input type="text" class="input-text" name="carInfoVo.biPolicyNo" value="${carInfoVo.biPolicyNo }"/>
+					</div>
+					<label class="form_label col-1">商业承保机构</label>
+					<div class="form_input col-2">
+						<app:codeSelect codeType="CIInsurerCompany" type="select" name="carInfoVo.biInsureComCode" value="${carInfoVo.biInsureComCode }" />
+					</div>
+					<label class="form_label col-1">商业承保地区</label>
+					<div class="form_input col-2">
+						<app:areaSelect targetElmId="biInsurerArea" areaCode="${carInfoVo.biInsurerArea}"  showLevel="1" />
+						<input type="hidden" id="biInsurerArea" name="carInfoVo.biInsurerArea" value="${carInfoVo.biInsurerArea }" />
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form_label col-1">交强险报案号</label>
+					<div class="form_input col-2">
+						<input type="text" class="input-text" name="carInfoVo.ciRegistNo" value="${carInfoVo.ciRegistNo }" />
+					</div>
+					<label class="form_label col-1">交强险保单号</label>
+					<div class="form_input col-2">
+						<input type="text" class="input-text" name="carInfoVo.ciPolicyNo" value="${carInfoVo.ciPolicyNo }" />
+					</div>
+					<label class="form_label col-1">交强承保机构</label>
+					<div class="form_input col-2">
+						<app:codeSelect codeType="CIInsurerCompany" type="select" name="carInfoVo.ciInsureComCode" value="${carInfoVo.ciInsureComCode }"/>
+					</div>
+					<label class="form_label col-1">交强承保地区</label>
+					<div class="form_input col-2">
+						<app:areaSelect targetElmId="ciInsurerArea" areaCode="${carInfoVo.ciInsurerArea}"  showLevel="1" />
+						<input type="hidden" id="ciInsurerArea" name="carInfoVo.ciInsurerArea" value="${carInfoVo.ciInsurerArea }" />
+					</div>
+				</div>
+			</c:if>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function() {
+//定损来源标志位
+var sourceFlag=$("#sourceFlag").val();
+//var deflossCarType=$("#deflossCarType").val();
+var registNo=$("#registNo").val();
+var serialNo=$("#serialNo").val();
+var handleStatus=$("#handleStatus").val();
+var flag="";
+
+if(sourceFlag=='0'|| handleStatus=='3'|| sourceFlag=='2'){
+   $("#sameCheck").hide();
+}else{
+
+  var url="/claimcar/defloss/checkComp.ajax";
+  var params={
+		"registNo":registNo,
+		"serialNo":serialNo,
+     };
+  $.ajax({
+	
+	url : url, // 后台校验
+	type : 'post', // 数据发送方式
+	dataType : 'json', // 接受数据格式
+	data : params, // 要传递的数据
+	async : false,//同异步设置
+	success : function(jsonData) {// 回调方法，可单独定义
+		var result = eval(jsonData);
+	   if (result.status == "200") {
+			flag=result.data;
+			 }
+	}
+   });
+
+   if(flag=='0'){
+	 $("#sameCheck").removeAttr("onclick");
+	 $("#sameCheck").removeClass();
+	 $("#sameCheck").addClass("btn btn-disabled col-2"); 
+   } 
+ }
+});
+function sameCheck(flowTaskId){
+	var sign="1";//判断是否是同查勘按钮发的请求
+	var url="/claimcar/defloss/preAddDefloss.do?flowTaskId="+flowTaskId+"&sign="+sign;
+	openTaskEditWin("车辆定损处理",url);
+	
+}
+</script>
